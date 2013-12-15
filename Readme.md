@@ -18,7 +18,9 @@ to open an issue if you want something to be fixed.
 
 ## Did you do this all on your own?
 
-Yes I did - but I used the following libraries:
+Of course not. I used various libraries and assets...
+
+### Libraries
 
 - ThreeJS
 - Lodash
@@ -28,13 +30,18 @@ Yes I did - but I used the following libraries:
 - Box2DWeb
 
 
-Also most of the assets used are free ones and not owned/created by me.
+### Assets
+
+- Some models from opengameart.org (cco)
+- One or more textures on this project have been created with images from Goodtextures.com. These images may not be redistributed by default. Please visit www.goodtextures.com for more information.
+- I used Wings3D, Gimp and Blender for creating own models
 
 
 ## That's quite cool, may I use it?
 
 The project is released under the the MIT License (MIT) so you should be able
-to use it for almost everything you need. 
+to use it for almost everything you need. Be careful when using the libraries and
+assets as they may fall under other licenses.
 
 
 The MIT License (MIT)
