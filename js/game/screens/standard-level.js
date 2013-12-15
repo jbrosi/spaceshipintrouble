@@ -95,8 +95,7 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         shipFix.density = 1000.0;
         shipFix.friction = 0;
         shipFix.restitution = 0.1;
-        shipFix.shape = new Box2D.b2CircleShape(2.5);
-        shipFix.shape.SetRadius(2.5);
+        shipFix.shape = new Box2D.b2CircleShape(3);
 
 
         var shipBodyDef = new Box2D.b2BodyDef();
@@ -176,13 +175,13 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         
         
         var facingDirection = new Box2D.b2Vec2();
-        facingDirection.x = Math.cos( this._physics.ship.GetAngle() + Math.PI );
-        facingDirection.y = Math.sin( this._physics.ship.GetAngle() + Math.PI );
+        facingDirection.x = Math.cos( this._physics.ship.GetAngle() - (Math.PI/2) );
+        facingDirection.y = Math.sin( this._physics.ship.GetAngle() - (Math.PI/2) );
         facingDirection.Multiply(factor);
 
         var backwardsDirection = new Box2D.b2Vec2();
-        backwardsDirection.x = Math.cos(this._physics.ship.GetAngle());
-        backwardsDirection.y = Math.sin(this._physics.ship.GetAngle());
+        backwardsDirection.x = Math.cos(this._physics.ship.GetAngle() + (Math.PI/2));
+        backwardsDirection.y = Math.sin(this._physics.ship.GetAngle() + (Math.PI/2));
         backwardsDirection.Multiply(factor);
          
         if (this._keyboard.isLeftPressed()) {
@@ -207,7 +206,7 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
             joystickDirection.y = Math.sin(this._virtualJoystick.getAngle());
             joystickDirection.Multiply(factor * this._virtualJoystick.getSpeed());
             this._physics.ship.ApplyImpulse(joystickDirection, this._physics.ship.GetWorldCenter());
-            this._physics.ship.SetAngle(this._virtualJoystick.getAngle() + Math.PI);
+            this._physics.ship.SetAngle(this._virtualJoystick.getAngle() + (Math.PI / 2));
         }
         
 
@@ -302,12 +301,12 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         
         //Load and add ship
         var loader = new THREE.JSONLoader();
-        loader.load( "assets/models/spaceship_01.js", function( shipGeo, shipMaterials ) {
+        loader.load( "assets/models/fighter.js", function( shipGeo, shipMaterials ) {
             console.log("ship loaded");
             
-            var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/textures/spaceship_01_col.png')});
+            var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/textures/fighter.png')});
             that._shipMesh = new THREE.Mesh( shipGeo, shipMaterial);
-            that._shipMesh.scale.set( 1, 1, 1 );
+            that._shipMesh.scale.set( 1.5, 1.5, 1.5 );
             that._shipMesh.rotation.set(Math.PI/2,0,0);
             that._scene.add( that._shipMesh );
         } , "assets/textures/");

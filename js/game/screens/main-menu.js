@@ -2,6 +2,7 @@
 
 define(['three', 'helper/3d/textHelper', 'lodash', 'game/screenManager'], function(THREE, TextHelper, _, ScreenManager) {
     
+    console.log(ScreenManager);
     
 
     var MainMenuScreen = function(renderer) {
@@ -226,10 +227,10 @@ define(['three', 'helper/3d/textHelper', 'lodash', 'game/screenManager'], functi
 
         //Load and add ship to the lower left
         var loader = new THREE.JSONLoader();
-        loader.load( "assets/models/spaceship_01.js", function( shipGeo, shipMaterials ) {
+        loader.load( "assets/models/fighter.js", function( shipGeo, shipMaterials ) {
             console.log("ship loaded");
             
-            var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/textures/spaceship_01_col.png')});
+            var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/textures/fighter.png')});
             that._shipMesh = new THREE.Mesh( shipGeo, shipMaterial);
             that._shipMesh.scale.set( 10, 10, 10 );
             that._shipMesh.position.y = -30;

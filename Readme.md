@@ -28,6 +28,9 @@ Yes I did - but I used the following libraries:
 - Box2DWeb
 
 
+Also most of the assets used are free ones and not owned/created by me.
+
+
 ## That's quite cool, may I use it?
 
 The project is released under the the MIT License (MIT) so you should be able

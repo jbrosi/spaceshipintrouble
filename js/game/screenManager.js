@@ -1,6 +1,6 @@
 
 
-define(['three', 'lodash', 'helper/performanceTimer', 'helper/statsHelper', 'game/screens/main-menu', 'game/screens/standard-level'], function(THREE, _, performanceTimer, statsHelper) {
+define(['three', 'lodash', 'helper/performanceTimer', 'helper/statsHelper'], function(THREE, _, performanceTimer, statsHelper) {
     
     var ScreenManager = function() {
         this._screenStack = [];

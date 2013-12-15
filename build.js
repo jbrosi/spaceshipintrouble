@@ -24,7 +24,7 @@
 		require: 'lib/require'
     },
     name: "lib/almond",
-    include: ["app"],
+    include: ["app", "game/screens/game-menu", "game/screens/main-menu", "game/screens/settings-menu", "game/screens/standard-level"],
     insertRequire: ["app"],
     out: "main-built.js"
 })
