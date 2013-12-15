@@ -1,0 +1,43 @@
+
+
+define(['three', 'lodash'], function(THREE, _) {
+    var GameInitializer = function () {
+        _.bindAll(this);
+    };
+    
+    
+    
+    GameInitializer.prototype.init = function() {
+        console.log("initializing...");
+        
+        this._initializeCanvasContainer();
+        
+        this._initializeThreeJS();
+        
+        
+    };
+    
+    GameInitializer.prototype._initializeThreeJS = function () {
+        this._canvas = document.createElement(navigator.isCocoonJS ? 'screencanvas' : 'canvas');
+        this._renderer = new THREE.WebGLRenderer({canvas: this._canvas});
+        this._renderer.setSize(window.innerWidth, window.innerHeight);
+        this._renderContainer.appendChild(this._renderer.domElement);
+        
+        window.addEventListener('resize', this.onWindowResized);
+    };
+    
+    GameInitializer.prototype.onWindowResized = function () {
+        this._renderer.setSize(window.innerWidth, window.innerHeight);
+        //TODO: resize all the camera's aspect ratios ? Maybe provide a callback hook for this or enhance ThreeJS camera directly
+    };
+    
+    GameInitializer.prototype._initializeCanvasContainer = function () {
+        this._renderContainer = document.getElementById('canvas-container');
+    };
+    
+    GameInitializer.prototype.getRenderer = function () {
+        return this._renderer;
+    }
+    
+    return new GameInitializer();
+});

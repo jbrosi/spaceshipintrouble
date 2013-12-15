@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Spaceship in Trouble</title>
+        <style>
+            body {margin: 0; padding: 0;}
+            
+            
+        </style>
+        <script>
+            var require = {
+                baseUrl: "js",               
+                shim: {
+                    'three': {
+                        exports: 'THREE'
+                    },
+                    'helvetiker-font': {
+                        deps: ['three']
+                    },
+                    'box2d': { 
+                        exports: 'Box2D'
+                    },
+                    'stats': {
+                        exports: 'Stats'
+                    }
+                    
+                },
+                paths: {           
+                    stats: 'lib/stats',
+                    three: 'lib/three',
+                    'helvetiker-font': '../assets/fonts/helvetiker_regular.typeface',
+            		lodash: 'lib/lodash',
+            		box2d: 'lib/box2dweb'
+                },
+               urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
+               waitSeconds: 15
+            };  
+
+        </script>
+        <script src="js/lib/require.js" data-main="app"></script>
+    </head>
+    <body>
+        <div id="canvas-container"></div>
+    </body>
+</html>
