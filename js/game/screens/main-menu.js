@@ -120,8 +120,8 @@ define(['three', 'helper/3d/textHelper', 'lodash', 'game/screenManager'], functi
         
         //check if we're hovered over something
         var pos = {
-            x : (evt.x / this._renderer.context.canvas.width * 2) - 1,
-            y: (evt.y / this._renderer.context.canvas.height * 2) - 1 
+            x : (evt.x / window.innerWidth * 2) - 1,
+            y: (evt.y / window.innerHeight * 2) - 1 
         };
         
         if (this._isMenuItemHovered) {
@@ -154,14 +154,14 @@ define(['three', 'helper/3d/textHelper', 'lodash', 'game/screenManager'], functi
     };
 
     MainMenuScreen.prototype.onMouseClicked = function(evt) {
-        if (this._cameraPhase < 5 && evt.x > this._renderer.context.canvas.width - 200 && evt.y > this._renderer.context.canvas.height - 40) {
+        if (this._cameraPhase < 5 && evt.x > window.innerWidth - 200 && evt.y > window.innerHeight - 40) {
             this._skipIntro();
         }
         
         if (this._cameraPhase == 5) {
             var pos = {
-                x : (evt.x / this._renderer.context.canvas.width * 2) - 1,
-                y: (evt.y / this._renderer.context.canvas.height * 2) - 1 
+                x : (evt.x / window.innerWidth * 2) - 1,
+                y: (evt.y / window.innerHeight * 2) - 1 
             };
         
             if (pos.y >= -0.34 && pos.y <= -0.16) {
@@ -257,12 +257,12 @@ define(['three', 'helper/3d/textHelper', 'lodash', 'game/screenManager'], functi
     }
     
     MainMenuScreen.prototype._showSkipIntroButton = function () {
-        
+
         
         var texture = THREE.ImageUtils.loadTexture('assets/textures/skip_intro_button.png');
         var mat  = new THREE.SpriteMaterial({map: texture, useScreenCoordinates: true, depthTest: false, depthWrite: false});
         this._skipIntroButton = new THREE.Sprite(mat);
-        this._skipIntroButton.position.set( this._renderer.context.canvas.width - 80, this._renderer.context.canvas.height - 20, 0 );
+        this._skipIntroButton.position.set( window.innerWidth - 80, window.innerHeight - 20, 0 );
         this._skipIntroButton.scale.set( 128, 64, 1.0 ); // imageWidth, imageHeight
         this._scene.add(this._skipIntroButton);
     }
@@ -285,7 +285,7 @@ define(['three', 'helper/3d/textHelper', 'lodash', 'game/screenManager'], functi
         this._scene.add( directionalLight );
 
         //perspective camera with default values / angle
-        this._camera = new THREE.PerspectiveCamera(75, this._renderer.context.canvas.width/this._renderer.context.canvas.height, 0.1, 2000);
+        this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
         this._camera.rotation.x = -1;
         this._camera.rotation.y = -2;
         this._camera.position.z = 500;

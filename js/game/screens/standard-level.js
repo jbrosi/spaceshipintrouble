@@ -289,7 +289,7 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         this._scene.add( directionalLight );
 
         //perspective camera with default values / angle
-        this._camera = new THREE.PerspectiveCamera(75, this._renderer.context.canvas.width/this._renderer.context.canvas.height, 0.1, 2000);
+        this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
         this._camera.position.set(0,0,50);
 
         this._renderer.setClearColor( 0x000000, 1 );
