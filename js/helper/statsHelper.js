@@ -22,10 +22,12 @@ define(['stats'], function(Stats) {
     };
     
     StatsHelper.prototype.begin = function () {
-        this._stats.begin();
+        if (this._stats)
+            this._stats.begin();
     };
     StatsHelper.prototype.end = function () {
-        this._stats.end();
+        if (this._stats)
+            this._stats.end();
     };
     
     return new StatsHelper();
