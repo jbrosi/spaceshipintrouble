@@ -12,6 +12,9 @@
         },
         'stats': {
             exports: 'Stats'
+        },
+        'hammer': {
+            exports: 'Hammer'
         }
         
     },
@@ -21,7 +24,8 @@
         'helvetiker-font': '../assets/fonts/helvetiker_regular.typeface',
 		lodash: 'lib/lodash',
 		box2d: 'lib/box2dweb',
-		require: 'lib/require'
+		require: 'lib/require',
+		hammer: 'lib/hammer'
     },
     name: "lib/almond",
     include: ["app", "game/screens/game-menu", "game/screens/main-menu", "game/screens/settings-menu", "game/screens/standard-level"],

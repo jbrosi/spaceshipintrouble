@@ -1,5 +1,6 @@
 <html>
     <head>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
         <title>Spaceship in Trouble</title>
         <style>
             body {margin: 0; padding: 0;}
@@ -21,15 +22,18 @@
                     },
                     'stats': {
                         exports: 'Stats'
-                    }
-                    
+                    },
+                    'hammer': {
+                        exports: 'Hammer'
+                    }                    
                 },
                 paths: {           
                     stats: 'lib/stats',
                     three: 'lib/three',
                     'helvetiker-font': '../assets/fonts/helvetiker_regular.typeface',
             		lodash: 'lib/lodash',
-            		box2d: 'lib/box2dweb'
+            		box2d: 'lib/box2dweb',
+            		hammer: 'lib/hammer'
                 },
                urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
                waitSeconds: 15
