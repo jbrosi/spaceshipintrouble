@@ -1,7 +1,7 @@
 
 
 define(['box2d'], function (Box2D) {
-    
+
     //just add some shortcuts
     Box2D.b2Vec2 = Box2D.Common.Math.b2Vec2;
     Box2D.b2AABB = Box2D.Collision.b2AABB;

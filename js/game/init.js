@@ -19,6 +19,8 @@ define(['three', 'lodash'], function(THREE, _) {
     
     GameInitializer.prototype._initializeThreeJS = function () {
         this._canvas = document.createElement(navigator.isCocoonJS ? 'screencanvas' : 'canvas');
+        this._canvas.style.cssText="idtkscale:ScaleAspectFit;";  // CocoonJS extension
+
         this._renderer = new THREE.WebGLRenderer({canvas: this._canvas});
         this._renderer.setSize(window.innerWidth, window.innerHeight);
         this._renderContainer.appendChild(this._renderer.domElement);

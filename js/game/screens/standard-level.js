@@ -104,7 +104,6 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         this._physics.ship = this._physics.world.CreateBody(shipBodyDef);
         this._physics.ship.CreateFixture(shipFix);
         this._physics.ship.SetLinearDamping(0.003);
-        this._physics.ship.SetAngularDamping(0.001);
         this._physics.ship.SetUserData({type: 'ship'});
 
 
