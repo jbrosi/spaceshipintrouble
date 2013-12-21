@@ -20,12 +20,16 @@
                     'box2d': { 
                         exports: 'Box2D'
                     },
+                    'box2d-cocoon': {
+                        exports: 'Box2D'
+                    },                    
                     'stats': {
                         exports: 'Stats'
                     },
                     'hammer': {
                         exports: 'Hammer'
-                    }                    
+                    }
+
                 },
                 paths: {           
                     stats: 'lib/stats',
@@ -33,6 +37,7 @@
                     'helvetiker-font': '../assets/fonts/helvetiker_regular.typeface',
             		lodash: 'lib/lodash',
             		box2d: 'lib/box2dweb',
+            		'box2d-cocoon': 'lib/box2d_cocoonJS',
             		hammer: 'lib/hammer'
                 },
                urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
