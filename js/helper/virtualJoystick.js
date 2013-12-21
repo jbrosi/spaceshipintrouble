@@ -54,22 +54,26 @@ define(['three', 'lodash', 'hammer'], function(THREE, _, Hammer) {
         this._scene.add(this._fireButtonMesh);
 
 
-        this._hammer = new Hammer(document.body, {
+        this._hammer = new Hammer(this._renderer.context.canvas, {
             drag: true,
             transform: false,
-            swipe: false
+            swipe: false,
+            drag_max_touches: 10
         });        
         
         this._hammer.on('touch drag', this._onTouchMove);
         this._hammer.on('release', this._onTouchEnd);
         
-        this._renderer.context.canvas.addEventListener('touchmove', this._onTouchMove);
-        this._renderer.context.canvas.addEventListener('touchend', this._onTouchEnd);
     };
     
     VirtualJoystick.prototype._onTouchMove = function (evt) {
-
+        
+        //false by default
+        this._isFireButtonPressed = false;
+        
+        
         for (var a = 0; a < evt.gesture.touches.length; a++) {
+            
             var touch = evt.gesture.touches[a];
     
             var x = touch.pageX;

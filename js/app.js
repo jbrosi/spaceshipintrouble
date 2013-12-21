@@ -22,6 +22,6 @@ require(['game/init', 'game/screenManager'], function(GameInitializer, ScreenMan
     
     //run first scene:
     ScreenManager.init(renderer);
-    ScreenManager.showScreen('main-menu');
+    ScreenManager.showScreen('standard-level');
     ScreenManager.startRendering();
 });
