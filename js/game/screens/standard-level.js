@@ -309,7 +309,7 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
             that._shipMesh.rotation.set(Math.PI/2,0,0);
             that._scene.add( that._shipMesh );
         } , "assets/textures/");
-    }
+    };
     
     return StandardLevelScreen;
     

@@ -34,4 +34,4 @@
     include: ["app", "game/screens/game-menu", "game/screens/main-menu", "game/screens/settings-menu", "game/screens/standard-level", 'box2d', 'box2d-cocoon'],
     insertRequire: ["app"],
     out: "main-built.js"
-})
+});
