@@ -73,29 +73,29 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
             )
         };
         
-        
+        this._physScale = 3;
         
         //wall
         var fixDef = new Box2D.b2FixtureDef();
-        fixDef.density = 1.0;
-        fixDef.friction = 0.5;
+        fixDef.density = 1000.0;
+        fixDef.friction = 1.0;
         fixDef.restitution = 0.2;
         fixDef.shape = new Box2D.b2PolygonShape;
-        fixDef.shape.SetAsBox(5,5);
+        fixDef.shape.SetAsBox(5 / this._physScale, 5 / this._physScale);
          
         this._physics.defaultWallFixture = fixDef;
         this._physics.defaultWallDefinition = new Box2D.b2BodyDef();
-        this._physics.defaultWallDefinition.type = Box2D.b2Body.b2_staticBody
+        this._physics.defaultWallDefinition.type = Box2D.b2Body.b2_staticBody;
         this._physics.defaultWallDefinition.position.x = 0;
         this._physics.defaultWallDefinition.position.y = 0;
 
 
         //ship
         var shipFix = new Box2D.b2FixtureDef();
-        shipFix.density = 1000.0;
+        shipFix.density = 100.0;
         shipFix.friction = 0;
         shipFix.restitution = 0.1;
-        shipFix.shape = new Box2D.b2CircleShape(3);
+        shipFix.shape = new Box2D.b2CircleShape(3 / this._physScale);
 
 
         var shipBodyDef = new Box2D.b2BodyDef();
@@ -103,7 +103,7 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         
         this._physics.ship = this._physics.world.CreateBody(shipBodyDef);
         this._physics.ship.CreateFixture(shipFix);
-        this._physics.ship.SetLinearDamping(0.003);
+        this._physics.ship.SetLinearDamping(0.002);
         this._physics.ship.SetUserData({type: 'ship'});
 
 
@@ -113,7 +113,8 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         projectileFix.friction = 0;
         projectileFix.restitution = 1;
         projectileFix.isSensor = true;
-        projectileFix.shape = new Box2D.b2CircleShape(0.1);
+        projectileFix.isBullet = true;
+        projectileFix.shape = new Box2D.b2CircleShape(1 / this._physScale);
 
         var projectileBodyDef = new Box2D.b2BodyDef();
         projectileBodyDef.type = Box2D.b2Body.b2_dynamicBody;
@@ -131,13 +132,16 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         this._moveProjectiles(time);
         
         this._renderer.render(this._scene, this._camera); 
+        
         this._physics.world.Step(
-            16,   //framerate
+            16,     //framerate
             10,     //velocity iterations
             10      //position iterations
         );
-        this._physics.world.DrawDebugData();
+        //this._physics.world.DrawDebugData();
         this._physics.world.ClearForces();
+        
+        
     };
     
     StandardLevelScreen.prototype._moveEnemies = function (time) {
@@ -146,12 +150,13 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
     
     StandardLevelScreen.prototype._moveProjectiles = function (time) {
         var projectile;
+        var currentTime = new Date().getTime();
         for (var a = 0; a < this._projectiles.length; a++) {
             projectile = this._projectiles[a];
             
             
             
-            if (projectile.physic.GetUserData().isKilled) {
+            if (projectile.physic.GetUserData().isKilled || currentTime - projectile.physic.GetUserData().time > 300) {
                 this._physics.world.DestroyBody(projectile.physic);
                 this._scene.remove(projectile.mesh);
                 this._projectiles.splice(a, 1);
@@ -160,7 +165,7 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
             
             
             
-            projectile.mesh.position.set(projectile.physic.GetPosition().x, projectile.physic.GetPosition().y, 0);
+            projectile.mesh.position.set(projectile.physic.GetPosition().x * this._physScale, projectile.physic.GetPosition().y * this._physScale, 0);
         }
     };
     
@@ -169,31 +174,33 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
             return;
         }
         
-        var factor = 400;
+        var factor = 0.20284;
         
-        
+        var isAngleSet = false;        
         
         var facingDirection = new Box2D.b2Vec2();
-        facingDirection.x = Math.cos( this._physics.ship.GetAngle() - (Math.PI/2) );
-        facingDirection.y = Math.sin( this._physics.ship.GetAngle() - (Math.PI/2) );
+        facingDirection.x = Math.cos( this._physics.ship.GetAngle() - (Math.PI/2));
+        facingDirection.y = Math.sin( this._physics.ship.GetAngle() - (Math.PI/2));
         facingDirection.Multiply(factor);
-
+        
         var backwardsDirection = new Box2D.b2Vec2();
         backwardsDirection.x = Math.cos(this._physics.ship.GetAngle() + (Math.PI/2));
         backwardsDirection.y = Math.sin(this._physics.ship.GetAngle() + (Math.PI/2));
         backwardsDirection.Multiply(factor);
-         
+        
         if (this._keyboard.isLeftPressed()) {
             this._physics.ship.SetAngle(this._physics.ship.GetAngle() + 0.1);
+            isAngleSet = true;
         }
         if (this._keyboard.isRightPressed()) {
             this._physics.ship.SetAngle(this._physics.ship.GetAngle() - 0.1);
+            isAngleSet = true;
         }
         if (this._keyboard.isUpPressed()) {
-            this._physics.ship.ApplyImpulse(facingDirection, this._physics.ship.GetWorldCenter());
+            this._physics.ship.ApplyForce(facingDirection, this._physics.ship.GetWorldCenter());
         }
         if (this._keyboard.isDownPressed()) {
-            this._physics.ship.ApplyImpulse(backwardsDirection, this._physics.ship.GetWorldCenter());
+            this._physics.ship.ApplyForce(backwardsDirection, this._physics.ship.GetWorldCenter());
         }
         
         
@@ -204,36 +211,47 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
             joystickDirection.x = Math.cos(this._virtualJoystick.getAngle());
             joystickDirection.y = Math.sin(this._virtualJoystick.getAngle());
             joystickDirection.Multiply(factor * this._virtualJoystick.getSpeed());
-            this._physics.ship.ApplyImpulse(joystickDirection, this._physics.ship.GetWorldCenter());
+            this._physics.ship.ApplyForce(joystickDirection, this._physics.ship.GetWorldCenter());
             this._physics.ship.SetAngle(this._virtualJoystick.getAngle() + (Math.PI / 2));
+            isAngleSet = true;
         }
-        
+        if(!isAngleSet) {
+            this._physics.ship.SetAngle(this._physics.ship.GetAngle());
+        }
 
-        this._shipMesh.position.x = this._physics.ship.GetPosition().x;
-        this._shipMesh.position.y = this._physics.ship.GetPosition().y;
-        this._camera.position.x = this._physics.ship.GetPosition().x;
-        this._camera.position.y = this._physics.ship.GetPosition().y;
+        this._shipMesh.position.x = this._physics.ship.GetPosition().x * this._physScale;
+        this._shipMesh.position.y = this._physics.ship.GetPosition().y * this._physScale;
+        this._camera.position.x = this._physics.ship.GetPosition().x * this._physScale;
+        this._camera.position.y = this._physics.ship.GetPosition().y * this._physScale;
         this._shipMesh.rotation.y = this._physics.ship.GetAngle();
+        
+        
+        this._physics.ship.SetLinearDamping(0.1 * this._physics.ship.GetLinearVelocity().Length());
         
         
         //shoot?
         if (this._keyboard.isSpacePressed() || this._virtualJoystick.isFireButtonPressed()) {
             var currentTime = new Date().getTime();
-            if (currentTime - this._lastShot > 50) {
+            if (currentTime - this._lastShot > 150) {
                 
                 this._lastShot = currentTime;
-                var phys = "";
                 var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
-                shotMesh.position.set(this._physics.ship.GetPosition().x, this._physics.ship.GetPosition().y, 0);
+                shotMesh.position.set(this._physics.ship.GetPosition().x * this._physScale, this._physics.ship.GetPosition().y * this._physScale, 0);
                 
-                this._scene.add(shotMesh);
+                this._scene.add(shotMesh)
                 
                 this._physics.projectileBodyDef.position.Set(this._physics.ship.GetPosition().x + (facingDirection.x / factor), this._physics.ship.GetPosition().y + (facingDirection.y / factor));
                 var projectile = this._physics.world.CreateBody(this._physics.projectileBodyDef);
+
+                facingDirection.Multiply(5);
+                
+                projectile.SetLinearVelocity(facingDirection);
+
                 projectile.CreateFixture(this._physics.projectileFix);
-                projectile.SetLinearVelocity(facingDirection, 20);
+                
+                
                 projectile.SetUserData({type: "projectile"});
-                this._projectiles.push({mesh: shotMesh, physic: projectile});
+                this._projectiles.push({mesh: shotMesh, physic: projectile, time: currentTime});
             }
             
         }
@@ -242,6 +260,12 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
     
     StandardLevelScreen.prototype._setupLevel = function() {
         //todo: load from levelfile
+        
+        var cubeGeo = new THREE.CubeGeometry(10, 10, 10);
+
+        var geo = new THREE.Geometry();
+        var mesh = new THREE.Mesh(cubeGeo);
+        
         
         var isBoxToCreate = 0;
         for (var x = 0; x < 100; x++ ) {
@@ -258,21 +282,28 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
                 }
                 
                 if (isBoxToCreate) {
-                    var box = new THREE.Mesh(new THREE.CubeGeometry(10,10,10), new THREE.MeshLambertMaterial({color: 0xff00ff}));
                     var posx = (x - 50) * 10;
                     var posy = (y - 50) * 10;
-                    box.position.set(posx, posy, 0);
+                    mesh.position.x = posx;
+                    mesh.position.y = posy;
                     
-                    this._physics.defaultWallDefinition.position.Set(posx, posy);
+                    
+                    THREE.GeometryUtils.merge(geo, mesh);
+                    
+                    this._physics.defaultWallDefinition.position.Set(posx / this._physScale, posy / this._physScale);
                     var wall = this._physics.world.CreateBody(this._physics.defaultWallDefinition);
                     wall.CreateFixture(this._physics.defaultWallFixture);
                     wall.SetUserData({type: 'wall'});
                     
-                    this._scene.add(box);
                 }
             }
         }
         
+        var group = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({color: 0xffff00}));
+        group.matrixAutoUpdate = false;
+        group.updateMatrix();
+        
+        this._scene.add(group);
     };
     
     StandardLevelScreen.prototype._setupCameraAndLighting = function () {
@@ -291,7 +322,7 @@ define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helpe
         this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
         this._camera.position.set(0,0,50);
 
-        this._renderer.setClearColor( 0x000000, 1 );
+        this._renderer.setClearColor( 0xffffff, 1 );
 
     };
     
