@@ -1,0 +1,9 @@
+
+
+
+class EntityScript {
+    
+};
+    
+
+export = EntityScript;

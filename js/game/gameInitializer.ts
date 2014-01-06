@@ -1,23 +1,28 @@
+/// <reference path="../lib/three.d.ts" />
+
+import THREE = require("three");
+import _ = require("lodash");
 
 
-define(['three', 'lodash'], function(THREE, _) {
-    var GameInitializer = function () {
+class GameInitializer {
+
+
+
+    _canvas = null;
+    _renderer = null;
+    _renderContainer = null;
+
+    constructor() {
         _.bindAll(this);
-    };
+    }
     
-    
-    
-    GameInitializer.prototype.init = function() {
+    init () {
         console.log("initializing...");
-        
         this._initializeCanvasContainer();
-        
         this._initializeThreeJS();
-        
-        
-    };
+    }
     
-    GameInitializer.prototype._initializeThreeJS = function () {
+    private _initializeThreeJS () {
         this._canvas = document.createElement(navigator.isCocoonJS ? 'screencanvas' : 'canvas');
         this._canvas.style.cssText="idtkscale:ScaleAspectFit;";  // CocoonJS extension
 
@@ -26,20 +31,20 @@ define(['three', 'lodash'], function(THREE, _) {
         this._renderContainer.appendChild(this._renderer.domElement);
         
         window.addEventListener('resize', this.onWindowResized);
-    };
+    }
     
-    GameInitializer.prototype.onWindowResized = function () {
+    public onWindowResized () {
         this._renderer.setSize(window.innerWidth, window.innerHeight);
         //TODO: resize all the camera's aspect ratios ? Maybe provide a callback hook for this or enhance ThreeJS camera directly
-    };
+    }
     
-    GameInitializer.prototype._initializeCanvasContainer = function () {
+    private _initializeCanvasContainer () {
         this._renderContainer = document.getElementById('canvas-container');
-    };
+    }
     
-    GameInitializer.prototype.getRenderer = function () {
+    public getRenderer () {
         return this._renderer;
     }
     
-    return new GameInitializer();
-});
+}
+export = GameInitializer;

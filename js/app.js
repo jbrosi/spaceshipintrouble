@@ -9,15 +9,16 @@ window.requestAnimationFrame = (function(){
           };
 })();
 
-require(['game/init', 'game/screenManager'], function(GameInitializer, ScreenManager) {
+require(['game/gameInitializer', 'game/screenManager'], function(GameInitializer, ScreenManager) {
     
     
     
     
     //run the game init
-    GameInitializer.init();
+    var gi = new GameInitializer();
+    gi.init();
     
-    var renderer = GameInitializer.getRenderer();
+    var renderer = gi.getRenderer();
     
     
     //run first scene:

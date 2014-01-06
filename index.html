@@ -28,8 +28,10 @@
                     },
                     'hammer': {
                         exports: 'Hammer'
+                    },
+                    'quadtree': {
+                        exports: 'Quadtree'
                     }
-
                 },
                 paths: {           
                     stats: 'lib/stats',
@@ -38,7 +40,8 @@
             		lodash: 'lib/lodash',
             		box2d: 'lib/box2dweb',
             		'box2d-cocoon': 'lib/box2d_cocoonJS',
-            		hammer: 'lib/hammer'
+            		hammer: 'lib/hammer',
+            		quadtree: 'lib/quadtree'
                 },
                urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
                waitSeconds: 15
