@@ -1,4 +1,8 @@
-define(["require", "exports", "game/entity/entity", "game/entity/entityMessage", "game/entity/entityPrototype"], function(require, exports, Entity, EntityMessage, EntityPrototype) {
+define(["require", "exports", "game/entity/entity", "game/entity/entityMessage", "game/entity/entityPrototype"], function(require, exports, __Entity__, __EntityMessage__, __EntityPrototype__) {
+    var Entity = __Entity__;
+    var EntityMessage = __EntityMessage__;
+    var EntityPrototype = __EntityPrototype__;
+
     var DEFAULT_ENTITY_POOL_SIZE = 10000;
 
     var EntityManager = (function () {
@@ -37,16 +41,50 @@ define(["require", "exports", "game/entity/entity", "game/entity/entityMessage",
 
         /**
         * Creates a new entity and adds it to the pool
+        *
+        * @returns the entity created (be carefull, the entity may not have been fully initialized yet!)
         */
-        EntityManager.prototype.createEntity = function (prototype) {
-            this._entities[this._entityCount++] = new Entity(prototype);
+        EntityManager.prototype.createEntityFromPrototype = function (prototype) {
+            var entity = new Entity(prototype);
+            this._entities[this._entityCount++] = entity;
+
             //todo: perform active/inactive check and sort into corresponding pool
+            return entity;
         };
 
+        /**
+        * Creates a new entity by typename and adds it to the pool
+        *
+        * @returns the entity created or null if the type isn't defined (be carefull, the entity may not have been fully initialized yet!)
+        */
+        EntityManager.prototype.createEntityByName = function (type) {
+            if (this._registeredPrototypes[type] === undefined) {
+                //TODO: warn: Type not found! return null...
+                return null;
+            }
+            return this.createEntityFromPrototype(this._registeredPrototypes[type]);
+        };
+
+        /**
+        * sends message to all active entities (if you set the second parameter to true it also gets send to inactive ones)
+        */
         EntityManager.prototype.sendMessage = function (message, alsoSendToInactives) {
             if (typeof alsoSendToInactives === "undefined") { alsoSendToInactives = false; }
-            // sends message to all active entities (if you set the second parameter to true it also gets send to inactive ones)
-            //todo: loop through entities and pass the message so they may call their listener scripts
+            var a;
+
+            for (a = 0; a < this._alwaysActiveEntityCount; a++) {
+                this._alwaysActiveEntities[a].sendMessage(message);
+            }
+
+            for (a = 0; a < this._activeEntityCount; a++) {
+                this._activeEntities[a].sendMessage(message);
+            }
+
+            if (alsoSendToInactives) {
+                for (a = 0; a < this._inactiveEntityCount; a++) {
+                    this._inactiveEntities[a].sendMessage(message);
+                }
+            }
         };
         return EntityManager;
     })();

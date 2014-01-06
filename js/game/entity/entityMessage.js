@@ -1,4 +1,6 @@
 define(["require", "exports"], function(require, exports) {
+    
+
     var EntityMessage = (function () {
         function EntityMessage() {
             this._identifier = "undefined";

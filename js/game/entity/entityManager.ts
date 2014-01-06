@@ -10,6 +10,8 @@ class EntityManager {
     
     
     private _objectIdsUsed = 0;
+
+    private _registeredPrototypes: EntityPrototype[];
     
     private _entities: Entity[];
     private _entityCount = 0;
@@ -52,20 +54,56 @@ class EntityManager {
         this._alwaysActiveEntityCount = 0;
     }
     
+    
     /**
      * Creates a new entity and adds it to the pool
+     * 
+     * @returns the entity created (be carefull, the entity may not have been fully initialized yet!)
      */
-    public createEntity (prototype: EntityPrototype) {
-        this._entities[this._entityCount++] = new Entity(prototype);
-        
+    public createEntityFromPrototype (prototype: EntityPrototype) {
+        var entity: Entity = new Entity(prototype);
+        this._entities[this._entityCount++] = entity;
+
         //todo: perform active/inactive check and sort into corresponding pool
+        
+        return entity;
+    }
+    
+    /**
+     * Creates a new entity by typename and adds it to the pool
+     * 
+     * @returns the entity created or null if the type isn't defined (be carefull, the entity may not have been fully initialized yet!)
+     */
+    public createEntityByName (type: string): Entity {
+        if (this._registeredPrototypes[type] === undefined) {
+            //TODO: warn: Type not found! return null...
+            return null;
+        }
+        return this.createEntityFromPrototype(this._registeredPrototypes[type]);
     }
     
     
+    /**
+     * sends message to all active entities (if you set the second parameter to true it also gets send to inactive ones)
+     */
     public sendMessage(message: EntityMessage, alsoSendToInactives: boolean = false) {
-        // sends message to all active entities (if you set the second parameter to true it also gets send to inactive ones)
         
-        //todo: loop through entities and pass the message so they may call their listener scripts
+        var a: number;
+
+        for (a = 0; a < this._alwaysActiveEntityCount; a++) {
+            this._alwaysActiveEntities[a].sendMessage(message);
+        }
+        
+        for (a = 0; a < this._activeEntityCount; a++) {
+            this._activeEntities[a].sendMessage(message);
+        }
+
+        if (alsoSendToInactives) {
+            for (a = 0; a < this._inactiveEntityCount; a++) {
+                this._inactiveEntities[a].sendMessage(message);
+            }
+        }
+        
     }
     
 };

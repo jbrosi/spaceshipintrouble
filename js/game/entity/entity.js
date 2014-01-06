@@ -1,4 +1,8 @@
-define(["require", "exports", "game/entity/entityMessage", "game/entity/entityScript"], function(require, exports, EntityMessage, EntityScript) {
+define(["require", "exports", "game/entity/entityMessage"], function(require, exports, __EntityMessage__) {
+    var EntityMessage = __EntityMessage__;
+    
+    
+
     var Entity = (function () {
         /**
         * Creates a new entity from the given entityprototype. The entity will copy
@@ -9,6 +13,7 @@ define(["require", "exports", "game/entity/entityMessage", "game/entity/entitySc
         */
         function Entity(prototype) {
             this._listeners = [];
+            this._data = {};
             //todo: initialize entity, load scripts defined in Prototype,
             //      initialize scripts, ...
         }
@@ -22,6 +27,10 @@ define(["require", "exports", "game/entity/entityMessage", "game/entity/entitySc
             //with same data and prototype data set.
             //TODO: implement
             return this;
+        };
+
+        Entity.prototype.getData = function () {
+            return this._data;
         };
 
         /**
@@ -72,7 +81,6 @@ define(["require", "exports", "game/entity/entityMessage", "game/entity/entitySc
             }
 
             if (this._listeners[identifier].length == 1) {
-                //nothin to do
                 if (this._listeners[identifier][0] === callback) {
                     delete this._listeners[identifier];
                 } else {
@@ -92,11 +100,11 @@ define(["require", "exports", "game/entity/entityMessage", "game/entity/entitySc
         };
 
         /**
-        * Gets called when this entity is receiving a message. Forwards the message
+        * Call this to send a message to this entity. Forwards the message
         * to all listeners which registered on this entity for that event. You may
         * use this method to directly deliver a message to this entity.
         */
-        Entity.prototype.receiveMessage = function (msg) {
+        Entity.prototype.sendMessage = function (msg) {
             //notify our registered callbacks:
             var id = msg.getIdentifier();
             if (this._listeners[id] === undefined) {

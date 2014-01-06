@@ -9,6 +9,8 @@ class Entity {
     
     private _listeners = [];
     
+    private _data = {};
+    
     /**
      * Creates a new entity from the given entityprototype. The entity will copy
      * all necessary data from the prototype and does not rely any further on
@@ -33,6 +35,12 @@ class Entity {
         //TODO: implement
         return this;
     }
+    
+    public getData() {
+        return this._data;
+    }
+    
+    
     
     /**
      * Registers the given callback for messages with the given identifier
@@ -102,11 +110,11 @@ class Entity {
     }
     
     /**
-     * Gets called when this entity is receiving a message. Forwards the message
+     * Call this to send a message to this entity. Forwards the message
      * to all listeners which registered on this entity for that event. You may
      * use this method to directly deliver a message to this entity.
      */ 
-    receiveMessage (msg: EntityMessage): void {
+    sendMessage (msg: EntityMessage): void {
         //notify our registered callbacks:
         var id = msg.getIdentifier();
         if (this._listeners[id] === undefined) {
