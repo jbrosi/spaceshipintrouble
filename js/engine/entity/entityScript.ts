@@ -1,5 +1,5 @@
 
-import Entity = require("game/entity/entity");
+import Entity = require("engine/entity/entity");
 
 class EntityScript {
     private _data = {};

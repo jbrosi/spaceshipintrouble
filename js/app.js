@@ -9,7 +9,7 @@ window.requestAnimationFrame = (function(){
           };
 })();
 
-require(['game/gameInitializer', 'game/screenManager'], function(GameInitializer, ScreenManager) {
+require(['engine/gameInitializer', 'engine/screenManager'], function(GameInitializer, ScreenManager) {
     
     
     

@@ -1,7 +1,7 @@
 
-import EntityMessage = require("game/entity/entityMessage");
-import EntityPrototype = require("game/entity/entityPrototype");
-import EntityScript = require("game/entity/entityScript");
+import EntityMessage = require("engine/entity/entityMessage");
+import EntityPrototype = require("engine/entity/entityPrototype");
+import EntityScript = require("engine/entity/entityScript");
 
 class Entity {
     
@@ -10,6 +10,8 @@ class Entity {
     private _listeners = [];
     
     private _data = {};
+    
+    private _stepMessage = new EntityMessage("entity:step", {timeStep: 0}, this);
     
     /**
      * Creates a new entity from the given entityprototype. The entity will copy
@@ -83,7 +85,7 @@ class Entity {
      * @returns true if a callback was removed false otherwise (if it's not found or
      * has already been removed)
      */
-    removeListener(identifier: string, callback: (EntityMessage) => void): boolean {
+    public removeListener(identifier: string, callback: (EntityMessage) => void): boolean {
         if (this._listeners[identifier] === undefined || this._listeners[identifier].length == 0) {
             //nothin to do
             return false;
@@ -109,12 +111,18 @@ class Entity {
         return false;
     }
     
+    public doStep (timeStep: number): void {
+        //fake step message for scripts:
+        
+        this._stepMessage.getMessage().timeStep = timeStep;
+    }
+    
     /**
      * Call this to send a message to this entity. Forwards the message
      * to all listeners which registered on this entity for that event. You may
      * use this method to directly deliver a message to this entity.
      */ 
-    sendMessage (msg: EntityMessage): void {
+    public sendMessage (msg: EntityMessage): void {
         //notify our registered callbacks:
         var id = msg.getIdentifier();
         if (this._listeners[id] === undefined) {

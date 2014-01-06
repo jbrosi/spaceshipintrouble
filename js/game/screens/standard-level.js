@@ -1,6 +1,6 @@
 
 
-define(['three', 'lodash', 'helper/box2DHelper', 'helper/keyboardHelper', 'helper/virtualJoystick'], function (THREE, _, Box2D, KeyboardHelper, VirtualJoystick) {
+define(['three', 'lodash', 'engine/helper/box2DHelper', 'engine/helper/keyboardHelper', 'engine/helper/virtualJoystick'], function (THREE, _, Box2D, KeyboardHelper, VirtualJoystick) {
     
     var StandardLevelScreen = function(renderer) {
         this._renderer = renderer;

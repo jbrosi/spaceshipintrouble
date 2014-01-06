@@ -1,4 +1,4 @@
-define(["require", "exports", "game/entity/entity", "game/entity/entityMessage", "game/entity/entityPrototype"], function(require, exports, __Entity__, __EntityMessage__, __EntityPrototype__) {
+define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessage", "engine/entity/entityPrototype"], function(require, exports, __Entity__, __EntityMessage__, __EntityPrototype__) {
     var Entity = __Entity__;
     var EntityMessage = __EntityMessage__;
     var EntityPrototype = __EntityPrototype__;
@@ -84,6 +84,19 @@ define(["require", "exports", "game/entity/entity", "game/entity/entityMessage",
                 for (a = 0; a < this._inactiveEntityCount; a++) {
                     this._inactiveEntities[a].sendMessage(message);
                 }
+            }
+        };
+
+        EntityManager.prototype.doStep = function (timeStep) {
+            //lets all the (active) entities do their stuff
+            var a;
+
+            for (a = 0; a < this._alwaysActiveEntityCount; a++) {
+                this._alwaysActiveEntities[a].doStep(timeStep);
+            }
+
+            for (a = 0; a < this._activeEntityCount; a++) {
+                this._activeEntities[a].doStep(timeStep);
             }
         };
         return EntityManager;

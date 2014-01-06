@@ -1,8 +1,8 @@
 
 
-import Entity = require("game/entity/entity");        
-import EntityMessage = require("game/entity/entityMessage");
-import EntityPrototype = require("game/entity/entityPrototype");
+import Entity = require("engine/entity/entity");        
+import EntityMessage = require("engine/entity/entityMessage");
+import EntityPrototype = require("engine/entity/entityPrototype");
 
 var DEFAULT_ENTITY_POOL_SIZE = 10000;
 
@@ -103,6 +103,24 @@ class EntityManager {
                 this._inactiveEntities[a].sendMessage(message);
             }
         }
+        
+    }
+    
+    
+    public doStep(timeStep: number) {
+        
+        //lets all the (active) entities do their stuff
+        var a: number;
+        
+        for (a = 0; a < this._alwaysActiveEntityCount; a++) {
+            this._alwaysActiveEntities[a].doStep(timeStep);
+        }
+        
+        for (a = 0; a < this._activeEntityCount; a++) {
+            this._activeEntities[a].doStep(timeStep);
+        }
+        
+        
         
     }
     

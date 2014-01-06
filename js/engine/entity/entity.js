@@ -1,4 +1,4 @@
-define(["require", "exports", "game/entity/entityMessage"], function(require, exports, __EntityMessage__) {
+define(["require", "exports", "engine/entity/entityMessage"], function(require, exports, __EntityMessage__) {
     var EntityMessage = __EntityMessage__;
     
     
@@ -14,6 +14,7 @@ define(["require", "exports", "game/entity/entityMessage"], function(require, ex
         function Entity(prototype) {
             this._listeners = [];
             this._data = {};
+            this._stepMessage = new EntityMessage("entity:step", { timeStep: 0 }, this);
             //todo: initialize entity, load scripts defined in Prototype,
             //      initialize scripts, ...
         }
@@ -97,6 +98,11 @@ define(["require", "exports", "game/entity/entityMessage"], function(require, ex
                 }
             }
             return false;
+        };
+
+        Entity.prototype.doStep = function (timeStep) {
+            //fake step message for scripts:
+            this._stepMessage.getMessage().timeStep = timeStep;
         };
 
         /**

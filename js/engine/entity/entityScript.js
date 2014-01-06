@@ -1,4 +1,4 @@
-define(["require", "exports", "game/entity/entity"], function(require, exports, __Entity__) {
+define(["require", "exports", "engine/entity/entity"], function(require, exports, __Entity__) {
     var Entity = __Entity__;
 
     var EntityScript = (function () {
