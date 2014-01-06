@@ -18,7 +18,7 @@ to open an issue if you want something to be fixed.
 
 ## Did you do this all on your own?
 
-Of course not. I used various libraries and assets...
+Of course not. I used various libraries, tools and assets...
 
 ### Libraries
 
@@ -30,11 +30,24 @@ Of course not. I used various libraries and assets...
 - Box2DWeb
 
 
+### Tools
+
+- Typescript
+- Wings3D
+- Gimp
+- Blender
+- Cloud9
+
 ### Assets
 
 - Some models from opengameart.org (cco)
 - One or more textures on this project have been created with images from Goodtextures.com. These images may not be redistributed by default. Please visit www.goodtextures.com for more information.
-- I used Wings3D, Gimp and Blender for creating own models
+
+
+## Sounds awesome, may I join?
+
+Sure! Just fork the project, play around with it, create issues for new features and drop me a message if you really
+want to add some code or assets.
 
 
 ## That's quite cool, may I use it?
