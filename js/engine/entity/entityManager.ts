@@ -3,6 +3,9 @@
 import Entity = require("engine/entity/entity");        
 import EntityMessage = require("engine/entity/entityMessage");
 import EntityPrototype = require("engine/entity/entityPrototype");
+import AbstractLevel = require("engine/abstractLevel");
+
+
 
 var DEFAULT_ENTITY_POOL_SIZE = 10000;
 
@@ -25,7 +28,11 @@ class EntityManager {
     private _alwaysActiveEntities: Entity[];
     private _alwaysActiveEntityCount = 0;
     
-    constructor() {
+    private _level: AbstractLevel;
+    
+    constructor(level: AbstractLevel) {
+        this._level = level;
+        
         this.resetEntityPools();
     }
     
@@ -61,7 +68,7 @@ class EntityManager {
      * @returns the entity created (be carefull, the entity may not have been fully initialized yet!)
      */
     public createEntityFromPrototype (prototype: EntityPrototype) {
-        var entity: Entity = new Entity(prototype);
+        var entity: Entity = new Entity(prototype, this);
         this._entities[this._entityCount++] = entity;
 
         //todo: perform active/inactive check and sort into corresponding pool

@@ -1,17 +1,15 @@
-define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessage", "engine/entity/entityPrototype"], function(require, exports, __Entity__, __EntityMessage__, __EntityPrototype__) {
-    var Entity = __Entity__;
-    var EntityMessage = __EntityMessage__;
-    var EntityPrototype = __EntityPrototype__;
-
+define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessage", "engine/entity/entityPrototype"], function(require, exports, Entity, EntityMessage, EntityPrototype) {
     var DEFAULT_ENTITY_POOL_SIZE = 10000;
 
     var EntityManager = (function () {
-        function EntityManager() {
+        function EntityManager(level) {
             this._objectIdsUsed = 0;
             this._entityCount = 0;
             this._activeEntityCount = 0;
             this._inactiveEntityCount = 0;
             this._alwaysActiveEntityCount = 0;
+            this._level = level;
+
             this.resetEntityPools();
         }
         /**
@@ -45,7 +43,7 @@ define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessa
         * @returns the entity created (be carefull, the entity may not have been fully initialized yet!)
         */
         EntityManager.prototype.createEntityFromPrototype = function (prototype) {
-            var entity = new Entity(prototype);
+            var entity = new Entity(prototype, this);
             this._entities[this._entityCount++] = entity;
 
             //todo: perform active/inactive check and sort into corresponding pool

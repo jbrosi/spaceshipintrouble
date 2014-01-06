@@ -1,6 +1,4 @@
 define(["require", "exports"], function(require, exports) {
-    
-
     var EntityMessage = (function () {
         function EntityMessage(identifier, message, sender) {
             if (typeof identifier === "undefined") { identifier = "undefined"; }

@@ -1,6 +1,4 @@
-define(["require", "exports", "engine/entity/entity"], function(require, exports, __Entity__) {
-    var Entity = __Entity__;
-
+define(["require", "exports", "engine/entity/entity"], function(require, exports, Entity) {
     var EntityScript = (function () {
         function EntityScript() {
             this._data = {};

@@ -1,8 +1,4 @@
-define(["require", "exports", "engine/entity/entityMessage"], function(require, exports, __EntityMessage__) {
-    var EntityMessage = __EntityMessage__;
-    
-    
-
+define(["require", "exports", "engine/entity/entityMessage", "engine/entity/entityScript"], function(require, exports, EntityMessage, EntityScript) {
     var Entity = (function () {
         /**
         * Creates a new entity from the given entityprototype. The entity will copy
@@ -11,12 +7,13 @@ define(["require", "exports", "engine/entity/entityMessage"], function(require, 
         * you won't have any impact on this entity.
         *
         */
-        function Entity(prototype) {
+        function Entity(prototype, manager) {
             this._listeners = [];
             this._data = {};
             this._stepMessage = new EntityMessage("entity:step", { timeStep: 0 }, this);
             //todo: initialize entity, load scripts defined in Prototype,
             //      initialize scripts, ...
+            this._manager = manager;
         }
         /**
         * Clones the current entity and returns the result. Cloning means the new entity
@@ -28,6 +25,10 @@ define(["require", "exports", "engine/entity/entityMessage"], function(require, 
             //with same data and prototype data set.
             //TODO: implement
             return this;
+        };
+
+        Entity.prototype.getManager = function () {
+            return this._manager;
         };
 
         Entity.prototype.getData = function () {
@@ -82,6 +83,7 @@ define(["require", "exports", "engine/entity/entityMessage"], function(require, 
             }
 
             if (this._listeners[identifier].length == 1) {
+                //nothin to do
                 if (this._listeners[identifier][0] === callback) {
                     delete this._listeners[identifier];
                 } else {

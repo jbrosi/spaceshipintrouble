@@ -2,6 +2,7 @@
 import EntityMessage = require("engine/entity/entityMessage");
 import EntityPrototype = require("engine/entity/entityPrototype");
 import EntityScript = require("engine/entity/entityScript");
+import EntityManager = require("engine/entity/entityManager");
 
 class Entity {
     
@@ -10,6 +11,8 @@ class Entity {
     private _listeners = [];
     
     private _data = {};
+    
+    private _manager : EntityManager;
     
     private _stepMessage = new EntityMessage("entity:step", {timeStep: 0}, this);
     
@@ -20,9 +23,11 @@ class Entity {
      * you won't have any impact on this entity.
      * 
      */ 
-    constructor(prototype: EntityPrototype) {
+    constructor(prototype: EntityPrototype, manager: EntityManager) {
         //todo: initialize entity, load scripts defined in Prototype,
         //      initialize scripts, ...
+        
+        this._manager = manager;
     }
 
     /**
@@ -37,6 +42,12 @@ class Entity {
         //TODO: implement
         return this;
     }
+    
+    
+    public getManager() : EntityManager {
+        return this._manager;
+    }
+    
     
     public getData() {
         return this._data;
