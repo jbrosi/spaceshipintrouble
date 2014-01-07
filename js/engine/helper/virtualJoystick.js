@@ -1,4 +1,3 @@
-/// <reference path="../lib/three.d.ts" />
 define(["require", "exports", "three", "lodash", "hammer"], function(require, exports, THREE, _, Hammer) {
     var VirtualJoystick = (function () {
         function VirtualJoystick() {

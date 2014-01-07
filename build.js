@@ -24,6 +24,7 @@
         }
     },
     paths: {           
+        bluebird: 'lib/bluebird',
         stats: 'lib/stats',
         three: 'lib/three',
         'helvetiker-font': '../assets/fonts/helvetiker_regular.typeface',

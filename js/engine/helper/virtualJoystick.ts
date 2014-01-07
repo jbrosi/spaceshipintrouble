@@ -1,4 +1,3 @@
-/// <reference path="../lib/three.d.ts" />
 
 import THREE = require("three");
 import _ = require("lodash");

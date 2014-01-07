@@ -1,4 +1,4 @@
-/// <reference path="../../lib/three.d.ts" />
+/// <reference path="../lib/three.d.ts" />
 define(["require", "exports", "three", "lodash"], function(require, exports, THREE, _) {
     var GameInitializer = (function () {
         function GameInitializer() {
