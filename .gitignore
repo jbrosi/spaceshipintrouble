@@ -1,2 +1,18 @@
 /build
 /main-built.js
+
+/images
+
+
+#Ignore Visual studio temporary and user specific stuff:
+
+#build dirs
+/bin
+/bld
+
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+UpgradeLog.htm
