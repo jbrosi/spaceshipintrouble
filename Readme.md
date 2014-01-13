@@ -6,9 +6,10 @@ performance isn't too bad.
 
 ## May I see it in action?
 
-Yes you may! Visit https://c9.io/jbrosi/spaceshipintrouble/workspace/built.html in order to
-run the latest built version. If you're interested in the code you may browse
-through https://c9.io/jbrosi/spaceshipintrouble. The game was entirely written
+Yes you may! Visit http://jbrosi.github.io/spaceshipintrouble/demo/ for the latest
+stable version or visit https://c9.io/jbrosi/spaceshipintrouble/workspace/built.html in order to
+run the latest built version. Or just clone the project and build it on your own. If you're interested 
+in the code you may browse through https://c9.io/jbrosi/spaceshipintrouble. The game was entirely written
 within the cloud9 IDE and you can see the latest updates there.
 
 ## What if something doesn't work?
