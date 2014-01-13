@@ -23,14 +23,6 @@ define(
         Box2D.b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
         Box2D.b2MouseJointDef =  Box2D.Dynamics.Joints.b2MouseJointDef;
           
-          
-        //missing functions in box2dweb
-        Box2D.b2Body.prototype.ApplyAngularImpulse = function(impulse) {
-            if (this.IsAwake() == false) {
-                this.SetAwake(true);
-            }
-            this.m_angularVelocity += this.m_invI * impulse;
-        };
         return Box2D;
     }
 );
