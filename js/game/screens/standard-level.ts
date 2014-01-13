@@ -1,13 +1,13 @@
 
 import THREE = require("three");
 import _ = require("lodash");
-import Box2DHelper = require("engine/helper/box2DHelper");
+import Box2D = require("engine/helper/box2DHelper");
 
 import AbstractLevel = require("engine/abstractLevel");
 
 class StandardLevelScreen extends AbstractLevel {
     public constructor(renderer) {
-        this._renderer = renderer;
+        super(renderer);
         _.bindAll(this);
     }
     
@@ -20,9 +20,6 @@ class StandardLevelScreen extends AbstractLevel {
         
         var that = this;
         
-        this._lastShot = 0;
-        this._projectiles = [];
-        
         this._setupCameraAndLighting();
         this._createShip();
         this._setupPhysics();
@@ -30,12 +27,10 @@ class StandardLevelScreen extends AbstractLevel {
         this._setupLevel();
         
         console.log("registering keyboard and virtual joystick")
-        this._keyboard = new KeyboardHelper();
-        this._keyboard.register();
+        this.getKeyboard().register();
+        this.getJoystick().attachToScene(this.getScene(), this.getRenderer());
         
-        this._virtualJoystick = new VirtualJoystick();
-        this._virtualJoystick.attachToScene(this._scene, this._renderer);
-        
+
     }
     
     private _setupCollisionListener () {
@@ -133,9 +128,8 @@ class StandardLevelScreen extends AbstractLevel {
         
         this._moveShip(time);
         this._moveEnemies(time);
-        this._moveProjectiles(time);
-        
-        this._renderer.render(this._scene, this._camera); 
+
+        this.getRenderer().render(this.getScene(), this.getCamera()); 
         
         this._physics.world.Step(
             16,     //framerate
@@ -152,27 +146,7 @@ class StandardLevelScreen extends AbstractLevel {
         
     }
     
-    private _moveProjectiles (time) {
-        var projectile;
-        var currentTime = new Date().getTime();
-        for (var a = 0; a < this._projectiles.length; a++) {
-            projectile = this._projectiles[a];
-            
-            
-            
-            if (projectile.physic.GetUserData().isKilled || currentTime - projectile.physic.GetUserData().time > 300) {
-                this._physics.world.DestroyBody(projectile.physic);
-                this._scene.remove(projectile.mesh);
-                this._projectiles.splice(a, 1);
-                continue;
-            }
-            
-            
-            
-            projectile.mesh.position.set(projectile.physic.GetPosition().x * this._physScale, projectile.physic.GetPosition().y * this._physScale, 0);
-        }
-    }
-    
+
     private _moveShip (time) {
         if (!time || !this._shipMesh) {
             return;
@@ -192,31 +166,31 @@ class StandardLevelScreen extends AbstractLevel {
         backwardsDirection.y = Math.sin(this._physics.ship.GetAngle() + (Math.PI/2));
         backwardsDirection.Multiply(factor);
         
-        if (this._keyboard.isLeftPressed()) {
+        if (this.getKeyboard().isLeftPressed()) {
             this._physics.ship.SetAngle(this._physics.ship.GetAngle() + 0.1);
             isAngleSet = true;
         }
-        if (this._keyboard.isRightPressed()) {
+        if (this.getKeyboard().isRightPressed()) {
             this._physics.ship.SetAngle(this._physics.ship.GetAngle() - 0.1);
             isAngleSet = true;
         }
-        if (this._keyboard.isUpPressed()) {
+        if (this.getKeyboard().isUpPressed()) {
             this._physics.ship.ApplyForce(facingDirection, this._physics.ship.GetWorldCenter());
         }
-        if (this._keyboard.isDownPressed()) {
+        if (this.getKeyboard().isDownPressed()) {
             this._physics.ship.ApplyForce(backwardsDirection, this._physics.ship.GetWorldCenter());
         }
         
         
         //check the joystick:
-        if (this._virtualJoystick.getSpeed() > 0) {
+        if (this.getJoystick().getSpeed() > 0) {
             //try to get direction:
             var joystickDirection = new Box2D.b2Vec2();
-            joystickDirection.x = Math.cos(this._virtualJoystick.getAngle());
-            joystickDirection.y = Math.sin(this._virtualJoystick.getAngle());
-            joystickDirection.Multiply(factor * this._virtualJoystick.getSpeed());
+            joystickDirection.x = Math.cos(this.getJoystick().getAngle());
+            joystickDirection.y = Math.sin(this.getJoystick().getAngle());
+            joystickDirection.Multiply(factor * this.getJoystick().getSpeed());
             this._physics.ship.ApplyForce(joystickDirection, this._physics.ship.GetWorldCenter());
-            this._physics.ship.SetAngle(this._virtualJoystick.getAngle() + (Math.PI / 2));
+            this._physics.ship.SetAngle(this.getJoystick().getAngle() + (Math.PI / 2));
             isAngleSet = true;
         }
         if(!isAngleSet) {
@@ -225,8 +199,8 @@ class StandardLevelScreen extends AbstractLevel {
 
         this._shipMesh.position.x = this._physics.ship.GetPosition().x * this._physScale;
         this._shipMesh.position.y = this._physics.ship.GetPosition().y * this._physScale;
-        this._camera.position.x = this._physics.ship.GetPosition().x * this._physScale;
-        this._camera.position.y = this._physics.ship.GetPosition().y * this._physScale;
+        this.getCamera().position.x = this._physics.ship.GetPosition().x * this._physScale;
+        this.getCamera().position.y = this._physics.ship.GetPosition().y * this._physScale;
         this._shipMesh.rotation.y = this._physics.ship.GetAngle();
         
         
@@ -234,28 +208,28 @@ class StandardLevelScreen extends AbstractLevel {
         
         
         //shoot?
-        if (this._keyboard.isSpacePressed() || this._virtualJoystick.isFireButtonPressed()) {
+        if (this.getKeyboard().isSpacePressed() || this.getJoystick().isFireButtonPressed()) {
             var currentTime = new Date().getTime();
             if (currentTime - this._lastShot > 150) {
                 
                 this._lastShot = currentTime;
-                var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
-                shotMesh.position.set(this._physics.ship.GetPosition().x * this._physScale, this._physics.ship.GetPosition().y * this._physScale, 0);
+                // var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
+                // shotMesh.position.set(this._physics.ship.GetPosition().x * this._physScale, this._physics.ship.GetPosition().y * this._physScale, 0);
                 
-                this._scene.add(shotMesh)
+                // this._scene.add(shotMesh)
                 
-                this._physics.projectileBodyDef.position.Set(this._physics.ship.GetPosition().x + (facingDirection.x / factor), this._physics.ship.GetPosition().y + (facingDirection.y / factor));
-                var projectile = this._physics.world.CreateBody(this._physics.projectileBodyDef);
+                // this._physics.projectileBodyDef.position.Set(this._physics.ship.GetPosition().x + (facingDirection.x / factor), this._physics.ship.GetPosition().y + (facingDirection.y / factor));
+                // var projectile = this._physics.world.CreateBody(this._physics.projectileBodyDef);
 
-                facingDirection.Multiply(5);
+                // facingDirection.Multiply(5);
                 
-                projectile.SetLinearVelocity(facingDirection);
+                // projectile.SetLinearVelocity(facingDirection);
 
-                projectile.CreateFixture(this._physics.projectileFix);
+                // projectile.CreateFixture(this._physics.projectileFix);
                 
                 
-                projectile.SetUserData({type: "projectile"});
-                this._projectiles.push({mesh: shotMesh, physic: projectile, time: currentTime});
+                // projectile.SetUserData({type: "projectile"});
+                // this._projectiles.push({mesh: shotMesh, physic: projectile, time: currentTime});
             }
             
         }
@@ -311,22 +285,22 @@ class StandardLevelScreen extends AbstractLevel {
     }
     
     private _setupCameraAndLighting () {
-        this._scene = new THREE.Scene();
+        this.setScene(new THREE.Scene());
         
         //soft white ambient light (change to blueish color?)
         var light = new THREE.AmbientLight( 0x404040 ); 
-        this._scene.add( light );
+        this.getScene().add(light);
 
         //directional light for soft shadows
         var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.9 );
         directionalLight.position.set( 1, 1, 1 );
-        this._scene.add( directionalLight );
+        this.getScene().add(directionalLight);
 
         //perspective camera with default values / angle
-        this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-        this._camera.position.set(0,0,50);
+        this.setCamera(new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000));
+        this.getCamera().position.set(0,0,50);
 
-        this._renderer.setClearColor( 0xffffff, 1 );
+        this.getRenderer().setClearColor( 0xffffff, 1 );
 
     }
     
@@ -342,7 +316,7 @@ class StandardLevelScreen extends AbstractLevel {
             that._shipMesh = new THREE.Mesh( shipGeo, shipMaterial);
             that._shipMesh.scale.set( 1.5, 1.5, 1.5 );
             that._shipMesh.rotation.set(Math.PI/2,0,0);
-            that._scene.add( that._shipMesh );
+            that.getScene().add( that._shipMesh );
         } , "assets/textures/");
     }
     

@@ -8,6 +8,11 @@ define(
         Box2D.b2Vec2 = Box2D.Common.Math.b2Vec2;
         Box2D.b2AABB = Box2D.Collision.b2AABB;
         Box2D.b2BodyDef = Box2D.Dynamics.b2BodyDef;
+        
+        if (navigator.isCocoonJS) {
+            //this method is named the old way in cocoon js bindings - add a convenience shortcut
+            Box2D.Dynamics.b2Body.prototype.ApplyForce = Box2D.Dynamics.b2Body.prototype.ApplyForceToCenter;
+        }
         Box2D.b2Body = Box2D.Dynamics.b2Body;
         Box2D.b2FixtureDef = Box2D.Dynamics.b2FixtureDef;
         Box2D.b2Fixture = Box2D.Dynamics.b2Fixture;
