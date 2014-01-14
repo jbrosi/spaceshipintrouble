@@ -28,7 +28,7 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
 
             console.log("registering keyboard and virtual joystick");
             this.getKeyboard().register();
-            this.getJoystick().attachToScene(this.getScene(), this.getRenderer());
+            this.getJoystick().register(this);
         };
 
         StandardLevelScreen.prototype._setupCollisionListener = function () {
@@ -39,8 +39,7 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
                 var objectB = contact.GetFixtureB().GetBody().GetUserData();
                 if (objectA.type == 'projectile' && objectB.type == 'wall') {
                     objectA.isKilled = true;
-                }
-                if (objectB.type == 'projectile' && objectA.type == 'wall') {
+                } else if (objectB.type == 'projectile' && objectA.type == 'wall') {
                     objectB.isKilled = true;
                 }
             };
@@ -206,6 +205,9 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             var geo = new THREE.Geometry();
             var mesh = new THREE.Mesh(cubeGeo);
 
+            var wall = this._physics.world.CreateBody(this._physics.defaultWallDefinition);
+            wall.SetUserData({ type: 'wall' });
+
             var isBoxToCreate = 0;
             for (var x = 0; x < 100; x++) {
                 for (var y = 0; y < 100; y++) {
@@ -227,10 +229,8 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
 
                         THREE.GeometryUtils.merge(geo, mesh);
 
-                        this._physics.defaultWallDefinition.position.Set(posx / this._physScale, posy / this._physScale);
-                        var wall = this._physics.world.CreateBody(this._physics.defaultWallDefinition);
+                        this._physics.defaultWallFixture.shape.SetAsOrientedBox(5 / this._physScale, 5 / this._physScale, new Box2D.b2Vec2(posx / this._physScale, posy / this._physScale), 0);
                         wall.CreateFixture(this._physics.defaultWallFixture);
-                        wall.SetUserData({ type: 'wall' });
                     }
                 }
             }

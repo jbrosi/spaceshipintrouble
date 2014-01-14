@@ -28,7 +28,7 @@ class StandardLevelScreen extends AbstractLevel {
         
         console.log("registering keyboard and virtual joystick");
         this.getKeyboard().register();
-        this.getJoystick().attachToScene(this.getScene(), this.getRenderer());
+        this.getJoystick().register(this);
         
 
     }
@@ -42,8 +42,7 @@ class StandardLevelScreen extends AbstractLevel {
             var objectB = contact.GetFixtureB().GetBody().GetUserData();
             if (objectA.type == 'projectile' && objectB.type == 'wall') {
                 objectA.isKilled = true;
-            }
-            if (objectB.type == 'projectile' && objectA.type == 'wall') {
+            } else if (objectB.type == 'projectile' && objectA.type == 'wall') {
                 objectB.isKilled = true;
             }
         };
@@ -270,7 +269,7 @@ class StandardLevelScreen extends AbstractLevel {
                     
                     THREE.GeometryUtils.merge(geo, mesh);
                     
-                    this._physics.defaultWallFixture.position.Set(posx / this._physScale, posy / this._physScale);
+                    this._physics.defaultWallFixture.shape.SetAsOrientedBox(5 / this._physScale, 5 / this._physScale, new Box2D.b2Vec2(posx / this._physScale, posy / this._physScale), 0);
                     wall.CreateFixture(this._physics.defaultWallFixture);
                     
                     
