@@ -14,11 +14,11 @@ define(["require", "exports", "three", "lodash", "hammer"], function(require, ex
                 //already created
                 return;
             }
-            var joystickTexture = THREE.ImageUtils.loadTexture('assets/textures/joystick_move.png');
+            var joystickTexture = THREE.ImageUtils.loadTexture('assets/engine/textures/joystick_move.png');
             var joystickMat = new THREE.SpriteMaterial({ map: joystickTexture, useScreenCoordinates: true, depthTest: false, depthWrite: false });
             this._joystickMesh = new THREE.Sprite(joystickMat);
 
-            var fireButtonTexture = THREE.ImageUtils.loadTexture('assets/textures/joystick_fire.png');
+            var fireButtonTexture = THREE.ImageUtils.loadTexture('assets/engine/textures/joystick_fire.png');
             var fireButtonMat = new THREE.SpriteMaterial({ map: fireButtonTexture, useScreenCoordinates: true, depthTest: false, depthWrite: false });
             this._fireButtonMesh = new THREE.Sprite(fireButtonMat);
         };

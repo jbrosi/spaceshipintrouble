@@ -38,6 +38,10 @@ class EntityMessage {
      */ 
     private _sender: Entity;
     
+    /**
+     * Creates a new message ready to be sent to entities. The message *should*
+     * contain an identifier, the message param and the entity param are optional.
+     */ 
     constructor(identifier: string = "undefined", message: any = {}, sender: Entity = null) {
         this._identifier = identifier;
         this._message = message;

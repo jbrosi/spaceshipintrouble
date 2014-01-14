@@ -231,15 +231,15 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
 
             //Load and add ship
             var loader = new THREE.JSONLoader();
-            loader.load("assets/models/fighter.js", function (shipGeo, shipMaterials) {
+            loader.load("assets/game/models/fighter.js", function (shipGeo, shipMaterials) {
                 console.log("ship loaded");
 
-                var shipMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/textures/fighter.png') });
+                var shipMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/game/textures/fighter.png') });
                 that._shipMesh = new THREE.Mesh(shipGeo, shipMaterial);
                 that._shipMesh.scale.set(1.5, 1.5, 1.5);
                 that._shipMesh.rotation.set(Math.PI / 2, 0, 0);
                 that.getScene().add(that._shipMesh);
-            }, "assets/textures/");
+            }, "assets/game/textures/");
         };
         return StandardLevelScreen;
     })(AbstractLevel);
