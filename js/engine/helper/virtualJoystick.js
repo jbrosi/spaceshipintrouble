@@ -23,13 +23,13 @@ define(["require", "exports", "three", "lodash", "hammer"], function(require, ex
             this._fireButtonMesh = new THREE.Sprite(fireButtonMat);
         };
 
-        VirtualJoystick.prototype.attachToScene = function (scene, renderer) {
+        VirtualJoystick.prototype.register = function (level) {
             if (!this._joystickMesh) {
                 this._createMeshes();
             }
 
-            this._scene = scene;
-            this._renderer = renderer;
+            this._scene = level.getScene();
+            this._renderer = level.getRenderer();
 
             this._screenHeight = window.innerHeight;
             this._screenWidth = window.innerWidth;

@@ -2,6 +2,7 @@
 import THREE = require("three");
 import _ = require("lodash");
 import Hammer = require("hammer");
+import AbstractLevel = require("engine/abstractLevel");
 
 class VirtualJoystick {
         
@@ -41,14 +42,14 @@ class VirtualJoystick {
 
     }
     
-    public attachToScene (scene, renderer) {
+    public register (level: AbstractLevel) {
         
         if (!this._joystickMesh) {
             this._createMeshes();
         }
         
-        this._scene = scene;
-        this._renderer = renderer;
+        this._scene = level.getScene();
+        this._renderer = level.getRenderer();
         
         this._screenHeight = window.innerHeight;
         this._screenWidth = window.innerWidth;
