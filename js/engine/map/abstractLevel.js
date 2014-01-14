@@ -10,13 +10,13 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
         AbstractLevel.prototype.getRenderer = function () {
             return this._renderer;
         };
-        AbstractLevel.prototype.preRender = function () {
+        AbstractLevel.prototype.preRender = function (timeStep) {
             //overwrite to do own stuff here
         };
-        AbstractLevel.prototype.postRender = function () {
+        AbstractLevel.prototype.postRender = function (timeStep) {
             //overwrite to do own stuff here
         };
-        AbstractLevel.prototype.prePhysics = function () {
+        AbstractLevel.prototype.prePhysics = function (timeStep) {
             //overwrite to do own stuff here
         };
         AbstractLevel.prototype.preEntitySteps = function (timeStep) {

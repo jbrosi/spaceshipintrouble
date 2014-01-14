@@ -3,7 +3,7 @@
 import Entity = require("engine/entity/entity");        
 import EntityMessage = require("engine/entity/entityMessage");
 import EntityPrototype = require("engine/entity/entityPrototype");
-import AbstractLevel = require("engine/abstractLevel");
+import AbstractLevel = require("engine/map/abstractLevel");
 
 
 

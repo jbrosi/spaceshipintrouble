@@ -1,0 +1,8 @@
+
+
+
+class AbstractMapLoader {
+    
+};
+
+export = AbstractMapLoader;

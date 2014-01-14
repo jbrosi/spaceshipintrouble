@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "engine/abstractLevel"], function(require, exports, THREE, _, Box2D, AbstractLevel) {
+define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "engine/map/abstractLevel"], function(require, exports, THREE, _, Box2D, AbstractLevel) {
     var StandardLevelScreen = (function (_super) {
         __extends(StandardLevelScreen, _super);
         function StandardLevelScreen(renderer) {

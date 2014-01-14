@@ -2,7 +2,7 @@
 import THREE = require("three");
 import _ = require("lodash");
 import Hammer = require("hammer");
-import AbstractLevel = require("engine/abstractLevel");
+import AbstractLevel = require("engine/map/abstractLevel");
 
 class VirtualJoystick {
         

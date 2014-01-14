@@ -25,13 +25,13 @@ class AbstractLevel {
     public getRenderer() {
         return this._renderer;
     }
-    public preRender() {
+    public preRender(timeStep) {
         //overwrite to do own stuff here
     }
-    public postRender() {
+    public postRender(timeStep) {
         //overwrite to do own stuff here
     }
-    public prePhysics() {
+    public prePhysics(timeStep) {
         //overwrite to do own stuff here
     }    
     public preEntitySteps(timeStep) {

@@ -2,8 +2,9 @@
 import THREE = require("three");
 import _ = require("lodash");
 import Box2D = require("engine/helper/box2DHelper");
+import AbstractLevel = require("engine/map/abstractLevel");
 
-import AbstractLevel = require("engine/abstractLevel");
+
 
 class StandardLevelScreen extends AbstractLevel {
     public constructor(renderer) {
