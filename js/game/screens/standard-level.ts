@@ -26,7 +26,7 @@ class StandardLevelScreen extends AbstractLevel {
         this._setupCollisionListener();
         this._setupLevel();
         
-        console.log("registering keyboard and virtual joystick")
+        console.log("registering keyboard and virtual joystick");
         this.getKeyboard().register();
         this.getJoystick().attachToScene(this.getScene(), this.getRenderer());
         
@@ -243,7 +243,9 @@ class StandardLevelScreen extends AbstractLevel {
 
         var geo = new THREE.Geometry();
         var mesh = new THREE.Mesh(cubeGeo);
-        
+
+        var wall = this._physics.world.CreateBody(this._physics.defaultWallDefinition);
+        wall.SetUserData({type: 'wall'});
         
         var isBoxToCreate = 0;
         for (var x = 0; x < 100; x++ ) {
@@ -268,10 +270,9 @@ class StandardLevelScreen extends AbstractLevel {
                     
                     THREE.GeometryUtils.merge(geo, mesh);
                     
-                    this._physics.defaultWallDefinition.position.Set(posx / this._physScale, posy / this._physScale);
-                    var wall = this._physics.world.CreateBody(this._physics.defaultWallDefinition);
+                    this._physics.defaultWallFixture.position.Set(posx / this._physScale, posy / this._physScale);
                     wall.CreateFixture(this._physics.defaultWallFixture);
-                    wall.SetUserData({type: 'wall'});
+                    
                     
                 }
             }
