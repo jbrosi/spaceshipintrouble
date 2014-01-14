@@ -79,15 +79,6 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             physics.projectileBodyDef = projectileBodyDef;
         };
 
-        StandardLevelScreen.prototype.render = function (time) {
-            this._moveShip(time);
-            this._moveEnemies(time);
-
-            this.getRenderer().render(this.getScene(), this.getCamera());
-
-            this.calculatePhysics();
-        };
-
         StandardLevelScreen.prototype._moveEnemies = function (time) {
         };
 

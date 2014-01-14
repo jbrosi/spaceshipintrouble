@@ -85,18 +85,6 @@ class StandardLevelScreen extends AbstractLevel {
     }
     
 
-    
-    public render (time) {
-        
-        this._moveShip(time);
-        this._moveEnemies(time);
-
-        this.getRenderer().render(this.getScene(), this.getCamera()); 
-        
-        this.calculatePhysics();
-        
-    }
-    
     private _moveEnemies (time) {
         
     }

@@ -26,6 +26,13 @@ class AbstractLevel {
         return this._renderer;
     }
     
+    
+    public render(timeStep: number) {
+        this.calculatePhysics();
+        this.getEntityManager().doStep(timeStep);
+        this.getRenderer().render(this._scene, this._camera);
+    }
+    
     /**
      * Initializes the physics world. Should be called before using #calculatePhysics()
      * The gravity param should be a b2Vec. If you don't set this param there will be

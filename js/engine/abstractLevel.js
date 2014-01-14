@@ -11,6 +11,12 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
             return this._renderer;
         };
 
+        AbstractLevel.prototype.render = function (timeStep) {
+            this.calculatePhysics();
+            this.getEntityManager().doStep(timeStep);
+            this.getRenderer().render(this._scene, this._camera);
+        };
+
         /**
         * Initializes the physics world. Should be called before using #calculatePhysics()
         * The gravity param should be a b2Vec. If you don't set this param there will be
