@@ -12,7 +12,35 @@ define(
         if (navigator.isCocoonJS) {
             //this method is named the old way in cocoon js bindings - add a convenience shortcut
             Box2D.Dynamics.b2Body.prototype.ApplyForce = Box2D.Dynamics.b2Body.prototype.ApplyForceToCenter;
+            
+            
+            //add support for orientedBox in cocoon bindings:
+            Box2D.Collision.Shapes.b2PolygonShape.prototype.SetAsOrientedBox = function (hx, hy, center, angle) {
+                if (hx === undefined) hx = 0;
+                if (hy === undefined) hy = 0;
+                if (center === undefined) center = null;
+                if (angle === undefined) angle = 0.0;
+
+                var vertices = [];
+                vertices.push(new Box2D.b2Vec2(-hx, -hy));
+                vertices.push(new Box2D.b2Vec2(hx, -hy));
+                vertices.push(new Box2D.b2Vec2(hx, hy));
+                vertices.push(new Box2D.b2Vec2(-hx, hy));
+
+                var xf = new Box2D.Common.Math.b2Transform();
+                xf.position = center;
+                xf.R.Set(angle);
+                for (var i = 0; i < 4; ++i) {
+                    vertices[i] = Box2D.Common.Math.b2Math.MulX(xf, vertices[i]);
+                }
+                
+                this.SetAsArray(vertices, 4);
+            };
         }
+        
+    
+        
+        
         Box2D.b2Body = Box2D.Dynamics.b2Body;
         Box2D.b2FixtureDef = Box2D.Dynamics.b2FixtureDef;
         Box2D.b2Fixture = Box2D.Dynamics.b2Fixture;
