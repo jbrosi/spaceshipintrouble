@@ -79,6 +79,10 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             physics.projectileBodyDef = projectileBodyDef;
         };
 
+        StandardLevelScreen.prototype.prePhysics = function (time) {
+            this._moveShip(time);
+        };
+
         StandardLevelScreen.prototype._moveEnemies = function (time) {
         };
 

@@ -25,12 +25,44 @@ class AbstractLevel {
     public getRenderer() {
         return this._renderer;
     }
+    public preRender() {
+        //overwrite to do own stuff here
+    }
+    public postRender() {
+        //overwrite to do own stuff here
+    }
+    public prePhysics() {
+        //overwrite to do own stuff here
+    }    
+    public preEntitySteps(timeStep) {
+        //overwrite to do own stuff here
+    }
     
-    
+    /**
+     * Gets called by the screenManager when this LevelScreen should render itself.
+     * This also calculates the physics and entity movements like so:
+     * 
+     * - *prePhysics
+     * - calculatePhysics
+     * - *preEntitySteps
+     * - calculate entity steps
+     * - *preRender
+     * - actually call three js render
+     * - *postRender
+     * 
+     * the *-methods do nothing and can be overwritten to do own stuff in your level
+     */ 
     public render(timeStep: number) {
+        this.prePhysics(timeStep);
         this.calculatePhysics();
+        
+        this.preEntitySteps(timeStep);
         this.getEntityManager().doStep(timeStep);
+        
+        this.preRender(timeStep);
         this.getRenderer().render(this._scene, this._camera);
+        
+        this.postRender(timeStep);
     }
     
     /**

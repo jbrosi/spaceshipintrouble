@@ -84,6 +84,9 @@ class StandardLevelScreen extends AbstractLevel {
         physics.projectileBodyDef = projectileBodyDef;
     }
     
+    public prePhysics(time) {
+        this._moveShip(time);
+    }
 
     private _moveEnemies (time) {
         

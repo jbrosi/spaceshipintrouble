@@ -10,11 +10,44 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
         AbstractLevel.prototype.getRenderer = function () {
             return this._renderer;
         };
+        AbstractLevel.prototype.preRender = function () {
+            //overwrite to do own stuff here
+        };
+        AbstractLevel.prototype.postRender = function () {
+            //overwrite to do own stuff here
+        };
+        AbstractLevel.prototype.prePhysics = function () {
+            //overwrite to do own stuff here
+        };
+        AbstractLevel.prototype.preEntitySteps = function (timeStep) {
+            //overwrite to do own stuff here
+        };
 
+        /**
+        * Gets called by the screenManager when this LevelScreen should render itself.
+        * This also calculates the physics and entity movements like so:
+        *
+        * - *prePhysics
+        * - calculatePhysics
+        * - *preEntitySteps
+        * - calculate entity steps
+        * - *preRender
+        * - actually call three js render
+        * - *postRender
+        *
+        * the *-methods do nothing and can be overwritten to do own stuff in your level
+        */
         AbstractLevel.prototype.render = function (timeStep) {
+            this.prePhysics(timeStep);
             this.calculatePhysics();
+
+            this.preEntitySteps(timeStep);
             this.getEntityManager().doStep(timeStep);
+
+            this.preRender(timeStep);
             this.getRenderer().render(this._scene, this._camera);
+
+            this.postRender(timeStep);
         };
 
         /**
