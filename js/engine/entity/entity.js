@@ -105,6 +105,7 @@ define(["require", "exports", "engine/entity/entityMessage", "engine/entity/enti
         Entity.prototype.doStep = function (timeStep) {
             //fake step message for scripts:
             this._stepMessage.getMessage().timeStep = timeStep;
+            this.sendMessage(this._stepMessage);
         };
 
         /**

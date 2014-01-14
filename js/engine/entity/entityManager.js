@@ -12,6 +12,10 @@ define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessa
 
             this.resetEntityPools();
         }
+        EntityManager.prototype.getLevel = function () {
+            return this._level;
+        };
+
         /**
         * Notifies all entities about their deletion and resets the entity pools afterwards.
         */

@@ -36,6 +36,11 @@ class EntityManager {
         this.resetEntityPools();
     }
     
+    
+    public getLevel(): AbstractLevel {
+        return this._level;
+    }
+    
     /**
      * Notifies all entities about their deletion and resets the entity pools afterwards.
      */

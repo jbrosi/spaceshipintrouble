@@ -23,7 +23,6 @@ class StandardLevelScreen extends AbstractLevel {
         this._setupCameraAndLighting();
         this._createShip();
         this._setupPhysics();
-        this._setupCollisionListener();
         this._setupLevel();
         
         console.log("registering keyboard and virtual joystick");
@@ -33,44 +32,8 @@ class StandardLevelScreen extends AbstractLevel {
 
     }
     
-    private _setupCollisionListener () {
-        var colDetector = Box2D.Dynamics.b2ContactListener;
-        
-        
-        colDetector.BeginContact = function(contact) {
-            var objectA = contact.GetFixtureA().GetBody().GetUserData();
-            var objectB = contact.GetFixtureB().GetBody().GetUserData();
-            if (objectA.type == 'projectile' && objectB.type == 'wall') {
-                objectA.isKilled = true;
-            } else if (objectB.type == 'projectile' && objectA.type == 'wall') {
-                objectB.isKilled = true;
-            }
-        };
-        colDetector.EndContact = function(contact) {
-            
-        };
-        
-        colDetector.PostSolve = function (contact, impulse) {
-            
-        };
-        
-        colDetector.PreSolve = function (contact, oldManifold) {
-            
-        };
-        
-        this._physics.world.SetContactListener(colDetector);
-
-    }
-    
-    
     private _setupPhysics () {
-        this._physics = {
-            world: new Box2D.b2World(
-                new Box2D.b2Vec2(0,0),  //gravity
-                true                    //allow sleep
-            )
-        };
-        
+        var physics = this.initPhysics();
         this._physScale = 3;
         
         //wall
@@ -81,11 +44,11 @@ class StandardLevelScreen extends AbstractLevel {
         fixDef.shape = new Box2D.b2PolygonShape;
         fixDef.shape.SetAsBox(5 / this._physScale, 5 / this._physScale);
          
-        this._physics.defaultWallFixture = fixDef;
-        this._physics.defaultWallDefinition = new Box2D.b2BodyDef();
-        this._physics.defaultWallDefinition.type = Box2D.b2Body.b2_staticBody;
-        this._physics.defaultWallDefinition.position.x = 0;
-        this._physics.defaultWallDefinition.position.y = 0;
+        physics.defaultWallFixture = fixDef;
+        physics.defaultWallDefinition = new Box2D.b2BodyDef();
+        physics.defaultWallDefinition.type = Box2D.b2Body.b2_staticBody;
+        physics.defaultWallDefinition.position.x = 0;
+        physics.defaultWallDefinition.position.y = 0;
 
 
         //ship
@@ -99,10 +62,10 @@ class StandardLevelScreen extends AbstractLevel {
         var shipBodyDef = new Box2D.b2BodyDef();
         shipBodyDef.type = Box2D.b2Body.b2_dynamicBody;
         
-        this._physics.ship = this._physics.world.CreateBody(shipBodyDef);
-        this._physics.ship.CreateFixture(shipFix);
-        this._physics.ship.SetLinearDamping(0.002);
-        this._physics.ship.SetUserData({type: 'ship'});
+        physics.ship = physics.world.CreateBody(shipBodyDef);
+        physics.ship.CreateFixture(shipFix);
+        physics.ship.SetLinearDamping(0.002);
+        physics.ship.SetUserData({type: 'ship'});
 
 
         //projectile
@@ -117,8 +80,8 @@ class StandardLevelScreen extends AbstractLevel {
         var projectileBodyDef = new Box2D.b2BodyDef();
         projectileBodyDef.type = Box2D.b2Body.b2_dynamicBody;
         
-        this._physics.projectileFix = projectileFix;
-        this._physics.projectileBodyDef = projectileBodyDef;
+        physics.projectileFix = projectileFix;
+        physics.projectileBodyDef = projectileBodyDef;
     }
     
 
@@ -130,14 +93,7 @@ class StandardLevelScreen extends AbstractLevel {
 
         this.getRenderer().render(this.getScene(), this.getCamera()); 
         
-        this._physics.world.Step(
-            16,     //framerate
-            10,     //velocity iterations
-            10      //position iterations
-        );
-        //this._physics.world.DrawDebugData();
-        this._physics.world.ClearForces();
-        
+        this.calculatePhysics();
         
     }
     
@@ -150,34 +106,35 @@ class StandardLevelScreen extends AbstractLevel {
         if (!time || !this._shipMesh) {
             return;
         }
+        var physics = this.getPhysics();
         
         var factor = 0.20284;
         
         var isAngleSet = false;        
         
         var facingDirection = new Box2D.b2Vec2();
-        facingDirection.x = Math.cos( this._physics.ship.GetAngle() - (Math.PI/2));
-        facingDirection.y = Math.sin( this._physics.ship.GetAngle() - (Math.PI/2));
+        facingDirection.x = Math.cos( physics.ship.GetAngle() - (Math.PI/2));
+        facingDirection.y = Math.sin( physics.ship.GetAngle() - (Math.PI/2));
         facingDirection.Multiply(factor);
         
         var backwardsDirection = new Box2D.b2Vec2();
-        backwardsDirection.x = Math.cos(this._physics.ship.GetAngle() + (Math.PI/2));
-        backwardsDirection.y = Math.sin(this._physics.ship.GetAngle() + (Math.PI/2));
+        backwardsDirection.x = Math.cos(physics.ship.GetAngle() + (Math.PI/2));
+        backwardsDirection.y = Math.sin(physics.ship.GetAngle() + (Math.PI/2));
         backwardsDirection.Multiply(factor);
         
         if (this.getKeyboard().isLeftPressed()) {
-            this._physics.ship.SetAngle(this._physics.ship.GetAngle() + 0.1);
+            physics.ship.SetAngle(physics.ship.GetAngle() + 0.1);
             isAngleSet = true;
         }
         if (this.getKeyboard().isRightPressed()) {
-            this._physics.ship.SetAngle(this._physics.ship.GetAngle() - 0.1);
+            physics.ship.SetAngle(physics.ship.GetAngle() - 0.1);
             isAngleSet = true;
         }
         if (this.getKeyboard().isUpPressed()) {
-            this._physics.ship.ApplyForce(facingDirection, this._physics.ship.GetWorldCenter());
+            physics.ship.ApplyForce(facingDirection, physics.ship.GetWorldCenter());
         }
         if (this.getKeyboard().isDownPressed()) {
-            this._physics.ship.ApplyForce(backwardsDirection, this._physics.ship.GetWorldCenter());
+            physics.ship.ApplyForce(backwardsDirection, physics.ship.GetWorldCenter());
         }
         
         
@@ -188,22 +145,22 @@ class StandardLevelScreen extends AbstractLevel {
             joystickDirection.x = Math.cos(this.getJoystick().getAngle());
             joystickDirection.y = Math.sin(this.getJoystick().getAngle());
             joystickDirection.Multiply(factor * this.getJoystick().getSpeed());
-            this._physics.ship.ApplyForce(joystickDirection, this._physics.ship.GetWorldCenter());
-            this._physics.ship.SetAngle(this.getJoystick().getAngle() + (Math.PI / 2));
+            physics.ship.ApplyForce(joystickDirection, physics.ship.GetWorldCenter());
+            physics.ship.SetAngle(this.getJoystick().getAngle() + (Math.PI / 2));
             isAngleSet = true;
         }
         if(!isAngleSet) {
-            this._physics.ship.SetAngle(this._physics.ship.GetAngle());
+            physics.ship.SetAngle(physics.ship.GetAngle());
         }
 
-        this._shipMesh.position.x = this._physics.ship.GetPosition().x * this._physScale;
-        this._shipMesh.position.y = this._physics.ship.GetPosition().y * this._physScale;
-        this.getCamera().position.x = this._physics.ship.GetPosition().x * this._physScale;
-        this.getCamera().position.y = this._physics.ship.GetPosition().y * this._physScale;
-        this._shipMesh.rotation.y = this._physics.ship.GetAngle();
+        this._shipMesh.position.x = physics.ship.GetPosition().x * this._physScale;
+        this._shipMesh.position.y = physics.ship.GetPosition().y * this._physScale;
+        this.getCamera().position.x = physics.ship.GetPosition().x * this._physScale;
+        this.getCamera().position.y = physics.ship.GetPosition().y * this._physScale;
+        this._shipMesh.rotation.y = physics.ship.GetAngle();
         
         
-        this._physics.ship.SetLinearDamping(0.1 * this._physics.ship.GetLinearVelocity().Length());
+        physics.ship.SetLinearDamping(0.1 * physics.ship.GetLinearVelocity().Length());
         
         
         //shoot?
@@ -243,7 +200,7 @@ class StandardLevelScreen extends AbstractLevel {
         var geo = new THREE.Geometry();
         var mesh = new THREE.Mesh(cubeGeo);
 
-        var wall = this._physics.world.CreateBody(this._physics.defaultWallDefinition);
+        var wall = this.getPhysics().world.CreateBody(this.getPhysics().defaultWallDefinition);
         wall.SetUserData({type: 'wall'});
         
         var isBoxToCreate = 0;
@@ -269,8 +226,8 @@ class StandardLevelScreen extends AbstractLevel {
                     
                     THREE.GeometryUtils.merge(geo, mesh);
                     
-                    this._physics.defaultWallFixture.shape.SetAsOrientedBox(5 / this._physScale, 5 / this._physScale, new Box2D.b2Vec2(posx / this._physScale, posy / this._physScale), 0);
-                    wall.CreateFixture(this._physics.defaultWallFixture);
+                    this.getPhysics().defaultWallFixture.shape.SetAsOrientedBox(5 / this._physScale, 5 / this._physScale, new Box2D.b2Vec2(posx / this._physScale, posy / this._physScale), 0);
+                    wall.CreateFixture(this.getPhysics().defaultWallFixture);
                     
                     
                 }

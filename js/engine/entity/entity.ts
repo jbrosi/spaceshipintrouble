@@ -126,6 +126,7 @@ class Entity {
         //fake step message for scripts:
         
         this._stepMessage.getMessage().timeStep = timeStep;
+        this.sendMessage(this._stepMessage);
     }
     
     /**

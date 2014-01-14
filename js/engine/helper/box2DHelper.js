@@ -1,5 +1,11 @@
 
-
+/**
+ * This module encapsulates the Box2D-Libraries and provides some convenience
+ * functions and shortcuts. It decides whether to use cocoon js native bindings
+ * or box2dweb. Later on we may also add some native bindings for other OS-Types,
+ * too.
+ * You should use this module instead of directly using box2d or box2d-cocoon
+ */ 
 define(
     [navigator.isCocoonJS ? 'box2d-cocoon' : 'box2d'], 
     function (Box2D) {
@@ -9,7 +15,9 @@ define(
         Box2D.b2AABB = Box2D.Collision.b2AABB;
         Box2D.b2BodyDef = Box2D.Dynamics.b2BodyDef;
         
+        //add some cocoon specific stuff
         if (navigator.isCocoonJS) {
+            
             //this method is named the old way in cocoon js bindings - add a convenience shortcut
             Box2D.Dynamics.b2Body.prototype.ApplyForce = Box2D.Dynamics.b2Body.prototype.ApplyForceToCenter;
             
@@ -40,7 +48,7 @@ define(
         
     
         
-        
+        //more shortcuts
         Box2D.b2Body = Box2D.Dynamics.b2Body;
         Box2D.b2FixtureDef = Box2D.Dynamics.b2FixtureDef;
         Box2D.b2Fixture = Box2D.Dynamics.b2Fixture;
