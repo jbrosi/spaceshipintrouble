@@ -10,7 +10,6 @@ import TileSet = require('engine/map/tileSet');
 
 class PlayLevelScreen extends AbstractScreen {
 
-    private _renderer: any;
     private _scene: any;
     private _physicWorld: any;
     private _entityManager: EntityManager;
@@ -23,16 +22,13 @@ class PlayLevelScreen extends AbstractScreen {
     private _tileSets: TileSet[];
     
     public constructor(renderer) {
-        this._renderer = renderer;
+        super(renderer);
     }
     public showLevel(level: AbstractLevel) {
         console.log("showing level");
         return "played";
     }
 
-    public getRenderer() {
-        return this._renderer;
-    }
     public preRender(timeStep) {
         //overwrite to do own stuff here
     }

@@ -8,16 +8,13 @@ define(["require", "exports", 'engine/screens/abstractScreen', 'engine/helper/vi
     var PlayLevelScreen = (function (_super) {
         __extends(PlayLevelScreen, _super);
         function PlayLevelScreen(renderer) {
-            this._renderer = renderer;
+            _super.call(this, renderer);
         }
         PlayLevelScreen.prototype.showLevel = function (level) {
             console.log("showing level");
             return "played";
         };
 
-        PlayLevelScreen.prototype.getRenderer = function () {
-            return this._renderer;
-        };
         PlayLevelScreen.prototype.preRender = function (timeStep) {
             //overwrite to do own stuff here
         };

@@ -8,7 +8,6 @@ define(["require", "exports", 'engine/screens/playLevelScreen', "three", "lodash
     var PlayLevelScreen = (function (_super) {
         __extends(PlayLevelScreen, _super);
         function PlayLevelScreen(renderer) {
-            console.log("CONSTRUCT");
             _super.call(this, renderer);
             _.bindAll(this);
         }
