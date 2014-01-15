@@ -1,4 +1,4 @@
-define(["require", "exports", 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/tileLayer', 'engine/map/objectLayer'], function(require, exports, MapLayer, TileSet, TileLayer, ObjectLayer) {
+define(["require", "exports", 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/tileLayer', 'engine/map/objectLayer', 'lodash'], function(require, exports, MapLayer, TileSet, TileLayer, ObjectLayer, _) {
     var Map = (function () {
         function Map(width, height, tileWidth, tileHeight, properties, version) {
             this._layers = [];
@@ -9,6 +9,8 @@ define(["require", "exports", 'engine/map/mapLayer', 'engine/map/tileSet', 'engi
             this._tileHeight = tileHeight;
             this._properties = properties;
             this._version = version;
+
+            _.bindAll(this);
         }
         Map.prototype.addLayer = function (layer) {
             this._layers.push(layer);

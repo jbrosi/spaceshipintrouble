@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", 'engine/map/abstractMapLoader', 'engine/util/resourceLoader', 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/tileLayer', 'engine/map/objectLayer', 'engine/map/map'], function(require, exports, AbstractMapLoader, ResourceLoader, MapLayer, TileSet, TileLayer, ObjectLayer, Map) {
+define(["require", "exports", 'q', 'engine/map/abstractMapLoader', 'engine/util/resourceLoader', 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/tileLayer', 'engine/map/objectLayer', 'engine/map/map'], function(require, exports, Q, AbstractMapLoader, ResourceLoader, MapLayer, TileSet, TileLayer, ObjectLayer, Map) {
     var TiledJSONMapLoader = (function (_super) {
         __extends(TiledJSONMapLoader, _super);
         function TiledJSONMapLoader() {
@@ -41,15 +41,17 @@ define(["require", "exports", 'engine/map/abstractMapLoader', 'engine/util/resou
                 }
             }
 
-            var map = new Map(data.width, data.height, data.tileWidth, data.tileHeight, data.properties, data.version);
+            var map = new Map(data.width, data.height, data.tilewidth, data.tileheight, data.properties, data.version);
+
+            var promises = [];
 
             for (a = 0; a < data.layers.length; a++) {
                 switch (data.layers[a].type) {
                     case 'tilelayer':
-                        map.addLayer(new TileLayer(data.layers[a]));
+                        promises.push(Q.fcall(TileLayer.createFromJSON, data.layers[a]).then(map.addLayer));
                         break;
                     case 'objectgroup':
-                        map.addLayer(new ObjectLayer(data.layers[a]));
+                        promises.push(Q.fcall(ObjectLayer.createFromJSON, data.layers[a]).then(map.addLayer));
                         break;
                     default:
                         console.log("Warning: invalid layer type found... ignoring layer");
@@ -57,10 +59,18 @@ define(["require", "exports", 'engine/map/abstractMapLoader', 'engine/util/resou
             }
 
             for (var a = 0; a < data.tilesets.length; a++) {
-                map.addTileSet(new TileSet(data.tilesets[a]));
+                promises.push(Q.fcall(TileSet.createFromJSON, data.tilesets[a]).then(map.addTileSet));
             }
-            console.log("successfully parsed the map");
-            return map;
+
+            return Q.allSettled(promises).then(function (states) {
+                for (a = 0; a < states.length; a++) {
+                    if (states[a].state !== "fulfilled") {
+                        console.log("one failed!", states[a].reason);
+                    }
+                }
+                console.log("successfully parsed the map");
+                return map;
+            });
         };
         return TiledJSONMapLoader;
     })(AbstractMapLoader);

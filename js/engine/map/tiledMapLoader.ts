@@ -46,17 +46,18 @@ class TiledJSONMapLoader extends AbstractMapLoader{
             }
         }
         
-        var map = new Map(data.width, data.height, data.tileWidth, data.tileHeight, data.properties, data.version);
+        var map = new Map(data.width, data.height, data.tilewidth, data.tileheight, data.properties, data.version);
         
+        var promises = [];
         
         //parse, create and add the layers
         for (a = 0; a < data.layers.length; a++) {
             switch (data.layers[a].type) {
                 case 'tilelayer': 
-                    map.addLayer(new TileLayer(data.layers[a]));
+                    promises.push(Q.fcall(TileLayer.createFromJSON, data.layers[a]).then(map.addLayer));
                     break;
                 case 'objectgroup':
-                    map.addLayer(new ObjectLayer(data.layers[a]));
+                    promises.push(Q.fcall(ObjectLayer.createFromJSON, data.layers[a]).then(map.addLayer));
                     break;
                 default:
                     console.log("Warning: invalid layer type found... ignoring layer");
@@ -66,10 +67,18 @@ class TiledJSONMapLoader extends AbstractMapLoader{
         
         //parse, create and add tilesets
         for (var a = 0; a < data.tilesets.length; a++) {
-            map.addTileSet(new TileSet(data.tilesets[a]));
+            promises.push(Q.fcall(TileSet.createFromJSON, data.tilesets[a]).then(map.addTileSet));
         }
-        console.log("successfully parsed the map");
-        return map;
+        
+        return Q.allSettled(promises).then(function(states) {
+            for(a = 0; a < states.length; a++) {
+                if (states[a].state !== "fulfilled") {
+                    console.log("one failed!", states[a].reason);
+                }
+            }
+            console.log("successfully parsed the map");
+            return map;
+        });
     }
 
 

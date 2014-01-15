@@ -8,8 +8,11 @@ define(["require", "exports", 'engine/map/mapLayer'], function(require, exports,
     var TileLayer = (function (_super) {
         __extends(TileLayer, _super);
         function TileLayer() {
-            _super.apply(this, arguments);
+            _super.call(this);
         }
+        TileLayer.createFromJSON = function (jsonData) {
+            return new TileLayer();
+        };
         return TileLayer;
     })(MapLayer);
     ;

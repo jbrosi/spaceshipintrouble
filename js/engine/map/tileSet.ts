@@ -15,6 +15,11 @@ class TileSet {
     private margin: number;
     private tileOffsetX: number;
     private tileOffsetY: number;
+    
+    
+    public static createFromJSON(jsonData: any): TileSet {
+        return new TileSet();
+    }
 };
 
 export = TileSet;

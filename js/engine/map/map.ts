@@ -3,7 +3,7 @@ import MapLayer = require('engine/map/mapLayer');
 import TileSet = require('engine/map/tileSet');
 import TileLayer = require('engine/map/tileLayer');
 import ObjectLayer = require('engine/map/objectLayer');
-
+import _ = require('lodash');
 
 class Map {
     
@@ -24,6 +24,8 @@ class Map {
         this._tileHeight = tileHeight;
         this._properties = properties;
         this._version = version;
+        
+        _.bindAll(this);
     }
     
     public addLayer(layer: MapLayer) {

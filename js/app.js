@@ -9,10 +9,10 @@ window.requestAnimationFrame = (function(){
           };
 })();
 
-require(['engine/gameInitializer', 'engine/screens/screenManager', 'engine/map/tiledMapLoader'], function(GameInitializer, ScreenManager, TiledMapLoader) {
+require(['engine/gameInitializer', 'engine/screens/screenManager', 'engine/map/tiledMapLoader', 'q'], function(GameInitializer, ScreenManager, TiledMapLoader, Q) {
     
-    
-    
+    //disable for release!!
+    Q.longStackSupport = true;
     
     //run the game init
     var gi = new GameInitializer();
