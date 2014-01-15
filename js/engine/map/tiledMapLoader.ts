@@ -68,9 +68,8 @@ class TiledJSONMapLoader extends AbstractMapLoader{
         for (var a = 0; a < data.tilesets.length; a++) {
             map.addTileSet(new TileSet(data.tilesets[a]));
         }
-        
-        console.log(map);
-        return Q(map);
+        console.log("successfully parsed the map");
+        return map;
     }
 
 

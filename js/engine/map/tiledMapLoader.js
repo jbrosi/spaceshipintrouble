@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", 'q', 'engine/map/abstractMapLoader', 'engine/util/resourceLoader', 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/tileLayer', 'engine/map/objectLayer', 'engine/map/map'], function(require, exports, Q, AbstractMapLoader, ResourceLoader, MapLayer, TileSet, TileLayer, ObjectLayer, Map) {
+define(["require", "exports", 'engine/map/abstractMapLoader', 'engine/util/resourceLoader', 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/tileLayer', 'engine/map/objectLayer', 'engine/map/map'], function(require, exports, AbstractMapLoader, ResourceLoader, MapLayer, TileSet, TileLayer, ObjectLayer, Map) {
     var TiledJSONMapLoader = (function (_super) {
         __extends(TiledJSONMapLoader, _super);
         function TiledJSONMapLoader() {
@@ -59,9 +59,8 @@ define(["require", "exports", 'q', 'engine/map/abstractMapLoader', 'engine/util/
             for (var a = 0; a < data.tilesets.length; a++) {
                 map.addTileSet(new TileSet(data.tilesets[a]));
             }
-
-            console.log(map);
-            return Q(map);
+            console.log("successfully parsed the map");
+            return map;
         };
         return TiledJSONMapLoader;
     })(AbstractMapLoader);
