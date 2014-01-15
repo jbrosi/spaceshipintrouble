@@ -1,25 +1,33 @@
-define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/keyboardHelper', 'engine/entity/entityManager', 'engine/entity/entityMessage', 'engine/helper/box2DHelper'], function(require, exports, VirtualJoystick, KeyboardHelper, EntityManager, EntityMessage, Box2D) {
-    /**
-    * Gets inherited by all the levels and holds together the common objects like entities,
-    * physics, graphics and so on.
-    */
-    var AbstractLevel = (function () {
-        function AbstractLevel(renderer) {
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+define(["require", "exports", 'engine/screens/abstractScreen', 'engine/helper/virtualJoystick', 'engine/helper/keyboardHelper', 'engine/entity/entityManager', 'engine/entity/entityMessage', 'engine/helper/box2DHelper', 'engine/map/mapLayer', 'engine/map/tileSet'], function(require, exports, AbstractScreen, VirtualJoystick, KeyboardHelper, EntityManager, EntityMessage, Box2D, MapLayer, TileSet) {
+    var PlayLevelScreen = (function (_super) {
+        __extends(PlayLevelScreen, _super);
+        function PlayLevelScreen(renderer) {
             this._renderer = renderer;
         }
-        AbstractLevel.prototype.getRenderer = function () {
+        PlayLevelScreen.prototype.showLevel = function (level) {
+            console.log("showing level");
+            return "played";
+        };
+
+        PlayLevelScreen.prototype.getRenderer = function () {
             return this._renderer;
         };
-        AbstractLevel.prototype.preRender = function (timeStep) {
+        PlayLevelScreen.prototype.preRender = function (timeStep) {
             //overwrite to do own stuff here
         };
-        AbstractLevel.prototype.postRender = function (timeStep) {
+        PlayLevelScreen.prototype.postRender = function (timeStep) {
             //overwrite to do own stuff here
         };
-        AbstractLevel.prototype.prePhysics = function (timeStep) {
+        PlayLevelScreen.prototype.prePhysics = function (timeStep) {
             //overwrite to do own stuff here
         };
-        AbstractLevel.prototype.preEntitySteps = function (timeStep) {
+        PlayLevelScreen.prototype.preEntitySteps = function (timeStep) {
             //overwrite to do own stuff here
         };
 
@@ -37,7 +45,7 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
         *
         * the *-methods do nothing and can be overwritten to do own stuff in your level
         */
-        AbstractLevel.prototype.render = function (timeStep) {
+        PlayLevelScreen.prototype.render = function (timeStep) {
             this.prePhysics(timeStep);
             this.calculatePhysics();
 
@@ -58,10 +66,8 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
         * This also returns the physicsObject. You'll find a b2World in the world property
         * of the physicsObject returned.
         */
-        AbstractLevel.prototype.initPhysics = function (gravity) {
-            if (gravity === undefined) {
-                gravity = new Box2D.b2Vec2(0, 0);
-            }
+        PlayLevelScreen.prototype.initPhysics = function (gravity) {
+            if (typeof gravity === "undefined") { gravity = new Box2D.b2Vec2(0, 0); }
             this._physicWorld = {
                 world: new Box2D.b2World(gravity, true)
             };
@@ -75,7 +81,7 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
         * results if the number gets too high or too low. By now 16 seems the best value. Also a iteration value of 10
         * seems to lead to a stable result.
         */
-        AbstractLevel.prototype.calculatePhysics = function (frameRate, velocityIterations, positionIterations) {
+        PlayLevelScreen.prototype.calculatePhysics = function (frameRate, velocityIterations, positionIterations) {
             if (typeof frameRate === "undefined") { frameRate = 16; }
             if (typeof velocityIterations === "undefined") { velocityIterations = 10; }
             if (typeof positionIterations === "undefined") { positionIterations = 10; }
@@ -89,7 +95,7 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
         * set the property "entity" in the userData of the b2Body to allow the entities
         * to receive the messages.
         */
-        AbstractLevel.prototype._setupPhysicCollisionListener = function () {
+        PlayLevelScreen.prototype._setupPhysicCollisionListener = function () {
             var colDetector = Box2D.Dynamics.b2ContactListener;
 
             colDetector.BeginContact = function (contact) {
@@ -126,53 +132,53 @@ define(["require", "exports", 'engine/helper/virtualJoystick', 'engine/helper/ke
         * Returns the physics object to do calculations with. The object contains a property "world" which is a b2World
         * object and may be used for the box2d physics. You may add other properties for use in other scripts...
         */
-        AbstractLevel.prototype.getPhysics = function () {
+        PlayLevelScreen.prototype.getPhysics = function () {
             return this._physicWorld;
         };
 
-        AbstractLevel.prototype.setCamera = function (camera) {
+        PlayLevelScreen.prototype.setCamera = function (camera) {
             this._camera = camera;
         };
 
-        AbstractLevel.prototype.getCamera = function () {
+        PlayLevelScreen.prototype.getCamera = function () {
             return this._camera;
         };
-        AbstractLevel.prototype.setScene = function (scene) {
+        PlayLevelScreen.prototype.setScene = function (scene) {
             this._scene = scene;
         };
 
-        AbstractLevel.prototype.getScene = function () {
+        PlayLevelScreen.prototype.getScene = function () {
             return this._scene;
         };
 
-        AbstractLevel.prototype.show = function () {
+        PlayLevelScreen.prototype.show = function () {
             console.log("show not implemented");
         };
 
-        AbstractLevel.prototype.getEntityManager = function () {
+        PlayLevelScreen.prototype.getEntityManager = function () {
             if (this._entityManager == null) {
                 this._entityManager = new EntityManager(this);
             }
             return this._entityManager;
         };
 
-        AbstractLevel.prototype.getJoystick = function () {
+        PlayLevelScreen.prototype.getJoystick = function () {
             if (this._joystick == null) {
                 this._joystick = new VirtualJoystick();
             }
             return this._joystick;
         };
 
-        AbstractLevel.prototype.getKeyboard = function () {
+        PlayLevelScreen.prototype.getKeyboard = function () {
             if (this._keyboard == null) {
                 this._keyboard = new KeyboardHelper();
             }
             return this._keyboard;
         };
-        return AbstractLevel;
-    })();
+        return PlayLevelScreen;
+    })(AbstractScreen);
     ;
 
     
-    return AbstractLevel;
+    return PlayLevelScreen;
 });

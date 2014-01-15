@@ -1,4 +1,4 @@
-define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessage", "engine/entity/entityPrototype", "engine/map/abstractLevel"], function(require, exports, Entity, EntityMessage, EntityPrototype, AbstractLevel) {
+define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessage", "engine/entity/entityPrototype"], function(require, exports, Entity, EntityMessage, EntityPrototype) {
     var DEFAULT_ENTITY_POOL_SIZE = 10000;
 
     var EntityManager = (function () {

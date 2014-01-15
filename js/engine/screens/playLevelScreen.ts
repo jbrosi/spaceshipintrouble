@@ -1,16 +1,15 @@
 
+import AbstractScreen = require('engine/screens/abstractScreen');
 import VirtualJoystick = require('engine/helper/virtualJoystick');
 import KeyboardHelper = require('engine/helper/keyboardHelper');
 import EntityManager = require('engine/entity/entityManager');
 import EntityMessage = require('engine/entity/entityMessage');
 import Box2D = require('engine/helper/box2DHelper');
+import MapLayer = require('engine/map/mapLayer');
+import TileSet = require('engine/map/tileSet');
 
-/**
- * Gets inherited by all the levels and holds together the common objects like entities,
- * physics, graphics and so on.
- */ 
-class AbstractLevel {
-    
+class PlayLevelScreen extends AbstractScreen {
+
     private _renderer: any;
     private _scene: any;
     private _physicWorld: any;
@@ -19,9 +18,18 @@ class AbstractLevel {
     private _keyboard: KeyboardHelper;
     private _camera: any;
     
+    
+    private _layers: MapLayer[];
+    private _tileSets: TileSet[];
+    
     public constructor(renderer) {
         this._renderer = renderer;
     }
+    public showLevel(level: AbstractLevel) {
+        console.log("showing level");
+        return "played";
+    }
+
     public getRenderer() {
         return this._renderer;
     }
@@ -73,10 +81,7 @@ class AbstractLevel {
      * This also returns the physicsObject. You'll find a b2World in the world property
      * of the physicsObject returned.
      */
-    public initPhysics(gravity) {
-        if (gravity === undefined) {
-            gravity = new Box2D.b2Vec2(0,0);
-        }
+    public initPhysics(gravity: any = new Box2D.b2Vec2(0,0)) {
         this._physicWorld = {
             world: new Box2D.b2World(
                 gravity,  //gravity
@@ -200,5 +205,5 @@ class AbstractLevel {
 
 };
 
-export = AbstractLevel;
+export = PlayLevelScreen;
 

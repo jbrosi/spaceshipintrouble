@@ -1,18 +1,22 @@
 
+import DefaultPlayLevelScreen = require('engine/screens/playLevelScreen');
 import THREE = require("three");
 import _ = require("lodash");
 import Box2D = require("engine/helper/box2DHelper");
-import AbstractLevel = require("engine/map/abstractLevel");
 
-
-
-class StandardLevelScreen extends AbstractLevel {
+class PlayLevelScreen extends DefaultPlayLevelScreen {
+    
+    private _shipMesh: any;
+    private _physScale: any;
+    
+    
     public constructor(renderer) {
         super(renderer);
         _.bindAll(this);
     }
     
     public show () {
+        console.log("Showing");
         this._setupScene();
     }
     
@@ -195,7 +199,7 @@ class StandardLevelScreen extends AbstractLevel {
         var wall = this.getPhysics().world.CreateBody(this.getPhysics().defaultWallDefinition);
         wall.SetUserData({type: 'wall'});
         
-        var isBoxToCreate = 0;
+        var isBoxToCreate = false;
         for (var x = 0; x < 100; x++ ) {
             for (var y = 0; y < 100; y++) {
                 
@@ -230,7 +234,7 @@ class StandardLevelScreen extends AbstractLevel {
         group.matrixAutoUpdate = false;
         group.updateMatrix();
         
-        this._scene.add(group);
+        this.getScene().add(group);
     }
     
     private _setupCameraAndLighting () {
@@ -271,4 +275,4 @@ class StandardLevelScreen extends AbstractLevel {
     
 }
 
-export = StandardLevelScreen;
+export = PlayLevelScreen;

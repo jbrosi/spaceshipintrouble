@@ -1,0 +1,7 @@
+
+
+
+class MapLayer {
+};
+
+export = MapLayer;

@@ -4,18 +4,20 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "engine/map/abstractLevel"], function(require, exports, THREE, _, Box2D, AbstractLevel) {
-    var StandardLevelScreen = (function (_super) {
-        __extends(StandardLevelScreen, _super);
-        function StandardLevelScreen(renderer) {
+define(["require", "exports", 'engine/screens/playLevelScreen', "three", "lodash", "engine/helper/box2DHelper"], function(require, exports, DefaultPlayLevelScreen, THREE, _, Box2D) {
+    var PlayLevelScreen = (function (_super) {
+        __extends(PlayLevelScreen, _super);
+        function PlayLevelScreen(renderer) {
+            console.log("CONSTRUCT");
             _super.call(this, renderer);
             _.bindAll(this);
         }
-        StandardLevelScreen.prototype.show = function () {
+        PlayLevelScreen.prototype.show = function () {
+            console.log("Showing");
             this._setupScene();
         };
 
-        StandardLevelScreen.prototype._setupScene = function () {
+        PlayLevelScreen.prototype._setupScene = function () {
             console.log("setting up level scene");
 
             var that = this;
@@ -30,7 +32,7 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             this.getJoystick().register(this);
         };
 
-        StandardLevelScreen.prototype._setupPhysics = function () {
+        PlayLevelScreen.prototype._setupPhysics = function () {
             var physics = this.initPhysics();
             this._physScale = 3;
 
@@ -79,14 +81,14 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             physics.projectileBodyDef = projectileBodyDef;
         };
 
-        StandardLevelScreen.prototype.prePhysics = function (time) {
+        PlayLevelScreen.prototype.prePhysics = function (time) {
             this._moveShip(time);
         };
 
-        StandardLevelScreen.prototype._moveEnemies = function (time) {
+        PlayLevelScreen.prototype._moveEnemies = function (time) {
         };
 
-        StandardLevelScreen.prototype._moveShip = function (time) {
+        PlayLevelScreen.prototype._moveShip = function (time) {
             if (!time || !this._shipMesh) {
                 return;
             }
@@ -163,7 +165,7 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             }
         };
 
-        StandardLevelScreen.prototype._setupLevel = function () {
+        PlayLevelScreen.prototype._setupLevel = function () {
             //todo: load from levelfile
             var cubeGeo = new THREE.CubeGeometry(10, 10, 10);
 
@@ -173,7 +175,7 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             var wall = this.getPhysics().world.CreateBody(this.getPhysics().defaultWallDefinition);
             wall.SetUserData({ type: 'wall' });
 
-            var isBoxToCreate = 0;
+            var isBoxToCreate = false;
             for (var x = 0; x < 100; x++) {
                 for (var y = 0; y < 100; y++) {
                     if (x == 0 || x == 99 || y == 0 || y == 99) {
@@ -204,10 +206,10 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             group.matrixAutoUpdate = false;
             group.updateMatrix();
 
-            this._scene.add(group);
+            this.getScene().add(group);
         };
 
-        StandardLevelScreen.prototype._setupCameraAndLighting = function () {
+        PlayLevelScreen.prototype._setupCameraAndLighting = function () {
             this.setScene(new THREE.Scene());
 
             //soft white ambient light (change to blueish color?)
@@ -226,7 +228,7 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
             this.getRenderer().setClearColor(0xffffff, 1);
         };
 
-        StandardLevelScreen.prototype._createShip = function () {
+        PlayLevelScreen.prototype._createShip = function () {
             var that = this;
 
             //Load and add ship
@@ -241,9 +243,9 @@ define(["require", "exports", "three", "lodash", "engine/helper/box2DHelper", "e
                 that.getScene().add(that._shipMesh);
             }, "assets/game/textures/");
         };
-        return StandardLevelScreen;
-    })(AbstractLevel);
+        return PlayLevelScreen;
+    })(DefaultPlayLevelScreen);
 
     
-    return StandardLevelScreen;
+    return PlayLevelScreen;
 });
