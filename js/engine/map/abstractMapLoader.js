@@ -1,7 +1,12 @@
 define(["require", "exports", 'q'], function(require, exports, Q) {
     var AbstractMapLoader = (function () {
-        function AbstractMapLoader() {
+        function AbstractMapLoader(levelFile) {
+            this._levelFile = levelFile;
         }
+        AbstractMapLoader.prototype.getLevelFile = function () {
+            return this._levelFile;
+        };
+
         AbstractMapLoader.prototype.getProgressInPercent = function () {
             return 0;
         };
@@ -10,7 +15,7 @@ define(["require", "exports", 'q'], function(require, exports, Q) {
             return "initializing";
         };
 
-        AbstractMapLoader.prototype.loadLevel = function (levelFile) {
+        AbstractMapLoader.prototype.loadLevel = function () {
             return Q("not yet implemented");
         };
         return AbstractMapLoader;

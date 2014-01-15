@@ -21,6 +21,9 @@
         },
         'quadtree': {
             exports: 'Quadtree'
+        },
+        'zepto': {
+            exports: 'Zepto'
         }
     },
     paths: {           
@@ -33,7 +36,8 @@
 		'box2d-cocoon': 'lib/box2d_cocoonJS',
 		require: 'lib/require',
 		hammer: 'lib/hammer',
-		quadtree: 'lib/quadtree'
+		quadtree: 'lib/quadtree',
+		zepto: 'lib/zepto'
     },
     name: "lib/almond",
     include: ["app", "game/screens/game-menu", "game/screens/main-menu", "game/screens/settings-menu", "game/screens/standard-level", 'box2d', 'box2d-cocoon'],

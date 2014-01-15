@@ -31,6 +31,9 @@
                     },
                     'quadtree': {
                         exports: 'Quadtree'
+                    },
+                    'zepto': {
+                        exports: 'Zepto'
                     }
                 },
                 paths: {           
@@ -42,9 +45,10 @@
             		box2d: 'lib/box2dweb',
             		'box2d-cocoon': 'lib/box2d_cocoonJS',
             		hammer: 'lib/hammer',
-            		quadtree: 'lib/quadtree'
+            		quadtree: 'lib/quadtree',
+            		zepto: 'lib/zepto'
                 },
-               urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
+               //urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
                waitSeconds: 30
             };  
 
