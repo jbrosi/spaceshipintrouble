@@ -3,14 +3,14 @@ import Q = require('q');
 
 
 class AbstractMapLoader {
-    private _levelFile: String;
+    private _mapFile: String;
     
-    public constructor(levelFile: String) {
-        this._levelFile = levelFile;
+    public constructor(mapFile: String) {
+        this._mapFile = mapFile;
     }
     
-    public getLevelFile (): String {
-        return this._levelFile;
+    public getMapFile (): String {
+        return this._mapFile;
     }
     
     public getProgressInPercent(): number {
@@ -22,7 +22,7 @@ class AbstractMapLoader {
     }
     
     
-    public loadLevel() {
+    public loadMap() {
         return Q("not yet implemented");
     }
 };

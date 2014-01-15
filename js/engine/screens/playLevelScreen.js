@@ -4,14 +4,14 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", 'engine/screens/abstractScreen', 'engine/helper/virtualJoystick', 'engine/helper/keyboardHelper', 'engine/entity/entityManager', 'engine/entity/entityMessage', 'engine/helper/box2DHelper', 'engine/map/mapLayer', 'engine/map/tileSet'], function(require, exports, AbstractScreen, VirtualJoystick, KeyboardHelper, EntityManager, EntityMessage, Box2D, MapLayer, TileSet) {
+define(["require", "exports", 'engine/screens/abstractScreen', 'engine/helper/virtualJoystick', 'engine/helper/keyboardHelper', 'engine/entity/entityManager', 'engine/entity/entityMessage', 'engine/helper/box2DHelper', 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/map'], function(require, exports, AbstractScreen, VirtualJoystick, KeyboardHelper, EntityManager, EntityMessage, Box2D, MapLayer, TileSet, Map) {
     var PlayLevelScreen = (function (_super) {
         __extends(PlayLevelScreen, _super);
         function PlayLevelScreen(renderer) {
             _super.call(this, renderer);
         }
-        PlayLevelScreen.prototype.showLevel = function (level) {
-            console.log("showing level");
+        PlayLevelScreen.prototype.startMap = function (map) {
+            console.log("start playing map", map);
             return "played";
         };
 

@@ -38,7 +38,7 @@ require(['engine/gameInitializer', 'engine/screens/screenManager', 'engine/map/t
         loadLevelScreen.setMapLoader(mapLoader);
         
         //start loading level
-        mapLoader.loadLevel().then(function(level) {
+        mapLoader.loadMap().then(function(map) {
             //when level is loaded: Create new PlayLevel-Screen
             sm.createScreen('playLevel').then(function(playLevelScreen) {
                 
@@ -47,9 +47,8 @@ require(['engine/gameInitializer', 'engine/screens/screenManager', 'engine/map/t
                 
                 //show the playLevelScreen
                 sm.showScreen(playLevelScreen);
-                
                 //let the playLevelScreen show the previously loaded level
-                playLevelScreen.showLevel(level);
+                playLevelScreen.startMap(map);
             });
         });
     });

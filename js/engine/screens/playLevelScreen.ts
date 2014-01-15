@@ -7,6 +7,8 @@ import EntityMessage = require('engine/entity/entityMessage');
 import Box2D = require('engine/helper/box2DHelper');
 import MapLayer = require('engine/map/mapLayer');
 import TileSet = require('engine/map/tileSet');
+import Map = require('engine/map/map');
+
 
 class PlayLevelScreen extends AbstractScreen {
 
@@ -24,8 +26,8 @@ class PlayLevelScreen extends AbstractScreen {
     public constructor(renderer) {
         super(renderer);
     }
-    public showLevel(level: AbstractLevel) {
-        console.log("showing level");
+    public startMap(map: Map) {
+        console.log("start playing map", map);
         return "played";
     }
 

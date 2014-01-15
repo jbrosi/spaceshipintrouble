@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", 'q', 'engine/map/abstractMapLoader', 'engine/util/resourceLoader'], function(require, exports, Q, AbstractMapLoader, ResourceLoader) {
+define(["require", "exports", 'q', 'engine/map/abstractMapLoader', 'engine/util/resourceLoader', 'engine/map/mapLayer', 'engine/map/tileSet', 'engine/map/tileLayer', 'engine/map/objectLayer', 'engine/map/map'], function(require, exports, Q, AbstractMapLoader, ResourceLoader, MapLayer, TileSet, TileLayer, ObjectLayer, Map) {
     var TiledJSONMapLoader = (function (_super) {
         __extends(TiledJSONMapLoader, _super);
         function TiledJSONMapLoader() {
@@ -20,17 +20,48 @@ define(["require", "exports", 'q', 'engine/map/abstractMapLoader', 'engine/util/
             return this._status;
         };
 
-        TiledJSONMapLoader.prototype.loadLevel = function () {
-            console.log("trying to load level " + this.getLevelFile());
+        TiledJSONMapLoader.prototype.loadMap = function () {
+            console.log("loading level " + this.getMapFile());
 
             var rl = ResourceLoader.getInstance();
-            rl.loadJSONFile(this.getLevelFile()).then(function (data) {
-                console.log("Loaded the level: ", data);
-            }, function (error) {
-                console.log(error);
-                console.log("failed to load file :(");
-            });
-            return Q("not yet implemented");
+
+            return rl.loadJSONFile(this.getMapFile()).then(this._parseMap);
+        };
+
+        TiledJSONMapLoader.prototype._parseMap = function (data) {
+            var a;
+
+            var mandatoryFields = [
+                'width', 'height', 'tilewidth', 'tileheight', 'properties', 'version'
+            ];
+            console.log("parsing map");
+            for (a = 0; a < mandatoryFields.length; a++) {
+                if (data[mandatoryFields[a]] === undefined) {
+                    throw new Error("Invalid Map file! Missing mandatory field '" + mandatoryFields[a] + "'.");
+                }
+            }
+
+            var map = new Map(data.width, data.height, data.tileWidth, data.tileHeight, data.properties, data.version);
+
+            for (a = 0; a < data.layers.length; a++) {
+                switch (data.layers[a].type) {
+                    case 'tilelayer':
+                        map.addLayer(new TileLayer(data.layers[a]));
+                        break;
+                    case 'objectgroup':
+                        map.addLayer(new ObjectLayer(data.layers[a]));
+                        break;
+                    default:
+                        console.log("Warning: invalid layer type found... ignoring layer");
+                }
+            }
+
+            for (var a = 0; a < data.tilesets.length; a++) {
+                map.addTileSet(new TileSet(data.tilesets[a]));
+            }
+
+            console.log(map);
+            return Q(map);
         };
         return TiledJSONMapLoader;
     })(AbstractMapLoader);
