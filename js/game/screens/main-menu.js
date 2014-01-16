@@ -1,6 +1,6 @@
 
 
-define(['three', 'engine/helper/3d/textHelper', 'lodash', 'engine/screenManager'], function(THREE, TextHelper, _, ScreenManager) {
+define(['three', 'engine/helper/3d/textHelper', 'lodash', 'engine/screens/screenManager'], function(THREE, TextHelper, _, ScreenManager) {
     
     console.log(ScreenManager);
     
