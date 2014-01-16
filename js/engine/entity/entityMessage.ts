@@ -46,38 +46,50 @@ class EntityMessage {
     private _isConsumed: boolean = false;
 
     /**
+     * If set to true (default) this message may get consumed by invoking #consume
+     * if it's set to false this message can't be consumed at all.
+     */
+    private _isConsumable: boolean = true;
+
+    /**
      * Creates a new message ready to be sent to entities. The message *should*
      * contain an identifier, the message param and the entity param are optional.
-     */ 
-    constructor(identifier: string = "undefined", message: any = {}, sender: Entity = null) {
+     *
+     * @param identifier the type/identifier of this message. This is what the listeners should register for
+     * @param message (optional) the message itsself - may contain any data
+     * @param sender (optional) the entity sending this message. Might be null
+     * @param isConsumable (optional, default: true). Set to false if you don't want this message to be consumable
+     */
+    constructor(identifier: string = "undefined", message: any = {}, sender: Entity = null, isConsumable: boolean = true) {
         this._identifier = identifier;
         this._message = message;
         this._sender = sender;
+        this._isConsumable = isConsumable;
     }
     
     /**
-     * Returns the identifier of this message
+     * @returns {String} the identifier of this message
      */
-    public getIdentifier() {
+    public getIdentifier() : String {
         return this._identifier;
     }
     
     /**
-     * Returns the message data
+     * @returns {any} the message data
      */
-    public getMessage() {
+    public getMessage(): any {
         return this._message;
     }
     
     /**
-     * Returns the sending entity (might be null)
+     * @returns {Entity} the sending entity (might be null)
      */
-    public getSender() {
+    public getSender() : Entity{
         return this._sender;
     }
     
     /**
-     * Returns true if this message was sent by an entity.
+     * @eturns {boolean} true if this message was sent by an entity.
      */
     public hasSender(): boolean {
         return this._sender != null;
@@ -87,8 +99,9 @@ class EntityMessage {
      * By invoking this u may stop a message from being sent any further
      * this is usefull when you want to delete a message and stop propagation.
      */
-    public consume() {
-        this._isConsumed = true;
+    public consume() : void{
+        if (this._isConsumable)
+            this._isConsumed = true;
     }
 
     /**

@@ -8,7 +8,7 @@ import Position = require("engine/util/position");
 class Entity {
     
     private _components: EntityComponent[];
-    private _listeners = [];
+    private _listeners: any = {};
     private _data = {};
 
     private _childEntities: Entity[] = [];
@@ -18,7 +18,7 @@ class Entity {
     private _position: Position;
 
     private _manager : EntityManager;
-    private _stepMessage = new EntityMessage("entity:step", {timeStep: 0}, this);
+    private _stepMessage = new EntityMessage("entity:step", {timeStep: 0}, this, false);
 
     /**
      * Creates a new entity from the given entityprototype. The entity will copy
