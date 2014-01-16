@@ -1,23 +1,59 @@
-import EntityMessage = require("engine/entity/entityMessage");
-import EntityPrototype = require("engine/entity/entityPrototype");
-import EntityScript = require("engine/entity/entityScript");
-import EntityManager = require("engine/entity/entityManager");
-import EntityComponent = require("engine/entity/entityComponent");
-import Position = require("engine/util/position");
+import EntityMessage    = require("engine/entity/entityMessage");
+import EntityPrototype  = require("engine/entity/entityPrototype");
+import EntityScript     = require("engine/entity/entityScript");
+import EntityManager    = require("engine/entity/entityManager");
+import EntityComponent  = require("engine/entity/entityComponent");
+import Position         = require("engine/util/position");
 
+/**
+ * This class defines the base type for all "gameobjects" or as we call them here: Entites.
+ * Almost everything in the game is an entity. Entities may be nested and may have several
+ * components attached to them.
+ * Please see Readme.md in the same folder for a further explanation.
+ */
 class Entity {
-    
+
+    /**
+     * Holds all the components attached to this entity.
+     */
     private _components: EntityComponent[];
+
+    /**
+     * Holds all callbacks who registered for listening on receiving messages on this entity.
+     */
     private _listeners: any = {};
+
+    /**
+     * Holds all data private to this entity. This may be used for the various components
+     * to share their states (though it's not really recommended. Use messaging for communication!)
+     */
     private _data = {};
 
+    /**
+     * Holds all entities attached to this entity.
+     */
     private _childEntities: Entity[] = [];
 
+    /**
+     * Holds the parent entity of this entity. May be null if the entity is on the root
+     * and does not have any parents.
+     */
     private _parentEntity: Entity;
 
+    /**
+     * The position, rotation and scale of this entity. This might be either world-coordinates or local coordinates.
+     */
     private _position: Position;
 
+    /**
+     * Reference to the entityManager holding this entity
+     */
     private _manager : EntityManager;
+
+    /**
+     * This message is a template for all the "steps" sent to the scripts. It's reinitialized and reused many times
+     * please don't use this for any other purpose
+     */
     private _stepMessage = new EntityMessage("entity:step", {timeStep: 0}, this, false);
 
     /**
@@ -46,20 +82,36 @@ class Entity {
         //TODO: implement
         return this;
     }
-    
-    
+
+    /**
+     * Returns a reference to the EntityManager holding this entity
+     *
+     * @returns {EntityManager}
+     */
     public getManager() : EntityManager {
         return this._manager;
     }
-    
-    
+
+    /**
+     *
+     * @returns {{}} the shared data hold by this entity.
+     */
     public getData() {
         return this._data;
     }
+
+    /**
+     *
+     * @returns {Entity} the parent of this entity. Might be null if there is no parent (meaning this entity is root)
+     */
     public getParent() : Entity {
         return this._parentEntity;
     }
 
+    /**
+     *
+     * @returns {boolean} true if there is a parent to this entity, false if there isn't
+     */
     public hasParent() : boolean {
         return this._parentEntity != null;
     }
@@ -131,15 +183,19 @@ class Entity {
         }
         return false;
     }
-    
+
+    /**
+     * Gets invoked whenever this entity should calculate its movements and changes. Forwards a "entity:step" message
+     * so all components may react to this.
+     *
+     * @param timeStep
+     */
     public doStep (timeStep: number): void {
         //fake step message for scripts:
         
         this._stepMessage.getMessage().timeStep = timeStep;
         this.sendMessage(this._stepMessage);
 
-        //TODO: afterwards go through the other components and let them do their stuff like
-        //drawing or updating position.
     }
     
     /**
@@ -180,11 +236,19 @@ class Entity {
         }
     }
 
+    /**
+     *
+     *
+     * @returns {Position} the position/rotation/scale of this entity
+     */
     public getPosition(): Position {
         return this._position;
     }
 
-
+    /**
+     *
+     * @returns {EntityComponent[]} all the components hold by this entity
+     */
     public getComponents(): EntityComponent[] {
         return this._components;
     }
