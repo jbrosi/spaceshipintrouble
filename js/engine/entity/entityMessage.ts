@@ -37,7 +37,14 @@ class EntityMessage {
      * an entity.
      */ 
     private _sender: Entity;
-    
+
+
+    /**
+     * This is telling whether a message has been consumed or not. If a message gets
+     * consumed it doesn't get sent any further. It's like "stopPropagation" on JS events
+     */
+    private _isConsumed: boolean = false;
+
     /**
      * Creates a new message ready to be sent to entities. The message *should*
      * contain an identifier, the message param and the entity param are optional.
@@ -75,7 +82,24 @@ class EntityMessage {
     public hasSender(): boolean {
         return this._sender != null;
     }
-    
+
+    /**
+     * By invoking this u may stop a message from being sent any further
+     * this is usefull when you want to delete a message and stop propagation.
+     */
+    public consume() {
+        this._isConsumed = true;
+    }
+
+    /**
+     * This is telling whether a message has been consumed or not. If a message gets
+     * consumed it doesn't get sent any further. It's like "stopPropagation" on JS events
+     * @returns {boolean} true if the message has been consumed already
+     */
+    public isConsumed(): boolean {
+        return this._isConsumed;
+    }
+
 };
     
 

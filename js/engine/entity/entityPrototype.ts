@@ -15,10 +15,10 @@ class EntityPrototype {
     private _name: string = null;
     
     /**
-     * Contains all the filenames of the scripts that belong to this type
+     * Contains all the names of the components that belong to this type
      * and should get loaded when the entity gets created
      */ 
-    private _scripts: string[];
+    private _components: string[];
     
     /**
      * Holds predefined data for the entity construction. The scripts may
@@ -69,10 +69,10 @@ class EntityPrototype {
     }
 
     /**
-     * @returns all the scripts that should be attached to entities of this type
+     * @returns all the components that should be attached to entities of this type
      */
-    public getScripts(): string[] {
-        return this._scripts;
+    public getComponents(): string[] {
+        return this._components;
     }
     
 };

@@ -72,7 +72,7 @@ class EntityManager {
      * 
      * @returns the entity created (be carefull, the entity may not have been fully initialized yet!)
      */
-    public createEntityFromPrototype (prototype: EntityPrototype) {
+    public createEntityFromPrototype (prototype: EntityPrototype): Entity {
         var entity: Entity = new Entity(prototype, this);
         this._entities[this._entityCount++] = entity;
 
@@ -102,16 +102,16 @@ class EntityManager {
         
         var a: number;
 
-        for (a = 0; a < this._alwaysActiveEntityCount; a++) {
+        for (a = 0; a < this._alwaysActiveEntityCount && ! message.isConsumed(); a++) {
             this._alwaysActiveEntities[a].sendMessage(message);
         }
         
-        for (a = 0; a < this._activeEntityCount; a++) {
+        for (a = 0; a < this._activeEntityCount && ! message.isConsumed(); a++) {
             this._activeEntities[a].sendMessage(message);
         }
 
         if (alsoSendToInactives) {
-            for (a = 0; a < this._inactiveEntityCount; a++) {
+            for (a = 0; a < this._inactiveEntityCount && ! message.isConsumed(); a++) {
                 this._inactiveEntities[a].sendMessage(message);
             }
         }

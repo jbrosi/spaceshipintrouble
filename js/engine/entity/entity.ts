@@ -2,12 +2,21 @@ import EntityMessage = require("engine/entity/entityMessage");
 import EntityPrototype = require("engine/entity/entityPrototype");
 import EntityScript = require("engine/entity/entityScript");
 import EntityManager = require("engine/entity/entityManager");
+import EntityComponent = require("engine/entity/entityComponent");
+import Position = require("engine/util/position");
 
 class Entity {
     
-    private _scripts: EntityScript[];
+    private _components: EntityComponent[];
     private _listeners = [];
     private _data = {};
+
+    private _childEntities: Entity[] = [];
+
+    private _parentEntity: Entity;
+
+    private _position: Position;
+
     private _manager : EntityManager;
     private _stepMessage = new EntityMessage("entity:step", {timeStep: 0}, this);
 
@@ -47,7 +56,13 @@ class Entity {
     public getData() {
         return this._data;
     }
-    
+    public getParent() : Entity {
+        return this._parentEntity;
+    }
+
+    public hasParent() : boolean {
+        return this._parentEntity != null;
+    }
     
     
     /**
@@ -122,6 +137,9 @@ class Entity {
         
         this._stepMessage.getMessage().timeStep = timeStep;
         this.sendMessage(this._stepMessage);
+
+        //TODO: afterwards go through the other components and let them do their stuff like
+        //drawing or updating position.
     }
     
     /**
@@ -137,8 +155,56 @@ class Entity {
         }
         
         var a = 0;
-        for (a = 0; a < this._listeners[id].length; a++) {
+        for (a = 0; a < this._listeners[id].length && ! msg.isConsumed(); a++) {
             this._listeners[msg.getIdentifier()][a](msg);
+        }
+    }
+
+    /**
+     * Sends the given message to all (direct) children of this entity. If isDeep is set
+     * also all the childrens of the childrens of the childrens... will receive this message
+     * carefull on large nested constructs if you use this param :).
+     *
+     * @param msg the message to be sent
+     * @param isDeep default: false. Set to true if you want all childs of all childs (of all childs...)
+     *        to receive this message, too
+     */
+    public sendMessageToChildren (msg: EntityMessage, isDeep: boolean = false): void {
+        var a: number;
+        for (a = 0; a < this._childEntities.length && ! msg.isConsumed(); a++) {
+            this._childEntities[a].sendMessage(msg);
+
+            if (isDeep && ! msg.isConsumed()) {
+                this._childEntities[a].sendMessageToChildren(msg, true);
+            }
+        }
+    }
+
+    public getPosition(): Position {
+        return this._position;
+    }
+
+
+    public getComponents(): EntityComponent[] {
+        return this._components;
+    }
+
+    /**
+     * Sends the given message to the parent of this entity. If you set isDeep this message will also be
+     * sent to all other ascendants of this entity (meaning the parents of the parents of the ...)
+     *
+     * @param msg the message to be sent
+     * @param isDeep defaults: false. If set to true all ascendants will be included to receive the message
+     */
+    public sendMessageToParent (msg: EntityMessage, isDeep: boolean = false): void {
+        if (! this.hasParent() || msg.isConsumed()) {
+            //no parent to send something to
+            return;
+        }
+
+        this._parentEntity.sendMessage(msg);
+        if (isDeep  && ! msg.isConsumed()) {
+            this._parentEntity.sendMessageToParent(msg, true);
         }
     }
 };
