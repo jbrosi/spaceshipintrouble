@@ -4,6 +4,8 @@
 
 /images
 
+#PHP-/Webstorm stuff
+/.idea
 
 #Ignore Visual studio temporary and user specific stuff:
 
