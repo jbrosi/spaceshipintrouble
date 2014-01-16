@@ -1,0 +1,1 @@
+%HOMEDRIVE%%HOMEPATH%\AppData\Roaming\npm\r.js.cmd -o build.js
