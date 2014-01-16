@@ -7,7 +7,7 @@ import EntityMessage = require('engine/entity/entityMessage');
 import Box2D = require('engine/helper/box2DHelper');
 import MapLayer = require('engine/map/mapLayer');
 import TileSet = require('engine/map/tileSet');
-import Map = require('engine/map/map');
+import Map = require('../map/tiledMap');
 
 
 class PlayLevelScreen extends AbstractScreen {

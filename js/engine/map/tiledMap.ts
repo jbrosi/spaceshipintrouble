@@ -5,7 +5,7 @@ import TileLayer = require('engine/map/tileLayer');
 import ObjectLayer = require('engine/map/objectLayer');
 import _ = require('lodash');
 
-class Map {
+class TiledMap {
     
     private _layers: MapLayer[] = [];
     private _tileSets: TileSet[] = [];
@@ -41,4 +41,4 @@ class Map {
     }
 };
 
-export = Map;
+export = TiledMap;

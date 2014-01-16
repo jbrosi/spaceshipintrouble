@@ -4,6 +4,20 @@
 
 /images
 
+#ignore all the js files
+*.js
+*.js.map
+
+#don't ignore js in lib
+!/js/lib/*.js
+
+#don't ignore app and build js
+!/js/app.js
+!/build.js
+
+#ignore source maps
+
+
 #PHP-/Webstorm stuff
 /.idea
 

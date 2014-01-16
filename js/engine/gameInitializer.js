@@ -41,3 +41,4 @@ define(["require", "exports", "three", "lodash"], function(require, exports, THR
     
     return GameInitializer;
 });
+//# sourceMappingURL=gameInitializer.js.map

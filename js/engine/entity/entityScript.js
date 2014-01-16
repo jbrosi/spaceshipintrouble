@@ -36,3 +36,4 @@ define(["require", "exports", "engine/entity/entity"], function(require, exports
     
     return EntityScript;
 });
+//# sourceMappingURL=entityScript.js.map

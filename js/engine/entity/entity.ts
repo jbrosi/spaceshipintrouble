@@ -1,4 +1,3 @@
-
 import EntityMessage = require("engine/entity/entityMessage");
 import EntityPrototype = require("engine/entity/entityPrototype");
 import EntityScript = require("engine/entity/entityScript");
@@ -7,27 +6,23 @@ import EntityManager = require("engine/entity/entityManager");
 class Entity {
     
     private _scripts: EntityScript[];
-    
     private _listeners = [];
-    
     private _data = {};
-    
     private _manager : EntityManager;
-    
     private _stepMessage = new EntityMessage("entity:step", {timeStep: 0}, this);
-    
+
     /**
      * Creates a new entity from the given entityprototype. The entity will copy
      * all necessary data from the prototype and does not rely any further on
      * the prototype. So if you change the prototype after creating this entity
      * you won't have any impact on this entity.
-     * 
      */ 
     constructor(prototype: EntityPrototype, manager: EntityManager) {
         //todo: initialize entity, load scripts defined in Prototype,
         //      initialize scripts, ...
-        
+
         this._manager = manager;
+
     }
 
     /**

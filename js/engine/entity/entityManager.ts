@@ -3,7 +3,7 @@
 import Entity = require("engine/entity/entity");        
 import EntityMessage = require("engine/entity/entityMessage");
 import EntityPrototype = require("engine/entity/entityPrototype");
-import AbstractLevel = require("engine/map/abstractLevel");
+import TiledMap = require("../map/tiledMap");
 
 
 
@@ -11,7 +11,7 @@ var DEFAULT_ENTITY_POOL_SIZE = 10000;
 
 class EntityManager {
     
-    
+
     private _objectIdsUsed = 0;
 
     private _registeredPrototypes: EntityPrototype[];
@@ -28,17 +28,17 @@ class EntityManager {
     private _alwaysActiveEntities: Entity[];
     private _alwaysActiveEntityCount = 0;
     
-    private _level: AbstractLevel;
+    private _map: TiledMap;
     
-    constructor(level: AbstractLevel) {
-        this._level = level;
+    constructor(map: TiledMap) {
+        this._map = map;
         
         this.resetEntityPools();
     }
     
     
-    public getLevel(): AbstractLevel {
-        return this._level;
+    public getMap(): TiledMap {
+        return this._map;
     }
     
     /**

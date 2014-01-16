@@ -67,3 +67,4 @@ define(["require", "exports"], function(require, exports) {
     
     return EntityPrototype;
 });
+//# sourceMappingURL=entityPrototype.js.map

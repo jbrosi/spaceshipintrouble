@@ -8,7 +8,7 @@ import TileSet = require('engine/map/tileSet');
 import TileLayer = require('engine/map/tileLayer');
 import ObjectLayer = require('engine/map/objectLayer');
 
-import Map = require('engine/map/map');
+import Map = require('engine/map/tiledMap');
 
 
 class TiledJSONMapLoader extends AbstractMapLoader{
@@ -42,7 +42,7 @@ class TiledJSONMapLoader extends AbstractMapLoader{
         console.log("parsing map");
         for(a = 0; a < mandatoryFields.length; a++) {
             if (data[mandatoryFields[a]] === undefined) {
-                throw new Error("Invalid Map file! Missing mandatory field '"+mandatoryFields[a]+"'.");
+                throw new Error("Invalid TiledMap file! Missing mandatory field '"+mandatoryFields[a]+"'.");
             }
         }
         

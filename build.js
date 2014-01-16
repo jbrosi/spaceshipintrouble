@@ -40,7 +40,7 @@
 		zepto: 'lib/zepto'
     },
     name: "lib/almond",
-    include: ["app", "game/screens/game-menu", "game/screens/main-menu", "game/screens/settings-menu", "game/screens/playLevel", "game/screens/loadLevel", 'box2d', 'box2d-cocoon'],
+    include: ["app", "game/screens/playLevel", "game/screens/loadLevel", 'box2d', 'box2d-cocoon'],
     insertRequire: ["app"],
     out: "main-built.js"
 })

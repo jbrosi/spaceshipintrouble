@@ -5,7 +5,6 @@ define(["require", "exports", "engine/entity/entityMessage", "engine/entity/enti
         * all necessary data from the prototype and does not rely any further on
         * the prototype. So if you change the prototype after creating this entity
         * you won't have any impact on this entity.
-        *
         */
         function Entity(prototype, manager) {
             this._listeners = [];
@@ -132,3 +131,4 @@ define(["require", "exports", "engine/entity/entityMessage", "engine/entity/enti
     
     return Entity;
 });
+//# sourceMappingURL=entity.js.map

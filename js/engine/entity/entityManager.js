@@ -2,18 +2,18 @@ define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessa
     var DEFAULT_ENTITY_POOL_SIZE = 10000;
 
     var EntityManager = (function () {
-        function EntityManager(level) {
+        function EntityManager(map) {
             this._objectIdsUsed = 0;
             this._entityCount = 0;
             this._activeEntityCount = 0;
             this._inactiveEntityCount = 0;
             this._alwaysActiveEntityCount = 0;
-            this._level = level;
+            this._map = map;
 
             this.resetEntityPools();
         }
-        EntityManager.prototype.getLevel = function () {
-            return this._level;
+        EntityManager.prototype.getMap = function () {
+            return this._map;
         };
 
         /**
@@ -108,3 +108,4 @@ define(["require", "exports", "engine/entity/entity", "engine/entity/entityMessa
     
     return EntityManager;
 });
+//# sourceMappingURL=entityManager.js.map
