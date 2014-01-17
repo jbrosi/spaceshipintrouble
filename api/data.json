@@ -1,0 +1,2923 @@
+{
+    "project": {},
+    "files": {
+        "js\\engine\\entity\\entity.js": {
+            "name": "js\\engine\\entity\\entity.js",
+            "modules": {},
+            "classes": {
+                "engine.entity.Entity": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.entity": 1
+            }
+        },
+        "js\\engine\\entity\\entityComponent.js": {
+            "name": "js\\engine\\entity\\entityComponent.js",
+            "modules": {},
+            "classes": {
+                "engine.entity.EntityComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.entity": 1
+            }
+        },
+        "js\\engine\\entity\\entityManager.js": {
+            "name": "js\\engine\\entity\\entityManager.js",
+            "modules": {},
+            "classes": {
+                "engine.entity.EntityManager": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.entity": 1
+            }
+        },
+        "js\\engine\\entity\\entityMessage.js": {
+            "name": "js\\engine\\entity\\entityMessage.js",
+            "modules": {},
+            "classes": {
+                "engine.entity.EntityMessage": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.entity": 1
+            }
+        },
+        "js\\engine\\entity\\entityPrototype.js": {
+            "name": "js\\engine\\entity\\entityPrototype.js",
+            "modules": {},
+            "classes": {
+                "engine.entity.EntityPrototype": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.entity": 1
+            }
+        },
+        "js\\engine\\entity\\entityScript.js": {
+            "name": "js\\engine\\entity\\entityScript.js",
+            "modules": {},
+            "classes": {
+                "engine.entity.EntityScript": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.entity": 1
+            }
+        },
+        "js\\engine\\helper\\3d\\textHelper.js": {
+            "name": "js\\engine\\helper\\3d\\textHelper.js",
+            "modules": {},
+            "classes": {
+                "engine.helper.TextHelper": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.helper": 1
+            }
+        },
+        "js\\engine\\helper\\box2DHelper.js": {
+            "name": "js\\engine\\helper\\box2DHelper.js",
+            "modules": {},
+            "classes": {
+                "engine.helper.Box2DHelper": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.helper": 1
+            }
+        },
+        "js\\engine\\helper\\keyboardHelper.js": {
+            "name": "js\\engine\\helper\\keyboardHelper.js",
+            "modules": {},
+            "classes": {
+                "engine.helper.KeyboardHelper": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.helper": 1
+            }
+        },
+        "js\\engine\\helper\\performanceTimer.js": {
+            "name": "js\\engine\\helper\\performanceTimer.js",
+            "modules": {},
+            "classes": {
+                "engine.helper.PerformanceTimer": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.helper": 1
+            }
+        },
+        "js\\engine\\helper\\statsHelper.js": {
+            "name": "js\\engine\\helper\\statsHelper.js",
+            "modules": {},
+            "classes": {
+                "engine.helper.StatsHelper": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.helper": 1
+            }
+        },
+        "js\\engine\\helper\\virtualJoystick.js": {
+            "name": "js\\engine\\helper\\virtualJoystick.js",
+            "modules": {},
+            "classes": {
+                "engine.helper.VirtualJoystick": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.helper": 1
+            }
+        },
+        "js\\engine\\map\\abstractMapLoader.js": {
+            "name": "js\\engine\\map\\abstractMapLoader.js",
+            "modules": {},
+            "classes": {
+                "engine.map.AbstractMapLoader": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\map\\mapLayer.js": {
+            "name": "js\\engine\\map\\mapLayer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\map\\mapObject.js": {
+            "name": "js\\engine\\map\\mapObject.js",
+            "modules": {},
+            "classes": {
+                "engine.map.MapObject": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\map\\objectLayer.js": {
+            "name": "js\\engine\\map\\objectLayer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\map\\tileLayer.js": {
+            "name": "js\\engine\\map\\tileLayer.js",
+            "modules": {},
+            "classes": {
+                "engine.map.MapLayer": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\map\\tileSet.js": {
+            "name": "js\\engine\\map\\tileSet.js",
+            "modules": {},
+            "classes": {
+                "engine.map.TileSet": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\map\\tiledMap.js": {
+            "name": "js\\engine\\map\\tiledMap.js",
+            "modules": {},
+            "classes": {
+                "engine.map.TiledMap": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\map\\tiledMapLoader.js": {
+            "name": "js\\engine\\map\\tiledMapLoader.js",
+            "modules": {},
+            "classes": {
+                "engine.map.TiledJSONMapLoader": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.map": 1
+            }
+        },
+        "js\\engine\\screens\\abstractScreen.js": {
+            "name": "js\\engine\\screens\\abstractScreen.js",
+            "modules": {},
+            "classes": {
+                "engine.screens.AbstractScreen": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.screens": 1
+            }
+        },
+        "js\\engine\\screens\\loadLevelScreen.js": {
+            "name": "js\\engine\\screens\\loadLevelScreen.js",
+            "modules": {},
+            "classes": {
+                "engine.screens.LoadLevelScreen": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.screens": 1
+            }
+        },
+        "js\\engine\\screens\\playLevelScreen.js": {
+            "name": "js\\engine\\screens\\playLevelScreen.js",
+            "modules": {},
+            "classes": {
+                "engine.screens.PlayLevelScreen": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.screens": 1
+            }
+        },
+        "js\\engine\\screens\\screenManager.js": {
+            "name": "js\\engine\\screens\\screenManager.js",
+            "modules": {},
+            "classes": {
+                "engine.screens.Screenmanager": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.screens": 1
+            }
+        },
+        "js\\engine\\util\\resourceLoader.js": {
+            "name": "js\\engine\\util\\resourceLoader.js",
+            "modules": {},
+            "classes": {
+                "engine.util.ResourceLoader": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine.util": 1
+            }
+        },
+        "js\\engine\\gameInitializer.js": {
+            "name": "js\\engine\\gameInitializer.js",
+            "modules": {},
+            "classes": {
+                "engine.GameInitializer": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "engine": 1
+            }
+        }
+    },
+    "modules": {},
+    "classes": {
+        "engine.entity.Entity": {
+            "name": "engine.entity.Entity",
+            "shortname": "engine.entity.Entity",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.entity",
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 2,
+            "description": "This class defines the base type for all \"gameobjects\" or as we call them here: Entites.\nAlmost everything in the game is an entity. Entities may be nested and may have several\ncomponents attached to them.\nPlease see Readme.md in the same folder for a further explanation."
+        },
+        "engine.entity.EntityComponent": {
+            "name": "engine.entity.EntityComponent",
+            "shortname": "engine.entity.EntityComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.entity",
+            "file": "js\\engine\\entity\\entityComponent.js",
+            "line": 2,
+            "description": "Every `Entity` may hold various `EntityComponent`s which define the behavior\nand visual representation of the Entity. EntityComponents may be scripts,\nSprites, ..."
+        },
+        "engine.entity.EntityManager": {
+            "name": "engine.entity.EntityManager",
+            "shortname": "engine.entity.EntityManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.entity",
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 4,
+            "description": "The EntityManager is responsible for managing the lifecycle of the entities. It creates, initializes,\nsaves, activates, deactivates and destroys them."
+        },
+        "engine.entity.EntityMessage": {
+            "name": "engine.entity.EntityMessage",
+            "shortname": "engine.entity.EntityMessage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.entity",
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 2,
+            "description": "Basic EntityMessage which gets send between entities and scripts\n\nNote: Instances of this type *should* be immutable in most cases.\n      Do not reuse messages - create new messages instead!\n\nProperties\n----------\nIdentifier: The \"Messagetype\" you may listen to. For example: \"collision:entity\"\nMessage: Object containing various msg data. Structure depends on message type\nSender: The entity which send this message (may be null if there\n        was no entity sending this message)."
+        },
+        "engine.entity.EntityPrototype": {
+            "name": "engine.entity.EntityPrototype",
+            "shortname": "engine.entity.EntityPrototype",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.entity",
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 2,
+            "description": "Prototype for creating new entities. This is like a blue print for an entity\nand conains all the scripts and data needed for creating a new entity of this\ntype."
+        },
+        "engine.entity.EntityScript": {
+            "name": "engine.entity.EntityScript",
+            "shortname": "engine.entity.EntityScript",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.entity",
+            "file": "js\\engine\\entity\\entityScript.js",
+            "line": 8,
+            "description": "This class represents a script as a type of `EntityComponent`. It gets attached to a `Entity`\nand may influence the behavior of that `Entity`",
+            "extends": "engine.entity.EntityComponent"
+        },
+        "engine.helper.TextHelper": {
+            "name": "engine.helper.TextHelper",
+            "shortname": "engine.helper.TextHelper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.helper",
+            "file": "js\\engine\\helper\\3d\\textHelper.js",
+            "line": 6,
+            "description": "Helps to create 3D Texts"
+        },
+        "engine.helper.Box2DHelper": {
+            "name": "engine.helper.Box2DHelper",
+            "shortname": "engine.helper.Box2DHelper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.helper",
+            "file": "js\\engine\\helper\\box2DHelper.js",
+            "line": 4,
+            "description": "This module encapsulates the Box2D-Libraries and provides some convenience\nfunctions and shortcuts. It decides whether to use cocoon js native bindings\nor box2dweb. Later on we may also add some native bindings for other OS-Types,\ntoo.\nYou should use this module instead of directly using box2d or box2d-cocoon\n\nNote\n----\nSee Box2DWeb API for details"
+        },
+        "engine.helper.KeyboardHelper": {
+            "name": "engine.helper.KeyboardHelper",
+            "shortname": "engine.helper.KeyboardHelper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.helper",
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 2,
+            "description": "This class simplifies keyboard input for the game and provides simple methods for\nchecking which keys are pressed actually."
+        },
+        "engine.helper.PerformanceTimer": {
+            "name": "engine.helper.PerformanceTimer",
+            "shortname": "engine.helper.PerformanceTimer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.helper",
+            "file": "js\\engine\\helper\\performanceTimer.js",
+            "line": 2,
+            "description": "Provides a high PerformanceTimer (if available)\n\nSOURCE: http://gent.ilcore.com/2012/06/better-timer-for-javascript.html"
+        },
+        "engine.helper.StatsHelper": {
+            "name": "engine.helper.StatsHelper",
+            "shortname": "engine.helper.StatsHelper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.helper",
+            "file": "js\\engine\\helper\\statsHelper.js",
+            "line": 2,
+            "description": "Provides a StatsHelper for recording and showing performance stats\nNote: On cocoonJS the stats don't get shown as we already have a fps counter there\n\nWarning: This is a SINGLETON(!) it get's automatically instantiated"
+        },
+        "engine.helper.VirtualJoystick": {
+            "name": "engine.helper.VirtualJoystick",
+            "shortname": "engine.helper.VirtualJoystick",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.helper",
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 2,
+            "description": "Capsulates a virtual joystick. Contains one joystick field (like an analog joystick) and one fire button."
+        },
+        "engine.map.AbstractMapLoader": {
+            "name": "engine.map.AbstractMapLoader",
+            "shortname": "engine.map.AbstractMapLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.map",
+            "file": "js\\engine\\map\\abstractMapLoader.js",
+            "line": 2,
+            "description": "Abstract class that might be overloaded by various map loaders.\nMapLoaders are responsible for loading a map file and initializing it."
+        },
+        "engine.map.MapLayer": {
+            "name": "engine.map.MapLayer",
+            "shortname": "engine.map.MapLayer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.map",
+            "file": "js\\engine\\map\\tileLayer.js",
+            "line": 8,
+            "description": "A `TileLayer` is a special type of `MapLayer` which consists of several tiles.",
+            "extends": "engine.map.ObjectLayer"
+        },
+        "engine.map.MapObject": {
+            "name": "engine.map.MapObject",
+            "shortname": "engine.map.MapObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.map",
+            "file": "js\\engine\\map\\mapObject.js",
+            "line": 2,
+            "description": "MapObjects are objects contained in the `ObjectLayer`. They may get converted\nto entities as the map loading progress goes on."
+        },
+        "engine.map.TileSet": {
+            "name": "engine.map.TileSet",
+            "shortname": "engine.map.TileSet",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.map",
+            "file": "js\\engine\\map\\tileSet.js",
+            "line": 2,
+            "description": "A `TileSet` holds information about how to draw tiles with certain tileIds."
+        },
+        "engine.map.TiledMap": {
+            "name": "engine.map.TiledMap",
+            "shortname": "engine.map.TiledMap",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.map",
+            "file": "js\\engine\\map\\tiledMap.js",
+            "line": 2,
+            "description": "Represents a `Map` loaded via Tiled Mapeditor\n\n\nTODO: I don't want tiled to be in here. Let this be a normal map and convert\n      tiled maps to this one"
+        },
+        "engine.map.TiledJSONMapLoader": {
+            "name": "engine.map.TiledJSONMapLoader",
+            "shortname": "engine.map.TiledJSONMapLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.map",
+            "file": "js\\engine\\map\\tiledMapLoader.js",
+            "line": 8,
+            "description": "Responsible for loading Tiled Maps.",
+            "extends": "engine.map.AbstractMapLoader"
+        },
+        "engine.screens.AbstractScreen": {
+            "name": "engine.screens.AbstractScreen",
+            "shortname": "engine.screens.AbstractScreen",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.screens",
+            "file": "js\\engine\\screens\\abstractScreen.js",
+            "line": 2,
+            "description": "Base class for all screens shown by the `ScreenManager`"
+        },
+        "engine.screens.LoadLevelScreen": {
+            "name": "engine.screens.LoadLevelScreen",
+            "shortname": "engine.screens.LoadLevelScreen",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.screens",
+            "file": "js\\engine\\screens\\loadLevelScreen.js",
+            "line": 8,
+            "description": "Default implementation of a screen for displaying the load level progress\nUse this as base for your own loadLevelScreen, override it or build your own\nloadLevelScreen as you wish.",
+            "extends": "AbstractScreen"
+        },
+        "engine.screens.PlayLevelScreen": {
+            "name": "engine.screens.PlayLevelScreen",
+            "shortname": "engine.screens.PlayLevelScreen",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.screens",
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 8,
+            "description": "Default implementation of a play level screen. Use this as a base for your own\nPlayLevelScreen or implement a new one by yourself.",
+            "extends": "AbstractScreen"
+        },
+        "engine.screens.Screenmanager": {
+            "name": "engine.screens.Screenmanager",
+            "shortname": "engine.screens.Screenmanager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.screens",
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 2,
+            "description": "Manages all the screens shown. You may stack multiple screens."
+        },
+        "engine.util.ResourceLoader": {
+            "name": "engine.util.ResourceLoader",
+            "shortname": "engine.util.ResourceLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine.util",
+            "file": "js\\engine\\util\\resourceLoader.js",
+            "line": 6,
+            "description": "The ResourceLoader helps you loading various resources with promises.\n\nWarning: SINGLETON! Use `getInstance()` instead of `new`"
+        },
+        "engine.GameInitializer": {
+            "name": "engine.GameInitializer",
+            "shortname": "engine.GameInitializer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "engine",
+            "file": "js\\engine\\gameInitializer.js",
+            "line": 3,
+            "description": "Responsible for initializing some game stuff like the canvas and threejs"
+        }
+    },
+    "classitems": [
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 12,
+            "description": "Creates a new entity from the given `prototype`. The entity will copy\nall necessary data from the `prototype` and does not rely any further on\nit. So if you change the `prototype` after creating this entity\nyou won't have any impact on this entity.",
+            "params": [
+                {
+                    "name": "prototype",
+                    "description": "the prototype to create this entity from",
+                    "type": "engine.entity.EntityPrototype"
+                },
+                {
+                    "name": "manager",
+                    "description": "reference to the manager this entity was created with",
+                    "type": "engine.entity.EntityManager"
+                }
+            ],
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 23,
+            "description": "Holds all callbacks who registered for listening on receiving messages on this entity.",
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 27,
+            "description": "Holds all data private to this entity. This may be used for the various components\nto share their states (though it's not really recommended. Use messaging for communication!)",
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 32,
+            "description": "Holds all entities attached to this entity.",
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 36,
+            "description": "This message is a template for all the \"steps\" sent to the scripts. It's reinitialized and reused many times\nplease don't use this for any other purpose",
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 45,
+            "description": "Clones the current entity and returns the result. Cloning means the new entity\nwill have the same data attributes, and the same scripts.",
+            "itemtype": "method",
+            "name": "cloneEntity",
+            "return": {
+                "description": "a copy of this entity",
+                "type": "engine.entity.Entity"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 59,
+            "description": "Returns a reference to the `EntityManager` holding this entity",
+            "itemtype": "method",
+            "name": "getManager",
+            "return": {
+                "description": "the manager used to create this entity and responsible for managing this entitty",
+                "type": "engine.entity.EntityManager"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 69,
+            "itemtype": "method",
+            "name": "getData",
+            "return": {
+                "description": "the shared data hold by this entity.",
+                "type": "*"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 78,
+            "itemtype": "method",
+            "name": "getParent",
+            "return": {
+                "description": "the parent of this entity. Might be null if there is no parent (meaning this entity is root)",
+                "type": "engine.entity.Entity"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 87,
+            "itemtype": "method",
+            "name": "hasParent",
+            "return": {
+                "description": "true if there is a parent to this entity, false if there isn't",
+                "type": "Boolean"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 95,
+            "description": "Registers the given `callback` for messages/events with the given `identifier`\nThe `callback` will be called whenever this entity receives a message\nwith the given `identifier`.",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "identifier",
+                    "description": "the event-identifier to register for",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "the function callback to register for this event",
+                    "type": "Function"
+                }
+            ],
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 130,
+            "description": "Removes the given listener (`callback`) from the given event/message (`identifier`)\n\nnote: this will only remove one instance of this `callback`. If you added\nthe callback multiple times you need to call this multiple times, too.\n\nnote2: You can't deregister multiple `identifier`s at once (separating with whitespace) at the moment!",
+            "itemtype": "method",
+            "name": "removeListener",
+            "params": [
+                {
+                    "name": "identifier",
+                    "description": "the event identifier to deregister from",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "the function callback to deregister",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "true if a callback was removed false otherwise (if it's not found or\nhas already been removed)",
+                "type": "Boolean"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 170,
+            "description": "Gets invoked whenever this entity should calculate its movements and changes. Forwards a \"entity:step\" message\nso all components may react to this. The message will contain the `timeStep` parameter with the time elapsed\nsince the last step.",
+            "itemtype": "method",
+            "name": "doStep",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "the time elapsed since the last step"
+                }
+            ],
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 184,
+            "description": "Call this to send a `message` to this entity. Forwards the `message`\nto all listeners which registered on this entity for that event. You may\nuse this method to directly deliver a `message` to this entity.",
+            "itemtype": "method",
+            "name": "sendMessage",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "the message to send",
+                    "type": "engine.entity.EntityMessage"
+                }
+            ],
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 205,
+            "description": "Sends the given `message` to all (direct) children of this entity. If `isDeep` is set to true\nalso all the childrens of the childrens of the childrens... will receive this message\ncarefull on large nested constructs if you use this param :).",
+            "itemtype": "method",
+            "name": "sendMessageToChildren",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "the message to be sent",
+                    "type": "engine.entity.EntityMessage"
+                },
+                {
+                    "name": "isDeep",
+                    "description": "(optional, default: false). Set to true if you want all childs of all childs (of all childs...)\n       to receive this message, too",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 227,
+            "itemtype": "method",
+            "name": "getPosition",
+            "return": {
+                "description": "the position/rotation/scale of this entity",
+                "type": "Position"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 236,
+            "itemtype": "method",
+            "name": "getComponents",
+            "return": {
+                "description": "all the components hold by this entity",
+                "type": "engine.entity.EntityComponent[]"
+            },
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entity.js",
+            "line": 244,
+            "description": "Sends the given `message` to the parent of this entity. If you set `isDeep` to true this `message` will also be\nsent to all other ascendants of this entity (meaning the parents of the parents of the ...)",
+            "itemtype": "method",
+            "name": "sendMessageToParent",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "the message to be sent",
+                    "type": "engine.entity.EntityMessage"
+                },
+                {
+                    "name": "isDeep",
+                    "description": "(optional, defaults: false). If set to true all ascendants will be included to receive the message",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "engine.entity.Entity",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityComponent.js",
+            "line": 11,
+            "description": "Creates a new `EntityComponent` for the given `entity` with the given `name` and the given `data`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "the name of this component",
+                    "type": "String"
+                },
+                {
+                    "name": "entity",
+                    "description": "reference to the entity this component is attached to",
+                    "type": "engine.entity.Entity"
+                },
+                {
+                    "name": "data",
+                    "description": "the data for this component",
+                    "type": "Any"
+                }
+            ],
+            "class": "engine.entity.EntityComponent",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityComponent.js",
+            "line": 26,
+            "itemtype": "method",
+            "name": "getEntity",
+            "return": {
+                "description": "the reference to the entity holding this component",
+                "type": "engine.entity.Entity"
+            },
+            "class": "engine.entity.EntityComponent",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityComponent.js",
+            "line": 35,
+            "itemtype": "method",
+            "name": "getData",
+            "return": {
+                "description": "the data hold by this component",
+                "type": "*"
+            },
+            "class": "engine.entity.EntityComponent",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityComponent.js",
+            "line": 44,
+            "itemtype": "method",
+            "name": "getStaticData",
+            "return": {
+                "description": "the static data hold by components with the same `name` as this component",
+                "type": "*"
+            },
+            "class": "engine.entity.EntityComponent",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityComponent.js",
+            "line": 56,
+            "description": "Sets the `data` for this component (overriding previously set `data`)",
+            "itemtype": "method",
+            "name": "setData",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "the data to be set",
+                    "type": "*"
+                }
+            ],
+            "class": "engine.entity.EntityComponent",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 13,
+            "description": "Creates a new EntityManager ready for managing entities.",
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.entity.EntityManager",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 26,
+            "description": "Notifies all entities about their deletion and resets the entity pools afterwards.",
+            "itemtype": "method",
+            "name": "deleteEntities",
+            "class": "engine.entity.EntityManager",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 36,
+            "description": "Cleans up all the entity pools and resets them to their default size.\nWarning: this does not call the entities' cleanup methods. Use #deleteEntities()\n         if you want a clean reset.",
+            "itemtype": "method",
+            "name": "resetEntityPools",
+            "class": "engine.entity.EntityManager",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 55,
+            "description": "Creates a new entity and adds it to the pool",
+            "itemtype": "method",
+            "name": "createEntityFromPrototype",
+            "params": [
+                {
+                    "name": "prototype",
+                    "description": "the prototype to create the entity from",
+                    "type": "engine.entity.EntityPrototype"
+                }
+            ],
+            "return": {
+                "description": "the entity created (be carefull, the entity may not have been fully initialized yet!)",
+                "type": "engine.entity.Entity"
+            },
+            "class": "engine.entity.EntityManager",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 70,
+            "description": "Creates a new entity by typename and adds it to the pool",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "the name of the type to create this entity from",
+                    "type": "String"
+                }
+            ],
+            "itemtype": "method",
+            "name": "createEntityByName",
+            "return": {
+                "description": "the entity created or null if the type isn't defined (be carefull, the entity may not have been fully initialized yet!)",
+                "type": "engine.entity.Entity"
+            },
+            "class": "engine.entity.EntityManager",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 84,
+            "description": "Sends `message` to all active entities (if you set the `alsoSendToInactives` parameter to true it also gets send to inactive ones)",
+            "itemtype": "method",
+            "name": "sendMessage",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "the message to be sent",
+                    "type": "engine.entity.EntityMessage"
+                },
+                {
+                    "name": "alsoSendToInactives",
+                    "description": "false (default): don't send message to inactive entities.\n       True: send to *all* (actives and inactives)",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "engine.entity.EntityManager",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityManager.js",
+            "line": 111,
+            "description": "Invokes `doStep` on all active entities and tells them the time elapsed since the last step (`timeStep`)",
+            "itemtype": "method",
+            "name": "doStep",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "the time elapsed since the last step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.entity.EntityManager",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 20,
+            "description": "Creates a new message ready to be sent to entities. The message *should*\ncontain an identifier, the message param and the entity param are optional.",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "identifier",
+                    "description": "the type/identifier of this message. This is what the listeners should register for",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "(optional) the message itsself - may contain any data",
+                    "type": "*"
+                },
+                {
+                    "name": "sender",
+                    "description": "(optional) the entity sending this message. Might be null",
+                    "type": "engine.entity.Entity"
+                },
+                {
+                    "name": "isConsumable",
+                    "description": "(optional, default: true). Set to false if you don't want this message to be consumable",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 34,
+            "description": "Identifies the type of this message. You may register for these identifiers to\nreceive messages of a certain type. An example might be: \"collision:entity\". You\nmay use \":\" in order to namespace the identifiers. Don't ever use whitespaces\nin your Identifier as you may register to multiple identifiers by separating\nthem trough whitespace!",
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 42,
+            "description": "This is telling whether a message has been consumed or not. If a message gets\nconsumed it doesn't get sent any further. It's like \"stopPropagation\" on JS events",
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 47,
+            "description": "If set to true (default) this message may get consumed by invoking #consume\nif it's set to false this message can't be consumed at all.",
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 57,
+            "itemtype": "method",
+            "name": "getIdentifier",
+            "return": {
+                "description": "the identifier of this message",
+                "type": "String"
+            },
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 65,
+            "itemtype": "method",
+            "name": "getMessage",
+            "return": {
+                "description": "the message data",
+                "type": "*"
+            },
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 73,
+            "itemtype": "method",
+            "name": "getSender",
+            "return": {
+                "description": "the sending entity (might be null)",
+                "type": "engine.entity.Entity"
+            },
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 81,
+            "itemtype": "method",
+            "name": "hasSender",
+            "eturns": "{boolean} true if this message was sent by an entity.",
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 90,
+            "description": "By invoking this u may stop a message from being sent any further\nthis is usefull when you want to delete a message and stop propagation.",
+            "itemtype": "method",
+            "name": "consume",
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityMessage.js",
+            "line": 101,
+            "description": "This is telling whether a message has been consumed or not. If a message gets\nconsumed it doesn't get sent any further. It's like \"stopPropagation\" on JS events",
+            "itemtype": "method",
+            "name": "isConsumed",
+            "return": {
+                "description": "true if the message has been consumed already",
+                "type": "Boolean"
+            },
+            "class": "engine.entity.EntityMessage",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 11,
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 15,
+            "description": "The name describing this (proto-)type may get referenced to create new\nentities of this type. This also may be null when it's a\nanonymous type (for example created on the fly by a script)",
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 21,
+            "description": "Counts how many entities of this type have been created. For debug\npurposes only.",
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 29,
+            "description": "Increments the counter for the entities which have been created using\nthis prototype. This should get invoked whenever a entity of this type\nis being created.",
+            "itemtype": "method",
+            "name": "incrementEntityCreationCount",
+            "return": {
+                "description": "the amount of entities created with this prototype",
+                "type": "Number"
+            },
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 41,
+            "itemtype": "method",
+            "name": "getEntityCreationCount",
+            "return": {
+                "description": "the amount of entities created with this prototype",
+                "type": "Number"
+            },
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 49,
+            "itemtype": "method",
+            "name": "getName",
+            "return": {
+                "description": "the name of this type or null if the type is anonymous",
+                "type": "String"
+            },
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 57,
+            "itemtype": "method",
+            "name": "getData",
+            "return": {
+                "description": "the predefined data for entities of this type",
+                "type": "*"
+            },
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityPrototype.js",
+            "line": 65,
+            "itemtype": "method",
+            "name": "getComponents",
+            "return": {
+                "description": "all the components that should be attached to entities of this type",
+                "type": "String[]"
+            },
+            "class": "engine.entity.EntityPrototype",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\entity\\entityScript.js",
+            "line": 18,
+            "description": "Constructs a new EntityScript with the given `name` for the given `Entity` from the given script-`file`\nwith the given `data`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "the name of this script",
+                    "type": "String"
+                },
+                {
+                    "name": "entity",
+                    "description": "reference to the entity this script is attached to",
+                    "type": "engine.entity.Entity"
+                },
+                {
+                    "name": "file",
+                    "description": "the scriptFile to use for loading/initializing this script",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "the data this script uses",
+                    "type": "*"
+                }
+            ],
+            "class": "engine.entity.EntityScript",
+            "namespace": "engine.entity"
+        },
+        {
+            "file": "js\\engine\\helper\\3d\\textHelper.js",
+            "line": 13,
+            "description": "Creates a new TextHelper",
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.helper.TextHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\3d\\textHelper.js",
+            "line": 31,
+            "description": "Creates and returns a new TextGeometry out of the given `text` and given `options`",
+            "itemtype": "method",
+            "name": "createTextGeometry",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "the text to be displayed",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "(optional) the options for creating this. Options might be empty.",
+                    "type": "*"
+                }
+            ],
+            "return": {
+                "description": "the geometry created",
+                "type": "THREE.TextGeometry"
+            },
+            "class": "engine.helper.TextHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 11,
+            "description": "Creates the KeyboardHelper",
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 29,
+            "description": "Returns the currently pressed keys",
+            "itemtype": "method",
+            "name": "getKeys",
+            "return": {
+                "description": "}",
+                "type": "Right: boolean, up: boolean, left: boolean, down: boolean, space: boolean, floatLeft: boolean, floatRight: boolean"
+            },
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 39,
+            "description": "Registers this on the `document.body` keypress events. Without this you won't receive any\nkey events and no keys will be pressed ever. Also see #unregister",
+            "itemtype": "method",
+            "name": "register",
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 50,
+            "description": "Removes the key lsiteners from `document.body`. You won't receive any keypress events afterwards",
+            "itemtype": "method",
+            "name": "unregister",
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 60,
+            "description": "Internal binding for the `onkeyup` event",
+            "itemtype": "method",
+            "name": "_onKeyUp",
+            "params": [
+                {
+                    "name": "event",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 71,
+            "itemtype": "method",
+            "name": "isLeftPressed",
+            "return": {
+                "description": "True if the left key is actually pressed",
+                "type": "Boolean"
+            },
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 79,
+            "itemtype": "method",
+            "name": "isUpPressed",
+            "return": {
+                "description": "true if the up key is actually pressed",
+                "type": "Boolean"
+            },
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 87,
+            "itemtype": "method",
+            "name": "isDownPressed",
+            "return": {
+                "description": "true if the down key is actually pressed",
+                "type": "Boolean"
+            },
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 95,
+            "itemtype": "method",
+            "name": "isRightPressed",
+            "return": {
+                "description": "true if the right key is actually pressed",
+                "type": "Boolean"
+            },
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 103,
+            "itemtype": "method",
+            "name": "isSpacePressed",
+            "return": {
+                "description": "true if the space key is actually pressed",
+                "type": "Boolean"
+            },
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\keyboardHelper.js",
+            "line": 111,
+            "description": "Internal callback for the `onkeydown` event",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "the event received",
+                    "type": "KeyEvent"
+                },
+                {
+                    "name": "upDown",
+                    "description": "true if the key is actually pressed",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "engine.helper.KeyboardHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\statsHelper.js",
+            "line": 12,
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.helper.StatsHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\statsHelper.js",
+            "line": 31,
+            "description": "Start counting for the frame (should be executed right after your requestAnimationFrame callback starts)",
+            "class": "engine.helper.StatsHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\statsHelper.js",
+            "line": 39,
+            "description": "Ends counting for the frame (should be executed right before your requestAnimationFrame callback ends)",
+            "class": "engine.helper.StatsHelper",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 9,
+            "description": "Creates a new VirtualJoystick",
+            "itemtype": "method",
+            "name": "__constructor()",
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 18,
+            "description": "Removes the joystick from the scene",
+            "itemtype": "method",
+            "name": "removeFromScene",
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 28,
+            "description": "Creates the meshes for the joystick buttons",
+            "itemtype": "method",
+            "name": "_createMeshes",
+            "access": "private",
+            "tagname": "",
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 48,
+            "description": "Registers the Joystick to the current level",
+            "itemtype": "method",
+            "name": "register",
+            "params": [
+                {
+                    "name": "levelScreen",
+                    "description": "the levelScreen to attach the joystick to"
+                }
+            ],
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 90,
+            "description": "Internal callback for the touchmove events",
+            "itemtype": "method",
+            "name": "_onTouchMove",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "the event caught"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 123,
+            "description": "Internal callback for the touchend events",
+            "itemtype": "method",
+            "name": "_onTouchEnd",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "",
+                    "type": "TouchEvent"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 135,
+            "description": "Returns the current speed. The further your finger gets from the center of the joystick, the higher\nthis value will get. At the center it's about 0",
+            "itemtype": "method",
+            "name": "getSpeed",
+            "return": {
+                "description": "the current speed (value between 0 and 1)",
+                "type": "Number"
+            },
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 146,
+            "description": "Returns the angle of the joystick.",
+            "itemtype": "method",
+            "name": "getAngle",
+            "return": {
+                "description": "the angle of the joystick",
+                "type": "Number"
+            },
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\helper\\virtualJoystick.js",
+            "line": 156,
+            "itemtype": "method",
+            "name": "isFireButtonPressed",
+            "return": {
+                "description": "true if the fire button is pressed",
+                "type": "Boolean"
+            },
+            "class": "engine.helper.VirtualJoystick",
+            "namespace": "engine.helper"
+        },
+        {
+            "file": "js\\engine\\map\\abstractMapLoader.js",
+            "line": 10,
+            "description": "Creates a new MapLoader for the given `mapFile`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "mapFile",
+                    "description": "the file to be loaded",
+                    "type": "String"
+                }
+            ],
+            "class": "engine.map.AbstractMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\abstractMapLoader.js",
+            "line": 19,
+            "description": "Returns the path to the mapFile this mapLoader is about to load",
+            "itemtype": "method",
+            "name": "getMapFile",
+            "return": {
+                "description": "the path to the mapFile this loader is about to load",
+                "type": "String"
+            },
+            "class": "engine.map.AbstractMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\abstractMapLoader.js",
+            "line": 29,
+            "description": "Returns the percentage of the progress loading this level. You may call this\nmultiple times while the level loads to display the progress",
+            "return": {
+                "description": "the percentage of progress loading this level",
+                "type": "Number"
+            },
+            "class": "engine.map.AbstractMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\abstractMapLoader.js",
+            "line": 39,
+            "description": "Reutrns the current progress status text message",
+            "return": {
+                "description": "progress status text message",
+                "type": "String"
+            },
+            "class": "engine.map.AbstractMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\abstractMapLoader.js",
+            "line": 48,
+            "description": "Starts loading the map. Abstract method - should be overwriten!",
+            "abstract": "",
+            "return": {
+                "description": "(Promise!)",
+                "type": "engine.map.Map"
+            },
+            "class": "engine.map.AbstractMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\mapObject.js",
+            "line": 12,
+            "description": "Creates a `MapObject` from the given `jsonData`",
+            "itemtype": "method",
+            "name": "createFromJSON",
+            "static": 1,
+            "params": [
+                {
+                    "name": "jsonData",
+                    "description": "the data to create the `MapObject` from",
+                    "type": "*"
+                }
+            ],
+            "return": {
+                "description": "a new `MapObject` created from the given `jsonData`",
+                "type": "MapObject"
+            },
+            "class": "engine.map.MapObject",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\objectLayer.js",
+            "line": 18,
+            "description": "Creates a new `ObjectLayer` with given `name`, `width`, `height` and the position/offset (`x`, `y`)",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "how this ObjectLayer should be called",
+                    "type": "String"
+                },
+                {
+                    "name": "width",
+                    "description": "width of this layer",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "height of this layer",
+                    "type": "Number"
+                },
+                {
+                    "name": "x",
+                    "description": "x-offset",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "y-offset",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.map.MapLayer",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\objectLayer.js",
+            "line": 42,
+            "description": "Adds the MapObject `obj` to this layer",
+            "itemtype": "method",
+            "name": "addObject",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "the object to add",
+                    "type": "engine.map.MapObject"
+                }
+            ],
+            "class": "engine.map.MapLayer",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\objectLayer.js",
+            "line": 52,
+            "description": "Creates a new `ObjectLayer` from the given `jsonData`\n\nTODO: don't create on the fly but return promise instead",
+            "params": [
+                {
+                    "name": "jsonData",
+                    "description": "the jsonData defining this layer",
+                    "type": "*"
+                }
+            ],
+            "itemtype": "method",
+            "name": "createFromJSON",
+            "static": 1,
+            "class": "engine.map.MapLayer",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tileLayer.js",
+            "line": 16,
+            "description": "Creates a new `TileLayer`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.map.MapLayer",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tileLayer.js",
+            "line": 24,
+            "description": "Creates a new `TileLayer` from `jsonData`",
+            "params": [
+                {
+                    "name": "jsonData",
+                    "description": "the data to create the layer from",
+                    "type": "*"
+                }
+            ],
+            "return": {
+                "description": "the created `TileLayer`",
+                "type": "TileLayer"
+            },
+            "class": "engine.map.MapLayer",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tileSet.js",
+            "line": 11,
+            "description": "Creates a new `TileSet` from the given JSONData",
+            "params": [
+                {
+                    "name": "jsonData",
+                    "description": "the data to create this `TileSet` from",
+                    "type": "*"
+                }
+            ],
+            "return": {
+                "description": "the newly created `TileSet`",
+                "type": "TileSet"
+            },
+            "class": "engine.map.TileSet",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMap.js",
+            "line": 13,
+            "description": "Creates a new `TiledMap` with the given `width`, `height`, `tileWidth`, `tileHeight`, `properties` and `version`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "width of map in pixel",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "height of map in pixel",
+                    "type": "Number"
+                },
+                {
+                    "name": "tileWidth",
+                    "description": "width of default tiles in pixel",
+                    "type": "Number"
+                },
+                {
+                    "name": "tileHeight",
+                    "description": "height of default tiles in pixel",
+                    "type": "Number"
+                },
+                {
+                    "name": "properties",
+                    "description": "various properties for this map",
+                    "type": "*"
+                },
+                {
+                    "name": "version",
+                    "description": "the version number of this map",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.map.TiledMap",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMap.js",
+            "line": 36,
+            "description": "Adds a `MapLayer` to the map",
+            "itemtype": "method",
+            "name": "addLayer",
+            "params": [
+                {
+                    "name": "layer",
+                    "description": "the layer to be added",
+                    "type": "engine.map.MapLayer"
+                }
+            ],
+            "class": "engine.map.TiledMap",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMap.js",
+            "line": 46,
+            "description": "Adds a `TileSet` to the map",
+            "itemtype": "method",
+            "name": "addTileSet",
+            "params": [
+                {
+                    "name": "tileSet",
+                    "description": "",
+                    "type": "engine.map.TileSet"
+                }
+            ],
+            "class": "engine.map.TiledMap",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMap.js",
+            "line": 56,
+            "description": "Sets the `properties` for this map. Previously set `properties` will be overwritten",
+            "itemtype": "method",
+            "name": "setProperties",
+            "params": [
+                {
+                    "name": "properties",
+                    "description": "the properties to set",
+                    "type": "*"
+                }
+            ],
+            "class": "engine.map.TiledMap",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMapLoader.js",
+            "line": 22,
+            "description": "returns the current progress in percent",
+            "itemtype": "method",
+            "name": "getProgressInPercent",
+            "overrides": "",
+            "return": {
+                "description": "current progress in percent",
+                "type": "Number"
+            },
+            "class": "engine.map.TiledJSONMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMapLoader.js",
+            "line": 33,
+            "description": "Returns the current progress status text",
+            "itemtype": "method",
+            "name": "getProgressAsText",
+            "overrides": "",
+            "return": {
+                "description": "current progress status",
+                "type": "String"
+            },
+            "class": "engine.map.TiledJSONMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMapLoader.js",
+            "line": 44,
+            "description": "Loads the map and returns promise to it",
+            "itemtype": "method",
+            "name": "loadMap",
+            "overrides": "",
+            "return": {
+                "description": "",
+                "type": "Promise(engine.map.TiledMap)"
+            },
+            "class": "engine.map.TiledJSONMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\map\\tiledMapLoader.js",
+            "line": 59,
+            "description": "Internal method for parsing the map data",
+            "itemtype": "method",
+            "name": "_parseMap",
+            "params": [
+                {
+                    "name": "data",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "engine.map.TiledJSONMapLoader",
+            "namespace": "engine.map"
+        },
+        {
+            "file": "js\\engine\\screens\\abstractScreen.js",
+            "line": 9,
+            "description": "Creates a new screen",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "the renderer to be used in this screen",
+                    "type": "THREE.Renderer"
+                }
+            ],
+            "class": "engine.screens.AbstractScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\abstractScreen.js",
+            "line": 18,
+            "description": "Returns the renderer used for this screen",
+            "itemtype": "method",
+            "name": "getRenderer",
+            "return": {
+                "description": "the renderer used for this screen",
+                "type": "THREE.Renderer"
+            },
+            "class": "engine.screens.AbstractScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\abstractScreen.js",
+            "line": 28,
+            "description": "Gets called when the screen is about to get visible\nOverride to implement your own behavior",
+            "itemtype": "method",
+            "name": "show",
+            "abstract": "",
+            "class": "engine.screens.AbstractScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\abstractScreen.js",
+            "line": 39,
+            "description": "Gets called whenever this screen should render itself.\nOverride to implement your own behavior",
+            "abstract": "",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "the time that passed since the last render step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.AbstractScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\loadLevelScreen.js",
+            "line": 19,
+            "description": "Creates a new `LoadLevelScreen`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "the renderer to use for this screen",
+                    "type": "THREE.Renderer"
+                }
+            ],
+            "class": "engine.screens.LoadLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\loadLevelScreen.js",
+            "line": 28,
+            "description": "Sets the `MapLoader` to query for progess updates",
+            "itemtype": "method",
+            "name": "setMapLoader",
+            "params": [
+                {
+                    "name": "mapLoader",
+                    "description": "the map loader to ask for progress",
+                    "type": "engine.map.AbstractMapLoader"
+                }
+            ],
+            "class": "engine.screens.LoadLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\loadLevelScreen.js",
+            "line": 38,
+            "description": "Gets called when this screen gets visible. Use it to setup the scene",
+            "itemtype": "method",
+            "name": "show",
+            "overrides": "",
+            "class": "engine.screens.LoadLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\loadLevelScreen.js",
+            "line": 48,
+            "description": "Initializes our load level scene",
+            "itemtype": "method",
+            "name": "_setupScene",
+            "access": "private",
+            "tagname": "",
+            "class": "engine.screens.LoadLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\loadLevelScreen.js",
+            "line": 83,
+            "description": "Renders the loadLevel scene",
+            "itemtype": "method",
+            "name": "render",
+            "overrides": "",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "the time that has passed since the last render step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.LoadLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 18,
+            "description": "Creates a new `PlayLevelScreen`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "the renderer to use",
+                    "type": "THREE.Renderer"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 27,
+            "description": "Starts to play the given `map`",
+            "params": [
+                {
+                    "name": "map",
+                    "description": "the map to play",
+                    "type": "engine.map.Map"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 37,
+            "description": "Gets called before we render anything.\nDoes nothing - override for your own usage",
+            "itemtype": "method",
+            "name": "preRender",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "time since last render step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 48,
+            "description": "Gets called after we rendered everything.\nDoes nothing - override for your own usage",
+            "itemtype": "method",
+            "name": "postRender",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "time since last render step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 59,
+            "description": "Gets called before we calculate the physics.\nDoes nothing - override for your own usage",
+            "itemtype": "method",
+            "name": "prePhysics",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "time since last render step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 70,
+            "description": "Gets called before we do the entity steps.\nDoes nothing - override for your own usage",
+            "itemtype": "method",
+            "name": "preEntitySteps",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "time since last render step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 81,
+            "description": "Gets called by the screenManager when this LevelScreen should render itself.\nThis also calculates the physics and entity movements like so:\n\n- *prePhysics\n- calculatePhysics\n- *preEntitySteps\n- calculate entity steps\n- *preRender\n- actually call three js render\n- *postRender\n\nthe *-methods do nothing and can be overwritten to do own stuff in your level",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "timeStep",
+                    "description": "time since last render step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 111,
+            "description": "Initializes the physics world. Should be called before using #calculatePhysics()\nThe gravity param should be a b2Vec. If you don't set this param there will be\nno gravity in this world.\n\nThis also returns the physicsObject. You'll find a b2World in the world property\nof the physicsObject returned.",
+            "itemtype": "method",
+            "name": "initPhsics",
+            "params": [
+                {
+                    "name": "gravity",
+                    "description": "(optional, defaults 0) the gravity to apply to the world",
+                    "type": "Box2D.b2Vec2"
+                }
+            ],
+            "return": {
+                "description": "the physics defined",
+                "type": "*"
+            },
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 131,
+            "description": "Does the physic calculations for the given frameRate at the given precision (higher numbers mean higher precision).\nShould be called once per frame.\nWarning: You may or may not adjust the frameRate for the physic calculations. This may lead to extremely weird\nresults if the number gets too high or too low. By now 16 seems the best value. Also a iteration value of 10\nseems to lead to a stable result.",
+            "itemtype": "method",
+            "name": "calculatePhysics",
+            "params": [
+                {
+                    "name": "frameRate",
+                    "description": "(optional, default: 16) the frameRate to use",
+                    "type": "Number"
+                },
+                {
+                    "name": "velocityIterations",
+                    "description": "(optional, default: 10) the velocityIterations to make per physic step",
+                    "type": "Number"
+                },
+                {
+                    "name": "positionIterations",
+                    "description": "(optional, default: 10) the positionIterations to make per physic step",
+                    "type": "Number"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 151,
+            "description": "Sets up a collision listener for the physic world. This will send messages to all\nentities that collide with each other or collide with walls/other stuff. You need to\nset the property \"entity\" in the userData of the b2Body to allow the entities\nto receive the messages.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_setupPhysicCollisionListener",
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 194,
+            "description": "Returns the physics object to do calculations with. The object contains a property \"world\" which is a b2World\nobject and may be used for the box2d physics. You may add other properties for use in other scripts...",
+            "itemtype": "method",
+            "name": "getPhysics",
+            "return": {
+                "description": "the physics of this level",
+                "type": "*"
+            },
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 205,
+            "description": "Sets the camera for this level screen",
+            "itemtype": "method",
+            "name": "setCamera",
+            "params": [
+                {
+                    "name": "camera",
+                    "description": "the camera to set",
+                    "type": "THREE.Camera"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 215,
+            "description": "Returns the camera for this level screen",
+            "itemtype": "method",
+            "name": "getCamera",
+            "return": {
+                "description": "the camera of this level",
+                "type": "THREE.Camera"
+            },
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 225,
+            "description": "Sets the ThreeJS scene for this level",
+            "itemtype": "method",
+            "name": "setScene",
+            "params": [
+                {
+                    "name": "scene",
+                    "description": "the scene to set",
+                    "type": "THREE.Scene"
+                }
+            ],
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 235,
+            "description": "Returns the ThreeJS scene for this level",
+            "itemtype": "method",
+            "name": "getScene",
+            "return": {
+                "description": "",
+                "type": "THREE.Scene"
+            },
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 245,
+            "description": "Gets called when the level is about to be shown",
+            "itemtype": "method",
+            "name": "show",
+            "overrides": "",
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 255,
+            "description": "Returns the EntityManger for this level (lazy loaded if it doesn't exist yet)",
+            "itemtype": "method",
+            "name": "getEntityManager",
+            "return": {
+                "description": "current `EntityManager` or lazily created one",
+                "type": "engine.entity.EntityManager"
+            },
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 268,
+            "description": "Returns the joystick used in this level or creates one lazily",
+            "itemtype": "method",
+            "name": "getJoystick",
+            "return": {
+                "description": "current joystick or lazily created one",
+                "type": "engine.helper.VirtualJoystick"
+            },
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\playLevelScreen.js",
+            "line": 281,
+            "description": "Returns the current keyboard used in this level or creates one lazily",
+            "itemtype": "method",
+            "name": "getKeyboard",
+            "return": {
+                "description": "current keyboard or lazily created one",
+                "type": "engine.helper.KeyboardHelper"
+            },
+            "class": "engine.screens.PlayLevelScreen",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 9,
+            "description": "Creates a new `ScreenManager`",
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 19,
+            "description": "Initializes the `ScreenManager` with the given ThreeJS-`renderer`",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "the renderer to use in all the screens",
+                    "type": "THREE.Renderer"
+                }
+            ],
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 29,
+            "description": "Starts rendering of the screens. This will start a requestAnimationFrame-loop until there\nis no more screen left to show or until you call `stopRendering`.",
+            "itemtype": "method",
+            "name": "startRendering",
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 42,
+            "description": "Stops a previously invoked `startRendering`. No more screens will be rendered after calling this.\nCall `startRendering` again to continue with rendering.",
+            "itemtype": "method",
+            "name": "stopRendering",
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 52,
+            "description": "Load and create a screen with the given `screenName`. Returns a promise for the loaded screen",
+            "itemtype": "method",
+            "name": "createScreen",
+            "params": [
+                {
+                    "name": "screenName",
+                    "description": "name of the screen to be loaded",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise for the loaded screen",
+                "type": "Promise(AbstractScreen)"
+            },
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 70,
+            "description": "Drops the given `screen`. If it's the current top screen the one beneath it will get the current screen.",
+            "itemtype": "method",
+            "name": "dropScreen",
+            "params": [
+                {
+                    "name": "screen",
+                    "description": "the screen to be dropped",
+                    "type": "AbstractScreen"
+                }
+            ],
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 88,
+            "description": "Makes the given `screen` the current one and adds it to the top of the screen stack",
+            "itemtype": "method",
+            "name": "showScreen",
+            "params": [
+                {
+                    "name": "screen",
+                    "description": "the screen to be shown",
+                    "type": "AbstractScreen"
+                }
+            ],
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 102,
+            "description": "Loads and shows a screen by `screenName`",
+            "itemtype": "method",
+            "name": "showScreenByName",
+            "params": [
+                {
+                    "name": "screenName",
+                    "description": "the screen to be loaded and shown",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise for the screen when it's loaded and shown"
+            },
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\screens\\screenManager.js",
+            "line": 122,
+            "description": "Internal method for rendering the currentScreen",
+            "itemtype": "method",
+            "name": "_render",
+            "access": "private",
+            "tagname": "",
+            "class": "engine.screens.Screenmanager",
+            "namespace": "engine.screens"
+        },
+        {
+            "file": "js\\engine\\util\\resourceLoader.js",
+            "line": 15,
+            "description": "Warning: SINGLETON. Don't use this constructor, use `getInstance()` instead",
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.util.ResourceLoader",
+            "namespace": "engine.util"
+        },
+        {
+            "file": "js\\engine\\util\\resourceLoader.js",
+            "line": 26,
+            "description": "Singleton method for getting the instance for this `ResourceLoader`",
+            "itemtype": "method",
+            "name": "getInstance",
+            "static": 1,
+            "return": {
+                "description": "the singleton instance of this `ResourceLoader`",
+                "type": "engine.util.ResourceLoader"
+            },
+            "class": "engine.util.ResourceLoader",
+            "namespace": "engine.util"
+        },
+        {
+            "file": "js\\engine\\util\\resourceLoader.js",
+            "line": 40,
+            "description": "Loads and parses a json file and returns a promise to it",
+            "params": [
+                {
+                    "name": "jsonFile",
+                    "description": "the file to load"
+                }
+            ],
+            "return": {
+                "description": "promise for the parsed JSON Data",
+                "type": "Promise(*)"
+            },
+            "class": "engine.util.ResourceLoader",
+            "namespace": "engine.util"
+        },
+        {
+            "file": "js\\engine\\gameInitializer.js",
+            "line": 10,
+            "description": "Creates a new GameInitializer",
+            "itemtype": "method",
+            "name": "__constructor",
+            "class": "engine.GameInitializer",
+            "namespace": "engine"
+        },
+        {
+            "file": "js\\engine\\gameInitializer.js",
+            "line": 21,
+            "description": "Initializes the canvasContainer and the ThreeJS environment",
+            "itemtype": "method",
+            "name": "init",
+            "class": "engine.GameInitializer",
+            "namespace": "engine"
+        },
+        {
+            "file": "js\\engine\\gameInitializer.js",
+            "line": 32,
+            "description": "Internal method for initializig three js",
+            "itemtype": "method",
+            "name": "_initializeThreeJS",
+            "access": "private",
+            "tagname": "",
+            "class": "engine.GameInitializer",
+            "namespace": "engine"
+        },
+        {
+            "file": "js\\engine\\gameInitializer.js",
+            "line": 49,
+            "description": "Callback for window resizing events",
+            "itemtype": "method",
+            "name": "onWindowResized",
+            "class": "engine.GameInitializer",
+            "namespace": "engine"
+        },
+        {
+            "file": "js\\engine\\gameInitializer.js",
+            "line": 58,
+            "description": "Internal method for initializing the canvas container and dom elements for the canvas",
+            "itemtype": "method",
+            "name": "_initializeCanvasContainer",
+            "access": "private",
+            "tagname": "",
+            "class": "engine.GameInitializer",
+            "namespace": "engine"
+        },
+        {
+            "file": "js\\engine\\gameInitializer.js",
+            "line": 68,
+            "description": "Helper method which returns the intialized ThreeJS Renderer. Call `init` first!",
+            "return": {
+                "description": "",
+                "type": "THREE.Renderer"
+            },
+            "class": "engine.GameInitializer",
+            "namespace": "engine"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:45"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:59"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:69"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:78"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:87"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:130"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:227"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entity.js:236"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityComponent.js:26"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityComponent.js:35"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityComponent.js:44"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityManager.js:55"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityManager.js:70"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityMessage.js:57"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityMessage.js:65"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityMessage.js:73"
+        },
+        {
+            "message": "unknown tag: eturns",
+            "line": " js\\engine\\entity\\entityMessage.js:81"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityMessage.js:101"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityPrototype.js:29"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityPrototype.js:41"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityPrototype.js:49"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityPrototype.js:57"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\entity\\entityPrototype.js:65"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\3d\\textHelper.js:31"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\keyboardHelper.js:29"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\keyboardHelper.js:71"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\keyboardHelper.js:79"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\keyboardHelper.js:87"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\keyboardHelper.js:95"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\keyboardHelper.js:103"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\virtualJoystick.js:135"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\virtualJoystick.js:146"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\helper\\virtualJoystick.js:156"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\abstractMapLoader.js:19"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\abstractMapLoader.js:29"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\abstractMapLoader.js:39"
+        },
+        {
+            "message": "unknown tag: abstract",
+            "line": " js\\engine\\map\\abstractMapLoader.js:48"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\abstractMapLoader.js:48"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\mapObject.js:12"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\tileLayer.js:24"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\tileSet.js:11"
+        },
+        {
+            "message": "unknown tag: overrides",
+            "line": " js\\engine\\map\\tiledMapLoader.js:22"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\tiledMapLoader.js:22"
+        },
+        {
+            "message": "unknown tag: overrides",
+            "line": " js\\engine\\map\\tiledMapLoader.js:33"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\tiledMapLoader.js:33"
+        },
+        {
+            "message": "unknown tag: overrides",
+            "line": " js\\engine\\map\\tiledMapLoader.js:44"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\tiledMapLoader.js:44"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\map\\tiledMapLoader.js:59"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\abstractScreen.js:18"
+        },
+        {
+            "message": "unknown tag: abstract",
+            "line": " js\\engine\\screens\\abstractScreen.js:28"
+        },
+        {
+            "message": "unknown tag: abstract",
+            "line": " js\\engine\\screens\\abstractScreen.js:39"
+        },
+        {
+            "message": "unknown tag: overrides",
+            "line": " js\\engine\\screens\\loadLevelScreen.js:38"
+        },
+        {
+            "message": "unknown tag: overrides",
+            "line": " js\\engine\\screens\\loadLevelScreen.js:83"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\playLevelScreen.js:111"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\playLevelScreen.js:194"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\playLevelScreen.js:215"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\playLevelScreen.js:235"
+        },
+        {
+            "message": "unknown tag: overrides",
+            "line": " js\\engine\\screens\\playLevelScreen.js:245"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\playLevelScreen.js:255"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\playLevelScreen.js:268"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\playLevelScreen.js:281"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\screenManager.js:52"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\screens\\screenManager.js:102"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\util\\resourceLoader.js:26"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\util\\resourceLoader.js:40"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " js\\engine\\gameInitializer.js:68"
+        },
+        {
+            "message": "Missing item type\nHolds all callbacks who registered for listening on receiving messages on this entity.",
+            "line": " js\\engine\\entity\\entity.js:23"
+        },
+        {
+            "message": "Missing item type\nHolds all data private to this entity. This may be used for the various components\nto share their states (though it's not really recommended. Use messaging for communication!)",
+            "line": " js\\engine\\entity\\entity.js:27"
+        },
+        {
+            "message": "Missing item type\nHolds all entities attached to this entity.",
+            "line": " js\\engine\\entity\\entity.js:32"
+        },
+        {
+            "message": "Missing item type\nThis message is a template for all the \"steps\" sent to the scripts. It's reinitialized and reused many times\nplease don't use this for any other purpose",
+            "line": " js\\engine\\entity\\entity.js:36"
+        },
+        {
+            "message": "Missing item type\nIdentifies the type of this message. You may register for these identifiers to\nreceive messages of a certain type. An example might be: \"collision:entity\". You\nmay use \":\" in order to namespace the identifiers. Don't ever use whitespaces\nin your Identifier as you may register to multiple identifiers by separating\nthem trough whitespace!",
+            "line": " js\\engine\\entity\\entityMessage.js:34"
+        },
+        {
+            "message": "Missing item type\nThis is telling whether a message has been consumed or not. If a message gets\nconsumed it doesn't get sent any further. It's like \"stopPropagation\" on JS events",
+            "line": " js\\engine\\entity\\entityMessage.js:42"
+        },
+        {
+            "message": "Missing item type\nIf set to true (default) this message may get consumed by invoking #consume\nif it's set to false this message can't be consumed at all.",
+            "line": " js\\engine\\entity\\entityMessage.js:47"
+        },
+        {
+            "message": "Missing item type\nThe name describing this (proto-)type may get referenced to create new\nentities of this type. This also may be null when it's a\nanonymous type (for example created on the fly by a script)",
+            "line": " js\\engine\\entity\\entityPrototype.js:15"
+        },
+        {
+            "message": "Missing item type\nCounts how many entities of this type have been created. For debug\npurposes only.",
+            "line": " js\\engine\\entity\\entityPrototype.js:21"
+        },
+        {
+            "message": "Missing item type\nInternal callback for the `onkeydown` event",
+            "line": " js\\engine\\helper\\keyboardHelper.js:111"
+        },
+        {
+            "message": "Missing item type\nStart counting for the frame (should be executed right after your requestAnimationFrame callback starts)",
+            "line": " js\\engine\\helper\\statsHelper.js:31"
+        },
+        {
+            "message": "Missing item type\nEnds counting for the frame (should be executed right before your requestAnimationFrame callback ends)",
+            "line": " js\\engine\\helper\\statsHelper.js:39"
+        },
+        {
+            "message": "Missing item type\nReturns the percentage of the progress loading this level. You may call this\nmultiple times while the level loads to display the progress",
+            "line": " js\\engine\\map\\abstractMapLoader.js:29"
+        },
+        {
+            "message": "Missing item type\nReutrns the current progress status text message",
+            "line": " js\\engine\\map\\abstractMapLoader.js:39"
+        },
+        {
+            "message": "Missing item type\nStarts loading the map. Abstract method - should be overwriten!",
+            "line": " js\\engine\\map\\abstractMapLoader.js:48"
+        },
+        {
+            "message": "Missing item type\nCreates a new `TileLayer` from `jsonData`",
+            "line": " js\\engine\\map\\tileLayer.js:24"
+        },
+        {
+            "message": "Missing item type\nCreates a new `TileSet` from the given JSONData",
+            "line": " js\\engine\\map\\tileSet.js:11"
+        },
+        {
+            "message": "Missing item type\nStarts to play the given `map`",
+            "line": " js\\engine\\screens\\playLevelScreen.js:27"
+        },
+        {
+            "message": "Missing item type\nLoads and parses a json file and returns a promise to it",
+            "line": " js\\engine\\util\\resourceLoader.js:40"
+        },
+        {
+            "message": "Missing item type\nHelper method which returns the intialized ThreeJS Renderer. Call `init` first!",
+            "line": " js\\engine\\gameInitializer.js:68"
+        }
+    ]
+}

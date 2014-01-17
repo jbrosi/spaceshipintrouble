@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>js\engine\entity\entity.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/engine.entity.Entity.html">engine.entity.Entity</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityComponent.html">engine.entity.EntityComponent</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityManager.html">engine.entity.EntityManager</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityMessage.html">engine.entity.EntityMessage</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityPrototype.html">engine.entity.EntityPrototype</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityScript.html">engine.entity.EntityScript</a></li>
+            
+                <li><a href="../classes/engine.GameInitializer.html">engine.GameInitializer</a></li>
+            
+                <li><a href="../classes/engine.helper.Box2DHelper.html">engine.helper.Box2DHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.KeyboardHelper.html">engine.helper.KeyboardHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.PerformanceTimer.html">engine.helper.PerformanceTimer</a></li>
+            
+                <li><a href="../classes/engine.helper.StatsHelper.html">engine.helper.StatsHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.TextHelper.html">engine.helper.TextHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.VirtualJoystick.html">engine.helper.VirtualJoystick</a></li>
+            
+                <li><a href="../classes/engine.map.AbstractMapLoader.html">engine.map.AbstractMapLoader</a></li>
+            
+                <li><a href="../classes/engine.map.MapLayer.html">engine.map.MapLayer</a></li>
+            
+                <li><a href="../classes/engine.map.MapObject.html">engine.map.MapObject</a></li>
+            
+                <li><a href="../classes/engine.map.TiledJSONMapLoader.html">engine.map.TiledJSONMapLoader</a></li>
+            
+                <li><a href="../classes/engine.map.TiledMap.html">engine.map.TiledMap</a></li>
+            
+                <li><a href="../classes/engine.map.TileSet.html">engine.map.TileSet</a></li>
+            
+                <li><a href="../classes/engine.screens.AbstractScreen.html">engine.screens.AbstractScreen</a></li>
+            
+                <li><a href="../classes/engine.screens.LoadLevelScreen.html">engine.screens.LoadLevelScreen</a></li>
+            
+                <li><a href="../classes/engine.screens.PlayLevelScreen.html">engine.screens.PlayLevelScreen</a></li>
+            
+                <li><a href="../classes/engine.screens.Screenmanager.html">engine.screens.Screenmanager</a></li>
+            
+                <li><a href="../classes/engine.util.ResourceLoader.html">engine.util.ResourceLoader</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: js\engine\entity\entity.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([&quot;require&quot;, &quot;exports&quot;, &quot;engine/entity/entityMessage&quot;, &quot;engine/entity/entityScript&quot;, &quot;engine/entity/entityComponent&quot;, &quot;engine/util/position&quot;], function(require, exports, EntityMessage, EntityScript, EntityComponent, Position) {
+    /**
+    * This class defines the base type for all &quot;gameobjects&quot; or as we call them here: Entites.
+    * Almost everything in the game is an entity. Entities may be nested and may have several
+    * components attached to them.
+    * Please see Readme.md in the same folder for a further explanation.
+    *
+    * @namespace engine.entity
+    * @class Entity
+    */
+    var Entity = (function () {
+        /**
+        * Creates a new entity from the given &#x60;prototype&#x60;. The entity will copy
+        * all necessary data from the &#x60;prototype&#x60; and does not rely any further on
+        * it. So if you change the &#x60;prototype&#x60; after creating this entity
+        * you won&#x27;t have any impact on this entity.
+        *
+        * @param prototype {engine.entity.EntityPrototype} the prototype to create this entity from
+        * @param manager {engine.entity.EntityManager} reference to the manager this entity was created with
+        * @method __constructor
+        */
+        function Entity(prototype, manager) {
+            /**
+            * Holds all callbacks who registered for listening on receiving messages on this entity.
+            */
+            this._listeners = {};
+            /**
+            * Holds all data private to this entity. This may be used for the various components
+            * to share their states (though it&#x27;s not really recommended. Use messaging for communication!)
+            */
+            this._data = {};
+            /**
+            * Holds all entities attached to this entity.
+            */
+            this._childEntities = [];
+            /**
+            * This message is a template for all the &quot;steps&quot; sent to the scripts. It&#x27;s reinitialized and reused many times
+            * please don&#x27;t use this for any other purpose
+            */
+            this._stepMessage = new EntityMessage(&quot;entity:step&quot;, { timeStep: 0 }, this, false);
+            //todo: initialize entity, load scripts defined in Prototype,
+            //      initialize scripts, ...
+            this._manager = manager;
+        }
+        /**
+        * Clones the current entity and returns the result. Cloning means the new entity
+        * will have the same data attributes, and the same scripts.
+        *
+        * @method cloneEntity
+        * @returns {engine.entity.Entity} a copy of this entity
+        */
+        Entity.prototype.cloneEntity = function () {
+            //clones the current entity and returns a new instance of this entity
+            //with same data and prototype data set.
+            //TODO: implement
+            return this;
+        };
+
+        /**
+        * Returns a reference to the &#x60;EntityManager&#x60; holding this entity
+        *
+        * @method getManager
+        * @returns {engine.entity.EntityManager} the manager used to create this entity and responsible for managing this entitty
+        */
+        Entity.prototype.getManager = function () {
+            return this._manager;
+        };
+
+        /**
+        *
+        * @method getData
+        * @returns {*} the shared data hold by this entity.
+        */
+        Entity.prototype.getData = function () {
+            return this._data;
+        };
+
+        /**
+        *
+        * @method getParent
+        * @returns {engine.entity.Entity} the parent of this entity. Might be null if there is no parent (meaning this entity is root)
+        */
+        Entity.prototype.getParent = function () {
+            return this._parentEntity;
+        };
+
+        /**
+        * @method hasParent
+        * @returns {boolean} true if there is a parent to this entity, false if there isn&#x27;t
+        */
+        Entity.prototype.hasParent = function () {
+            return this._parentEntity != null;
+        };
+
+        /**
+        * Registers the given &#x60;callback&#x60; for messages/events with the given &#x60;identifier&#x60;
+        * The &#x60;callback&#x60; will be called whenever this entity receives a message
+        * with the given &#x60;identifier&#x60;.
+        *
+        * @method on
+        * @param identifier {string} the event-identifier to register for
+        * @param callback {function} the function callback to register for this event
+        */
+        Entity.prototype.on = function (identifier, callback) {
+            //trim it
+            identifier = identifier.trim();
+
+            if (identifier.length === 0) {
+                //we expect the identifier to have at least one symbol
+                //TODO: warn?
+                return;
+            }
+
+            if (identifier.indexOf(&quot; &quot;) &gt; -1) {
+                var identifiers = identifier.split(&quot; &quot;);
+                var a;
+                for (a = 0; a &lt; identifiers.length; a++) {
+                    this.on(identifiers[a], callback);
+                }
+                return;
+            }
+
+            if (this._listeners[identifier] === undefined) {
+                this._listeners[identifier] = [];
+            }
+
+            this._listeners[identifier].push(callback);
+        };
+
+        /**
+        * Removes the given listener (&#x60;callback&#x60;) from the given event/message (&#x60;identifier&#x60;)
+        *
+        * note: this will only remove one instance of this &#x60;callback&#x60;. If you added
+        * the callback multiple times you need to call this multiple times, too.
+        *
+        * note2: You can&#x27;t deregister multiple &#x60;identifier&#x60;s at once (separating with whitespace) at the moment!
+        *
+        * @method removeListener
+        * @param identifier {string} the event identifier to deregister from
+        * @param callback {function} the function callback to deregister
+        * @returns {boolean} true if a callback was removed false otherwise (if it&#x27;s not found or
+        * has already been removed)
+        */
+        Entity.prototype.removeListener = function (identifier, callback) {
+            if (this._listeners[identifier] === undefined || this._listeners[identifier].length == 0) {
+                //nothin to do
+                return false;
+            }
+
+            if (this._listeners[identifier].length == 1) {
+                //nothin to do
+                if (this._listeners[identifier][0] === callback) {
+                    delete this._listeners[identifier];
+                } else {
+                    return false;
+                }
+            }
+
+            var a = 0;
+
+            for (a = 0; a &lt; this._listeners[identifier].length; a++) {
+                if (callback === this._listeners[identifier][a]) {
+                    this._listeners[identifier].splice(a, 1);
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        /**
+        * Gets invoked whenever this entity should calculate its movements and changes. Forwards a &quot;entity:step&quot; message
+        * so all components may react to this. The message will contain the &#x60;timeStep&#x60; parameter with the time elapsed
+        * since the last step.
+        *
+        * @method doStep
+        * @param timeStep the time elapsed since the last step
+        */
+        Entity.prototype.doStep = function (timeStep) {
+            //fake step message for scripts:
+            this._stepMessage.getMessage().timeStep = timeStep;
+            this.sendMessage(this._stepMessage);
+        };
+
+        /**
+        * Call this to send a &#x60;message&#x60; to this entity. Forwards the &#x60;message&#x60;
+        * to all listeners which registered on this entity for that event. You may
+        * use this method to directly deliver a &#x60;message&#x60; to this entity.
+        *
+        * @method sendMessage
+        * @param message {engine.entity.EntityMessage} the message to send
+        */
+        Entity.prototype.sendMessage = function (message) {
+            //notify our registered callbacks:
+            var id = message.getIdentifier();
+            if (this._listeners[id] === undefined) {
+                return;
+            }
+
+            var a = 0;
+            for (a = 0; a &lt; this._listeners[id].length &amp;&amp; !message.isConsumed(); a++) {
+                this._listeners[message.getIdentifier()][a](message);
+            }
+        };
+
+        /**
+        * Sends the given &#x60;message&#x60; to all (direct) children of this entity. If &#x60;isDeep&#x60; is set to true
+        * also all the childrens of the childrens of the childrens... will receive this message
+        * carefull on large nested constructs if you use this param :).
+        *
+        * @method sendMessageToChildren
+        * @param message {engine.entity.EntityMessage} the message to be sent
+        * @param isDeep {boolean} (optional, default: false). Set to true if you want all childs of all childs (of all childs...)
+        *        to receive this message, too
+        */
+        Entity.prototype.sendMessageToChildren = function (message, isDeep) {
+            if (typeof isDeep === &quot;undefined&quot;) { isDeep = false; }
+            var a;
+            for (a = 0; a &lt; this._childEntities.length &amp;&amp; !message.isConsumed(); a++) {
+                this._childEntities[a].sendMessage(message);
+
+                if (isDeep &amp;&amp; !message.isConsumed()) {
+                    this._childEntities[a].sendMessageToChildren(message, true);
+                }
+            }
+        };
+
+        /**
+        *
+        * @method getPosition
+        * @returns {Position} the position/rotation/scale of this entity
+        */
+        Entity.prototype.getPosition = function () {
+            return this._position;
+        };
+
+        /**
+        * @method getComponents
+        * @returns {engine.entity.EntityComponent[]} all the components hold by this entity
+        */
+        Entity.prototype.getComponents = function () {
+            return this._components;
+        };
+
+        /**
+        * Sends the given &#x60;message&#x60; to the parent of this entity. If you set &#x60;isDeep&#x60; to true this &#x60;message&#x60; will also be
+        * sent to all other ascendants of this entity (meaning the parents of the parents of the ...)
+        *
+        * @method sendMessageToParent
+        * @param message {engine.entity.EntityMessage} the message to be sent
+        * @param isDeep {boolean} (optional, defaults: false). If set to true all ascendants will be included to receive the message
+        */
+        Entity.prototype.sendMessageToParent = function (message, isDeep) {
+            if (typeof isDeep === &quot;undefined&quot;) { isDeep = false; }
+            if (!this.hasParent() || message.isConsumed()) {
+                //no parent to send something to
+                return;
+            }
+
+            this._parentEntity.sendMessage(message);
+            if (isDeep &amp;&amp; !message.isConsumed()) {
+                this._parentEntity.sendMessageToParent(message, true);
+            }
+        };
+        return Entity;
+    })();
+    ;
+
+    
+    return Entity;
+});
+//# sourceMappingURL=entity.js.map
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>engine.helper.KeyboardHelper</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/engine.entity.Entity.html">engine.entity.Entity</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityComponent.html">engine.entity.EntityComponent</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityManager.html">engine.entity.EntityManager</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityMessage.html">engine.entity.EntityMessage</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityPrototype.html">engine.entity.EntityPrototype</a></li>
+            
+                <li><a href="../classes/engine.entity.EntityScript.html">engine.entity.EntityScript</a></li>
+            
+                <li><a href="../classes/engine.GameInitializer.html">engine.GameInitializer</a></li>
+            
+                <li><a href="../classes/engine.helper.Box2DHelper.html">engine.helper.Box2DHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.KeyboardHelper.html">engine.helper.KeyboardHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.PerformanceTimer.html">engine.helper.PerformanceTimer</a></li>
+            
+                <li><a href="../classes/engine.helper.StatsHelper.html">engine.helper.StatsHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.TextHelper.html">engine.helper.TextHelper</a></li>
+            
+                <li><a href="../classes/engine.helper.VirtualJoystick.html">engine.helper.VirtualJoystick</a></li>
+            
+                <li><a href="../classes/engine.map.AbstractMapLoader.html">engine.map.AbstractMapLoader</a></li>
+            
+                <li><a href="../classes/engine.map.MapLayer.html">engine.map.MapLayer</a></li>
+            
+                <li><a href="../classes/engine.map.MapObject.html">engine.map.MapObject</a></li>
+            
+                <li><a href="../classes/engine.map.TiledJSONMapLoader.html">engine.map.TiledJSONMapLoader</a></li>
+            
+                <li><a href="../classes/engine.map.TiledMap.html">engine.map.TiledMap</a></li>
+            
+                <li><a href="../classes/engine.map.TileSet.html">engine.map.TileSet</a></li>
+            
+                <li><a href="../classes/engine.screens.AbstractScreen.html">engine.screens.AbstractScreen</a></li>
+            
+                <li><a href="../classes/engine.screens.LoadLevelScreen.html">engine.screens.LoadLevelScreen</a></li>
+            
+                <li><a href="../classes/engine.screens.PlayLevelScreen.html">engine.screens.PlayLevelScreen</a></li>
+            
+                <li><a href="../classes/engine.screens.Screenmanager.html">engine.screens.Screenmanager</a></li>
+            
+                <li><a href="../classes/engine.util.ResourceLoader.html">engine.util.ResourceLoader</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>engine.helper.KeyboardHelper Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/js_engine_helper_keyboardHelper.js.html#l2"><code>js\engine\helper\keyboardHelper.js:2</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>This class simplifies keyboard input for the game and provides simple methods for
+checking which keys are pressed actually.</p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method___constructor">__constructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onKeyUp">_onKeyUp</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getKeys">getKeys</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isDownPressed">isDownPressed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isLeftPressed">isLeftPressed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isRightPressed">isRightPressed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isSpacePressed">isSpacePressed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_isUpPressed">isUpPressed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_register">register</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_unregister">unregister</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method___constructor" class="method item">
+    <h3 class="name"><code>__constructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l11"><code>js\engine\helper\keyboardHelper.js:11</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Creates the KeyboardHelper</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onKeyUp" class="method item private">
+    <h3 class="name"><code>_onKeyUp</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l60"><code>js\engine\helper\keyboardHelper.js:60</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Internal binding for the <code>onkeyup</code> event</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getKeys" class="method item">
+    <h3 class="name"><code>getKeys</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Right: boolean, up: boolean, left: boolean, down: boolean, space: boolean, floatLeft: boolean, floatRight: boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l29"><code>js\engine\helper\keyboardHelper.js:29</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the currently pressed keys</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Right: boolean, up: boolean, left: boolean, down: boolean, space: boolean, floatLeft: boolean, floatRight: boolean</span>:
+                    
+                    <p>}</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_isDownPressed" class="method item">
+    <h3 class="name"><code>isDownPressed</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l87"><code>js\engine\helper\keyboardHelper.js:87</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>true if the down key is actually pressed</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_isLeftPressed" class="method item">
+    <h3 class="name"><code>isLeftPressed</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l71"><code>js\engine\helper\keyboardHelper.js:71</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>True if the left key is actually pressed</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_isRightPressed" class="method item">
+    <h3 class="name"><code>isRightPressed</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l95"><code>js\engine\helper\keyboardHelper.js:95</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>true if the right key is actually pressed</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_isSpacePressed" class="method item">
+    <h3 class="name"><code>isSpacePressed</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l103"><code>js\engine\helper\keyboardHelper.js:103</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>true if the space key is actually pressed</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_isUpPressed" class="method item">
+    <h3 class="name"><code>isUpPressed</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l79"><code>js\engine\helper\keyboardHelper.js:79</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>true if the up key is actually pressed</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_register" class="method item">
+    <h3 class="name"><code>register</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l39"><code>js\engine\helper\keyboardHelper.js:39</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Registers this on the <code>document.body</code> keypress events. Without this you won&#39;t receive any
+key events and no keys will be pressed ever. Also see #unregister</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_unregister" class="method item">
+    <h3 class="name"><code>unregister</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/js_engine_helper_keyboardHelper.js.html#l50"><code>js\engine\helper\keyboardHelper.js:50</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Removes the key lsiteners from <code>document.body</code>. You won&#39;t receive any keypress events afterwards</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
