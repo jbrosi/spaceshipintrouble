@@ -2,8 +2,14 @@
 import THREE = require("three");
 import _ = require("lodash");
 import Hammer = require("hammer");
-import AbstractLevel = require("engine/map/abstractLevel");
+import PlayLevelScreen = require("engine/screens/playLevelScreen");
 
+/**
+ * Capsulates a virtual joystick. Contains one joystick field (like an analog joystick) and one fire button.
+ *
+ * @namespace engine.helper
+ * @class VirtualJoystick
+ */
 class VirtualJoystick {
         
     private _speed = 0;
@@ -21,12 +27,23 @@ class VirtualJoystick {
     private _hammer;
     private _renderer;
     private _scene;
-    
+
+    /**
+     * Creates a new VirtualJoystick
+     *
+     * @method __constructor()
+     */
     public constructor() {
         _.bindAll(this);
     }
-    
-    public _createMeshes () {
+
+    /**
+     * Creates the meshes for the joystick buttons
+     *
+     * @method _createMeshes
+     * @private
+     */
+    private _createMeshes () {
         if (this._joystickMesh) {
             //already created
             return;
@@ -41,15 +58,21 @@ class VirtualJoystick {
         this._fireButtonMesh = new THREE.Sprite(fireButtonMat);
 
     }
-    
-    public register (level: AbstractLevel) {
+
+    /**
+     * Registers the Joystick to the current level
+     *
+     * @method register
+     * @param levelScreen the levelScreen to attach the joystick to
+     */
+    public register (levelScreen: PlayLevelScreen) {
         
         if (!this._joystickMesh) {
             this._createMeshes();
         }
         
-        this._scene = level.getScene();
-        this._renderer = level.getRenderer();
+        this._scene = levelScreen.getScene();
+        this._renderer = levelScreen.getRenderer();
         
         this._screenHeight = window.innerHeight;
         this._screenWidth = window.innerWidth;
@@ -82,7 +105,14 @@ class VirtualJoystick {
         this._hammer.on('release', this._onTouchEnd);
         
     }
-    
+
+    /**
+     * Internal callback for the touchmove events
+     *
+     * @method _onTouchMove
+     * @param evt the event caught
+     * @private
+     */
     private _onTouchMove (evt) {
         
         //false by default
@@ -113,26 +143,55 @@ class VirtualJoystick {
             
         }        
     }
-    
+
+    /**
+     * Internal callback for the touchend events
+     *
+     * @method _onTouchEnd
+     * @param evt {TouchEvent}
+     * @private
+     */
     private _onTouchEnd (evt) {
         this._speed = 0;
         this._isFireButtonPressed = false;
     }
-    
+
+    /**
+     * Returns the current speed. The further your finger gets from the center of the joystick, the higher
+     * this value will get. At the center it's about 0
+     *
+     * @method getSpeed
+     * @returns {number} the current speed (value between 0 and 1)
+     */
     public getSpeed () {
         return this._speed;
     }
-    
+
+    /**
+     * Returns the angle of the joystick.
+     *
+     * @method getAngle
+     * @returns {number} the angle of the joystick
+     */
     public getAngle () {
         return this._angle;
     }
-    
+
+    /**
+     * @method isFireButtonPressed
+     * @returns {boolean} true if the fire button is pressed
+     */
     public isFireButtonPressed () {
         return this._isFireButtonPressed;
     }
-    
+
+    /**
+     * Removes the joystick from the scene
+     * @method removeFromScene
+     */
     public removeFromScene = function () {
-        this._scene.remove(this._mesh);
+        this._scene.remove(this._joystickMesh);
+        this._scene.remove(this._fireButtonMesh);
     }
     
     

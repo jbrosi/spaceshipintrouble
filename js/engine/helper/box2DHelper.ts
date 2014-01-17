@@ -12,6 +12,13 @@ var Box2D = navigator.isCocoonJS ? Box2DCocoon : Box2DNormal;
  * or box2dweb. Later on we may also add some native bindings for other OS-Types,
  * too.
  * You should use this module instead of directly using box2d or box2d-cocoon
+ *
+ * Note
+ * ----
+ * See Box2DWeb API for details
+ *
+ * @namespace engine.helper
+ * @class Box2DHelper
  */ 
 
 //just add some shortcuts

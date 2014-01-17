@@ -5,7 +5,12 @@ import helvetikerFont = require('helvetiker-font');
 if (helvetikerFont) {
     //we need to have helvetikerFont somewhere in the code or typescript will kick it!
 }
-
+/**
+ * Helps to create 3D Texts
+ *
+ * @namespace engine.helper
+ * @class TextHelper
+ */
 class TextHelper {
     private static _defaultTextHelper: TextHelper;
     private _height = 3;
@@ -20,13 +25,23 @@ class TextHelper {
     private _weight = "normal";
     private _style = "normal";
 
+    /**
+     * Creates a new TextHelper
+     *
+     * @method __constructor
+     */
     public constructor () {
     }
-    
-    public createTextGeometry (text, options) {
-        if (!options) {
-            options = {};
-        }
+
+    /**
+     * Creates and returns a new TextGeometry out of the given `text` and given `options`
+     *
+     * @method createTextGeometry
+     * @param text {string} the text to be displayed
+     * @param options {*} (optional) the options for creating this. Options might be empty.
+     * @returns {THREE.TextGeometry} the geometry created
+     */
+    public createTextGeometry (text, options = {}) {
         var textGeometry = new THREE.TextGeometry( text, {
             size: options.size ? options.size : this._size,
             height: options.height ? options.height : this._height,
@@ -43,7 +58,13 @@ class TextHelper {
         
         return textGeometry;
     }
-    
+
+    /**
+     * Creates a default textHelper which might be reused to display texts in default font
+     *
+     * @method getDefaultTextHelper
+     * @static
+     */
     public static getDefaultTextHelper = function() {
         if (!TextHelper._defaultTextHelper) {
             TextHelper._defaultTextHelper = new TextHelper();

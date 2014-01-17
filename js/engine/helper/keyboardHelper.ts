@@ -1,5 +1,13 @@
 import _ = require('lodash');
 
+/**
+ * This class simplifies keyboard input for the game and provides simple methods for
+ * checking which keys are pressed actually.
+ *
+ * @namespace engine.helper
+ * @class KeyboardHelper
+ *
+ */
 class KeyboardHelper {
     private _keysDown = {
         right: false,
@@ -10,53 +18,107 @@ class KeyboardHelper {
         floatLeft: false,
         floatRight: false
     }
-        
 
+    /**
+     * Creates the KeyboardHelper
+     *
+     * @method __constructor
+     *
+     */
     public constructor() {
         _.bindAll(this);
     }
 
+    /**
+     * Returns the currently pressed keys
+     *
+     * @method getKeys
+     * @returns {{right: boolean, up: boolean, left: boolean, down: boolean, space: boolean, floatLeft: boolean, floatRight: boolean}}
+     */
     public getKeys () {
         return this._keysDown;
     }
-    
-    
+
+    /**
+     * Registers this on the `document.body` keypress events. Without this you won't receive any
+     * key events and no keys will be pressed ever. Also see #unregister
+     *
+     * @method register
+     */
     public register(): void {
         document.body.onkeydown = this._onKeyDown;
         document.body.onkeyup = this._onKeyUp;
     }
-    
+
+    /**
+     * Removes the key lsiteners from `document.body`. You won't receive any keypress events afterwards
+     *
+     * @method unregister
+     */
     public unregister(): void {
         delete document.body.onkeydown;
         delete document.body.onkeyup;
     }
 
-    
+    /**
+     * Internal binding for the `onkeyup` event
+     *
+     * @method _onKeyUp
+     * @param event
+     * @private
+     */
     private _onKeyUp (event) {
         this._onKeyDown(event, false);
     }
-    
-    
+
+
+    /**
+     * @method isLeftPressed
+     * @returns {boolean} True if the left key is actually pressed
+     */
     public isLeftPressed () : boolean {
         return this._keysDown.left;
     }
-    
+
+    /**
+     * @method isUpPressed
+     * @returns {boolean} true if the up key is actually pressed
+     */
     public isUpPressed () : boolean {
         return this._keysDown.up;
     }
-    
+
+    /**
+     * @method isDownPressed
+     * @returns {boolean} true if the down key is actually pressed
+     */
     public isDownPressed () : boolean {
         return this._keysDown.down;
     }
-    
+
+    /**
+     * @method isRightPressed
+     * @returns {boolean} true if the right key is actually pressed
+     */
     public isRightPressed () {
         return this._keysDown.right;
     }
-    
+
+    /**
+     * @method isSpacePressed
+     * @returns {boolean} true if the space key is actually pressed
+     */
     public isSpacePressed () {
         return this._keysDown.space;
     }
-    
+
+    /**
+     * Internal callback for the `onkeydown` event
+     *
+     * @param event {KeyEvent} the event received
+     * @param upDown {boolean} true if the key is actually pressed
+     * @private
+     */
     private _onKeyDown (event, upDown : boolean = true) {
 
         switch (event.keyCode) {
