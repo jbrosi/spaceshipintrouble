@@ -53,13 +53,6 @@ Sure! Just fork the project, play around with it, create issues for new features
 want to add some code or assets.
 
 
-## That's quite cool, may I use it?
-
-The project is released under the the MIT License (MIT) so you should be able
-to use it for almost everything you need. Be careful when using the libraries and
-assets as they may fall under other licenses.
-
-
 ## Some parts look more like an engine than an actual game, do they?
 
 You got sharp eyes over there. Yep, they do! I plan on separating engine and game later on and use the game
@@ -68,6 +61,14 @@ to have both projects combined in one as there will be lots of api changes.
 
 As soon as the project reaches a more stable status and the api becomes to be more stable, too I'll separate those
 two projects. Though both projects will remain under the MIT License. Promise.
+
+
+## That's quite cool, may I use it?
+
+The project is released under the the MIT License (MIT) so you should be able
+to use it for almost everything you need. Be careful when using the libraries and
+assets as they may fall under other licenses.
+
 
 The MIT License (MIT)
 
