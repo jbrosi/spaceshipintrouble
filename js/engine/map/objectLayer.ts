@@ -2,16 +2,34 @@
 import MapLayer = require('engine/map/mapLayer');
 import MapObject = require('engine/map/mapObject');
 
+/**
+ * Represents a layer consisting of `MapObject`s. These objects will obviously converted to
+ * entities.
+ *
+ * @namespace engine.map
+ * @class MapLayer
+ * @extends engine.map.ObjectLayer
+ */
 class ObjectLayer extends MapLayer {
     
     private _objects: MapObject[] = [];
     
-    private _name: String;
+    private _name: string;
     private _width: number;
     private _height: number;
     private _x: number;
     private _y: number;
-    
+
+    /**
+     * Creates a new `ObjectLayer` with given `name`, `width`, `height` and the position/offset (`x`, `y`)
+     *
+     * @method __constructor
+     * @param name {string} how this ObjectLayer should be called
+     * @param width {number} width of this layer
+     * @param height {number} height of this layer
+     * @param x {number} x-offset
+     * @param y {number} y-offset
+     */
     public constructor(name: string = "undefined", width: number = -1, height: number = -1, x: number = 0, y: number = 0) {
         super();
         this._name = name;
@@ -21,13 +39,25 @@ class ObjectLayer extends MapLayer {
         this._y = y;
         
     }
-    
+
+    /**
+     * Adds the MapObject `obj` to this layer
+     *
+     * @method addObject
+     * @param obj {engine.map.MapObject} the object to add
+     */
     public addObject(obj: MapObject) {
         this._objects.push(obj);
     }
     
     /**
+     * Creates a new `ObjectLayer` from the given `jsonData`
+     *
      * TODO: don't create on the fly but return promise instead
+     *
+     * @param jsonData {*} the jsonData defining this layer
+     * @method createFromJSON
+     * @static
      */
     public static createFromJSON(jsonData: any) {
         //very naive for the beginning... TODO: check existence/validity of the fields

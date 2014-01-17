@@ -7,7 +7,8 @@ import EntityComponent = require("engine/entity/entityComponent");
  * and may influence the behavior of that `Entity`
  *
  * @namespace engine.entity
- * @class EntityComponent
+ * @class EntityScript
+ * @extends engine.entity.EntityComponent
  */
 class EntityScript extends EntityComponent{
 
@@ -17,6 +18,7 @@ class EntityScript extends EntityComponent{
      * Constructs a new EntityScript with the given `name` for the given `Entity` from the given script-`file`
      * with the given `data`
      *
+     * @method __constructor
      * @param name {string} the name of this script
      * @param entity {engine.entity.Entity} reference to the entity this script is attached to
      * @param file {string} the scriptFile to use for loading/initializing this script

@@ -10,21 +10,47 @@ import ObjectLayer = require('engine/map/objectLayer');
 
 import Map = require('engine/map/tiledMap');
 
-
+/**
+ * Responsible for loading Tiled Maps.
+ *
+ * @namespace engine.map
+ * @class TiledJSONMapLoader
+ * @extends engine.map.AbstractMapLoader
+ */
 class TiledJSONMapLoader extends AbstractMapLoader{
 
     private _progress = 0;
     private _status = "initializing map loader";
 
+    /**
+     * returns the current progress in percent
+     *
+     * @method getProgressInPercent
+     * @overrides
+     * @returns {number} current progress in percent
+     */
     public getProgressInPercent(): number {
         return this._progress;
     }
-    
+
+    /**
+     * Returns the current progress status text
+     *
+     * @method getProgressAsText
+     * @overrides
+     * @returns {string} current progress status
+     */
     public getProgressAsText(): string {
         return this._status;
     }
-    
-    
+
+    /**
+     * Loads the map and returns promise to it
+     *
+     * @method loadMap
+     * @overrides
+     * @returns {Promise(engine.map.TiledMap)}
+     */
     public loadMap() {
         console.log("loading level "+ this.getMapFile());
 
@@ -32,7 +58,15 @@ class TiledJSONMapLoader extends AbstractMapLoader{
         
         return rl.loadJSONFile(this.getMapFile()).then(this._parseMap);
     }
-    
+
+    /**
+     * Internal method for parsing the map data
+     *
+     * @method _parseMap
+     * @param data
+     * @returns {*}
+     * @private
+     */
     private _parseMap(data) {
         var a: number;
     
