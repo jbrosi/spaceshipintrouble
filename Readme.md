@@ -12,6 +12,8 @@ run the latest built version. Or just clone the project and build it on your own
 in the code you may browse through https://c9.io/jbrosi/spaceshipintrouble. The game was entirely written
 within the cloud9 IDE and you can see the latest updates there.
 
+If you're interested in how this works you should take a look at the apidocs: http://jbrosi.github.io/spaceshipintrouble/api
+
 ## What if something doesn't work?
 
 The status of this is pre-alpha yet and there may be several bugs but feel free
