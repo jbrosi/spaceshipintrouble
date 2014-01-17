@@ -14,6 +14,10 @@ import Entity = require("engine/entity/entity");
  * Message: Object containing various msg data. Structure depends on message type
  * Sender: The entity which send this message (may be null if there
  *         was no entity sending this message).
+ *
+ * @namespace engine.entity
+ * @class EntityMessage
+ *
  */
 class EntityMessage {
     
@@ -35,6 +39,7 @@ class EntityMessage {
     /**
      * The entity which sent this message. This might be null if the sender wasn't
      * an entity.
+     * @type {engine.entity.Entity}
      */ 
     private _sender: Entity;
 
@@ -54,11 +59,11 @@ class EntityMessage {
     /**
      * Creates a new message ready to be sent to entities. The message *should*
      * contain an identifier, the message param and the entity param are optional.
-     *
-     * @param identifier the type/identifier of this message. This is what the listeners should register for
-     * @param message (optional) the message itsself - may contain any data
-     * @param sender (optional) the entity sending this message. Might be null
-     * @param isConsumable (optional, default: true). Set to false if you don't want this message to be consumable
+     * @method __constructor
+     * @param identifier {string} the type/identifier of this message. This is what the listeners should register for
+     * @param message {*} (optional) the message itsself - may contain any data
+     * @param sender {engine.entity.Entity} (optional) the entity sending this message. Might be null
+     * @param isConsumable {boolean} (optional, default: true). Set to false if you don't want this message to be consumable
      */
     constructor(identifier: string = "undefined", message: any = {}, sender: Entity = null, isConsumable: boolean = true) {
         this._identifier = identifier;
@@ -68,27 +73,32 @@ class EntityMessage {
     }
     
     /**
-     * @returns {String} the identifier of this message
+     * @method getIdentifier
+     * @returns {string} the identifier of this message
      */
-    public getIdentifier() : String {
+    public getIdentifier() : string {
         return this._identifier;
     }
     
     /**
-     * @returns {any} the message data
+     * @method getMessage
+     * @returns {*} the message data
      */
     public getMessage(): any {
         return this._message;
     }
     
     /**
-     * @returns {Entity} the sending entity (might be null)
+     * @method getSender
+     * @returns {engine.entity.Entity} the sending entity (might be null)
      */
     public getSender() : Entity{
         return this._sender;
     }
     
     /**
+     *
+     * @method hasSender
      * @eturns {boolean} true if this message was sent by an entity.
      */
     public hasSender(): boolean {
@@ -98,6 +108,8 @@ class EntityMessage {
     /**
      * By invoking this u may stop a message from being sent any further
      * this is usefull when you want to delete a message and stop propagation.
+     *
+     * @method consume
      */
     public consume() : void{
         if (this._isConsumable)
@@ -107,6 +119,8 @@ class EntityMessage {
     /**
      * This is telling whether a message has been consumed or not. If a message gets
      * consumed it doesn't get sent any further. It's like "stopPropagation" on JS events
+     *
+     * @method isConsumed
      * @returns {boolean} true if the message has been consumed already
      */
     public isConsumed(): boolean {
