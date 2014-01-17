@@ -4,23 +4,56 @@ import AbstractMapLoader = require('engine/map/abstractMapLoader');
 import TextHelper = require('engine/helper/3d/textHelper');
 import THREE = require('three');
 
+/**
+ * Default implementation of a screen for displaying the load level progress
+ * Use this as base for your own loadLevelScreen, override it or build your own
+ * loadLevelScreen as you wish.
+ *
+ * @namespace engine.screens
+ * @class LoadLevelScreen
+ * @extends AbstractScreen
+ */
 class LoadLevelScreen extends AbstractScreen {
     private _mapLoader: AbstractMapLoader;
     private _scene: any;
     private _camera: any;
-    
+
+    /**
+     * Creates a new `LoadLevelScreen`
+     *
+     * @method __constructor
+     * @param {THREE.Renderer} renderer the renderer to use for this screen
+     */
     public constructor(renderer) {
         super(renderer);
     }
-    
+
+    /**
+     * Sets the `MapLoader` to query for progess updates
+     *
+     * @method setMapLoader
+     * @param mapLoader {engine.map.AbstractMapLoader} the map loader to ask for progress
+     */
     public setMapLoader(mapLoader: AbstractMapLoader) {
         this._mapLoader = mapLoader;
     }
 
+    /**
+     * Gets called when this screen gets visible. Use it to setup the scene
+     *
+     * @method show
+     * @overrides
+     */
     public show() {
         this._setupScene();
     }
-    
+
+    /**
+     * Initializes our load level scene
+     *
+     * @method _setupScene
+     * @private
+     */
     private _setupScene() {
         
         this._scene = new THREE.Scene();
@@ -55,7 +88,14 @@ class LoadLevelScreen extends AbstractScreen {
 
 
     }
-    
+
+    /**
+     * Renders the loadLevel scene
+     *
+     * @method render
+     * @overrides
+     * @param timeStep {number} the time that has passed since the last render step
+     */
     public render(timeStep: number) {
         this.getRenderer().render(this._scene, this._camera);
     }
