@@ -1,3 +1,11 @@
+/**
+ * Spaceship in trouble - a Game & GameEngine in TypeScript
+ *
+ * Copyright (c) 2014 Johannes Brosi <me@brosi.me>
+ *
+ * Released under the MIT license
+ * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
+ */
 
 //TODO. REFACTOR THIS, this is no valid typescript yet (though this is not included in the project by now)
 define(['three', 'engine/helper/3d/textHelper', 'lodash', 'engine/screens/screenManager'], function(THREE, TextHelper, _, ScreenManager) {
