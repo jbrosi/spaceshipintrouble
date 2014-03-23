@@ -9,7 +9,7 @@
 *.js.map
 
 #don't ignore js in lib
-!/js/lib/*.js
+!/js/lib/vendor/*.js
 
 #don't ignore app and build js
 !/js/app.js
