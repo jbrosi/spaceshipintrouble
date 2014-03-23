@@ -1,3 +1,8 @@
+// Type definitions for bootstrap.timepicker
+// Project: http://code.google.com/p/box2dweb/
+// Definitions by: jbaldwin <https://github.com/jbaldwin/>
+// Definitions: https://github.com/borisyankov/DefinitelyTyped
+
 /**
 * Box2DWeb-2.1.d.ts Copyright (c) 2012-2013 Josh Baldwin http://github.com/jbaldwin/box2dweb.d.ts
 * There are a few competing javascript Box2D ports.
@@ -3731,7 +3736,7 @@ declare module Box2D.Dynamics {
 		* Register a contact event listener.
 		* @param listener Contact event listener.
 		**/
-		public SetContactListener(listener: b2ContactListener): void;
+		public SetContactListener(listener: Box2D.Dynamics.b2ContactListener): void;
 
 		/**
 		* Enable/disable continuous physics. For testing.
@@ -3799,13 +3804,13 @@ declare module Box2D.Dynamics.Contacts {
 		* Get the first fixture in this contact.
 		* @return First fixture in this contact.
 		**/
-		public GetFixtureA(): b2Fixture;
+		public GetFixtureA(): Box2D.Dynamics.b2Fixture;
 
 		/**
 		* Get the second fixture in this contact.
 		* @return Second fixture in this contact.
 		**/
-		public GetFixtureB(): b2Fixture;
+		public GetFixtureB(): Box2D.Dynamics.b2Fixture;
 
 		/**
 		* Get the contact manifold. Do not modify the manifold unless you understand the internals of Box2D.

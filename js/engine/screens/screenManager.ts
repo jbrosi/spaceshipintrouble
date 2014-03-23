@@ -7,12 +7,21 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+/// <reference path="../../lib.d/promise.d.ts" />
+/// <amd-dependency path="promise" />
+/// <reference path="../../lib.d/lodash.d.ts" />
+/// <amd-dependency path="lodash" />
+/// <reference path="../../lib.d/three.d.ts" />
+
+declare var require:(modules: any, method?: Function) => any;
+
+var Promise = require('promise');
+var _ = require('lodash');
 
 import AbstractScreen = require('engine/screens/abstractScreen');
-import statsHelper = require('engine/helper/statsHelper');
+import StatsHelper = require('engine/helper/statsHelper');
 import performanceTimer = require('engine/helper/performanceTimer');
-import Q = require('q');
-import _ = require('lodash');
+
 
 /**
  * Manages all the screens shown. You may stack multiple screens.
@@ -23,9 +32,13 @@ import _ = require('lodash');
 class ScreenManager {
 
     private _screenStack = [];
-    private _renderer;
+    private _renderer : THREE.WebGLRenderer;
     private _currentScreen: AbstractScreen;
     private _isRendering = false;
+
+    private _timeDiff: number;
+    private _currentTime: number;
+    private _lastTime: number;
 
     /**
      * Creates a new `ScreenManager`
@@ -40,7 +53,7 @@ class ScreenManager {
      * Initializes the `ScreenManager` with the given ThreeJS-`renderer`
      *
      * @method init
-     * @param renderer {THREE.Renderer} the renderer to use in all the screens
+     * @param renderer {THREE.WebGLRenderer} the renderer to use in all the screens
      */
     public init(renderer) {
         this._renderer = renderer;
@@ -78,7 +91,7 @@ class ScreenManager {
      */
     public createScreen(screenName: string) {
         console.log("trying to create screen");
-        var deferred = Q.defer();
+        var deferred = Promise.defer();
         var that = this;
         require(['game/screens/'+screenName], function(Screen) {
             console.log("Creating Screen "+screenName);
@@ -119,20 +132,24 @@ class ScreenManager {
         this.startRendering();
     }
 
+    public getRenderer () : THREE.WebGLRenderer {
+        return this._renderer;
+    }
+
     /**
      * Loads and shows a screen by `screenName`
      *
      * @method showScreenByName
      * @param screenName {string} the screen to be loaded and shown
-     * @returns Promise for the screen when it's loaded and shown
+     * @returns {Promise|Promise<ScreenManager>} for the screen when it's loaded and shown
      */
     public showScreenByName (screenName: string) {
         var that = this;
 
-        var deferred = Q.defer();
+        var deferred = Promise.defer();
         
         require(['game/screens/' + screen], function (Screen) {
-            that.showScreen(new Screen(this._renderer));
+            that.showScreen(new Screen(that.getRenderer()));
             deferred.resolve(that);
         });
         
@@ -153,7 +170,7 @@ class ScreenManager {
             return;
         }
         
-        statsHelper.begin();
+        StatsHelper.getInstance().begin();
         //render current screen
         this._currentTime = performanceTimer();
         this._timeDiff = this._currentTime - this._lastTime;
@@ -168,7 +185,7 @@ class ScreenManager {
         if (this._isRendering) {
             requestAnimationFrame(this._render);
         }
-        statsHelper.end();
+        StatsHelper.getInstance().end();
     }
     
 };

@@ -7,15 +7,21 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+
+/// <reference path="../../lib.d/box2dweb.d.ts" />
+/// <amd-dependency path="box2d" />
+declare var require:(moduleId:string) => any;
+var Box2D = require('box2d');
+
 import AbstractScreen = require('engine/screens/abstractScreen');
 import VirtualJoystick = require('engine/helper/virtualJoystick');
 import KeyboardHelper = require('engine/helper/keyboardHelper');
 import EntityManager = require('engine/entity/entityManager');
 import EntityMessage = require('engine/entity/entityMessage');
-import Box2D = require('engine/helper/box2DHelper');
 import MapLayer = require('engine/map/mapLayer');
 import TileSet = require('engine/map/tileSet');
-import Map = require('../map/tiledMap');
+import TiledMap = require('../map/tiledMap');
+
 
 /**
  * Default implementation of a play level screen. Use this as a base for your own
@@ -51,10 +57,10 @@ class PlayLevelScreen extends AbstractScreen {
     /**
      * Starts to play the given `map`
      *
-     * @param map {engine.map.Map} the map to play
+     * @param map {engine.map.TiledMap} the map to play
      *
      */
-    public startMap(map: Map) {
+    public startMap(map: TiledMap) {
         console.log("start playing map", map);
     }
 
@@ -144,9 +150,10 @@ class PlayLevelScreen extends AbstractScreen {
      * @param gravity {Box2D.b2Vec2}(optional, defaults 0) the gravity to apply to the world
      * @returns {*} the physics defined
      */
-    public initPhysics(gravity: any = new Box2D.b2Vec2(0,0)) {
+    public initPhysics(gravity: any = new Box2D.Common.Math.b2Vec2(0,0)) {
+
         this._physicWorld = {
-            world: new Box2D.b2World(
+            world: new Box2D.Dynamics.b2World(
                 gravity,  //gravity
                 true                    //allow sleep
             )
@@ -187,10 +194,11 @@ class PlayLevelScreen extends AbstractScreen {
      *
      */
     private _setupPhysicCollisionListener () {
-        
+
         var colDetector = Box2D.Dynamics.b2ContactListener;
         
         colDetector.BeginContact = function(contact) {
+
             var objectA = contact.GetFixtureA().GetBody().GetUserData();
             var objectB = contact.GetFixtureB().GetBody().GetUserData();
             
@@ -241,7 +249,7 @@ class PlayLevelScreen extends AbstractScreen {
      * Sets the camera for this level screen
      *
      * @method setCamera
-     * @param camera {THREE.Camera} the camera to set
+     * @param camera {THREE.Camera|THREE.PerspectiveCamera} the camera to set
      */
     public setCamera(camera) {
         this._camera = camera;
@@ -295,7 +303,7 @@ class PlayLevelScreen extends AbstractScreen {
      */
     public getEntityManager(): EntityManager {
         if (this._entityManager == null) {
-            this._entityManager = new EntityManager(this);
+            this._entityManager = new EntityManager();
         }
         return this._entityManager;
     }

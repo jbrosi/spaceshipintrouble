@@ -7,8 +7,13 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import $ = require('zepto');
-import Q = require('q');
+/// <reference path="../../lib.d/promise.d.ts" />
+/// <amd-dependency path="promise" />
+/// <reference path="../../lib.d/zepto.d.ts" />
+/// <amd-dependency path="zepto" />
+declare var require:(moduleId:string) => any;
+var Promise = require('promise');
+var $ : ZeptoStatic = require('zepto');
 
 //six seconds? maybe a little bit too much?
 //this is the timeout for loading the resources
@@ -59,7 +64,7 @@ class ResourceLoader {
      * @returns {Promise(*)} promise for the parsed JSON Data
      */
     public loadJSONFile(jsonFile: string) {
-        var deferred = Q.defer();
+        var deferred = Promise.defer();
         $.ajax({
             type: 'GET',
             url: jsonFile,

@@ -91,6 +91,7 @@ class TiledMap {
     public setProperties(properties) {
         this._properties = properties;
     }
+
 };
 
 export = TiledMap;

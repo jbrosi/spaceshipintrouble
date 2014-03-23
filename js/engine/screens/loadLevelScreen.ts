@@ -9,8 +9,7 @@
 
 import AbstractScreen = require('engine/screens/abstractScreen');
 import AbstractMapLoader = require('engine/map/abstractMapLoader');
-import TextHelper = require('engine/helper/3d/text/textHelper');
-import TextGeometryOptions = require('engine/helper/3d/text/textGeometryOptions');
+import TextGeometry = require('engine/helper/3d/text/textGeometry');
 
 /// <reference path="../../lib.d/three.d.ts" />
 /// <amd-dependency path="three" />
@@ -87,14 +86,13 @@ class LoadLevelScreen extends AbstractScreen {
         this.getRenderer().setClearColor( new THREE.Color(0xffffff), 1 );
 
         
-        var textHelper = TextHelper.getDefaultTextHelper();
         var defaultTextMaterial = new THREE.MeshPhongMaterial( { ambient: 0x777777, color: 0x3333ff, specular: 0x009900, shininess: 80, shading: THREE.FlatShading } );
         
 
         //loading
-        var textGeometryOptions = new TextGeometryOptions();
-        textGeometryOptions.size = 8;
-        var loadingGeo = textHelper.createTextGeometry('Loading...', textGeometryOptions);
+        var textGeometry = new TextGeometry();
+        textGeometry.setSize(8);
+        var loadingGeo = textGeometry.createTextGeometry('Loading...');
         THREE.GeometryUtils.center(loadingGeo);
         var loadingMesh = new THREE.Mesh(loadingGeo, defaultTextMaterial.clone()); 
         loadingMesh.position.y = 20;

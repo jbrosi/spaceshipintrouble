@@ -157,6 +157,6 @@ declare module Q {
     export function resolve<T>(object: T): Promise<T>;
 }
 
-declare module "q" {
+declare module "Promise" {
     export = Q;
 }

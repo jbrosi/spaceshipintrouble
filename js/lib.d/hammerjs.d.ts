@@ -40,6 +40,8 @@ interface HammerOptions {
 interface HammerPoint {
     x: number;
     y: number;
+    pageX: number;
+    pageY: number;
 }
 
 interface HammerEvent {
@@ -59,11 +61,15 @@ interface HammerDirectionEvent extends HammerEvent {
     distance: number;
     distanceX: number;
     distanceY: number;
+    gesture: {
+        touches: HammerPoint[];
+    }
 }
 
 declare class Hammer {
     constructor (element: any, options?: HammerOptions);
 
+    on: (gesture : string, handler : Function) => void;
     ondragstart: (event: HammerDirectionEvent) => void;
     ondrag: (event: HammerDirectionEvent) => void;
     ondragend: (event: HammerDirectionEvent) => void;

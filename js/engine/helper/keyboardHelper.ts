@@ -6,7 +6,12 @@
  * Released under the MIT license
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
-import _ = require('lodash');
+
+/// <reference path="../../lib.d/lodash.d.ts" />
+/// <amd-dependency path="lodash" />
+declare var require:(moduleId:string) => any;
+var _ = require('lodash');
+
 
 /**
  * This class simplifies keyboard input for the game and provides simple methods for
@@ -25,7 +30,7 @@ class KeyboardHelper {
         space: false,
         floatLeft: false,
         floatRight: false
-    }
+    };
 
     /**
      * Creates the KeyboardHelper
@@ -75,8 +80,19 @@ class KeyboardHelper {
      * @param event
      * @private
      */
-    private _onKeyUp (event) {
-        this._onKeyDown(event, false);
+    private _onKeyUp (event: KeyboardEvent) {
+        this._onKeyUpDown(event, false);
+    }
+
+    /**
+     * Internal binding for the onkeydown event
+     *
+     * @method _onKeyDown
+     * @param event
+     * @private
+     */
+    private _onKeyDown (event: KeyboardEvent) {
+        this._onKeyUpDown(event, true);
     }
 
 
@@ -121,13 +137,14 @@ class KeyboardHelper {
     }
 
     /**
-     * Internal callback for the `onkeydown` event
+     * Gets called by onKeyUp and onKeyDown and handles the keystrokes
      *
-     * @param event {KeyEvent} the event received
+     * @method _onKeyUpDown
+     * @param event {KeyboardEvent} the event received
      * @param upDown {boolean} true if the key is actually pressed
      * @private
      */
-    private _onKeyDown (event, upDown : boolean = true) {
+    private _onKeyUpDown (event: KeyboardEvent, upDown : boolean = true) {
 
         switch (event.keyCode) {
             case 40: case 83:

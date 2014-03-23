@@ -7,12 +7,11 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import Box2DCocoon = require('box2d-cocoon');
-import Box2DNormal = require('box2d');
-
-
-var Box2D = navigator.isCocoonJS ? Box2DCocoon : Box2DNormal;
-
+/// <reference path="../../lib.d/box2dweb.d.ts" />
+/// <amd-dependency path="box2d-web" />
+/// <amd-dependency path="box2d-cocoon" />
+declare var require:(moduleId:string) => any;
+var Box2D = require(navigator.hasOwnProperty("isCocoonJS") ? "box2d-cocoon" : "box2d-web");
 
 /**
  * This module encapsulates the Box2D-Libraries and provides some convenience
@@ -35,28 +34,26 @@ Box2D.b2AABB = Box2D.Collision.b2AABB;
 Box2D.b2BodyDef = Box2D.Dynamics.b2BodyDef;
 
 //add some cocoon specific stuff
-if (navigator.isCocoonJS) {
+if (navigator.hasOwnProperty("isCocoonJS")) {
 
     //this method is named the old way in cocoon js bindings - add a convenience shortcut
     Box2D.Dynamics.b2Body.prototype.ApplyForce = Box2D.Dynamics.b2Body.prototype.ApplyForceToCenter;
 
 
     //add support for orientedBox in cocoon bindings:
-    Box2D.Collision.Shapes.b2PolygonShape.prototype.SetAsOrientedBox = function (hx, hy, center, angle) {
+    Box2D.Collision.Shapes.b2PolygonShape["prototype"].SetAsOrientedBox = function (hx, hy, center, angle) {
         if (hx === undefined) hx = 0;
         if (hy === undefined) hy = 0;
         if (center === undefined) center = null;
         if (angle === undefined) angle = 0.0;
 
         var vertices = [];
-        vertices.push(new Box2D.b2Vec2(-hx, -hy));
-        vertices.push(new Box2D.b2Vec2(hx, -hy));
-        vertices.push(new Box2D.b2Vec2(hx, hy));
-        vertices.push(new Box2D.b2Vec2(-hx, hy));
+        vertices.push(new Box2D.Common.Math.b2Vec2(-hx, -hy));
+        vertices.push(new Box2D.Common.Math.b2Vec2(hx, -hy));
+        vertices.push(new Box2D.Common.Math.b2Vec2(hx, hy));
+        vertices.push(new Box2D.Common.Math.b2Vec2(-hx, hy));
 
-        var xf = new Box2D.Common.Math.b2Transform();
-        xf.position = center;
-        xf.R.Set(angle);
+        var xf = new Box2D.Common.Math.b2Transform(center, angle);
         for (var i = 0; i < 4; ++i) {
             vertices[i] = Box2D.Common.Math.b2Math.MulX(xf, vertices[i]);
         }

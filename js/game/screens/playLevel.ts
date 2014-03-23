@@ -8,16 +8,26 @@
  */
 
 import DefaultPlayLevelScreen = require('engine/screens/playLevelScreen');
-import THREE = require("three");
-import _ = require("lodash");
-import Box2D = require("engine/helper/box2DHelper");
+
+/// <reference path="../../lib.d/three.d.ts" />
+/// <amd-dependency path="three" />
+/// <reference path="../../lib.d/lodash.d.ts" />
+/// <amd-dependency path="lodash" />
+/// <reference path="../../lib.d/box2dweb.d.ts" />
+/// <amd-dependency path="box2d" />
+declare var require:(moduleId:string) => any;
+var THREE = require('three');
+var Box2D = require('box2d');
+var _ = require('lodash');
+
 
 class PlayLevelScreen extends DefaultPlayLevelScreen {
-    
-    private _shipMesh: any;
+
+    private _lastShot: number;
+    private _shipMesh: THREE.Mesh;
     private _physScale: any;
     
-    
+
     public constructor(renderer) {
         super(renderer);
         _.bindAll(this);
@@ -115,7 +125,6 @@ class PlayLevelScreen extends DefaultPlayLevelScreen {
         var factor = 0.20284;
         
         var isAngleSet = false;        
-        
         var facingDirection = new Box2D.b2Vec2();
         facingDirection.x = Math.cos( physics.ship.GetAngle() - (Math.PI/2));
         facingDirection.y = Math.sin( physics.ship.GetAngle() - (Math.PI/2));
@@ -261,8 +270,11 @@ class PlayLevelScreen extends DefaultPlayLevelScreen {
         this.setCamera(new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000));
         this.getCamera().position.set(0,0,50);
 
-        this.getRenderer().setClearColor( 0xffffff, 1 );
+    }
 
+
+    public setShipMesh(shipMesh: THREE.Mesh) {
+        this._shipMesh = shipMesh;
     }
     
     private _createShip () {
@@ -272,12 +284,14 @@ class PlayLevelScreen extends DefaultPlayLevelScreen {
         var loader = new THREE.JSONLoader();
         loader.load( "assets/game/models/fighter.js", function( shipGeo, shipMaterials ) {
             console.log("ship loaded");
-            
+
             var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/game/textures/fighter.png')});
-            that._shipMesh = new THREE.Mesh( shipGeo, shipMaterial);
-            that._shipMesh.scale.set( 1.5, 1.5, 1.5 );
-            that._shipMesh.rotation.set(Math.PI/2,0,0);
-            that.getScene().add( that._shipMesh );
+            var shipMesh = new THREE.Mesh( shipGeo, shipMaterial);
+            shipMesh.scale.set( 1.5, 1.5, 1.5 );
+            shipMesh.rotation.set(Math.PI/2,0,0);
+            that.getScene().add( shipMesh );
+
+            that.setShipMesh(shipMesh);
         } , "assets/game/textures/");
     }
     

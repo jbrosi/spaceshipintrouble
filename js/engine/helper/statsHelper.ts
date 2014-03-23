@@ -7,7 +7,10 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import Stats = require('stats');
+/// <reference path="../../lib.d/stats.d.ts" />
+/// <amd-dependency path="stats" />
+declare var require:(moduleId:string) => any;
+var Stats = require('stats');
 
 /**
  * Provides a StatsHelper for recording and showing performance stats
@@ -20,12 +23,13 @@ import Stats = require('stats');
  */
 class StatsHelper {
     private _stats: any;
+    private static _instance: StatsHelper = null;
 
     /**
      * @method __constructor
      */
     public constructor() {
-        if (navigator.isCocoonJS) {
+        if (navigator.hasOwnProperty("isCocoonJS")) {
             //skip all as we don't want the fps counter in cocoon
             return;
         }
@@ -58,6 +62,14 @@ class StatsHelper {
             this._stats.end();
     }
 
+    public static getInstance() : StatsHelper {
+        if (StatsHelper._instance === null) {
+            StatsHelper._instance = new StatsHelper();
+        }
+        return StatsHelper._instance;
+    }
+
+
 };
-var stats = new StatsHelper();
-export = stats;
+
+export = StatsHelper;

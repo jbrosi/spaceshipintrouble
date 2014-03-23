@@ -8,10 +8,10 @@
  */
 
 
-/// <reference path="../../lib.d/q.d.ts" />
-/// <amd-dependency path="q" />
+/// <reference path="../../lib.d/promise.d.ts" />
+/// <amd-dependency path="promise" />
 declare var require:(moduleId:string) => any;
-var Q = require('q');
+var Promise = require('promise');
 
 /**
  * Abstract class that might be overloaded by various map loaders.
@@ -54,7 +54,7 @@ class AbstractMapLoader {
     }
 
     /**
-     * Reutrns the current progress status text message
+     * Returns the current progress status text message
      *
      * @returns {string} progress status text message
      */
@@ -63,14 +63,15 @@ class AbstractMapLoader {
     }
 
     /**
-     * Starts loading the map. Abstract method - should be overwriten!
+     * Starts loading the map. Abstract method - should be overwritten!
      *
      * @abstract
-     * @returns {engine.map.Map} (Promise!)
+     * @returns {Promise(engine.map.Map)} (Promise!)
      */
     public loadMap() {
-        return Q("not yet implemented");
+        throw new Error("Abstract method called");
     }
+
 };
 
 export = AbstractMapLoader;

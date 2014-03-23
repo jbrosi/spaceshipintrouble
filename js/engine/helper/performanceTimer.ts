@@ -1,3 +1,12 @@
+
+declare class performance {
+    static now: any;
+    static mozNow: any;
+    static msNow: any;
+    static oNow: any;
+    static webkitNow: any;
+};
+
 /**
  * Provides a high PerformanceTimer (if available)
  *
@@ -17,6 +26,7 @@ var perfFunction = (function() {
         return new Date().getTime();
     };
 })();
+
 if (performance) {
     //correct bindings to performance (if exists)
     perfFunction = perfFunction.bind(performance);

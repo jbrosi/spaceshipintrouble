@@ -27,7 +27,7 @@
                     'helvetiker-font': {
                         deps: ['three']
                     },
-                    'box2d': { 
+                    'box2d-web': {
                         exports: 'Box2D'
                     },
                     'box2d-cocoon': {
@@ -47,12 +47,13 @@
                     }
                 },
                 paths: {
-                    q: 'lib/vendor/q',
+                    promise: 'lib/vendor/promise',
                     stats: 'lib/vendor/stats',
                     three: 'lib/vendor/three',
                     'helvetiker-font': '../assets/engine/fonts/helvetiker_regular.typeface',
             		lodash: 'lib/vendor/lodash',
-            		box2d: 'lib/vendor/box2dweb',
+                    box2d: 'engine/helper/box2DHelper',
+            	    'box2d-web': 'lib/vendor/box2dweb',
             		'box2d-cocoon': 'lib/vendor/box2d_cocoonJS',
             		hammer: 'lib/vendor/hammer',
             		quadtree: 'lib/vendor/quadtree',

@@ -7,16 +7,18 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import Q = require('q');
+/// <reference path="../../lib.d/promise.d.ts" />
+/// <amd-dependency path="promise" />
+declare var require:(moduleId:string) => any;
+var Promise = require('promise');
+
 import AbstractMapLoader = require('engine/map/abstractMapLoader');
 import ResourceLoader = require('engine/util/resourceLoader');
-
 import MapLayer = require('engine/map/mapLayer');
 import TileSet = require('engine/map/tileSet');
 import TileLayer = require('engine/map/tileLayer');
 import ObjectLayer = require('engine/map/objectLayer');
-
-import Map = require('engine/map/tiledMap');
+import TiledMap = require('engine/map/tiledMap');
 
 /**
  * Responsible for loading Tiled Maps.
@@ -88,7 +90,7 @@ class TiledJSONMapLoader extends AbstractMapLoader{
             }
         }
         
-        var map = new Map(data.width, data.height, data.tilewidth, data.tileheight, data.properties, data.version);
+        var map = new TiledMap(data.width, data.height, data.tilewidth, data.tileheight, data.properties, data.version);
         
         var promises = [];
         
@@ -96,10 +98,10 @@ class TiledJSONMapLoader extends AbstractMapLoader{
         for (a = 0; a < data.layers.length; a++) {
             switch (data.layers[a].type) {
                 case 'tilelayer': 
-                    promises.push(Q.fcall(TileLayer.createFromJSON, data.layers[a]).then(map.addLayer));
+                    promises.push(Promise.fcall(TileLayer.createFromJSON, data.layers[a]).then(map.addLayer));
                     break;
                 case 'objectgroup':
-                    promises.push(Q.fcall(ObjectLayer.createFromJSON, data.layers[a]).then(map.addLayer));
+                    promises.push(Promise.fcall(ObjectLayer.createFromJSON, data.layers[a]).then(map.addLayer));
                     break;
                 default:
                     console.log("Warning: invalid layer type found... ignoring layer");
@@ -109,10 +111,10 @@ class TiledJSONMapLoader extends AbstractMapLoader{
         
         //parse, create and add tilesets
         for (var a = 0; a < data.tilesets.length; a++) {
-            promises.push(Q.fcall(TileSet.createFromJSON, data.tilesets[a]).then(map.addTileSet));
+            promises.push(Promise.fcall(TileSet.createFromJSON, data.tilesets[a]).then(map.addTileSet));
         }
         
-        return Q.allSettled(promises).then(function(states) {
+        return Promise.allSettled(promises).then(function(states) {
             for(a = 0; a < states.length; a++) {
                 if (states[a].state !== "fulfilled") {
                     console.log("one failed!", states[a].reason);

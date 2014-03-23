@@ -7,8 +7,13 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import THREE = require("three");
-import _ = require("lodash");
+/// <reference path="../lib.d/lodash.d.ts" />
+/// <amd-dependency path="lodash" />
+/// <reference path="../lib.d/three.d.ts" />
+/// <amd-dependency path="three" />
+declare var require:(moduleId:string) => any;
+var _ = require('lodash');
+var THREE = require('three');
 
 /**
  * Responsible for initializing some game stuff like the canvas and threejs
@@ -20,9 +25,9 @@ class GameInitializer {
 
 
 
-    _canvas = null;
-    _renderer = null;
-    _renderContainer = null;
+    _canvas : HTMLCanvasElement = null;
+    _renderer : THREE.WebGLRenderer = null;
+    _renderContainer : HTMLElement = null;
 
     /**
      * Creates a new GameInitializer
@@ -51,7 +56,7 @@ class GameInitializer {
      * @private
      */
     private _initializeThreeJS () {
-        this._canvas = document.createElement(navigator.isCocoonJS ? 'screencanvas' : 'canvas');
+        this._canvas = <HTMLCanvasElement>document.createElement(navigator.hasOwnProperty("isCocoonJS") ? 'screencanvas' : 'canvas');
         this._canvas.style.cssText="idtkscale:ScaleAspectFit;";  // CocoonJS extension
 
         this._renderer = new THREE.WebGLRenderer({canvas: this._canvas});

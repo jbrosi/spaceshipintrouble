@@ -1545,4 +1545,3 @@ interface ZeptoEventHandlers {
 }
 
 declare var Zepto: (fn: ($: ZeptoStatic) => void) => void;
-declare var $: ZeptoStatic;

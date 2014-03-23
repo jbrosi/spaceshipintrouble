@@ -7,9 +7,17 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import THREE = require("three");
-import _ = require("lodash");
-import Hammer = require("hammer");
+/// <reference path="../../lib.d/three.d.ts" />
+/// <amd-dependency path="three" />
+/// <reference path="../../lib.d/hammerjs.d.ts" />
+/// <amd-dependency path="hammer" />
+/// <reference path="../../lib.d/lodash.d.ts" />
+/// <amd-dependency path="lodash" />
+declare var require:(moduleId:string) => any;
+var THREE = require('three');
+var _ = require('lodash');
+var Hammer = require('hammer');
+
 import PlayLevelScreen = require("engine/screens/playLevelScreen");
 
 /**
@@ -121,7 +129,7 @@ class VirtualJoystick {
      * @param evt the event caught
      * @private
      */
-    private _onTouchMove (evt) {
+    private _onTouchMove (evt : HammerDirectionEvent) {
         
         //false by default
         this._isFireButtonPressed = false;
@@ -130,7 +138,7 @@ class VirtualJoystick {
         for (var a = 0; a < evt.gesture.touches.length; a++) {
             
             var touch = evt.gesture.touches[a];
-    
+
             var x = touch.pageX;
             var y = touch.pageY;
     
