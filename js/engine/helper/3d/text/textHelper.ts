@@ -25,17 +25,8 @@ import TextGeometryOptions = require("engine/helper/3d/text/textGeometryOptions"
  */
 class TextHelper {
     private static _defaultTextHelper: TextHelper;
-    private _height = 3;
-    private _size = 12;
-    private _hover = 3;
-    private _curveSegments = 4;
-    private _bevelThickness = 0.2;
-    private _bevelSize = 0.2;
-    private _bevelSegments = 3;
-    private _bevelEnabled = true;
-    private _font = "helvetiker";
-    private _weight = "normal";
-    private _style = "normal";
+
+    private _options : TextGeometryOptions;
 
     /**
      * Creates a new TextHelper
@@ -58,17 +49,17 @@ class TextHelper {
      */
     public createTextGeometry (text, options : TextGeometryOptions = new TextGeometryOptions()) {
         var textGeometry = new THREE.TextGeometry( text, {
-            size: options.size ? options.size : this._size,
-            height: options.height ? options.height : this._height,
-            curveSegments: options.curveSegments ? options.curveSegments : this._curveSegments,
+            size: options.size,
+            height: options.height,
+            curveSegments: options.curveSegments,
 
-            font: options.font ? options.font : this._font,
-            weight: options.weight ? options.weight : this._weight,
-            style: options.style ? options.style : this._style,
+            font: options.font,
+            weight: options.weight,
+            style: options.style,
 
-            bevelThickness: options.bevelThickness ? options.bevelThickness : this._bevelThickness,
-            bevelSize: options.bevelSize ? options.bevelSize : this._bevelSize,
-            bevelEnabled: options.bevelEnabled ? options.bevelEnabled : this._bevelEnabled
+            bevelThickness: options.bevelThickness,
+            bevelSize: options.bevelSize,
+            bevelEnabled: options.bevelEnabled
         });
         
         return textGeometry;

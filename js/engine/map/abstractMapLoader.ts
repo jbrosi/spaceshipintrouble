@@ -7,7 +7,11 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import Q = require('q');
+
+/// <reference path="../../lib.d/q.d.ts" />
+/// <amd-dependency path="q" />
+declare var require:(moduleId:string) => any;
+var Q = require('q');
 
 /**
  * Abstract class that might be overloaded by various map loaders.

@@ -1,15 +1,17 @@
 class TextGeometryOptions {
 
-    public size: number;
-    public width: number;
-    public height: number;
-    public curveSegments: any;
-    public font: string;
-    public weight: any;
-    public style: string;
-    public bevelThickness: any;
-    public bevelSize: any;
-    public bevelEnabled: any;
+    public height = 3;
+    public size = 12;
+    public hover = 3;
+    public curveSegments = 4;
+    public bevelThickness = 0.2;
+    public bevelSize = 0.2;
+    public bevelSegments = 3;
+    public bevelEnabled = true;
+    public font = "helvetiker";
+    public weight = "normal";
+    public style = "normal";
+
 }
 
 export = TextGeometryOptions;

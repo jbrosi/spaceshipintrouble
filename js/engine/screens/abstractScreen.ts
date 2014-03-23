@@ -34,7 +34,7 @@ class AbstractScreen {
      * Returns the renderer used for this screen
      *
      * @method getRenderer
-     * @returns {THREE.Renderer} the renderer used for this screen
+     * @returns {THREE.WebGLRenderer} the renderer used for this screen
      */
     public getRenderer() {
         return this._renderer;

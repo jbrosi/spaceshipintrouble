@@ -3,7 +3,7 @@
 // Definitions by: Barrie Nemetchek, Andrew Gaspar
 // Definitions: https://github.com/borisyankov/DefinitelyTyped  
 
-/// <reference path="../jquery/jquery.d.ts"/>
+/// <reference path="jquery.d.ts"/>
 
 declare function Q<T>(promise: Q.IPromise<T>): Q.Promise<T>;
 declare function Q<T>(promise: JQueryPromise<T>): Q.Promise<T>;
