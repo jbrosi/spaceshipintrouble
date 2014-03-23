@@ -46,24 +46,24 @@
                         exports: 'Zepto'
                     }
                 },
-                paths: {           
-                    q: 'lib/q',
-                    stats: 'lib/stats',
-                    three: 'lib/three',
+                paths: {
+                    q: 'lib/vendor/q',
+                    stats: 'lib/vendor/stats',
+                    three: 'lib/vendor/three',
                     'helvetiker-font': '../assets/engine/fonts/helvetiker_regular.typeface',
-            		lodash: 'lib/lodash',
-            		box2d: 'lib/box2dweb',
-            		'box2d-cocoon': 'lib/box2d_cocoonJS',
-            		hammer: 'lib/hammer',
-            		quadtree: 'lib/quadtree',
-            		zepto: 'lib/zepto'
+            		lodash: 'lib/vendor/lodash',
+            		box2d: 'lib/vendor/box2dweb',
+            		'box2d-cocoon': 'lib/vendor/box2d_cocoonJS',
+            		hammer: 'lib/vendor/hammer',
+            		quadtree: 'lib/vendor/quadtree',
+            		zepto: 'lib/vendor/zepto'
                 },
-               //urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
+               urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
                waitSeconds: 30
             };  
 
         </script>
-        <script src="js/lib/require.js" data-main="app"></script>
+        <script src="js/lib/vendor/require.js" data-main="app"></script>
     </head>
     <body>
         <div id="canvas-container"></div>

@@ -9,7 +9,7 @@
 
 import AbstractScreen = require('engine/screens/abstractScreen');
 import AbstractMapLoader = require('engine/map/abstractMapLoader');
-import TextHelper = require('engine/helper/3d/textHelper');
+import TextHelper = require('engine/helper/3d/text/textHelper');
 import THREE = require('three');
 
 /**

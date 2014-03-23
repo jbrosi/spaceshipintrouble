@@ -36,19 +36,19 @@
         }
     },
     paths: {           
-        q: 'lib/q',
-        stats: 'lib/stats',
-        three: 'lib/three',
+        q: 'lib/vendor/q',
+        stats: 'lib/vendor/stats',
+        three: 'lib/vendor/three',
         'helvetiker-font': '../assets/engine/fonts/helvetiker_regular.typeface',
-		lodash: 'lib/lodash',
-		box2d: 'lib/box2dweb',
-		'box2d-cocoon': 'lib/box2d_cocoonJS',
-		require: 'lib/require',
-		hammer: 'lib/hammer',
-		quadtree: 'lib/quadtree',
-		zepto: 'lib/zepto'
+		lodash: 'lib/vendor/lodash',
+		box2d: 'lib/vendor/box2dweb',
+		'box2d-cocoon': 'lib/vendor/box2d_cocoonJS',
+		require: 'lib/vendor/require',
+		hammer: 'lib/vendor/hammer',
+		quadtree: 'lib/vendor/quadtree',
+		zepto: 'lib/vendor/zepto'
     },
-    name: "lib/almond",
+    name: "lib/vendor/almond",
     include: ["app", "game/screens/playLevel", "game/screens/loadLevel", 'box2d', 'box2d-cocoon'],
     insertRequire: ["app"],
     out: "main-built.js"

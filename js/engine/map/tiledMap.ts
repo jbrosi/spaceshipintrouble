@@ -7,11 +7,16 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+/// <reference path="../../lib.d/lodash.d.ts" />
+/// <amd-dependency path="lodash" />
+declare var require:(moduleId:string) => any;
+var _ : _.LoDashStatic = require('lodash');
+
+
 import MapLayer = require('engine/map/mapLayer');
 import TileSet = require('engine/map/tileSet');
 import TileLayer = require('engine/map/tileLayer');
 import ObjectLayer = require('engine/map/objectLayer');
-import _ = require('lodash');
 
 /**
  * Represents a `Map` loaded via Tiled Mapeditor
@@ -53,7 +58,7 @@ class TiledMap {
         this._tileHeight = tileHeight;
         this._properties = properties;
         this._version = version;
-        
+
         _.bindAll(this);
     }
 

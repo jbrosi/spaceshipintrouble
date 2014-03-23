@@ -7,12 +7,16 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import THREE = require('three');
-import helvetikerFont = require('helvetiker-font');
+/// <reference path="../../../../lib.d/three.d.ts" />
+/// <amd-dependency path="three" />
+/// <amd-dependency path="helvetiker-font" />
 
-if (helvetikerFont) {
-    //we need to have helvetikerFont somewhere in the code or typescript will kick it!
-}
+declare var require:(moduleId:string) => any;
+var THREE = require("three");
+var helvetikerFont = require('helvetiker-font');
+
+import TextGeometryOptions = require("engine/helper/3d/text/textGeometryOptions");
+
 /**
  * Helps to create 3D Texts
  *
@@ -41,6 +45,9 @@ class TextHelper {
     public constructor () {
     }
 
+
+
+
     /**
      * Creates and returns a new TextGeometry out of the given `text` and given `options`
      *
@@ -49,7 +56,7 @@ class TextHelper {
      * @param options {*} (optional) the options for creating this. Options might be empty.
      * @returns {THREE.TextGeometry} the geometry created
      */
-    public createTextGeometry (text, options = {}) {
+    public createTextGeometry (text, options : TextGeometryOptions = new TextGeometryOptions()) {
         var textGeometry = new THREE.TextGeometry( text, {
             size: options.size ? options.size : this._size,
             height: options.height ? options.height : this._height,

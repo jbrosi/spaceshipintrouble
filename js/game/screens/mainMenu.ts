@@ -8,7 +8,7 @@
  */
 
 //TODO. REFACTOR THIS, this is no valid typescript yet (though this is not included in the project by now)
-define(['three', 'engine/helper/3d/textHelper', 'lodash', 'engine/screens/screenManager'], function(THREE, TextHelper, _, ScreenManager) {
+define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/screenManager'], function(THREE, TextHelper, _, ScreenManager) {
     
     console.log(ScreenManager);
     
