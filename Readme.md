@@ -63,6 +63,20 @@ As soon as the project reaches a more stable status and the api becomes to be mo
 two projects. Though both projects will remain under the MIT License. Promise.
 
 
+## Why aren't you using Unity3D or Unreal Engine?
+
+I played around with both and yes, they're awesome (see http://blog.jbrosi.de for my experiments). You can focus on
+the game and don't  have to mess around with stuff like how to render graphics, how to handle input and how to display
+HUD-Stuff. Also both support (as with unity 5 and ue4) WebGL builds which may run in plain js/html5 within your favorite
+browser or native builds for more speed on your favorite mobile.
+
+Though as the title of this repo says this is not only about the game! It's more about to show what's possible with html5 on its own.
+The game engines use tools like emscripten to convert c++ to javascript / asm.js.
+
+I am not trying to compete with the professional game engines but want to show the power of modern webapps. See this
+as a proof of concept.
+
+
 ## That's quite cool, may I use it?
 
 The project is released under the the MIT License (MIT) so you should be able
