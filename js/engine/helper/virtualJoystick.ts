@@ -114,7 +114,8 @@ class VirtualJoystick {
             drag: true,
             transform: false,
             swipe: false,
-            drag_max_touches: 10
+            drag_max_touches: 10,
+            prevent_default: true
         });        
         
         this._hammer.on('touch drag', this._onTouchMove);
