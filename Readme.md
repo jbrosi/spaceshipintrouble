@@ -16,6 +16,15 @@ or watch the [apidocs](http://jbrosi.github.io/spaceshipintrouble/api).
 The status of this is pre-alpha yet and there may be several bugs but feel free
 to open an issue if you want something to be fixed.
 
+## Typescript? Why?
+
+In order to see if it's worth the effort. This is my first larger TypeScript project but I'm already loving it. It
+produces almost exactly the code I would write when using plain JavaScript but helps my IDE with AutoCompletion, Typechecks
+and so on. It just adds some convenience stuff to my beloved JavaScript while not affecting its performance or possibilities,
+so why not use it?
+
+If you don't like it but want to use parts of my Code just compile it to JavaScript and work with the compiled result.
+
 ## Did you do this all on your own?
 
 Of course not. I used various libraries, tools and assets... The entity / component system is heavily inspired by the
