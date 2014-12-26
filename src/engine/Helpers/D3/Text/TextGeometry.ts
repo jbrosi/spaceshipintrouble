@@ -2,12 +2,9 @@
 /// <amd-dependency path="three" />
 /// <amd-dependency path="helvetiker-font" />
 
-declare var require:(moduleId:string) => any;
-var THREE = require("three");
-
 var helvetikerFont = require('helvetiker-font');
 
-module SpaceshipInTrouble.Engine.Helper.D3.Text {
+module SpaceshipInTrouble.Engine.Helpers.D3.Text {
 
     export class TextGeometry implements THREE.TextGeometryParameters {
 

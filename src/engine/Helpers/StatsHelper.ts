@@ -7,10 +7,6 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-/// <reference path="../../lib.d/stats.d.ts" />
-/// <amd-dependency path="stats" />
-declare var require:(moduleId:string) => any;
-var Stats = require('stats');
 
 /**
  * Provides a StatsHelper for recording and showing performance stats
