@@ -1,22 +1,18 @@
+/build/*
+/dist/*
 /build
+/dist
+
 /main-built.js
 /node_modules
 
 /images
 
 #ignore all the js files
-*.js
-*.js.map
+!Gruntfile.js
 
-#don't ignore js in lib
-!/js/lib/vendor/*.js
-
-#don't ignore app and build js
-!/js/app.js
-!/build.js
-
-#ignore source maps
-
+#typescript cache
+.tscache
 
 #PHP-/Webstorm stuff
 /.idea
