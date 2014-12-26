@@ -15,8 +15,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
      * components attached to them.
      * Please see Readme.md in the same folder for a further explanation.
      *
-     * @namespace engine.entity
-     * @class Entity
      */
     export class Entity {
 
@@ -71,7 +69,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          *
          * @param prototype {engine.entity.EntityPrototype} the prototype to create this entity from
          * @param manager {engine.entity.EntityManager} reference to the manager this entity was created with
-         * @method __constructor
          */
         constructor(prototype: SpaceshipInTrouble.Engine.EntitySystem.EntityPrototype, manager: SpaceshipInTrouble.Engine.EntitySystem.EntityManager) {
             //todo: initialize entity, load scripts defined in Prototype,
@@ -85,7 +82,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * Clones the current entity and returns the result. Cloning means the new entity
          * will have the same data attributes, and the same scripts.
          *
-         * @method cloneEntity
          * @returns {engine.entity.Entity} a copy of this entity
          */
         cloneEntity(): Entity {
@@ -99,7 +95,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Returns a reference to the `EntityManager` holding this entity
          *
-         * @method getManager
          * @returns {engine.entity.EntityManager} the manager used to create this entity and responsible for managing this entitty
          */
         public getManager() : SpaceshipInTrouble.Engine.EntitySystem.EntityManager {
@@ -108,7 +103,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         /**
          *
-         * @method getData
          * @returns {*} the shared data hold by this entity.
          */
         public getData() {
@@ -117,7 +111,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         /**
          *
-         * @method getParent
          * @returns {engine.entity.Entity} the parent of this entity. Might be null if there is no parent (meaning this entity is root)
          */
         public getParent() : Entity {
@@ -125,7 +118,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method hasParent
          * @returns {boolean} true if there is a parent to this entity, false if there isn't
          */
         public hasParent() : boolean {
@@ -138,7 +130,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * The `callback` will be called whenever this entity receives a message
          * with the given `identifier`.
          *
-         * @method on
          * @param identifier {string} the event-identifier to register for
          * @param callback {function} the function callback to register for this event
          */
@@ -176,7 +167,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          *
          * note2: You can't deregister multiple `identifier`s at once (separating with whitespace) at the moment!
          *
-         * @method removeListener
          * @param identifier {string} the event identifier to deregister from
          * @param callback {function} the function callback to deregister
          * @returns {boolean} true if a callback was removed false otherwise (if it's not found or
@@ -213,7 +203,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * so all components may react to this. The message will contain the `timeStep` parameter with the time elapsed
          * since the last step.
          *
-         * @method doStep
          * @param timeStep the time elapsed since the last step
          */
         public doStep (timeStep: number): void {
@@ -229,7 +218,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * to all listeners which registered on this entity for that event. You may
          * use this method to directly deliver a `message` to this entity.
          *
-         * @method sendMessage
          * @param message {engine.entity.EntityMessage} the message to send
          */
         public sendMessage (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage): void {
@@ -250,7 +238,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * also all the childrens of the childrens of the childrens... will receive this message
          * carefull on large nested constructs if you use this param :).
          *
-         * @method sendMessageToChildren
          * @param message {engine.entity.EntityMessage} the message to be sent
          * @param isDeep {boolean} (optional, default: false). Set to true if you want all childs of all childs (of all childs...)
          *        to receive this message, too
@@ -268,7 +255,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         /**
          *
-         * @method getPosition
          * @returns {Position} the position/rotation/scale of this entity
          */
         public getPosition(): Position {
@@ -276,7 +262,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getComponents
          * @returns {engine.entity.EntityComponent[]} all the components hold by this entity
          */
         public getComponents(): SpaceshipInTrouble.Engine.EntitySystem.EntityComponent[] {
@@ -287,7 +272,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * Sends the given `message` to the parent of this entity. If you set `isDeep` to true this `message` will also be
          * sent to all other ascendants of this entity (meaning the parents of the parents of the ...)
          *
-         * @method sendMessageToParent
          * @param message {engine.entity.EntityMessage} the message to be sent
          * @param isDeep {boolean} (optional, defaults: false). If set to true all ascendants will be included to receive the message
          */

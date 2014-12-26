@@ -14,8 +14,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
      * and visual representation of the Entity. EntityComponents may be scripts,
      * Sprites, ...
      *
-     * @namespace engine.entity
-     * @class EntityComponent
      */
     export class EntityComponent {
 
@@ -26,14 +24,12 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         private _name:string;
 
         /**
-         * @type {engine.entity.Entity}
          */
         private _entity: SpaceshipInTrouble.Engine.EntitySystem.Entity;
 
         /**
          * Creates a new `EntityComponent` for the given `entity` with the given `name` and the given `data`
          *
-         * @method __constructor
          * @param name {string} the name of this component
          * @param entity {engine.entity.Entity} reference to the entity this component is attached to
          * @param data {any} the data for this component
@@ -46,7 +42,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         /**
          *
-         * @method getEntity
          * @returns {engine.entity.Entity} the reference to the entity holding this component
          */
         public getEntity(): SpaceshipInTrouble.Engine.EntitySystem.Entity {
@@ -55,7 +50,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         /**
          *
-         * @method getData
          * @returns {*} the data hold by this component
          */
         public getData() {
@@ -64,7 +58,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         /**
          *
-         * @method getStaticData
          * @returns {*} the static data hold by components with the same `name` as this component
          */
         public getStaticData() {
@@ -77,7 +70,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Sets the `data` for this component (overriding previously set `data`)
          *
-         * @method setData
          * @param data {*} the data to be set
          */
         public setData(data:any) {

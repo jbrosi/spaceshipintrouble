@@ -13,11 +13,8 @@ module SpaceshipInTrouble.Engine.EntitySystem {
      * This class represents a script as a type of `EntityComponent`. It gets attached to a `Entity`
      * and may influence the behavior of that `Entity`
      *
-     * @namespace engine.entity
-     * @class EntityScript
-     * @extends engine.entity.EntityComponent
      */
-    class EntityScript extends SpaceshipInTrouble.Engine.EntitySystem.EntityComponent {
+    export class EntityScript extends SpaceshipInTrouble.Engine.EntitySystem.EntityComponent {
 
         private _file:string;
 
@@ -25,7 +22,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * Constructs a new EntityScript with the given `name` for the given `Entity` from the given script-`file`
          * with the given `data`
          *
-         * @method __constructor
          * @param name {string} the name of this script
          * @param entity {engine.entity.Entity} reference to the entity this script is attached to
          * @param file {string} the scriptFile to use for loading/initializing this script

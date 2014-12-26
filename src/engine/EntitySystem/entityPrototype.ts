@@ -14,8 +14,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
      * and conains all the scripts and data needed for creating a new entity of this
      * type.
      *
-     * @namespace engine.entity
-     * @class EntityPrototype
      */
     export class EntityPrototype {
 
@@ -45,7 +43,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         private _entityCreationCount = 0;
 
         /**
-         * @method __constructor
          */
         public constructor() {
             //TODO: construct this prototype
@@ -57,7 +54,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * this prototype. This should get invoked whenever a entity of this type
          * is being created.
          *
-         * @method incrementEntityCreationCount
          * @returns {number} the amount of entities created with this prototype
          */
         public incrementEntityCreationCount():number {
@@ -65,7 +61,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getEntityCreationCount
          * @returns {number} the amount of entities created with this prototype
          */
         public getEntityCreationCount():number {
@@ -73,7 +68,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getName
          * @returns {string} the name of this type or null if the type is anonymous
          */
         public getName():string {
@@ -81,7 +75,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getData
          * @returns {*} the predefined data for entities of this type
          */
         public getData():any {
@@ -89,7 +82,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getComponents
          * @returns {string[]} all the components that should be attached to entities of this type
          */
         public getComponents():string[] {

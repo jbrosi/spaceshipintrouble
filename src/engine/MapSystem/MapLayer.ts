@@ -7,14 +7,13 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+module SpaceshipInTrouble.Engine.MapSystem {
 
-/**
- * Defines a MapLayer. Might get overwritten by specific MapLayers.
- *
- * @namespace engine.map
- * @class MapLayer
- */
-class MapLayer {
-};
+    /**
+     * Defines a MapLayer. Might get overwritten by specific MapLayers.
+     *
+     */
+    export class MapLayer {
+    }
 
-export = MapLayer;
+}

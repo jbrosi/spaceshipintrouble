@@ -16,8 +16,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
      * saves, activates, deactivates and destroys them.
      *
      *
-     * @namespace engine.entity
-     * @class EntityManager
      */
     export class EntityManager {
 
@@ -42,7 +40,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Creates a new EntityManager ready for managing entities.
          *
-         * @method __constructor
          */
         constructor() {
 
@@ -53,7 +50,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Notifies all entities about their deletion and resets the entity pools afterwards.
          *
-         * @method deleteEntities
          */
         public deleteEntities() {
             //todo: notify all entities of their deletion
@@ -65,7 +61,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * Warning: this does not call the entities' cleanup methods. Use #deleteEntities()
          *          if you want a clean reset.
          *
-         * @method resetEntityPools
          */
         public resetEntityPools() {
             this._entities = new Array(DEFAULT_ENTITY_POOL_SIZE);
@@ -83,7 +78,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Creates a new entity and adds it to the pool
          *
-         * @method createEntityFromPrototype
          * @param prototype {engine.entity.EntityPrototype} the prototype to create the entity from
          * @returns {engine.entity.Entity} the entity created (be carefull, the entity may not have been fully initialized yet!)
          */
@@ -99,7 +93,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Creates a new entity by typename and adds it to the pool
          * @param type {string} the name of the type to create this entity from
-         * @method createEntityByName
          * @returns {engine.entity.Entity} the entity created or null if the type isn't defined (be carefull, the entity may not have been fully initialized yet!)
          */
         public createEntityByName(type:string):Entity {
@@ -114,7 +107,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Sends `message` to all active entities (if you set the `alsoSendToInactives` parameter to true it also gets send to inactive ones)
          *
-         * @method sendMessage
          * @param message {engine.entity.EntityMessage} the message to be sent
          * @param alsoSendToInactives {boolean} false (default): don't send message to inactive entities.
          *        True: send to *all* (actives and inactives)
@@ -143,7 +135,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Invokes `doStep` on all active entities and tells them the time elapsed since the last step (`timeStep`)
          *
-         * @method doStep
          * @param timeStep {number} the time elapsed since the last step
          */
         public doStep(timeStep:number) {

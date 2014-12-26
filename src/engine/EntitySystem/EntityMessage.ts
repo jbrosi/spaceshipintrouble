@@ -21,9 +21,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
      * Sender: The entity which send this message (may be null if there
      *         was no entity sending this message).
      *
-     * @namespace engine.entity
-     * @class EntityMessage
-     *
      */
     export class EntityMessage {
 
@@ -65,7 +62,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Creates a new message ready to be sent to entities. The message *should*
          * contain an identifier, the message param and the entity param are optional.
-         * @method __constructor
          * @param identifier {string} the type/identifier of this message. This is what the listeners should register for
          * @param message {*} (optional) the message itsself - may contain any data
          * @param sender {engine.entity.Entity} (optional) the entity sending this message. Might be null
@@ -79,7 +75,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getIdentifier
          * @returns {string} the identifier of this message
          */
         public getIdentifier():string {
@@ -87,7 +82,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getMessage
          * @returns {*} the message data
          */
         public getMessage():any {
@@ -95,7 +89,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
-         * @method getSender
          * @returns {engine.entity.Entity} the sending entity (might be null)
          */
         public getSender():Entity {
@@ -104,7 +97,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         /**
          *
-         * @method hasSender
          * @eturns {boolean} true if this message was sent by an entity.
          */
         public hasSender():boolean {
@@ -115,7 +107,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * By invoking this u may stop a message from being sent any further
          * this is usefull when you want to delete a message and stop propagation.
          *
-         * @method consume
          */
         public consume():void {
             if (this._isConsumable)
@@ -126,7 +117,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * This is telling whether a message has been consumed or not. If a message gets
          * consumed it doesn't get sent any further. It's like "stopPropagation" on JS events
          *
-         * @method isConsumed
          * @returns {boolean} true if the message has been consumed already
          */
         public isConsumed():boolean {
