@@ -15,11 +15,17 @@ module SpaceshipInTrouble.Game.Screens {
         private _lastShot:number;
         private _shipMesh:THREE.Mesh;
         private _physScale:any;
-
+        private _groundMirror : any;
 
         public constructor(renderer) {
             super(renderer);
             _.bindAll(this);
+        }
+
+
+        public preRender(timeStep: number) {
+            super.preRender(timeStep);
+            this._groundMirror.render();
         }
 
         public show() {
@@ -206,6 +212,14 @@ module SpaceshipInTrouble.Game.Screens {
             var geo = new THREE.Geometry();
             var mesh = new THREE.Mesh(cubeGeo);
 
+
+
+            var lineGeo = new THREE.Geometry();
+            var lineMat = new THREE.LineBasicMaterial( { color: 0x666666 } );
+
+
+
+
             var wall = this.getPhysics().world.CreateBody(this.getPhysics().defaultWallDefinition);
             wall.SetUserData({type: 'wall'});
 
@@ -228,7 +242,7 @@ module SpaceshipInTrouble.Game.Screens {
                         var posy = (y - 50) * 10;
                         mesh.position.x = posx;
                         mesh.position.y = posy;
-
+                        mesh.position.z = 5;
 
                         THREE.GeometryUtils.merge(geo, mesh);
 
@@ -237,8 +251,29 @@ module SpaceshipInTrouble.Game.Screens {
 
 
                     }
+
+                    lineGeo.vertices.push( new THREE.Vector3( (x -50) * 10 + 5, (y - 50 ) * 10 + 5, 0 ) );
+                    lineGeo.vertices.push( new THREE.Vector3( (x -50) * 10 + 5, (y - 50 ) * 10 + 15, 0 ) );
+                    lineGeo.vertices.push( new THREE.Vector3( (x -50) * 10 + 5, (y - 50 ) * 10 + 5, 0 ) );
+                    lineGeo.vertices.push( new THREE.Vector3( (x -50) * 10 + 15, (y - 50 ) * 10 + 5, 0 ) );
+
                 }
+
             }
+
+            var lines = new THREE.Line( lineGeo, lineMat, THREE.LinePieces );
+            this.getScene().add( lines );
+
+
+            // MIRORR planes
+            var planeGeo = new THREE.PlaneGeometry( 1000.1, 1000.1 );
+
+            this._groundMirror = new THREE["Mirror"]( this.getRenderer(), this.getCamera(), { clipBias: 0.003, textureWidth: 512, textureHeight: 512, color: 0x777777 } );
+
+            var mirrorMesh = new THREE.Mesh( planeGeo, this._groundMirror.material );
+            mirrorMesh.add( this._groundMirror );
+            this.getScene().add( mirrorMesh );
+
 
             var group = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({color: 0xffff00}));
             group.matrixAutoUpdate = false;
