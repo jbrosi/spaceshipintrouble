@@ -42,9 +42,16 @@
         <script src="assets/engine/fonts/helvetiker_regular.typeface.js"></script>
 
         <script>
+            var isDebug = window.location.hash.indexOf("debug") !== -1;
             JL("Init").info("Finished loading libraries!");
+            JL("Init").info("*** " + (isDebug ? "debug" : "release" )+ " mode Detected ***");
+
+            if (isDebug) {
+                document.write("<scr" + "ipt src=\"build/debug_loader.js\"></scr"+"ipt>");
+            } else {
+                document.write("<scr" + "ipt src=\"dist/spaceshipintrouble.js\"></scr"+"ipt>");
+            }
         </script>
-        <script src="dist/spaceshipintrouble.js"></script>
     </head>
     <body>
         <div id="canvas-container"></div>

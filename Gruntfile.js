@@ -8,19 +8,13 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-
-        watch: {
-            typescripts: {
-                files: ["src/**/*.ts"],
-                tasks: ['includeSource:build'],
-                options: {
-                    debounceDelay: 250,
-                    spawn: true
-                }
+        copy: {
+            build: {
+                files: [
+                    {src: './src/debug_loader.js', dest: './build/debug_loader.js'}
+                ]
             }
         },
-
-
         ts: {
             build: {
                 src: ["src/**/*.ts"],
@@ -86,9 +80,9 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('default', ['clean:build', 'ts:build']);
+    grunt.registerTask('default', ['clean:build', 'copy:build', 'ts:build']);
     grunt.registerTask('dist', ['clean:dist', 'ts:dist']);
 
-    grunt.registerTask('dev', ['default','watch:typescript', 'ts:watch']);
+    grunt.registerTask('dev', ['default', 'ts:watch']);
 
 };
