@@ -276,7 +276,7 @@ module SpaceshipInTrouble.Game.Screens {
             //Load and add ship
             var loader = new THREE.JSONLoader();
             loader.load("assets/game/models/fighter.js", function (shipGeo, shipMaterials) {
-                console.log("ship loaded");
+                console.log("ship loaded", shipGeo, shipMaterials);
 
                 var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/game/textures/fighter.png')});
                 var shipMesh = new THREE.Mesh(shipGeo, shipMaterial);
