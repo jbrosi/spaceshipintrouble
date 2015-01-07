@@ -61,25 +61,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         }
 
         /**
-         * Load and create a screen with the given `screenName`. Returns a promise for the loaded screen
-         *
-         * @param screenName {string} name of the screen to be loaded
-         * @returns {Promise(AbstractScreen)} promise for the loaded screen
-         */
-        public createScreen(screenName: string) {
-            console.log("trying to create screen");
-            var deferred = Q.defer();
-            var that = this;
-            $.ajax('game/screens/'+screenName, {
-                success: function(Screen) {
-                    console.log("Creating Screen "+screenName);
-                    deferred.resolve(new Screen(that._renderer));
-                }
-            });
-            return deferred.promise;
-        }
-
-        /**
          * Drops the given `screen`. If it's the current top screen the one beneath it will get the current screen.
          *
          * @param screen {AbstractScreen} the screen to be dropped
@@ -113,25 +94,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
             return this._renderer;
         }
 
-        /**
-         * Loads and shows a screen by `screenName`
-         *
-         * @param screenName {string} the screen to be loaded and shown
-         * @returns {Promise|Promise<ScreenManager>} for the screen when it's loaded and shown
-         */
-        public showScreenByName (screenName: string) {
-            var that = this;
-
-            var deferred = Q.defer();
-
-            $.ajax('game/screens/' + screen, {success: function (Screen) {
-                that.showScreen(new Screen(that.getRenderer()));
-                deferred.resolve(that);
-            }}
-            );
-
-            return deferred.promise;
-        }
 
         /**
          * Internal method for rendering the currentScreen

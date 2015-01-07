@@ -54,8 +54,11 @@ module SpaceshipInTrouble.Engine {
                 });
         }
 
-        public start() : Q.Promise<boolean> {
+        public start(screen : SpaceshipInTrouble.Engine.ScreenSystem.AbstractScreen) : Q.Promise<boolean> {
             JL("GameEngine").info("*** starting ***");
+
+            this._screenManager.showScreen(screen);
+
             return Q(true);
         }
 
