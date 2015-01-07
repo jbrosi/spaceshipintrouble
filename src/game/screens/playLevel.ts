@@ -174,7 +174,6 @@ module SpaceshipInTrouble.Game.Screens {
 
             physics.ship.SetLinearDamping(0.1 * physics.ship.GetLinearVelocity().Length());
 
-
             //shoot?
             if (this.getKeyboard().isSpacePressed() || this.getJoystick().isFireButtonPressed()) {
                 var currentTime = new Date().getTime();
@@ -207,7 +206,7 @@ module SpaceshipInTrouble.Game.Screens {
         private _setupLevel() {
             //todo: load from levelfile
 
-            var cubeGeo = new THREE.CubeGeometry(10, 10, 10);
+            var cubeGeo = new THREE.BoxGeometry(10, 10, 10);
 
             var geo = new THREE.Geometry();
             var mesh = new THREE.Mesh(cubeGeo);
@@ -243,8 +242,8 @@ module SpaceshipInTrouble.Game.Screens {
                         mesh.position.x = posx;
                         mesh.position.y = posy;
                         mesh.position.z = 5;
-
-                        THREE.GeometryUtils.merge(geo, mesh);
+                        mesh.updateMatrix();
+                        geo.merge(mesh.geometry, mesh.matrix, undefined);
 
                         this.getPhysics().defaultWallFixture.shape.SetAsOrientedBox(5 / this._physScale, 5 / this._physScale, new Box2D.Common.Math.b2Vec2(posx / this._physScale, posy / this._physScale), 0);
                         wall.CreateFixture(this.getPhysics().defaultWallFixture);
@@ -317,8 +316,9 @@ module SpaceshipInTrouble.Game.Screens {
                 var shipMesh = new THREE.Mesh(shipGeo, shipMaterial);
                 shipMesh.scale.set(1.5, 1.5, 1.5);
                 shipMesh.rotation.set(Math.PI / 2, 0, 0);
-                that.getScene().add(shipMesh);
 
+                shipMesh.updateMatrix();
+                that.getScene().add(shipMesh);
                 that.setShipMesh(shipMesh);
             }, "assets/game/textures/");
         }
