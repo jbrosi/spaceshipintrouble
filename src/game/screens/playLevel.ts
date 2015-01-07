@@ -7,15 +7,18 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+///ts:ref=include_all.ts
+/// <reference path="../../Engine/include_all.ts"/> ///ts:ref:generated
 module SpaceshipInTrouble.Game.Screens {
-
 
     export class PlayLevelScreen extends SpaceshipInTrouble.Engine.ScreenSystem.PlayLevelScreen {
 
-        private _lastShot:number;
+        private _lastShot:number  = 0;
         private _shipMesh:THREE.Mesh;
         private _physScale:any;
         private _groundMirror : any;
+
+        private _projectiles: any[] = [];
 
         public constructor(renderer) {
             super(renderer);
@@ -63,7 +66,7 @@ module SpaceshipInTrouble.Game.Screens {
             var shape = new Box2D.Collision.Shapes.b2PolygonShape();
             shape.SetAsBox(5 / this._physScale, 5 / this._physScale);
 
-            fixDef.shape = shape
+            fixDef.shape = shape;
 
 
             physics.defaultWallFixture = fixDef;
@@ -114,6 +117,12 @@ module SpaceshipInTrouble.Game.Screens {
 
         }
 
+        public postPhysics(time) {
+            for (var i = 0; i < this._projectiles.length; i++) {
+                var cur = this._projectiles[i];
+                cur.mesh.position.set(cur.physic.GetPosition().x * this._physScale, cur.physic.GetPosition().y * this._physScale, 0);
+            }
+        }
 
         private _moveShip(time) {
             if (!time || !this._shipMesh) {
@@ -176,27 +185,28 @@ module SpaceshipInTrouble.Game.Screens {
 
             //shoot?
             if (this.getKeyboard().isSpacePressed() || this.getJoystick().isFireButtonPressed()) {
+
                 var currentTime = new Date().getTime();
                 if (currentTime - this._lastShot > 150) {
-
+                    console.log("FIRE!!");
                     this._lastShot = currentTime;
-                    // var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
-                    // shotMesh.position.set(this._physics.ship.GetPosition().x * this._physScale, this._physics.ship.GetPosition().y * this._physScale, 0);
+                    var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
+                     shotMesh.position.set(physics.ship.GetPosition().x * this._physScale, physics.ship.GetPosition().y * this._physScale, 0);
 
-                    // this._scene.add(shotMesh)
+                    this.getScene().add(shotMesh);
 
-                    // this._physics.projectileBodyDef.position.Set(this._physics.ship.GetPosition().x + (facingDirection.x / factor), this._physics.ship.GetPosition().y + (facingDirection.y / factor));
-                    // var projectile = this._physics.world.CreateBody(this._physics.projectileBodyDef);
+                    physics.projectileBodyDef.position.Set(physics.ship.GetPosition().x + (facingDirection.x / factor), physics.ship.GetPosition().y + (facingDirection.y / factor));
+                    var projectile :any = physics.world.CreateBody(physics.projectileBodyDef);
 
-                    // facingDirection.Multiply(5);
+                    facingDirection.Multiply(0.1);
 
-                    // projectile.SetLinearVelocity(facingDirection);
+                    projectile.SetLinearVelocity(facingDirection);
 
-                    // projectile.CreateFixture(this._physics.projectileFix);
+                    projectile.CreateFixture(physics.projectileFix);
 
 
-                    // projectile.SetUserData({type: "projectile"});
-                    // this._projectiles.push({mesh: shotMesh, physic: projectile, time: currentTime});
+                    projectile.SetUserData({type: "projectile"});
+                    this._projectiles.push({mesh: shotMesh, physic: projectile, time: currentTime});
                 }
 
             }

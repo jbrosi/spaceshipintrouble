@@ -7,7 +7,8 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-
+///ts:ref=include_all.ts
+/// <reference path="../include_all.ts"/> ///ts:ref:generated
 module SpaceshipInTrouble.Engine.ScreenSystem {
 
     /**
@@ -77,6 +78,17 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
             //overwrite to do own stuff here
         }
 
+
+        /**
+         * Gets called after we calculated the physics.
+         * Does nothing - override for your own usage
+         *
+         * @param timeStep {number} time since last render step
+         */
+        public postPhysics(timeStep) {
+            //overwrite to do own stuff here
+        }
+
         /**
          * Gets called before we do the entity steps.
          * Does nothing - override for your own usage
@@ -106,6 +118,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         public render(timeStep:number) {
             this.prePhysics(timeStep);
             this.calculatePhysics();
+            this.postPhysics(timeStep);
 
             this.preEntitySteps(timeStep);
             this.getEntityManager().doStep(timeStep);

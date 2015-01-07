@@ -22,7 +22,7 @@ try {
                     continue;
                 }
 
-                var scriptPath = "build/" + sourceString.replace("path=\"", "").replace("\"", "") + "?bust=" + new Date().getTime();
+                var scriptPath = "build/src/" + sourceString.replace("path=\"", "").replace("\"", "") + "?bust=" + new Date().getTime();
                 var script = "<scr" + "ipt src=\"" + scriptPath + "\"></sc"+"ript>";
                 JL("ModuleLoader").info(" - loading " + scriptPath);
                 document.write(script);
