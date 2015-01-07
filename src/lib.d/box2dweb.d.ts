@@ -2266,6 +2266,16 @@ declare module Box2D.Collision.Shapes {
 		**/
 		public static AsBox(hx: number, hy: number): b2PolygonShape;
 
+
+		/**
+		 * Build vertices to represent an axis-aligned box.
+		 * @param hx The half-width.
+		 * @param hy The half-height.
+		 * @return Box polygon shape.
+		 **/
+		public static SetAsBox(hx: number, hy: number): b2PolygonShape;
+
+
 		/**
 		* Creates a single edge from two vertices.
 		* @param v1 First vertex.

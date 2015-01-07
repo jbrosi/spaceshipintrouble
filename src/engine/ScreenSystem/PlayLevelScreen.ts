@@ -14,9 +14,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
      * Default implementation of a play level screen. Use this as a base for your own
      * PlayLevelScreen or implement a new one by yourself.
      *
-     * @namespace engine.screens
-     * @class PlayLevelScreen
-     * @extends AbstractScreen
      */
     export class PlayLevelScreen extends AbstractScreen {
 
@@ -34,7 +31,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Creates a new `PlayLevelScreen`
          *
-         * @method __constructor
          * @param renderer {THREE.Renderer} the renderer to use
          */
         public constructor(renderer) {
@@ -55,7 +51,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * Gets called before we render anything.
          * Does nothing - override for your own usage
          *
-         * @method preRender
          * @param timeStep {number} time since last render step
          */
         public preRender(timeStep) {
@@ -66,7 +61,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * Gets called after we rendered everything.
          * Does nothing - override for your own usage
          *
-         * @method postRender
          * @param timeStep {number} time since last render step
          */
         public postRender(timeStep) {
@@ -77,7 +71,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * Gets called before we calculate the physics.
          * Does nothing - override for your own usage
          *
-         * @method prePhysics
          * @param timeStep {number} time since last render step
          */
         public prePhysics(timeStep) {
@@ -88,7 +81,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * Gets called before we do the entity steps.
          * Does nothing - override for your own usage
          *
-         * @method preEntitySteps
          * @param timeStep {number} time since last render step
          */
         public preEntitySteps(timeStep) {
@@ -109,7 +101,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          *
          * the *-methods do nothing and can be overwritten to do own stuff in your level
          *
-         * @method render
          * @param timeStep {number} time since last render step
          */
         public render(timeStep:number) {
@@ -133,7 +124,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * This also returns the physicsObject. You'll find a b2World in the world property
          * of the physicsObject returned.
          *
-         * @method initPhsics
          * @param gravity {Box2D.b2Vec2}(optional, defaults 0) the gravity to apply to the world
          * @returns {*} the physics defined
          */
@@ -155,7 +145,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * results if the number gets too high or too low. By now 16 seems the best value. Also a iteration value of 10
          * seems to lead to a stable result.
          *
-         * @method calculatePhysics
          * @param frameRate {number} (optional, default: 16) the frameRate to use
          * @param velocityIterations {number} (optional, default: 10) the velocityIterations to make per physic step
          * @param positionIterations {number} (optional, default: 10) the positionIterations to make per physic step
@@ -176,13 +165,11 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * set the property "entity" in the userData of the b2Body to allow the entities
          * to receive the messages.
          *
-         * @private
-         * @method _setupPhysicCollisionListener
          *
          */
         private _setupPhysicCollisionListener() {
 
-            var colDetector = Box2D.Dynamics.b2ContactListener;
+            var colDetector : any = Box2D.Dynamics.b2ContactListener;
 
             colDetector.BeginContact = function (contact) {
 
@@ -194,14 +181,14 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
                     //both are entity?
                     if (objectB.type == 'entity' && objectB.entity !== undefined) {
                         objectA.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:entity', {entity: objectB.entity}));
-                        objectB.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.('collision:entity', {entity: objectA.entity}));
+                        objectB.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:entity', {entity: objectA.entity}));
                     } else {
                         //it's some other type of collision... maybe add more specific messages here later on
-                        objectA.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.('collision:other', {object: objectB}));
+                        objectA.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:other', {object: objectB}));
                     }
                 } else if (objectB.type == 'entity' && objectB.entity !== undefined) {
                     //it's some other type of collision... maybe add more specific messages here later on
-                    objectB.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.('collision:other', {object: objectA}));
+                    objectB.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:other', {object: objectA}));
                 }
             };
             colDetector.EndContact = function (contact) {
@@ -225,7 +212,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * Returns the physics object to do calculations with. The object contains a property "world" which is a b2World
          * object and may be used for the box2d physics. You may add other properties for use in other scripts...
          *
-         * @method getPhysics
          * @returns {*} the physics of this level
          */
         public getPhysics() {
@@ -235,7 +221,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Sets the camera for this level screen
          *
-         * @method setCamera
          * @param camera {THREE.Camera|THREE.PerspectiveCamera} the camera to set
          */
         public setCamera(camera) {
@@ -245,7 +230,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Returns the camera for this level screen
          *
-         * @method getCamera
          * @returns {THREE.Camera} the camera of this level
          */
         public getCamera() {
@@ -255,7 +239,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Sets the ThreeJS scene for this level
          *
-         * @method setScene
          * @param scene {THREE.Scene} the scene to set
          */
         public setScene(scene) {
@@ -265,7 +248,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Returns the ThreeJS scene for this level
          *
-         * @method getScene
          * @returns {THREE.Scene}
          */
         public getScene() {
@@ -275,8 +257,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Gets called when the level is about to be shown
          *
-         * @method show
-         * @overrides
          */
         public show() {
             console.log("show not implemented");
@@ -298,7 +278,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Returns the joystick used in this level or creates one lazily
          *
-         * @method getJoystick
          * @returns {engine.helper.VirtualJoystick} current joystick or lazily created one
          */
         public getJoystick(): SpaceshipInTrouble.Engine.Helpers.Input.VirtualJoystick {
@@ -311,7 +290,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         /**
          * Returns the current keyboard used in this level or creates one lazily
          *
-         * @method getKeyboard
          * @returns {engine.helper.KeyboardHelper} current keyboard or lazily created one
          */
         public getKeyboard(): SpaceshipInTrouble.Engine.Helpers.Input.KeyboardHelper {

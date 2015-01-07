@@ -17,54 +17,33 @@
             html {overflow: hidden;}
             
         </style>
+        <script src="src/lib/vendor/jsnlog.min.js"></script>
         <script>
-            var require = {
-                baseUrl: "js",               
-                shim: {
-                    'three': {
-                        exports: 'THREE'
-                    },
-                    'helvetiker-font': {
-                        deps: ['three']
-                    },
-                    'box2d-web': {
-                        exports: 'Box2D'
-                    },
-                    'box2d-cocoon': {
-                        exports: 'Box2D'
-                    },                    
-                    'stats': {
-                        exports: 'Stats'
-                    },
-                    'hammer': {
-                        exports: 'Hammer'
-                    },
-                    'quadtree': {
-                        exports: 'Quadtree'
-                    },
-                    'zepto': {
-                        exports: 'Zepto'
-                    }
-                },
-                paths: {
-                    promise: 'lib/vendor/promise',
-                    stats: 'lib/vendor/stats',
-                    three: 'lib/vendor/three',
-                    'helvetiker-font': '../assets/engine/fonts/helvetiker_regular.typeface',
-            		lodash: 'lib/vendor/lodash',
-                    box2d: 'engine/helper/box2DHelper',
-            	    'box2d-web': 'lib/vendor/box2dweb',
-            		'box2d-cocoon': 'lib/vendor/box2d_cocoonJS',
-            		hammer: 'lib/vendor/hammer',
-            		quadtree: 'lib/vendor/quadtree',
-            		zepto: 'lib/vendor/zepto'
-                },
-               urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
-               waitSeconds: 30
-            };  
+            var consoleAppender = JL.createConsoleAppender('consoleAppender');
+            JL().setOptions({
+                "appenders": [consoleAppender]
+            });
+            JL("Spaceship in Trouble").info("*** Logger initialized ***");
 
+            JL("Init").info("Loading libraries...");
         </script>
-        <script src="src/lib/vendor/require.js" data-main="app"></script>
+
+        <script src="src/lib/vendor/three.js"></script>
+        <script src="src/lib/vendor/zepto.js"></script>
+        <script src="src/lib/vendor/lodash.js"></script>
+        <script src="src/lib/vendor/box2dweb.js"></script>
+        <script src="src/lib/vendor/hammer.js"></script>
+        <script src="src/lib/vendor/promise.js"></script>
+        <script src="src/lib/vendor/stats.js"></script>
+
+
+
+        <script src="assets/engine/fonts/helvetiker_regular.typeface.js"></script>
+
+        <script>
+            JL("Init").info("Finished loading libraries!");
+        </script>
+        <script src="dist/spaceshipintrouble.js"></script>
     </head>
     <body>
         <div id="canvas-container"></div>

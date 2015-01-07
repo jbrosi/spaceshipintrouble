@@ -9,6 +9,7 @@
 
 
 /// ts:ref=promise.d.ts
+/// <reference path="../../lib.d/promise.d.ts"/> ///ts:ref:generated
 
 module SpaceshipInTrouble.Engine.MapSystem {
 

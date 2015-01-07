@@ -23,7 +23,7 @@ require(['engine/gameInitializer', 'Engine/screens/ScreenManager', 'Engine/map/T
     Promise.longStackSupport = true;
     
     //run the game init
-    var gi = new GameInitializer();
+    var gi = new GameEngine();
     gi.init();
     
     var renderer = gi.getRenderer();

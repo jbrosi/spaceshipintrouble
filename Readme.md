@@ -35,8 +35,6 @@ Of course not. I used various libraries, tools and assets... The entity / compon
 
 - ThreeJS
 - Lodash
-- RequireJS
-- Almond
 - Stats
 - Box2DWeb
 

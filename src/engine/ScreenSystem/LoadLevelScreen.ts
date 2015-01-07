@@ -26,7 +26,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * @method __constructor
          * @param {THREE.Renderer} renderer the renderer to use for this screen
          */
-        public constructor(renderer) {
+        public constructor(renderer : THREE.Renderer = null) {
             super(renderer);
         }
 

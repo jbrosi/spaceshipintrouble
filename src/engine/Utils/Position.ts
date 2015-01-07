@@ -7,27 +7,28 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+module SpaceshipInTrouble.Engine.Utils {
+    export class Position {
 
-class Position {
+        //x,y, (z?)
 
-    //x,y, (z?)
+        //rotation
 
-    //rotation
+        //scale
 
-    //scale
+        //all as vectors?
 
-    //all as vectors?
+        //with convenience methods for building ThreeJS vectors or Box2D vectors
 
-    //with convenience methods for building ThreeJS vectors or Box2D vectors
+        //with convenience methods for applying this position to another one (including rotation etc.)
 
-    //with convenience methods for applying this position to another one (including rotation etc.)
+        //Using quads internally for storing the current position
 
-    //Using quads internally for storing the current position
+        //listening to changes of parent positions?!
 
-    //listening to changes of parent positions?!
+        //with bool for "isWorldPosition" if not world it uses parents position
+    }
 
-    //with bool for "isWorldPosition" if not world it uses parents position
-};
+}
 
 
-export = Position;

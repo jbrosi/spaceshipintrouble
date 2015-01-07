@@ -7,109 +7,124 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-//TODO. REFACTOR THIS, this is no valid typescript yet (though this is not included in the project by now)
-define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/screenManager'], function(THREE, TextHelper, _, ScreenManager) {
-    
-    console.log(ScreenManager);
-    
+module SpaceshipInTrouble.Game.Screens.MainMenu {
 
-    var MainMenuScreen = function(renderer) {
+
+    var MainMenuScreen = function (renderer) {
         this._renderer = renderer;
         _.bindAll(this);
     };
-    
+
     MainMenuScreen.prototype.show = function () {
         this._setupScene();
     };
-    
+
     MainMenuScreen.prototype._setupScene = function () {
         console.log("setting up mainMenu scene");
-        
+
         var that = this;
-        
+
         this._setupCameraAndLighting();
         this._setupBackgroundStuff();
         this._registerMouseHandlers();
         this._showSkipIntroButton();
 
     };
-    
+
     MainMenuScreen.prototype._setupMenuTexts = function () {
-        
-        
-        var textHelper = TextHelper.getDefaultTextHelper();
-        var defaultTextMaterial = new THREE.MeshPhongMaterial( { ambient: 0x777777, color: 0x3333ff, specular: 0x009900, shininess: 80, shading: THREE.FlatShading } );
-        
+
+
+        var textHelper = new SpaceshipInTrouble.Engine.Helpers.D3.Text.TextGeometry();
+        var defaultTextMaterial = new THREE.MeshPhongMaterial({
+            ambient: 0x777777,
+            color: 0x3333ff,
+            specular: 0x009900,
+            shininess: 80,
+            shading: THREE.FlatShading
+        });
+
 
         //new game
-        var newGameGeo = textHelper.createTextGeometry('New Game', {size: 8});
+        var newGameGeo = textHelper.createTextGeometry('New Game');
         THREE.GeometryUtils.center(newGameGeo);
-        this._newGameTextMesh = new THREE.Mesh(newGameGeo, defaultTextMaterial.clone()); 
+        this._newGameTextMesh = new THREE.Mesh(newGameGeo, defaultTextMaterial.clone());
         this._newGameTextMesh.position.y = 20;
         this._scene.add(this._newGameTextMesh);
 
         //load game
-        var loadGameGeo = textHelper.createTextGeometry('Load Game', {size: 8});
+        var loadGameGeo = textHelper.createTextGeometry('Load Game');
         THREE.GeometryUtils.center(loadGameGeo);
-        this._loadGameTextMesh = new THREE.Mesh(loadGameGeo, defaultTextMaterial.clone()); 
+        this._loadGameTextMesh = new THREE.Mesh(loadGameGeo, defaultTextMaterial.clone());
         this._loadGameTextMesh.position.y = 5;
         this._scene.add(this._loadGameTextMesh);
 
 
         //settings
-        var settingsGeo = textHelper.createTextGeometry('Settings', {size: 8});
+        var settingsGeo = textHelper.createTextGeometry('Settings');
         THREE.GeometryUtils.center(settingsGeo);
-        this._settingsTextMesh = new THREE.Mesh(settingsGeo, defaultTextMaterial.clone()); 
+        this._settingsTextMesh = new THREE.Mesh(settingsGeo, defaultTextMaterial.clone());
         this._settingsTextMesh.position.y = -10;
         this._scene.add(this._settingsTextMesh);
 
 
         //help
-        var helpGeo = textHelper.createTextGeometry('Help', {size: 8});
+        var helpGeo = textHelper.createTextGeometry('Help');
         THREE.GeometryUtils.center(helpGeo);
-        this._helpTextMesh = new THREE.Mesh(helpGeo, defaultTextMaterial.clone()); 
+        this._helpTextMesh = new THREE.Mesh(helpGeo, defaultTextMaterial.clone());
         this._helpTextMesh.position.y = -25;
         this._scene.add(this._helpTextMesh);
-        
-        
+
+
         //about
-        var aboutGeo = textHelper.createTextGeometry('About', {size: 8});
+        var aboutGeo = textHelper.createTextGeometry('About');
         THREE.GeometryUtils.center(aboutGeo);
-        this._aboutTextMesh  = new THREE.Mesh(aboutGeo, defaultTextMaterial.clone()); 
+        this._aboutTextMesh = new THREE.Mesh(aboutGeo, defaultTextMaterial.clone());
         this._aboutTextMesh.position.y = -40;
         this._scene.add(this._aboutTextMesh);
 
 
-    };    
+    };
 
     MainMenuScreen.prototype._setupTitleTexts = function () {
-        
-        
-        var textHelper = TextHelper.getDefaultTextHelper();
-        var defaultTextMaterial = new THREE.MeshPhongMaterial( { ambient: 0x777777, color: 0xdddddd, specular: 0x009900, shininess: 80, shading: THREE.FlatShading } );
-        var redTextMaterial = new THREE.MeshPhongMaterial( { ambient: 0x777777, color: 0xff1111, specular: 0x009900, shininess: 80, shading: THREE.FlatShading } );
-        
+
+
+        var textHelper = new SpaceshipInTrouble.Engine.Helpers.D3.Text.TextGeometry();
+        var defaultTextMaterial = new THREE.MeshPhongMaterial({
+            ambient: 0x777777,
+            color: 0xdddddd,
+            specular: 0x009900,
+            shininess: 80,
+            shading: THREE.FlatShading
+        });
+        var redTextMaterial = new THREE.MeshPhongMaterial({
+            ambient: 0x777777,
+            color: 0xff1111,
+            specular: 0x009900,
+            shininess: 80,
+            shading: THREE.FlatShading
+        });
+
         //SpaceShip
-        var spaceshipGeo = textHelper.createTextGeometry('SpaceShip', {size: 12});
-        THREE.GeometryUtils.center( spaceshipGeo );
-        var spaceShipTextMesh = new THREE.Mesh(spaceshipGeo, defaultTextMaterial); 
+        var spaceshipGeo = textHelper.createTextGeometry('SpaceShip');
+        THREE.GeometryUtils.center(spaceshipGeo);
+        var spaceShipTextMesh = new THREE.Mesh(spaceshipGeo, defaultTextMaterial);
         spaceShipTextMesh.position.y += 60;
         this._scene.add(spaceShipTextMesh);
-        
+
         //in
-        var inGeo = textHelper.createTextGeometry('in', {size: 4});
-        THREE.GeometryUtils.center( inGeo );
-        var inTextMesh = new THREE.Mesh(inGeo, defaultTextMaterial); 
+        var inGeo = textHelper.createTextGeometry('in');
+        THREE.GeometryUtils.center(inGeo);
+        var inTextMesh = new THREE.Mesh(inGeo, defaultTextMaterial);
         inTextMesh.position.y += 50;
         this._scene.add(inTextMesh);
 
         //trouble!
-        var troubleGeo = textHelper.createTextGeometry('trouble!', {size: 7});
+        var troubleGeo = textHelper.createTextGeometry('trouble!');
         THREE.GeometryUtils.center(troubleGeo);
-        this._troubleTextMesh = new THREE.Mesh(troubleGeo, redTextMaterial); 
+        this._troubleTextMesh = new THREE.Mesh(troubleGeo, redTextMaterial);
         this._troubleTextMesh.position.y += 40;
         this._scene.add(this._troubleTextMesh);
-        
+
         this._troubleRota = {
             x: 0.003,
             y: 0.008,
@@ -117,21 +132,21 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
         };
 
     }
-    
+
     MainMenuScreen.prototype._registerMouseHandlers = function () {
         this._renderer.context.canvas.addEventListener('mousemove', this.onMouseMoved);
         this._renderer.context.canvas.addEventListener('click', this.onMouseClicked);
         this._renderer.context.canvas.addEventListener('touch', this.onMouseClicked);
     };
-    
-    MainMenuScreen.prototype.onMouseMoved = function(evt) {
-        
+
+    MainMenuScreen.prototype.onMouseMoved = function (evt) {
+
         //check if we're hovered over something
         var pos = {
-            x : (evt.x / window.innerWidth * 2) - 1,
-            y: (evt.y / window.innerHeight * 2) - 1 
+            x: (evt.x / window.innerWidth * 2) - 1,
+            y: (evt.y / window.innerHeight * 2) - 1
         };
-        
+
         if (this._isMenuItemHovered) {
             //reset color
             this._newGameTextMesh.material.color.setHex(0x3333ff);
@@ -141,9 +156,9 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
             this._aboutTextMesh.material.color.setHex(0x3333ff);
         }
 
-        if (this._cameraPhase >= 5 && pos.x >-0.2 && pos.x < 0.2) {
+        if (this._cameraPhase >= 5 && pos.x > -0.2 && pos.x < 0.2) {
 
-            
+
             this._isMenuItemHovered = true;
             if (pos.y >= -0.34 && pos.y <= -0.16) {
                 this._newGameTextMesh.material.color.setHex(0x33ffff);
@@ -161,17 +176,17 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
         }
     };
 
-    MainMenuScreen.prototype.onMouseClicked = function(evt) {
+    MainMenuScreen.prototype.onMouseClicked = function (evt) {
         if (this._cameraPhase < 5 && evt.x > window.innerWidth - 200 && evt.y > window.innerHeight - 40) {
             this._skipIntro();
         }
-        
+
         if (this._cameraPhase == 5) {
             var pos = {
-                x : (evt.x / window.innerWidth * 2) - 1,
-                y: (evt.y / window.innerHeight * 2) - 1 
+                x: (evt.x / window.innerWidth * 2) - 1,
+                y: (evt.y / window.innerHeight * 2) - 1
             };
-        
+
             if (pos.y >= -0.34 && pos.y <= -0.16) {
                 this._startNewGame();
             } else if (pos.y >= -0.16 && pos.y <= 0.03) {
@@ -185,42 +200,42 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
             } else {
                 //nothin clicked
             }
-    
+
         }
-        
+
     };
-    
+
     MainMenuScreen.prototype._startNewGame = function () {
-        
+
         this._unregisterEvents();
-        
-        ScreenManager.showScreen('standard-level');
-        ScreenManager.startRendering();
-    }
-    
+
+        this.getScreenManager().showScreen(new SpaceshipInTrouble.Engine.ScreenSystem.LoadLevelScreen());
+        this.getScreenManager().startRendering();
+    };
+
     MainMenuScreen.prototype._unregisterEvents = function () {
         this._renderer.context.canvas.removeEventListener('mousemove', this.onMouseMoved);
         this._renderer.context.canvas.removeEventListener('click', this.onMouseClicked);
         this._renderer.context.canvas.removeEventListener('touch', this.onMouseClicked);
 
     };
-    
+
     MainMenuScreen.prototype._skipIntro = function () {
         this._cameraPhase = 5;
         this._camera.rotation.x = 0;
         this._camera.rotation.y = 0;
         this._camera.rotation.z = 0;
-        this._camera.position.set(0,0,100);
+        this._camera.position.set(0, 0, 100);
 
         this._setupTitleTexts();
         this._setupMenuTexts();
         this._hideSkipIntroButton();
 
     }
-    
+
     MainMenuScreen.prototype._setupBackgroundStuff = function () {
         var that = this;
-    
+
         //create planet on the lower right    
         var planetMaterial = new THREE.MeshPhongMaterial();
         planetMaterial.map = THREE.ImageUtils.loadTexture('assets/textures/planet_02.jpg');
@@ -235,24 +250,23 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
 
         //Load and add ship to the lower left
         var loader = new THREE.JSONLoader();
-        loader.load( "assets/models/fighter.js", function( shipGeo, shipMaterials ) {
+        loader.load("assets/models/fighter.js", function (shipGeo, shipMaterials) {
             console.log("ship loaded");
-            
+
             var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/textures/fighter.png')});
-            that._shipMesh = new THREE.Mesh( shipGeo, shipMaterial);
-            that._shipMesh.scale.set( 10, 10, 10 );
+            that._shipMesh = new THREE.Mesh(shipGeo, shipMaterial);
+            that._shipMesh.scale.set(10, 10, 10);
             that._shipMesh.position.y = -30;
             that._shipMesh.position.x = -60;
             that._shipMesh.position.z = 0;
-            that._scene.add( that._shipMesh );
-        } , "assets/textures/");
-
+            that._scene.add(that._shipMesh);
+        }, "assets/textures/");
 
 
         //Create the skysphere around everything (needs a little tweaking later)
         var skySphereTexture = THREE.ImageUtils.loadTexture('assets/textures/nebula_01.jpg');
         skySphereTexture.wrapS = skySphereTexture.wrapT = THREE.RepeatWrapping;
-        skySphereTexture.repeat.set(3,3);
+        skySphereTexture.repeat.set(3, 3);
         var skySphereMaterial = new THREE.MeshPhongMaterial();
         skySphereMaterial.map = skySphereTexture;
         skySphereMaterial.depthWrite = false;
@@ -263,48 +277,53 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
         this._skySphere.rotation.z = 2;
         this._scene.add(this._skySphere);
     }
-    
+
     MainMenuScreen.prototype._showSkipIntroButton = function () {
 
-        
+
         var texture = THREE.ImageUtils.loadTexture('assets/textures/skip_intro_button.png');
-        var mat  = new THREE.SpriteMaterial({map: texture, useScreenCoordinates: true, depthTest: false, depthWrite: false});
+        var mat = new THREE.SpriteMaterial({
+            map: texture,
+            useScreenCoordinates: true,
+            depthTest: false,
+            depthWrite: false
+        });
         this._skipIntroButton = new THREE.Sprite(mat);
-        this._skipIntroButton.position.set( window.innerWidth - 80, window.innerHeight - 20, 0 );
-        this._skipIntroButton.scale.set( 128, 64, 1.0 ); // imageWidth, imageHeight
+        this._skipIntroButton.position.set(window.innerWidth - 80, window.innerHeight - 20, 0);
+        this._skipIntroButton.scale.set(128, 64, 1.0); // imageWidth, imageHeight
         this._scene.add(this._skipIntroButton);
     }
-    
+
     MainMenuScreen.prototype._hideSkipIntroButton = function () {
         this._scene.remove(this._skipIntroButton);
     }
-    
-    
-    MainMenuScreen.prototype._setupCameraAndLighting = function() {
+
+
+    MainMenuScreen.prototype._setupCameraAndLighting = function () {
         this._scene = new THREE.Scene();
-        
+
         //soft white ambient light (change to blueish color?)
-        var light = new THREE.AmbientLight( 0x404040 ); 
-        this._scene.add( light );
+        var light = new THREE.AmbientLight(0x404040);
+        this._scene.add(light);
 
         //directional light for soft shadows
-        var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.9 );
-        directionalLight.position.set( 1, 1, 1 );
-        this._scene.add( directionalLight );
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
+        directionalLight.position.set(1, 1, 1);
+        this._scene.add(directionalLight);
 
         //perspective camera with default values / angle
         this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
         this._camera.rotation.x = -1;
         this._camera.rotation.y = -2;
         this._camera.position.z = 500;
-        
+
         this._cameraPhase = 0;
     };
-    
-    MainMenuScreen.prototype.render = function (time) {    
-   
+
+    MainMenuScreen.prototype.render = function (time) {
+
         if (this._cameraPhase < 5) {
-            
+
             //slightly move into our center view
             if (this._cameraPhase == 0) {
                 this._camera.rotation.x += 0.0005;
@@ -321,13 +340,13 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
                 if (this._camera.rotation.x > -0.1) {
                     this._camera.position.z -= 0.4;
                 }
-                if(this._camera.rotation.x >= 0) {
+                if (this._camera.rotation.x >= 0) {
                     this._camera.rotation.x = 0;
                     this._camera.rotation.y = 0;
                     this._cameraPhase++;
-                }                
+                }
             }
-                
+
             //zoom and activate texts afterwards
             if (this._cameraPhase == 1) {
                 this._camera.position.z -= 0.5;
@@ -336,11 +355,11 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
                     this._setupTitleTexts();
                     this._setupMenuTexts();
                     this._hideSkipIntroButton();
-                    this._cameraPhase=5; 
+                    this._cameraPhase = 5;
                 }
             }
         }
-    
+
         if (this._shipMesh) {
             this._shipMesh.rotation.x -= 0.0001;
             this._shipMesh.rotation.y += 0.0003;
@@ -348,7 +367,6 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
         }
 
 
-        
         if (this._troubleTextMesh) {
             this._troubleTextMesh.rotation.x += this._troubleRota.x;
             this._troubleTextMesh.rotation.z += this._troubleRota.z;
@@ -360,11 +378,11 @@ define(['three', 'engine/helper/3d/text/textHelper', 'lodash', 'engine/screens/s
         this._skySphere.rotation.z += 0.00005;
 
 
-        this._renderer.render(this._scene, this._camera); 
-        
+        this._renderer.render(this._scene, this._camera);
+
     };
-    
-    
+
+
     return MainMenuScreen;
-    
-});
+
+}

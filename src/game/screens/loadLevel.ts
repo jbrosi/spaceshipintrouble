@@ -7,10 +7,12 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-import DefaultLoadLevelScreen = require('../../Engine/screens/LoadLevelScreen');
 
-class LoadLevelScreen extends DefaultLoadLevelScreen {
+module SpaceshipInTrouble.Game.Screens {
 
-};
 
-export = LoadLevelScreen;
+    export class LoadLevelScreen extends SpaceshipInTrouble.Engine.ScreenSystem.LoadLevelScreen {
+
+    }
+}
+
