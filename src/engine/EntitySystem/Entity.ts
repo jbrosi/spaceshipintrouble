@@ -1,7 +1,7 @@
 /**
  * Spaceship in trouble - a Game & GameEngine in TypeScript
  *
- * Copyright (c) 2014 Johannes Brosi <me@brosi.me>
+ * Copyright (c) 2014 - 2015 Johannes Brosi <me@brosi.me>
  *
  * Released under the MIT license
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
@@ -48,7 +48,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * The position, rotation and scale of this entity. This might be either world-coordinates or local coordinates.
          */
-        private _position: Position;
+        private _position: THREE.Object3D;
 
         /**
          * Reference to the entityManager holding this entity
@@ -74,6 +74,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
             //todo: initialize entity, load scripts defined in Prototype,
             //      initialize scripts, ...
 
+            this._position = new THREE.Object3D();
             this._manager = manager;
 
         }
@@ -234,6 +235,18 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
         /**
+         * Sends the given `message` to all (direct) children of this entity as well as
+         * to all the childrens of the childrens of the childrens...
+         * Please be careful with large nested constructs
+         *
+         * @param message {engine.entity.EntityMessage} the message to be sent
+         */
+        public sendMessageToChildren (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage, isDeep: boolean = false): void {
+            this.sendMessageToChild(message, true);
+        }
+
+
+        /**
          * Sends the given `message` to all (direct) children of this entity. If `isDeep` is set to true
          * also all the childrens of the childrens of the childrens... will receive this message
          * carefull on large nested constructs if you use this param :).
@@ -242,7 +255,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * @param isDeep {boolean} (optional, default: false). Set to true if you want all childs of all childs (of all childs...)
          *        to receive this message, too
          */
-        public sendMessageToChildren (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage, isDeep: boolean = false): void {
+        public sendMessageToChild (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage, isDeep: boolean = false): void {
             var a: number;
             for (a = 0; a < this._childEntities.length && ! message.isConsumed(); a++) {
                 this._childEntities[a].sendMessage(message);
@@ -253,11 +266,12 @@ module SpaceshipInTrouble.Engine.EntitySystem {
             }
         }
 
+
         /**
          *
          * @returns {Position} the position/rotation/scale of this entity
          */
-        public getPosition(): Position {
+        public getPosition(): THREE.Object3D {
             return this._position;
         }
 
@@ -286,7 +300,59 @@ module SpaceshipInTrouble.Engine.EntitySystem {
                 this._parentEntity.sendMessageToParent(message, true);
             }
         }
+
+
+        /**
+         * Sends the given `message` to all the parents of this entity
+         *
+         * @param message {engine.entity.EntityMessage} the message to be sent
+         */
+        public sendMessageToParents (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage): void {
+            this.sendMessageToParent(message, true);
+        }
+
+
+        public setParent(entity: Entity, preserveWorldCoordinates : boolean = false) {
+
+            if (preserveWorldCoordinates) {
+                JL("Entity").error("Not yet implemented 'preserverWorldCoordinates' parameter!");
+                throw new Error("preserverWorldCoordinates not yet implemented!");
+            }
+
+            if (this.hasParent()) {
+                if (preserveWorldCoordinates) {
+                    //THREE.SceneUtils.detach(this.getPosition(), this.getParent().getPosition(), scene);
+                } else {
+                    this.getParent().getPosition().remove(this.getPosition());
+                }
+
+            }
+
+            this._parentEntity = entity;
+            if (preserveWorldCoordinates) {
+                //THREE.SceneUtils.attach(this.getPosition(), scene, this.getParent().getPosition());
+            } else {
+                this.getParent().getPosition().add(this.getPosition());
+            }
+            this._parentEntity.getChildren().push(this);
+        }
+
+        public getChildren() {
+            return this._childEntities;
+        }
+
+        /**
+         *
+         * @param entity
+         */
+        public addChildEntity(entity : Entity) {
+            //also sets the position object3d stuff and registers as our child so we don't have to worry about that
+            entity.setParent(this);
+        }
+
     }
+
+
 }
 
 

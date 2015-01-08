@@ -1,7 +1,7 @@
 /**
  * Spaceship in trouble - a Game & GameEngine in TypeScript
  *
- * Copyright (c) 2014 Johannes Brosi <me@brosi.me>
+ * Copyright (c) 2014 - 2015 Johannes Brosi <me@brosi.me>
  *
  * Released under the MIT license
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
@@ -37,22 +37,35 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         private _alwaysActiveEntityCount = 0;
 
 
+        private _scene : THREE.Scene;
+
+        private _physic : Box2D.b2World;
+
         /**
          * Creates a new EntityManager ready for managing entities.
          *
          */
-        constructor() {
-
+        constructor(scene : THREE.Scene, physic: Box2D.b2World) {
+            this._scene = scene;
+            this._physic = physic;
             this.resetEntityPools();
         }
 
+        public getPhysic() {
+            return this._physic;
+        }
+
+        public getScene() {
+            return this._scene;
+        }
 
         /**
          * Notifies all entities about their deletion and resets the entity pools afterwards.
          *
          */
         public deleteEntities() {
-            //todo: notify all entities of their deletion
+            //TODO: notify all entities of their deletion
+            //TODO: remove entity object3ds from scene
             this.resetEntityPools();
         }
 
