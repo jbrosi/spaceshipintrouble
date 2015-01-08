@@ -39,13 +39,13 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         private _scene : THREE.Scene;
 
-        private _physic : Box2D.b2World;
+        private _physic : Box2D.Dynamics.b2World;
 
         /**
          * Creates a new EntityManager ready for managing entities.
          *
          */
-        constructor(scene : THREE.Scene, physic: Box2D.b2World) {
+        constructor(scene : THREE.Scene, physic: Box2D.Dynamics.b2World) {
             this._scene = scene;
             this._physic = physic;
             this.resetEntityPools();
@@ -88,32 +88,8 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         }
 
 
-        /**
-         * Creates a new entity and adds it to the pool
-         *
-         * @param prototype {engine.entity.EntityPrototype} the prototype to create the entity from
-         * @returns {engine.entity.Entity} the entity created (be carefull, the entity may not have been fully initialized yet!)
-         */
-        public createEntityFromPrototype(prototype: SpaceshipInTrouble.Engine.EntitySystem.EntityPrototype): SpaceshipInTrouble.Engine.EntitySystem.Entity {
-            var entity = new SpaceshipInTrouble.Engine.EntitySystem.Entity(prototype, this);
-            this._entities[this._entityCount++] = entity;
-
-            //todo: perform active/inactive check and sort into corresponding pool
-
-            return entity;
-        }
-
-        /**
-         * Creates a new entity by typename and adds it to the pool
-         * @param type {string} the name of the type to create this entity from
-         * @returns {engine.entity.Entity} the entity created or null if the type isn't defined (be carefull, the entity may not have been fully initialized yet!)
-         */
-        public createEntityByName(type:string):Entity {
-            if (this._registeredPrototypes[type] === undefined) {
-                //TODO: warn: Type not found! return null...
-                return null;
-            }
-            return this.createEntityFromPrototype(this._registeredPrototypes[type]);
+        public registerEntity(entity : SpaceshipInTrouble.Engine.EntitySystem.Entity) {
+            this._entities.push(entity);
         }
 
 

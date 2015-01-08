@@ -6,7 +6,8 @@
  * Released under the MIT license
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
-
+///ts:ref=include_all.ts
+/// <reference path="../include_all.ts"/> ///ts:ref:generated
 module SpaceshipInTrouble.Engine.EntitySystem {
 
     /**
@@ -31,7 +32,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
             super(name, entity, data);
             this._file = file;
         }
-
 
     }
 }

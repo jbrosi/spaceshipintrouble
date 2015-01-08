@@ -283,7 +283,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          */
         public getEntityManager(): SpaceshipInTrouble.Engine.EntitySystem.EntityManager {
             if (this._entityManager == null) {
-                this._entityManager = new SpaceshipInTrouble.Engine.EntitySystem.EntityManager();
+                this._entityManager = new SpaceshipInTrouble.Engine.EntitySystem.EntityManager(this._scene, this._physicWorld.world);
             }
             return this._entityManager;
         }

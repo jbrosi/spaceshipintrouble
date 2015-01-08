@@ -11,7 +11,13 @@ module.exports = function(grunt) {
         copy: {
             build: {
                 files: [
-                    {src: './src/debug_loader.js', dest: './build/debug_loader.js'}
+                    {src: './src/debug_loader.js', dest: './build/debug_loader.js'},
+                    {src: './src/reference.tpl', dest: './build/reference.ts'}
+                ]
+            },
+            dist: {
+                files: [
+                    {src: './src/reference.tpl', dest: './dist/reference.ts'}
                 ]
             }
         },
@@ -81,7 +87,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('default', ['clean:build', 'copy:build', 'ts:build']);
-    grunt.registerTask('dist', ['clean:dist', 'ts:dist']);
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'ts:dist']);
 
     grunt.registerTask('dev', ['default', 'ts:watch']);
 

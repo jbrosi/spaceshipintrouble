@@ -7,6 +7,9 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+///ts:ref=include_all.ts
+/// <reference path="../include_all.ts"/> ///ts:ref:generated
+
 
 module SpaceshipInTrouble.Engine.EntitySystem {
     /**
@@ -21,7 +24,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         /**
          * Holds all the components attached to this entity.
          */
-        private _components: SpaceshipInTrouble.Engine.EntitySystem.EntityComponent[];
+        private _components: SpaceshipInTrouble.Engine.EntitySystem.EntityComponent[] = [];
 
         /**
          * Holds all callbacks who registered for listening on receiving messages on this entity.
@@ -38,6 +41,14 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * Holds all entities attached to this entity.
          */
         private _childEntities: Entity[] = [];
+
+        /**
+         * Holds all generic event listeners
+         *
+         * @type {Array}
+         * @private
+         */
+        private _genericEventListeners : any[] = [];
 
         /**
          * Holds the parent entity of this entity. May be null if the entity is on the root
@@ -62,21 +73,12 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         private _stepMessage = new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage("entity:step", {timeStep: 0}, this, false);
 
         /**
-         * Creates a new entity from the given `prototype`. The entity will copy
-         * all necessary data from the `prototype` and does not rely any further on
-         * it. So if you change the `prototype` after creating this entity
-         * you won't have any impact on this entity.
+         * Don't use this to directly create entities. Use EntityFactory instead!
          *
-         * @param prototype {engine.entity.EntityPrototype} the prototype to create this entity from
-         * @param manager {engine.entity.EntityManager} reference to the manager this entity was created with
          */
-        constructor(prototype: SpaceshipInTrouble.Engine.EntitySystem.EntityPrototype, manager: SpaceshipInTrouble.Engine.EntitySystem.EntityManager) {
-            //todo: initialize entity, load scripts defined in Prototype,
-            //      initialize scripts, ...
+        constructor() {
 
             this._position = new THREE.Object3D();
-            this._manager = manager;
-
         }
 
         /**
@@ -123,6 +125,42 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          */
         public hasParent() : boolean {
             return this._parentEntity != null;
+        }
+
+
+        /**
+         * Adds the given component to this entity and also registers to this entity as genericEventListener.
+         *
+         * @param component
+         */
+        public addComponent(component : SpaceshipInTrouble.Engine.EntitySystem.EntityComponent) {
+            this._components.push(component);
+            this.addGenericEventListener(component);
+        }
+
+
+        public removeComponent(component : SpaceshipInTrouble.Engine.EntitySystem.EntityComponent) {
+            for (var i = 0; i < this._components.length; i++) {
+                if (this._components[i] === component) {
+                    this._components.splice(i,1);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public addGenericEventListener(listener) {
+            this._genericEventListeners.push(listener);
+        }
+
+        public removeGenericEventListener(listener) {
+            for (var i = 0; i < this._genericEventListeners.length; i++) {
+                if (this._genericEventListeners[i] === listener) {
+                    this._genericEventListeners.splice(i,1);
+                    return true;
+                }
+            }
+            return false;
         }
 
 
@@ -179,6 +217,8 @@ module SpaceshipInTrouble.Engine.EntitySystem {
                 return false;
             }
 
+            //TODO: split by spaces and remove all given stuff
+
             if (this._listeners[identifier].length == 1) {
                 //nothin to do
                 if (this._listeners[identifier][0] === callback) {
@@ -219,17 +259,34 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * to all listeners which registered on this entity for that event. You may
          * use this method to directly deliver a `message` to this entity.
          *
-         * @param message {engine.entity.EntityMessage} the message to send
+         * @param message {SpaceshipInTrouble.Engine.EntitySystem.EntityMessage} the message to send
          */
         public sendMessage (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage): void {
-            //notify our registered callbacks:
+
             var id = message.getIdentifier();
+
+            //notify the general listeners
+            for (var i = 0; i < this._genericEventListeners.length && ! message.isConsumed(); i++) {
+                var eventMethod = "onEvent:" + id;
+                if (this._genericEventListeners[i][eventMethod] !== undefined) {
+                    eventMethod = "onGenericEvent";
+                }
+                if (this._genericEventListeners[i][eventMethod] !== undefined) {
+                    try {
+                        this._genericEventListeners[i][eventMethod].apply(this._genericEventListeners[i], [message]);
+                    } catch (e) {
+                        JL("Entity").warn("Failed to dispatch message");
+                        console.error(e);
+                    }
+                }
+            }
+
+            //notify our registered callbacks:
             if (this._listeners[id] === undefined) {
                 return;
             }
 
-            var a = 0;
-            for (a = 0; a < this._listeners[id].length && ! message.isConsumed(); a++) {
+            for (var a = 0; a < this._listeners[id].length && ! message.isConsumed(); a++) {
                 this._listeners[message.getIdentifier()][a](message);
             }
         }
@@ -239,7 +296,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * to all the childrens of the childrens of the childrens...
          * Please be careful with large nested constructs
          *
-         * @param message {engine.entity.EntityMessage} the message to be sent
+         * @param message {SpaceshipInTrouble.Engine.EntitySystem.EntityMessage} the message to be sent
          */
         public sendMessageToChildren (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage, isDeep: boolean = false): void {
             this.sendMessageToChild(message, true);
@@ -272,6 +329,10 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * @returns {Position} the position/rotation/scale of this entity
          */
         public getPosition(): THREE.Object3D {
+            return this._position;
+        }
+
+        public getObject3D() : THREE.Object3D {
             return this._position;
         }
 

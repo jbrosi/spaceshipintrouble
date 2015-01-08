@@ -14,7 +14,7 @@ module SpaceshipInTrouble.Game.Screens {
     export class PlayLevelScreen extends SpaceshipInTrouble.Engine.ScreenSystem.PlayLevelScreen {
 
         private _lastShot:number  = 0;
-        private _shipMesh:THREE.Mesh;
+        private _shipEntity: SpaceshipInTrouble.Engine.EntitySystem.Entity;
         private _physScale:any;
         private _groundMirror : any;
 
@@ -42,8 +42,8 @@ module SpaceshipInTrouble.Game.Screens {
             var that = this;
 
             this._setupCameraAndLighting();
-            this._createShip();
             this._setupPhysics();
+            this._createShip();
             this._setupLevel();
 
             console.log("registering keyboard and virtual joystick");
@@ -125,7 +125,7 @@ module SpaceshipInTrouble.Game.Screens {
         }
 
         private _moveShip(time) {
-            if (!time || !this._shipMesh) {
+            if (!time || !this._shipEntity) {
                 return;
             }
             var physics = this.getPhysics();
@@ -174,11 +174,11 @@ module SpaceshipInTrouble.Game.Screens {
                 physics.ship.SetAngle(physics.ship.GetAngle());
             }
 
-            this._shipMesh.position.x = physics.ship.GetPosition().x * this._physScale;
-            this._shipMesh.position.y = physics.ship.GetPosition().y * this._physScale;
+            this._shipEntity.getObject3D().position.x = physics.ship.GetPosition().x * this._physScale;
+            this._shipEntity.getObject3D().position.y = physics.ship.GetPosition().y * this._physScale;
             this.getCamera().position.x = physics.ship.GetPosition().x * this._physScale;
             this.getCamera().position.y = physics.ship.GetPosition().y * this._physScale;
-            this._shipMesh.rotation.y = physics.ship.GetAngle();
+            this._shipEntity.getObject3D().rotation.y = physics.ship.GetAngle();
 
 
             physics.ship.SetLinearDamping(0.1 * physics.ship.GetLinearVelocity().Length());
@@ -310,12 +310,13 @@ module SpaceshipInTrouble.Game.Screens {
         }
 
 
-        public setShipMesh(shipMesh:THREE.Mesh) {
-            this._shipMesh = shipMesh;
-        }
-
         private _createShip() {
             var that = this;
+
+            this._shipEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
+            this._shipEntity.getObject3D().rotation.set(Math.PI / 2, 0, 0);
+
+
 
             //Load and add ship
             var loader = new THREE.JSONLoader();
@@ -325,11 +326,11 @@ module SpaceshipInTrouble.Game.Screens {
                 var shipMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/game/textures/fighter.png')});
                 var shipMesh = new THREE.Mesh(shipGeo, shipMaterial);
                 shipMesh.scale.set(1.5, 1.5, 1.5);
-                shipMesh.rotation.set(Math.PI / 2, 0, 0);
-
                 shipMesh.updateMatrix();
-                that.getScene().add(shipMesh);
-                that.setShipMesh(shipMesh);
+
+                var shipMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(that._shipEntity, shipMesh);
+
+                that.getScene().add(that._shipEntity.getObject3D());
             }, "assets/game/textures/");
         }
 
