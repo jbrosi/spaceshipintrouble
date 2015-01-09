@@ -213,6 +213,8 @@ module SpaceshipInTrouble.Game.Screens {
 
                     var projectilePhysicComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.PhysicComponent(projectileEntity, projectile, this._physScale);
 
+                    var projectileLimitedLifeComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.LimitedLifeComponent(projectileEntity, 1500);
+
                     this.getScene().add(projectileEntity.getObject3D());
 
                 }

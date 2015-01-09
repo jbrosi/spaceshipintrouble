@@ -37,6 +37,9 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          */
         private _data = {};
 
+
+        private _isDisposed = false;
+
         /**
          * Holds all entities attached to this entity.
          */
@@ -76,8 +79,9 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * Don't use this to directly create entities. Use EntityFactory instead!
          *
          */
-        constructor() {
+        constructor(entityManager : SpaceshipInTrouble.Engine.EntitySystem.EntityManager) {
 
+            this._manager = entityManager;
             this._position = new THREE.Object3D();
         }
 
@@ -253,6 +257,20 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
         }
 
+        public dispose() {
+            if (this._isDisposed) {
+                //already disposed
+                return;
+            }
+            this._isDisposed = true;
+            var msg = new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage("entity:disposed", {}, this);
+            this.sendMessage(msg);
+            this.sendMessageToChildren(msg);
+
+            //remove from scene
+            this.getManager().getScene().remove(this.getObject3D());
+        }
+
         /**
          * Call this to send a `message` to this entity. Forwards the `message`
          * to all listeners which registered on this entity for that event. You may
@@ -263,6 +281,10 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         public sendMessage (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage): void {
 
             var id = message.getIdentifier();
+
+            if (id == "entity:disposed" && ! this._isDisposed) {
+                this.dispose();
+            }
 
             //notify the general listeners
             for (var i = 0; i < this._genericEventListeners.length && ! message.isConsumed(); i++) {
@@ -297,7 +319,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          *
          * @param message {SpaceshipInTrouble.Engine.EntitySystem.EntityMessage} the message to be sent
          */
-        public sendMessageToChildren (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage, isDeep: boolean = false): void {
+        public sendMessageToChildren (message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage): void {
             this.sendMessageToChild(message, true);
         }
 
@@ -317,7 +339,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
                 this._childEntities[a].sendMessage(message);
 
                 if (isDeep && ! message.isConsumed()) {
-                    this._childEntities[a].sendMessageToChildren(message, true);
+                    this._childEntities[a].sendMessageToChildren(message);
                 }
             }
         }

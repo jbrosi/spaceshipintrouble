@@ -38,6 +38,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * @param data {any} the data for this component
          */
         public constructor(name: string, entity: SpaceshipInTrouble.Engine.EntitySystem.Entity, data: any = {}) {
+            _.bindAll(this);
             this._name = name;
             this._entity = entity;
             this._data = data;

@@ -14,7 +14,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         public static _registeredPrototypes : SpaceshipInTrouble.Engine.EntitySystem.EntityPrototype[] = [];
 
         public static createEntity(entityManager : SpaceshipInTrouble.Engine.EntitySystem.EntityManager) : SpaceshipInTrouble.Engine.EntitySystem.Entity{
-            var entity = new SpaceshipInTrouble.Engine.EntitySystem.Entity();
+            var entity = new SpaceshipInTrouble.Engine.EntitySystem.Entity(entityManager);
             entityManager.registerEntity(entity);
             return entity;
         }
@@ -27,11 +27,11 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          * @returns {engine.entity.Entity} the entity created (be carefull, the entity may not have been fully initialized yet!)
          */
         public static createEntityFromPrototype(prototype: SpaceshipInTrouble.Engine.EntitySystem.EntityPrototype, entityManager : SpaceshipInTrouble.Engine.EntitySystem.EntityManager): SpaceshipInTrouble.Engine.EntitySystem.Entity {
-            var entity = new SpaceshipInTrouble.Engine.EntitySystem.Entity();
+            var entity = new SpaceshipInTrouble.Engine.EntitySystem.Entity(entityManager);
 
             //TODO: add the prototype stuff
 
-            entityManager.registerEntity(new SpaceshipInTrouble.Engine.EntitySystem.Entity());
+            entityManager.registerEntity(entity);
             return entity;
         }
 

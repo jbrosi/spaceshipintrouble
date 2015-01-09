@@ -29,5 +29,10 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
             this.getEntity().getObject3D().position.set(this._physicBody.GetPosition().x * this._physScale, this._physicBody.GetPosition().y * this._physScale, 0);
             this.getEntity().getObject3D().updateMatrix();
         }
+
+
+        public "onEvent:entity:disposed" () {
+            this.getEntity().getManager().getPhysic().DestroyBody(this._physicBody);
+        }
     }
 }

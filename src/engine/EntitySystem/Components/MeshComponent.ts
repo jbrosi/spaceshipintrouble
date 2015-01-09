@@ -23,9 +23,5 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
             entity.getObject3D().add(mesh);
             this._mesh = mesh;
         }
-
-        public "onEvent:entity:step" () {
-
-        }
     }
 }
