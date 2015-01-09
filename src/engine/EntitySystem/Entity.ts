@@ -248,7 +248,6 @@ module SpaceshipInTrouble.Engine.EntitySystem {
          */
         public doStep (timeStep: number): void {
             //fake step message for scripts:
-
             this._stepMessage.getMessage().timeStep = timeStep;
             this.sendMessage(this._stepMessage);
 
@@ -268,7 +267,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
             //notify the general listeners
             for (var i = 0; i < this._genericEventListeners.length && ! message.isConsumed(); i++) {
                 var eventMethod = "onEvent:" + id;
-                if (this._genericEventListeners[i][eventMethod] !== undefined) {
+                if (this._genericEventListeners[i][eventMethod] === undefined) {
                     eventMethod = "onGenericEvent";
                 }
                 if (this._genericEventListeners[i][eventMethod] !== undefined) {

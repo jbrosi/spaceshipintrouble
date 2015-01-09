@@ -25,7 +25,7 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
         }
 
         public "onEvent:entity:step" () {
-            console.log("MeshComponent : Step");
+
         }
     }
 }

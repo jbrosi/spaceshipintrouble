@@ -7,6 +7,10 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
+
+///ts:ref=include_all.ts
+/// <reference path="../include_all.ts"/> ///ts:ref:generated
+
 module SpaceshipInTrouble.Engine.EntitySystem {
 
     var DEFAULT_ENTITY_POOL_SIZE = 10000;
@@ -89,7 +93,7 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
 
         public registerEntity(entity : SpaceshipInTrouble.Engine.EntitySystem.Entity) {
-            this._entities.push(entity);
+            this._entities[this._entityCount++] = entity;
         }
 
 
@@ -103,6 +107,10 @@ module SpaceshipInTrouble.Engine.EntitySystem {
         public sendMessage(message: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage, alsoSendToInactives:boolean = false) {
 
             var a:number;
+
+            for (a = 0; a < this._entityCount && !message.isConsumed(); a++) {
+                this._entities[a].sendMessage(message);
+            }
 
             for (a = 0; a < this._alwaysActiveEntityCount && !message.isConsumed(); a++) {
                 this._alwaysActiveEntities[a].sendMessage(message);
@@ -130,6 +138,10 @@ module SpaceshipInTrouble.Engine.EntitySystem {
 
             //lets all the (active) entities do their stuff
             var a:number;
+
+            for (a = 0; a < this._entityCount; a++) {
+                this._entities[a].doStep(timeStep);
+            }
 
             for (a = 0; a < this._alwaysActiveEntityCount; a++) {
                 this._alwaysActiveEntities[a].doStep(timeStep);
