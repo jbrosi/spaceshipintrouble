@@ -118,10 +118,7 @@ module SpaceshipInTrouble.Game.Screens {
         }
 
         public postPhysics(time) {
-            for (var i = 0; i < this._projectiles.length; i++) {
-                var cur = this._projectiles[i];
-                cur.mesh.position.set(cur.physic.GetPosition().x * this._physScale, cur.physic.GetPosition().y * this._physScale, 0);
-            }
+
         }
 
         private _moveShip(time) {
@@ -188,14 +185,19 @@ module SpaceshipInTrouble.Game.Screens {
 
                 var currentTime = new Date().getTime();
                 if (currentTime - this._lastShot > 150) {
-                    console.log("FIRE!!");
                     this._lastShot = currentTime;
+
+
+
+                    var projectileEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
+                    projectileEntity.getObject3D().rotation.set(Math.PI / 2, 0, 0);
+
                     var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
-                     shotMesh.position.set(physics.ship.GetPosition().x * this._physScale, physics.ship.GetPosition().y * this._physScale, 0);
+                    projectileEntity.getObject3D().position.set(physics.ship.GetPosition().x * this._physScale, physics.ship.GetPosition().y * this._physScale, 0);
 
-                    this.getScene().add(shotMesh);
+                    var projectileMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(projectileEntity, shotMesh);
 
-                    physics.projectileBodyDef.position.Set(physics.ship.GetPosition().x + (facingDirection.x / factor), physics.ship.GetPosition().y + (facingDirection.y / factor));
+                    //physics.projectileBodyDef.position.Set(physics.ship.GetPosition().x + (facingDirection.x / factor), physics.ship.GetPosition().y + (facingDirection.y / factor));
                     var projectile :any = physics.world.CreateBody(physics.projectileBodyDef);
 
                     facingDirection.Multiply(0.1);
@@ -203,10 +205,16 @@ module SpaceshipInTrouble.Game.Screens {
                     projectile.SetLinearVelocity(facingDirection);
 
                     projectile.CreateFixture(physics.projectileFix);
+                    var pos = new Box2D.Common.Math.b2Vec2(physics.ship.GetPosition().x + (facingDirection.x / factor), physics.ship.GetPosition().y + (facingDirection.y / factor));
+                    projectile.SetPosition(pos);
 
 
                     projectile.SetUserData({type: "projectile"});
-                    this._projectiles.push({mesh: shotMesh, physic: projectile, time: currentTime});
+
+                    var projectilePhysicComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.PhysicComponent(projectileEntity, projectile, this._physScale);
+
+                    this.getScene().add(projectileEntity.getObject3D());
+
                 }
 
             }
