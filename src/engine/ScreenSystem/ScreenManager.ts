@@ -7,7 +7,8 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-
+///ts:ref=include_all.ts
+/// <reference path="../include_all.ts"/> ///ts:ref:generated
 module SpaceshipInTrouble.Engine.ScreenSystem {
 
 
@@ -86,8 +87,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
             console.log("showing screen...");
             this._currentScreen = screen;
             this._screenStack.push(this._currentScreen);
-            this._currentScreen.show();
-            this.startRendering();
+            this._currentScreen.show().then(this.startRendering);
         }
 
         public getRenderer () : THREE.WebGLRenderer {

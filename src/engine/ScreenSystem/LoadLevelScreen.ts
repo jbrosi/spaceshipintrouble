@@ -46,8 +46,9 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * @method show
          * @overrides
          */
-        public show() {
-            this._setupScene();
+        public show() : Q.Promise<any> {
+            return this._setupScene();
+
         }
 
         /**
@@ -56,7 +57,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * @method _setupScene
          * @private
          */
-        private _setupScene() {
+        private _setupScene() : Q.Promise<any> {
 
             this._scene = new THREE.Scene();
 
@@ -95,6 +96,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
             this._scene.add(loadingMesh);
 
 
+            return Q(true);
         }
 
         /**

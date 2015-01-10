@@ -41,8 +41,9 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * Override to implement your own behavior
          *
          */
-        public show() {
+        public show() : Q.Promise<any> {
             //gets callend when the screen gets visible
+            return Q(true);
         }
 
         /**

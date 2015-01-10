@@ -24,6 +24,10 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
             this._physScale = physScale;
             this._physicBody = physicBody;
 
+            if (this._physicBody.GetUserData() == null) {
+                this._physicBody.SetUserData({});
+            }
+
             this._physicBody.GetUserData().type = 'entity';
             this._physicBody.GetUserData().entity = entity;
         }

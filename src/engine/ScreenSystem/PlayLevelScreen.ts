@@ -193,8 +193,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
                 var objectA = contact.GetFixtureA().GetBody().GetUserData();
                 var objectB = contact.GetFixtureB().GetBody().GetUserData();
 
-                console.log("hello", contact);
-
                 if (objectA.type == 'entity' && objectA.entity !== undefined) {
 
                     //both are entity?
@@ -215,7 +213,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
             };
 
             colDetector.PostSolve = function (contact, impulse) {
-                console.log(impulse.normalImpulses[0]);
+                //console.log(impulse.normalImpulses[0]);
 
             };
 
@@ -317,8 +315,9 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          * Gets called when the level is about to be shown
          *
          */
-        public show() {
+        public show() : Q.Promise<any> {
             console.log("show not implemented");
+            return Q(true);
         }
 
         /**

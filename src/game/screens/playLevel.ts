@@ -15,6 +15,9 @@ module SpaceshipInTrouble.Game.Screens {
 
         private _lastShot:number  = 0;
         private _shipEntity: SpaceshipInTrouble.Engine.EntitySystem.Entity;
+
+        private _droneMesh : THREE.Mesh;
+
         private _physScale:any;
         private _groundMirror : any;
 
@@ -31,26 +34,24 @@ module SpaceshipInTrouble.Game.Screens {
             this._groundMirror.render();
         }
 
-        public show() {
+        public show() : Q.Promise <any> {
             console.log("Showing");
-            this._setupScene();
+            return this._setupScene();
         }
 
-        private _setupScene() {
+        private _setupScene() : Q.Promise <any> {
             console.log("setting up level scene");
 
             var that = this;
 
-            this._setupCameraAndLighting();
-            this._setupPhysics();
 
-            this._createShip();
-            this._setupLevel();
-
-            console.log("registering keyboard and virtual joystick");
-            this.getKeyboard().register();
-            this.getJoystick().register(this);
-
+            return this._setupCameraAndLighting()
+                .then(this._setupPhysics)
+                .then(this._createShip)
+                .then(this._createDrone)
+                .then(this._setupLevel)
+                .then(this.getKeyboard().register)
+                .then(function() {that.getJoystick().register(that);});
 
         }
 
@@ -92,6 +93,27 @@ module SpaceshipInTrouble.Game.Screens {
             physics.ship.CreateFixture(shipFix);
             physics.ship.SetLinearDamping(0.002);
             physics.ship.SetUserData({type: 'ship'});
+
+
+
+            //enemy
+            var enemyFix = new Box2D.Dynamics.b2FixtureDef();
+            enemyFix.density = 50.0;
+            enemyFix.friction = 10.11;
+            enemyFix.restitution = 0.5;
+            enemyFix.shape = new Box2D.Collision.Shapes.b2CircleShape(3 / this._physScale);
+
+            physics.enemyFix = enemyFix;
+
+            var enemyBodyDef = new Box2D.Dynamics.b2BodyDef();
+            enemyBodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
+
+            physics.enemyBodyDef = enemyBodyDef;
+
+            physics.enemy = physics.world.CreateBody(enemyBodyDef);
+            physics.enemy.CreateFixture(enemyFix);
+            physics.enemy.SetLinearDamping(0.102);
+            physics.enemy.SetUserData({type: 'enemy'});
 
 
             //projectile
@@ -227,6 +249,7 @@ module SpaceshipInTrouble.Game.Screens {
         private _setupLevel() {
             //todo: load from levelfile
 
+
             var cubeGeo = new THREE.BoxGeometry(10, 10, 10);
 
             var geo = new THREE.Geometry();
@@ -247,6 +270,9 @@ module SpaceshipInTrouble.Game.Screens {
             for (var x = 0; x < 100; x++) {
                 for (var y = 0; y < 100; y++) {
 
+                    var posx = (x - 50) * 10;
+                    var posy = (y - 50) * 10;
+
                     if (x == 0 || x == 99 || y == 0 || y == 99) {
                         isBoxToCreate = true;
                     } else {
@@ -258,8 +284,7 @@ module SpaceshipInTrouble.Game.Screens {
                     }
 
                     if (isBoxToCreate) {
-                        var posx = (x - 50) * 10;
-                        var posy = (y - 50) * 10;
+
                         mesh.position.x = posx;
                         mesh.position.y = posy;
                         mesh.position.z = 5;
@@ -268,8 +293,27 @@ module SpaceshipInTrouble.Game.Screens {
 
                         this.getPhysics().defaultWallFixture.shape.SetAsOrientedBox(5 / this._physScale, 5 / this._physScale, new Box2D.Common.Math.b2Vec2(posx / this._physScale, posy / this._physScale), 0);
                         wall.CreateFixture(this.getPhysics().defaultWallFixture);
+                    } else {
+
+                        var isEnemyToCreate = Math.random() * 50 < 1;
+
+                        if (isEnemyToCreate) {
+
+                            var enemyBody : Box2D.Dynamics.b2Body = this.getPhysics().world.CreateBody(this.getPhysics().enemyBodyDef);
+                            enemyBody.CreateFixture(this.getPhysics().enemyFix);
+                            enemyBody.SetUserData({"type": "enemy"});
+                            var enemyEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
+                            var enemyMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(enemyEntity, this._droneMesh.clone());
+                            var enemyPhysicComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.PhysicComponent(enemyEntity, enemyBody, this._physScale);
+
+                            enemyBody.SetPosition(new Box2D.Common.Math.b2Vec2(posx / this._physScale, posy / this._physScale));
+                            enemyEntity.getObject3D().position.set(posx, posy, 0);
+
+                            enemyBody.SetLinearDamping(0.0012);
 
 
+                            this.getScene().add(enemyEntity.getObject3D());
+                        }
                     }
 
                     lineGeo.vertices.push( new THREE.Vector3( (x -50) * 10 + 5, (y - 50 ) * 10 + 5, 0 ) );
@@ -302,7 +346,7 @@ module SpaceshipInTrouble.Game.Screens {
             this.getScene().add(group);
         }
 
-        private _setupCameraAndLighting() {
+        private _setupCameraAndLighting() : Q.Promise <any> {
             this.setScene(new THREE.Scene());
             this.setHUDScene(new THREE.Scene());
 
@@ -324,6 +368,31 @@ module SpaceshipInTrouble.Game.Screens {
             this.getHUDCamera().position.set(0, 0, 50);
             this.getCamera().position.set(0, 0, 50);
 
+            return Q(true);
+
+        }
+
+
+        private _createDrone() : Q.Promise<any> {
+            var that = this;
+            var deferred = Q.defer();
+
+            //Load and add drone
+            var loader = new THREE.JSONLoader();
+            loader.load("assets/game/models/drone.js", function (droneGeo, droneMaterials) {
+
+                var droneMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('assets/game/textures/fighter.png')});
+                var droneMesh = new THREE.Mesh(droneGeo, droneMaterial);
+                droneMesh.scale.set(1.5, 1.5, 1.5);
+                droneMesh.rotation.set(Math.PI / 2, 0, 0);
+                droneMesh.updateMatrix();
+
+                that._droneMesh = droneMesh;
+                deferred.resolve(true);
+
+            }, "assets/game/textures/");
+
+            return deferred.promise;
         }
 
 
@@ -348,6 +417,8 @@ module SpaceshipInTrouble.Game.Screens {
                 var shipMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(that._shipEntity, shipMesh);
 
                 that.getScene().add(that._shipEntity.getObject3D());
+
+
             }, "assets/game/textures/");
         }
 
