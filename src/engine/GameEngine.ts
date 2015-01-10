@@ -7,7 +7,8 @@
  * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
  */
 
-
+///ts:ref=include_all.ts
+/// <reference path="./include_all.ts"/> ///ts:ref:generated
 module SpaceshipInTrouble.Engine {
 
     /**
@@ -76,6 +77,7 @@ module SpaceshipInTrouble.Engine {
 
             JL("GameEngine").info("- setting up THREE WebGLRenderer...");
             this._renderer = new THREE.WebGLRenderer({canvas: this._canvas});
+            this._renderer.autoClear = false;
             this._renderer.setSize(window.innerWidth, window.innerHeight);
             this._renderContainer.appendChild(this._renderer.domElement);
 

@@ -18,12 +18,14 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
      */
     export class PlayLevelScreen extends AbstractScreen {
 
-        private _scene:any;
-        private _physicWorld:any;
+        private _scene: THREE.Scene;
+        private _hudScene: THREE.Scene;
+        private _physicWorld: any;
         private _entityManager: SpaceshipInTrouble.Engine.EntitySystem.EntityManager;
         private _joystick: SpaceshipInTrouble.Engine.Helpers.Input.VirtualJoystick;
         private _keyboard: SpaceshipInTrouble.Engine.Helpers.Input.KeyboardHelper;
-        private _camera:any;
+        private _camera: THREE.Camera;
+        private _hudCamera: THREE.Camera;
 
 
         private _layers: SpaceshipInTrouble.Engine.MapSystem.MapLayer[];
@@ -125,6 +127,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
 
             this.preRender(timeStep);
             this.getRenderer().render(this._scene, this._camera);
+            this.getRenderer().render(this._hudScene, this._hudCamera);
 
             this.postRender(timeStep);
         }
@@ -190,6 +193,8 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
                 var objectA = contact.GetFixtureA().GetBody().GetUserData();
                 var objectB = contact.GetFixtureB().GetBody().GetUserData();
 
+                console.log("hello", contact);
+
                 if (objectA.type == 'entity' && objectA.entity !== undefined) {
 
                     //both are entity?
@@ -210,11 +215,11 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
             };
 
             colDetector.PostSolve = function (contact, impulse) {
+                console.log(impulse.normalImpulses[0]);
 
             };
 
             colDetector.PreSolve = function (contact, oldManifold) {
-
             };
 
             this.getPhysics().world.SetContactListener(colDetector);
@@ -237,7 +242,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          *
          * @param camera {THREE.Camera|THREE.PerspectiveCamera} the camera to set
          */
-        public setCamera(camera) {
+        public setCamera(camera: THREE.Camera) {
             this._camera = camera;
         }
 
@@ -246,16 +251,36 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          *
          * @returns {THREE.Camera} the camera of this level
          */
-        public getCamera() {
+        public getCamera() : THREE.Camera{
             return this._camera;
         }
+
+
+        /**
+         * Sets the hud camera for this level screen
+         *
+         * @param camera {THREE.Camera|THREE.PerspectiveCamera} the camera to set
+         */
+        public setHUDCamera(camera: THREE.Camera) {
+            this._hudCamera = camera;
+        }
+
+        /**
+         * Returns the hud camera for this level screen
+         *
+         * @returns {THREE.Camera} the camera of this level
+         */
+        public getHUDCamera() : THREE.Camera{
+            return this._hudCamera;
+        }
+
 
         /**
          * Sets the ThreeJS scene for this level
          *
          * @param scene {THREE.Scene} the scene to set
          */
-        public setScene(scene) {
+        public setScene(scene: THREE.Scene ) {
             this._scene = scene;
         }
 
@@ -264,9 +289,29 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
          *
          * @returns {THREE.Scene}
          */
-        public getScene() {
+        public getScene() : THREE.Scene {
             return this._scene;
         }
+
+
+        /**
+         * Sets the ThreeJS scene for the hud of this level
+         *
+         * @param scene {THREE.Scene} the scene to set
+         */
+        public setHUDScene(scene: THREE.Scene ) {
+            this._hudScene = scene;
+        }
+
+        /**
+         * Returns the ThreeJS HUD scene for this level
+         *
+         * @returns {THREE.Scene}
+         */
+        public getHUDScene() : THREE.Scene {
+            return this._hudScene;
+        }
+
 
         /**
          * Gets called when the level is about to be shown

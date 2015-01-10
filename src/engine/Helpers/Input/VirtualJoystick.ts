@@ -8,6 +8,8 @@
  */
 
 
+///ts:ref=include_all.ts
+/// <reference path="../../include_all.ts"/> ///ts:ref:generated
 
 module SpaceshipInTrouble.Engine.Helpers.Input {
 
@@ -84,7 +86,7 @@ module SpaceshipInTrouble.Engine.Helpers.Input {
                 this._createMeshes();
             }
 
-            this._scene = levelScreen.getScene();
+            this._scene = levelScreen.getHUDScene();
             this._renderer = levelScreen.getRenderer();
 
             this._screenHeight = window.innerHeight;
@@ -93,11 +95,11 @@ module SpaceshipInTrouble.Engine.Helpers.Input {
             var size = Math.floor(this._screenHeight / 3);
 
             this._joystickMesh.scale.set(size, size, 1.0); // imageWidth, imageHeight
-            this._joystickMesh.position.set(size / 2, this._screenHeight - (size / 2), 0);
+            this._joystickMesh.position.set(-(this._screenWidth / 2) + (size / 2), - (this._screenHeight / 2 ) + (size / 2), 0);
 
 
             this._fireButtonMesh.scale.set(size, size, 1.0); // imageWidth, imageHeight
-            this._fireButtonMesh.position.set(this._screenWidth - (size / 2), this._screenHeight - (size / 2), 0);
+            this._fireButtonMesh.position.set((this._screenWidth / 2) - (size / 2), - (this._screenHeight / 2 ) + (size / 2), 0);
 
 
             this._center = {x: size / 2, y: this._screenHeight - (size / 2)};

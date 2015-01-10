@@ -304,10 +304,13 @@ module SpaceshipInTrouble.Game.Screens {
 
         private _setupCameraAndLighting() {
             this.setScene(new THREE.Scene());
+            this.setHUDScene(new THREE.Scene());
 
             //soft white ambient light (change to blueish color?)
             var light = new THREE.AmbientLight(0x404040);
             this.getScene().add(light);
+
+            //this.getHUDScene().add(new THREE.AmbientLight(0xffffff));
 
             //directional light for soft shadows
             var directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
@@ -316,6 +319,9 @@ module SpaceshipInTrouble.Game.Screens {
 
             //perspective camera with default values / angle
             this.setCamera(new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000));
+
+            this.setHUDCamera(new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, -2000, 2000 ));
+            this.getHUDCamera().position.set(0, 0, 50);
             this.getCamera().position.set(0, 0, 50);
 
         }
