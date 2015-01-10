@@ -148,6 +148,7 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
                     true                    //allow sleep
                 )
             };
+            this._setupPhysicCollisionListener();
             return this.getPhysics();
         }
 

@@ -43,6 +43,7 @@ module SpaceshipInTrouble.Game.Screens {
 
             this._setupCameraAndLighting();
             this._setupPhysics();
+
             this._createShip();
             this._setupLevel();
 

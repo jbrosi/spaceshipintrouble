@@ -23,6 +23,9 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
             super("PhysicComponent", entity);
             this._physScale = physScale;
             this._physicBody = physicBody;
+
+            this._physicBody.GetUserData().type = 'entity';
+            this._physicBody.GetUserData().entity = entity;
         }
 
         public "onEvent:entity:step" () {
@@ -30,6 +33,13 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
             this.getEntity().getObject3D().updateMatrix();
         }
 
+
+        public "onEvent:collision:entity" (msg: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage) {
+            console.log("entity collision detected", msg.getMessage().entity);
+        }
+        public "onEvent:collision:other" (msg: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage) {
+            console.log("other collision detected", msg.getMessage().object);
+        }
 
         public "onEvent:entity:disposed" () {
             this.getEntity().getManager().getPhysic().DestroyBody(this._physicBody);
