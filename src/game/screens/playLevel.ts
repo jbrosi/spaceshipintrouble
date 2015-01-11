@@ -31,6 +31,7 @@ module SpaceshipInTrouble.Game.Screens {
 
         public preRender(timeStep: number) {
             super.preRender(timeStep);
+            this.getScene().updateMatrixWorld(true);
             this._groundMirror.render();
         }
 
@@ -305,6 +306,8 @@ module SpaceshipInTrouble.Game.Screens {
                             var enemyEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
                             var enemyMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(enemyEntity, this._droneMesh.clone());
                             var enemyPhysicComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.PhysicComponent(enemyEntity, enemyBody, this._physScale);
+
+                            var enemyBehaviourComponent = new SpaceshipInTrouble.Game.Components.Enemies.BasicEnemyBehavior(enemyEntity, enemyBody, this._physScale, this._shipEntity.getObject3D());
 
                             enemyBody.SetPosition(new Box2D.Common.Math.b2Vec2(posx / this._physScale, posy / this._physScale));
                             enemyEntity.getObject3D().position.set(posx, posy, 0);
