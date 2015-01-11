@@ -100,8 +100,9 @@ module SpaceshipInTrouble.Game.Screens {
             //enemy
             var enemyFix = new Box2D.Dynamics.b2FixtureDef();
             enemyFix.density = 50.0;
-            enemyFix.friction = 10.11;
-            enemyFix.restitution = 0.5;
+            enemyFix.friction = 0.11;
+            enemyFix.restitution = 0;
+
             enemyFix.shape = new Box2D.Collision.Shapes.b2CircleShape(3 / this._physScale);
 
             physics.enemyFix = enemyFix;
@@ -113,7 +114,7 @@ module SpaceshipInTrouble.Game.Screens {
 
             physics.enemy = physics.world.CreateBody(enemyBodyDef);
             physics.enemy.CreateFixture(enemyFix);
-            physics.enemy.SetLinearDamping(0.102);
+            physics.enemy.SetLinearDamping(0);
             physics.enemy.SetUserData({type: 'enemy'});
 
 

@@ -24,12 +24,15 @@ module SpaceshipInTrouble.Game.Components.Enemies {
 
         private _isActive: boolean;
 
+
         public constructor(entity: SpaceshipInTrouble.Engine.EntitySystem.Entity, physicBody : Box2D.Dynamics.b2Body, physScale: number, target : THREE.Object3D) {
             super("BasicEnemyBehavior", entity);
             this._physicBody = physicBody;
             this._physScale = physScale;
             this._target = target;
             this._isActive = false;
+
+
         }
 
         public "onEvent:entity:step" () {
@@ -49,9 +52,13 @@ module SpaceshipInTrouble.Game.Components.Enemies {
             }
 
             if (this._isActive) {
-                var force = direction.normalize().multiplyScalar(0.1);
+                var force = direction.normalize().multiplyScalar(0.005);
 
-                this._physicBody.ApplyForce(new Box2D.Common.Math.b2Vec2(force.x, force.y), this._physicBody.GetWorldCenter());
+                //it's completely strange -> we need to set the force point to a value where no enemy is o_O if we use the
+                //enemies coordinates it moves slowly and crushes through walls... Maybe I don't have yet understood the
+                //real meaning of this point... well but it seems to work when setting to somewhat wide outside the level o_O
+                this._physicBody.ApplyForce(new Box2D.Common.Math.b2Vec2(force.x, force.y), new Box2D.Common.Math.b2Vec2(99999,99999));
+
             }
 
 
