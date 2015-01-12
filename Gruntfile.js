@@ -2,6 +2,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-import');
     grunt.loadNpmTasks("grunt-ts");
 
     // Project configuration.
@@ -16,9 +17,25 @@ module.exports = function(grunt) {
                 ]
             },
             dist: {
-                files: [
-                    {src: './src/reference.tpl', dest: './dist/reference.ts'}
-                ]
+                src: './build/reference.ts',
+                dest: './dist/include_sources.inc',
+                options: {
+                    process: function (content, srcPath) {
+                        return content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/$1.js\";")
+                                      .replace(/(@import \".*\.d\.js\";)/g, "");
+                    }
+                }
+            }
+        },
+        import: {
+            options: {
+                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
+                footer: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
+                separator: ''
+            },
+            dist: {
+                src: 'dist/include_sources.inc',
+                dest: 'dist/spaceshipintrouble.js'
             }
         },
         ts: {
@@ -59,23 +76,6 @@ module.exports = function(grunt) {
                     // true (default) | false
                     removeComments: true
                 }
-            },
-            dist: {
-                src: ["src/**/*.ts"],
-                out: './dist/spaceshipintrouble.js',
-                reference: "./dist/reference.ts",
-                options: {
-                    // 'es3' (default) | 'es5'
-                    target: 'es5',
-                    // 'amd' (default) | 'commonjs'
-                    module: 'commonjs',
-                    // true (default) | false
-                    sourceMap: true,
-                    // true | false (default)
-                    declaration: true,
-                    // true (default) | false
-                    removeComments: true
-                }
             }
         },
         clean: {
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('default', ['clean:build', 'copy:build', 'ts:build']);
-    grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'ts:dist']);
+    grunt.registerTask('dist', ['clean:dist', 'default', 'copy:dist', 'import:dist']);
 
     grunt.registerTask('dev', ['default', 'ts:watch']);
 

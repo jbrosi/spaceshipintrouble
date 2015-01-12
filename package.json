@@ -24,6 +24,7 @@
         "grunt-contrib-clean": "*",
 		"grunt-contrib-copy": "*",
         "grunt-contrib-watch": "*",
+        "grunt-import": "*",
         "grunt-ts": "*"
     },
     "scripts": {
