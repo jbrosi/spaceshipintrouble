@@ -58731,11 +58731,13 @@ if (_typeface_js && _typeface_js.loadFace) _typeface_js.loadFace({"glyphs":{"ο"
 
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
             var EntityComponent = (function () {
                 function EntityComponent(name, entity, data) {
-                    if (typeof data === "undefined") { data = {}; }
+                    if (data === void 0) { data = {}; }
                     this._data = {};
                     _.bindAll(this);
                     this._name = name;
@@ -58746,18 +58748,15 @@ var SpaceshipInTrouble;
                 EntityComponent.prototype.getEntity = function () {
                     return this._entity;
                 };
-
                 EntityComponent.prototype.getData = function () {
                     return this._data;
                 };
-
                 EntityComponent.prototype.getStaticData = function () {
                     if (EntityComponent._staticData[this._name] === undefined) {
                         EntityComponent._staticData[this._name] = {};
                     }
                     return EntityComponent._staticData[this._name];
                 };
-
                 EntityComponent.prototype.setData = function (data) {
                     this._data = data;
                 };
@@ -58765,13 +58764,10 @@ var SpaceshipInTrouble;
                 return EntityComponent;
             })();
             EntitySystem.EntityComponent = EntityComponent;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=EntityComponent.js.map
-
 
 
 //grunt-start
@@ -58783,8 +58779,11 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
+            var Components;
             (function (Components) {
                 var LimitedLifeComponent = (function (_super) {
                     __extends(LimitedLifeComponent, _super);
@@ -58795,7 +58794,6 @@ var SpaceshipInTrouble;
                     }
                     LimitedLifeComponent.prototype["onEvent:entity:step"] = function (msg) {
                         this._timeLived += msg.getMessage().timeStep;
-
                         if (this._timeLived > this._timeToLive) {
                             this.getEntity().dispose();
                         }
@@ -58803,15 +58801,11 @@ var SpaceshipInTrouble;
                     return LimitedLifeComponent;
                 })(SpaceshipInTrouble.Engine.EntitySystem.EntityComponent);
                 Components.LimitedLifeComponent = LimitedLifeComponent;
-            })(EntitySystem.Components || (EntitySystem.Components = {}));
-            var Components = EntitySystem.Components;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+            })(Components = EntitySystem.Components || (EntitySystem.Components = {}));
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=LimitedLifeComponent.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -58820,8 +58814,11 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
+            var Components;
             (function (Components) {
                 var MeshComponent = (function (_super) {
                     __extends(MeshComponent, _super);
@@ -58833,15 +58830,11 @@ var SpaceshipInTrouble;
                     return MeshComponent;
                 })(SpaceshipInTrouble.Engine.EntitySystem.EntityComponent);
                 Components.MeshComponent = MeshComponent;
-            })(EntitySystem.Components || (EntitySystem.Components = {}));
-            var Components = EntitySystem.Components;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+            })(Components = EntitySystem.Components || (EntitySystem.Components = {}));
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=MeshComponent.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -58850,21 +58843,22 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
+            var Components;
             (function (Components) {
                 var PhysicComponent = (function (_super) {
                     __extends(PhysicComponent, _super);
                     function PhysicComponent(entity, physicBody, physScale) {
-                        if (typeof physScale === "undefined") { physScale = 1; }
+                        if (physScale === void 0) { physScale = 1; }
                         _super.call(this, "PhysicComponent", entity);
                         this._physScale = physScale;
                         this._physicBody = physicBody;
-
                         if (this._physicBody.GetUserData() == null) {
                             this._physicBody.SetUserData({});
                         }
-
                         this._physicBody.GetUserData().type = 'entity';
                         this._physicBody.GetUserData().entity = entity;
                     }
@@ -58872,32 +58866,26 @@ var SpaceshipInTrouble;
                         this.getEntity().getObject3D().position.set(this._physicBody.GetPosition().x * this._physScale, this._physicBody.GetPosition().y * this._physScale, 0);
                         this.getEntity().getObject3D().updateMatrix();
                     };
-
                     PhysicComponent.prototype["onEvent:collision:entity"] = function (msg) {
-                        console.log("entity collision detected", msg.getMessage().entity);
                     };
                     PhysicComponent.prototype["onEvent:collision:other"] = function (msg) {
-                        console.log("other collision detected", msg.getMessage().object);
                     };
-
                     PhysicComponent.prototype["onEvent:entity:disposed"] = function () {
                         this.getEntity().getManager().getPhysic().DestroyBody(this._physicBody);
                     };
                     return PhysicComponent;
                 })(SpaceshipInTrouble.Engine.EntitySystem.EntityComponent);
                 Components.PhysicComponent = PhysicComponent;
-            })(EntitySystem.Components || (EntitySystem.Components = {}));
-            var Components = EntitySystem.Components;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+            })(Components = EntitySystem.Components || (EntitySystem.Components = {}));
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=PhysicComponent.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
             var Entity = (function () {
                 function Entity(entityManager) {
@@ -58914,28 +58902,22 @@ var SpaceshipInTrouble;
                 Entity.prototype.cloneEntity = function () {
                     return this;
                 };
-
                 Entity.prototype.getManager = function () {
                     return this._manager;
                 };
-
                 Entity.prototype.getData = function () {
                     return this._data;
                 };
-
                 Entity.prototype.getParent = function () {
                     return this._parentEntity;
                 };
-
                 Entity.prototype.hasParent = function () {
                     return this._parentEntity != null;
                 };
-
                 Entity.prototype.addComponent = function (component) {
                     this._components.push(component);
                     this.addGenericEventListener(component);
                 };
-
                 Entity.prototype.removeComponent = function (component) {
                     for (var i = 0; i < this._components.length; i++) {
                         if (this._components[i] === component) {
@@ -58945,11 +58927,9 @@ var SpaceshipInTrouble;
                     }
                     return false;
                 };
-
                 Entity.prototype.addGenericEventListener = function (listener) {
                     this._genericEventListeners.push(listener);
                 };
-
                 Entity.prototype.removeGenericEventListener = function (listener) {
                     for (var i = 0; i < this._genericEventListeners.length; i++) {
                         if (this._genericEventListeners[i] === listener) {
@@ -58959,14 +58939,11 @@ var SpaceshipInTrouble;
                     }
                     return false;
                 };
-
                 Entity.prototype.on = function (identifier, callback) {
                     identifier = identifier.trim();
-
                     if (identifier.length === 0) {
                         return;
                     }
-
                     if (identifier.indexOf(" ") > -1) {
                         var identifiers = identifier.split(" ");
                         var a;
@@ -58975,29 +58952,24 @@ var SpaceshipInTrouble;
                         }
                         return;
                     }
-
                     if (this._listeners[identifier] === undefined) {
                         this._listeners[identifier] = [];
                     }
-
                     this._listeners[identifier].push(callback);
                 };
-
                 Entity.prototype.removeListener = function (identifier, callback) {
                     if (this._listeners[identifier] === undefined || this._listeners[identifier].length == 0) {
                         return false;
                     }
-
                     if (this._listeners[identifier].length == 1) {
                         if (this._listeners[identifier][0] === callback) {
                             delete this._listeners[identifier];
-                        } else {
+                        }
+                        else {
                             return false;
                         }
                     }
-
                     var a = 0;
-
                     for (a = 0; a < this._listeners[identifier].length; a++) {
                         if (callback === this._listeners[identifier][a]) {
                             this._listeners[identifier].splice(a, 1);
@@ -59006,12 +58978,10 @@ var SpaceshipInTrouble;
                     }
                     return false;
                 };
-
                 Entity.prototype.doStep = function (timeStep) {
                     this._stepMessage.getMessage().timeStep = timeStep;
                     this.sendMessage(this._stepMessage);
                 };
-
                 Entity.prototype.dispose = function () {
                     if (this._isDisposed) {
                         return;
@@ -59020,170 +58990,109 @@ var SpaceshipInTrouble;
                     var msg = new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage("entity:disposed", {}, this);
                     this.sendMessage(msg);
                     this.sendMessageToChildren(msg);
-
                     this.getManager().getScene().remove(this.getObject3D());
                 };
-
                 Entity.prototype.sendMessage = function (message) {
                     var id = message.getIdentifier();
-
                     if (id == "entity:disposed" && !this._isDisposed) {
                         this.dispose();
                     }
-
                     for (var i = 0; i < this._genericEventListeners.length && !message.isConsumed(); i++) {
                         var eventMethod = "onEvent:" + id;
                         if (this._genericEventListeners[i][eventMethod] === undefined) {
                             eventMethod = "onGenericEvent";
                         }
                         if (this._genericEventListeners[i][eventMethod] !== undefined) {
-                            try  {
+                            try {
                                 this._genericEventListeners[i][eventMethod].apply(this._genericEventListeners[i], [message]);
-                            } catch (e) {
+                            }
+                            catch (e) {
                                 JL("Entity").warn("Failed to dispatch message");
                                 console.error(e);
                             }
                         }
                     }
-
                     if (this._listeners[id] === undefined) {
                         return;
                     }
-
                     for (var a = 0; a < this._listeners[id].length && !message.isConsumed(); a++) {
                         this._listeners[message.getIdentifier()][a](message);
                     }
                 };
-
                 Entity.prototype.sendMessageToChildren = function (message) {
                     this.sendMessageToChild(message, true);
                 };
-
                 Entity.prototype.sendMessageToChild = function (message, isDeep) {
-                    if (typeof isDeep === "undefined") { isDeep = false; }
+                    if (isDeep === void 0) { isDeep = false; }
                     var a;
                     for (a = 0; a < this._childEntities.length && !message.isConsumed(); a++) {
                         this._childEntities[a].sendMessage(message);
-
                         if (isDeep && !message.isConsumed()) {
                             this._childEntities[a].sendMessageToChildren(message);
                         }
                     }
                 };
-
                 Entity.prototype.getPosition = function () {
                     return this._position;
                 };
-
                 Entity.prototype.getObject3D = function () {
                     return this._position;
                 };
-
                 Entity.prototype.getComponents = function () {
                     return this._components;
                 };
-
                 Entity.prototype.sendMessageToParent = function (message, isDeep) {
-                    if (typeof isDeep === "undefined") { isDeep = false; }
+                    if (isDeep === void 0) { isDeep = false; }
                     if (!this.hasParent() || message.isConsumed()) {
                         return;
                     }
-
                     this._parentEntity.sendMessage(message);
                     if (isDeep && !message.isConsumed()) {
                         this._parentEntity.sendMessageToParent(message, true);
                     }
                 };
-
                 Entity.prototype.sendMessageToParents = function (message) {
                     this.sendMessageToParent(message, true);
                 };
-
                 Entity.prototype.setParent = function (entity, preserveWorldCoordinates) {
-                    if (typeof preserveWorldCoordinates === "undefined") { preserveWorldCoordinates = false; }
+                    if (preserveWorldCoordinates === void 0) { preserveWorldCoordinates = false; }
                     if (preserveWorldCoordinates) {
                         JL("Entity").error("Not yet implemented 'preserverWorldCoordinates' parameter!");
                         throw new Error("preserverWorldCoordinates not yet implemented!");
                     }
-
                     if (this.hasParent()) {
                         if (preserveWorldCoordinates) {
-                        } else {
+                        }
+                        else {
                             this.getParent().getPosition().remove(this.getPosition());
                         }
                     }
-
                     this._parentEntity = entity;
                     if (preserveWorldCoordinates) {
-                    } else {
+                    }
+                    else {
                         this.getParent().getPosition().add(this.getPosition());
                     }
                     this._parentEntity.getChildren().push(this);
                 };
-
                 Entity.prototype.getChildren = function () {
                     return this._childEntities;
                 };
-
                 Entity.prototype.addChildEntity = function (entity) {
                     entity.setParent(this);
                 };
                 return Entity;
             })();
             EntitySystem.Entity = Entity;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=Entity.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
-        (function (EntitySystem) {
-            var EntityComponent = (function () {
-                function EntityComponent(name, entity, data) {
-                    if (typeof data === "undefined") { data = {}; }
-                    this._data = {};
-                    _.bindAll(this);
-                    this._name = name;
-                    this._entity = entity;
-                    this._data = data;
-                    entity.addComponent(this);
-                }
-                EntityComponent.prototype.getEntity = function () {
-                    return this._entity;
-                };
-
-                EntityComponent.prototype.getData = function () {
-                    return this._data;
-                };
-
-                EntityComponent.prototype.getStaticData = function () {
-                    if (EntityComponent._staticData[this._name] === undefined) {
-                        EntityComponent._staticData[this._name] = {};
-                    }
-                    return EntityComponent._staticData[this._name];
-                };
-
-                EntityComponent.prototype.setData = function (data) {
-                    this._data = data;
-                };
-                EntityComponent._staticData = {};
-                return EntityComponent;
-            })();
-            EntitySystem.EntityComponent = EntityComponent;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
-})(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
-//# sourceMappingURL=EntityComponent.js.map
-
-var SpaceshipInTrouble;
-(function (SpaceshipInTrouble) {
-    (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
             var EntityFactory = (function () {
                 function EntityFactory() {
@@ -59193,14 +59102,11 @@ var SpaceshipInTrouble;
                     entityManager.registerEntity(entity);
                     return entity;
                 };
-
                 EntityFactory.createEntityFromPrototype = function (prototype, entityManager) {
                     var entity = new SpaceshipInTrouble.Engine.EntitySystem.Entity(entityManager);
-
                     entityManager.registerEntity(entity);
                     return entity;
                 };
-
                 EntityFactory.createEntityByName = function (type, entityManager) {
                     if (EntityFactory._registeredPrototypes[type] === undefined) {
                         return null;
@@ -59211,19 +59117,17 @@ var SpaceshipInTrouble;
                 return EntityFactory;
             })();
             EntitySystem.EntityFactory = EntityFactory;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=EntityFactory.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
             var DEFAULT_ENTITY_POOL_SIZE = 10000;
-
             var EntityManager = (function () {
                 function EntityManager(scene, physic) {
                     this._objectIdsUsed = 0;
@@ -59238,65 +59142,51 @@ var SpaceshipInTrouble;
                 EntityManager.prototype.getPhysic = function () {
                     return this._physic;
                 };
-
                 EntityManager.prototype.getScene = function () {
                     return this._scene;
                 };
-
                 EntityManager.prototype.deleteEntities = function () {
                     this.resetEntityPools();
                 };
-
                 EntityManager.prototype.resetEntityPools = function () {
                     this._entities = new Array(DEFAULT_ENTITY_POOL_SIZE);
                     this._activeEntities = new Array(DEFAULT_ENTITY_POOL_SIZE);
                     this._inactiveEntities = new Array(DEFAULT_ENTITY_POOL_SIZE);
                     this._alwaysActiveEntities = new Array(DEFAULT_ENTITY_POOL_SIZE);
-
                     this._entityCount = 0;
                     this._activeEntityCount = 0;
                     this._inactiveEntityCount = 0;
                     this._alwaysActiveEntityCount = 0;
                 };
-
                 EntityManager.prototype.registerEntity = function (entity) {
                     this._entities[this._entityCount++] = entity;
                 };
-
                 EntityManager.prototype.sendMessage = function (message, alsoSendToInactives) {
-                    if (typeof alsoSendToInactives === "undefined") { alsoSendToInactives = false; }
+                    if (alsoSendToInactives === void 0) { alsoSendToInactives = false; }
                     var a;
-
                     for (a = 0; a < this._entityCount && !message.isConsumed(); a++) {
                         this._entities[a].sendMessage(message);
                     }
-
                     for (a = 0; a < this._alwaysActiveEntityCount && !message.isConsumed(); a++) {
                         this._alwaysActiveEntities[a].sendMessage(message);
                     }
-
                     for (a = 0; a < this._activeEntityCount && !message.isConsumed(); a++) {
                         this._activeEntities[a].sendMessage(message);
                     }
-
                     if (alsoSendToInactives) {
                         for (a = 0; a < this._inactiveEntityCount && !message.isConsumed(); a++) {
                             this._inactiveEntities[a].sendMessage(message);
                         }
                     }
                 };
-
                 EntityManager.prototype.doStep = function (timeStep) {
                     var a;
-
                     for (a = 0; a < this._entityCount; a++) {
                         this._entities[a].doStep(timeStep);
                     }
-
                     for (a = 0; a < this._alwaysActiveEntityCount; a++) {
                         this._alwaysActiveEntities[a].doStep(timeStep);
                     }
-
                     for (a = 0; a < this._activeEntityCount; a++) {
                         this._activeEntities[a].doStep(timeStep);
                     }
@@ -59304,23 +59194,22 @@ var SpaceshipInTrouble;
                 return EntityManager;
             })();
             EntitySystem.EntityManager = EntityManager;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=EntityManager.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
             var EntityMessage = (function () {
                 function EntityMessage(identifier, message, sender, isConsumable) {
-                    if (typeof identifier === "undefined") { identifier = "undefined"; }
-                    if (typeof message === "undefined") { message = {}; }
-                    if (typeof sender === "undefined") { sender = null; }
-                    if (typeof isConsumable === "undefined") { isConsumable = true; }
+                    if (identifier === void 0) { identifier = "undefined"; }
+                    if (message === void 0) { message = {}; }
+                    if (sender === void 0) { sender = null; }
+                    if (isConsumable === void 0) { isConsumable = true; }
                     this._identifier = "undefined";
                     this._isConsumed = false;
                     this._isConsumable = true;
@@ -59332,40 +59221,34 @@ var SpaceshipInTrouble;
                 EntityMessage.prototype.getIdentifier = function () {
                     return this._identifier;
                 };
-
                 EntityMessage.prototype.getMessage = function () {
                     return this._message;
                 };
-
                 EntityMessage.prototype.getSender = function () {
                     return this._sender;
                 };
-
                 EntityMessage.prototype.hasSender = function () {
                     return this._sender != null;
                 };
-
                 EntityMessage.prototype.consume = function () {
                     if (this._isConsumable)
                         this._isConsumed = true;
                 };
-
                 EntityMessage.prototype.isConsumed = function () {
                     return this._isConsumed;
                 };
                 return EntityMessage;
             })();
             EntitySystem.EntityMessage = EntityMessage;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=EntityMessage.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
             var EntityPrototype = (function () {
                 function EntityPrototype() {
@@ -59375,32 +59258,25 @@ var SpaceshipInTrouble;
                 EntityPrototype.prototype.incrementEntityCreationCount = function () {
                     return ++this._entityCreationCount;
                 };
-
                 EntityPrototype.prototype.getEntityCreationCount = function () {
                     return this._entityCreationCount;
                 };
-
                 EntityPrototype.prototype.getName = function () {
                     return this._name;
                 };
-
                 EntityPrototype.prototype.getData = function () {
                     return this._data;
                 };
-
                 EntityPrototype.prototype.getComponents = function () {
                     return this._components;
                 };
                 return EntityPrototype;
             })();
             EntitySystem.EntityPrototype = EntityPrototype;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=entityPrototype.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -59409,27 +59285,27 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var EntitySystem;
         (function (EntitySystem) {
             var EntityScript = (function (_super) {
                 __extends(EntityScript, _super);
                 function EntityScript(name, entity, file, data) {
-                    if (typeof data === "undefined") { data = {}; }
+                    if (data === void 0) { data = {}; }
                     _super.call(this, name, entity, data);
                     this._file = file;
                 }
                 return EntityScript;
             })(SpaceshipInTrouble.Engine.EntitySystem.EntityComponent);
             EntitySystem.EntityScript = EntityScript;
-        })(Engine.EntitySystem || (Engine.EntitySystem = {}));
-        var EntitySystem = Engine.EntitySystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(EntitySystem = Engine.EntitySystem || (Engine.EntitySystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=entityScript.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
         var GameEngine = (function () {
             function GameEngine() {
@@ -59442,7 +59318,6 @@ var SpaceshipInTrouble;
             GameEngine.prototype.getScreenManager = function () {
                 return this._screenManager;
             };
-
             GameEngine.prototype.init = function () {
                 JL("GameEngine").info("*** initializing ***");
                 var that = this;
@@ -59450,58 +59325,50 @@ var SpaceshipInTrouble;
                     that._screenManager = new SpaceshipInTrouble.Engine.ScreenSystem.ScreenManager(that._renderer);
                 });
             };
-
             GameEngine.prototype.start = function (screen) {
                 JL("GameEngine").info("*** starting ***");
-
                 this._screenManager.showScreen(screen);
-
                 return Q(true);
             };
-
             GameEngine.prototype._initializeThreeJS = function () {
                 JL("GameEngine").info("- Creating canvas element... (" + (navigator.hasOwnProperty("isCocoonJS") ? 'screencanvas' : 'canvas') + ")");
-
                 this._canvas = document.createElement(navigator.hasOwnProperty("isCocoonJS") ? 'screencanvas' : 'canvas');
                 this._canvas.style.cssText = "idtkscale:ScaleAspectFit;";
-
                 JL("GameEngine").info("- setting up THREE WebGLRenderer...");
                 this._renderer = new THREE.WebGLRenderer({ canvas: this._canvas });
                 this._renderer.autoClear = false;
                 this._renderer.setSize(window.innerWidth, window.innerHeight);
                 this._renderContainer.appendChild(this._renderer.domElement);
-
                 JL("GameEngine").info("- adding resize listener...");
                 window.addEventListener('resize', this.onWindowResized);
                 return Q(this._renderer);
             };
-
             GameEngine.prototype.onWindowResized = function () {
                 this._renderer.setSize(window.innerWidth, window.innerHeight);
             };
-
             GameEngine.prototype._initializeCanvasContainer = function () {
                 JL("GameEngine").info("- preparing canvas container");
                 this._renderContainer = document.getElementById('canvas-container');
                 return Q(this._renderContainer);
             };
-
             GameEngine.prototype.getRenderer = function () {
                 return this._renderer;
             };
             return GameEngine;
         })();
         Engine.GameEngine = GameEngine;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=GameEngine.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var Helpers;
         (function (Helpers) {
+            var D3;
             (function (D3) {
+                var Text;
                 (function (Text) {
                     var TextGeometry = (function () {
                         function TextGeometry() {
@@ -59520,112 +59387,88 @@ var SpaceshipInTrouble;
                         TextGeometry.prototype.getHeight = function () {
                             return this.height;
                         };
-
                         TextGeometry.prototype.setHeight = function (height) {
                             this.height = height;
                         };
-
                         TextGeometry.prototype.getSize = function () {
                             return this.size;
                         };
-
                         TextGeometry.prototype.setSize = function (size) {
                             this.size = size;
                         };
-
                         TextGeometry.prototype.getHover = function () {
                             return this.hover;
                         };
-
                         TextGeometry.prototype.setHover = function (hover) {
                             this.hover = hover;
                         };
-
                         TextGeometry.prototype.getCurveSegments = function () {
                             return this.curveSegments;
                         };
-
                         TextGeometry.prototype.setCurveSegments = function (curveSegments) {
                             this.curveSegments = curveSegments;
                         };
-
                         TextGeometry.prototype.getBevelThickness = function () {
                             return this.bevelThickness;
                         };
-
                         TextGeometry.prototype.setBevelThickness = function (bevelThickness) {
                             this.bevelThickness = bevelThickness;
                         };
-
                         TextGeometry.prototype.getBevelSize = function () {
                             return this.bevelSize;
                         };
-
                         TextGeometry.prototype.setBevelSize = function (bevelSize) {
                             this.bevelSize = bevelSize;
                         };
-
                         TextGeometry.prototype.getBevelSegments = function () {
                             return this.bevelSegments;
                         };
-
                         TextGeometry.prototype.setBevelSegments = function (bevelSegments) {
                             this.bevelSegments = bevelSegments;
                         };
-
                         TextGeometry.prototype.isBevelEnabled = function () {
                             return this.bevelEnabled;
                         };
-
                         TextGeometry.prototype.setBevelEnabled = function (bevelEnabled) {
                             this.bevelEnabled = bevelEnabled;
                         };
-
                         TextGeometry.prototype.createTextGeometry = function (text) {
                             return new THREE.TextGeometry(text, this);
                         };
-
                         TextGeometry.prototype.getFont = function () {
                             return this.font;
                         };
-
                         TextGeometry.prototype.setFont = function (font) {
                             this.font = font;
                         };
-
                         TextGeometry.prototype.getStyle = function () {
                             return this.style;
                         };
-
                         TextGeometry.prototype.setStyle = function (style) {
                             this.style = style;
                         };
-
                         TextGeometry.prototype.getWeight = function () {
                             return this.weight;
                         };
-
                         TextGeometry.prototype.setWeight = function (weight) {
                             this.weight = weight;
                         };
                         return TextGeometry;
                     })();
                     Text.TextGeometry = TextGeometry;
-                })(D3.Text || (D3.Text = {}));
-                var Text = D3.Text;
-            })(Helpers.D3 || (Helpers.D3 = {}));
-            var D3 = Helpers.D3;
-        })(Engine.Helpers || (Engine.Helpers = {}));
-        var Helpers = Engine.Helpers;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+                })(Text = D3.Text || (D3.Text = {}));
+            })(D3 = Helpers.D3 || (Helpers.D3 = {}));
+        })(Helpers = Engine.Helpers || (Engine.Helpers = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=TextGeometry.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var Helpers;
         (function (Helpers) {
+            var Input;
             (function (Input) {
                 var KeyboardHelper = (function () {
                     function KeyboardHelper() {
@@ -59643,47 +59486,37 @@ var SpaceshipInTrouble;
                     KeyboardHelper.prototype.getKeys = function () {
                         return this._keysDown;
                     };
-
                     KeyboardHelper.prototype.register = function () {
                         document.body.onkeydown = this._onKeyDown;
                         document.body.onkeyup = this._onKeyUp;
                     };
-
                     KeyboardHelper.prototype.unregister = function () {
                         delete document.body.onkeydown;
                         delete document.body.onkeyup;
                     };
-
                     KeyboardHelper.prototype._onKeyUp = function (event) {
                         this._onKeyUpDown(event, false);
                     };
-
                     KeyboardHelper.prototype._onKeyDown = function (event) {
                         this._onKeyUpDown(event, true);
                     };
-
                     KeyboardHelper.prototype.isLeftPressed = function () {
                         return this._keysDown.left;
                     };
-
                     KeyboardHelper.prototype.isUpPressed = function () {
                         return this._keysDown.up;
                     };
-
                     KeyboardHelper.prototype.isDownPressed = function () {
                         return this._keysDown.down;
                     };
-
                     KeyboardHelper.prototype.isRightPressed = function () {
                         return this._keysDown.right;
                     };
-
                     KeyboardHelper.prototype.isSpacePressed = function () {
                         return this._keysDown.space;
                     };
-
                     KeyboardHelper.prototype._onKeyUpDown = function (event, upDown) {
-                        if (typeof upDown === "undefined") { upDown = true; }
+                        if (upDown === void 0) { upDown = true; }
                         switch (event.keyCode) {
                             case 40:
                             case 83:
@@ -59715,19 +59548,18 @@ var SpaceshipInTrouble;
                     return KeyboardHelper;
                 })();
                 Input.KeyboardHelper = KeyboardHelper;
-            })(Helpers.Input || (Helpers.Input = {}));
-            var Input = Helpers.Input;
-        })(Engine.Helpers || (Engine.Helpers = {}));
-        var Helpers = Engine.Helpers;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+            })(Input = Helpers.Input || (Helpers.Input = {}));
+        })(Helpers = Engine.Helpers || (Engine.Helpers = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=KeyboardHelper.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var Helpers;
         (function (Helpers) {
+            var Input;
             (function (Input) {
                 var VirtualJoystick = (function () {
                     function VirtualJoystick() {
@@ -59752,7 +59584,6 @@ var SpaceshipInTrouble;
                             depthWrite: false
                         });
                         this._joystickMesh = new THREE.Sprite(joystickMat);
-
                         var fireButtonTexture = THREE.ImageUtils.loadTexture('assets/engine/textures/joystick_fire.png');
                         var fireButtonMat = new THREE.SpriteMaterial({
                             map: fireButtonTexture,
@@ -59762,32 +59593,23 @@ var SpaceshipInTrouble;
                         });
                         this._fireButtonMesh = new THREE.Sprite(fireButtonMat);
                     };
-
                     VirtualJoystick.prototype.register = function (levelScreen) {
                         if (!this._joystickMesh) {
                             this._createMeshes();
                         }
-
                         this._scene = levelScreen.getHUDScene();
                         this._renderer = levelScreen.getRenderer();
-
                         this._screenHeight = window.innerHeight;
                         this._screenWidth = window.innerWidth;
-
                         var size = Math.floor(this._screenHeight / 3);
-
                         this._joystickMesh.scale.set(size, size, 1.0);
                         this._joystickMesh.position.set(-(this._screenWidth / 2) + (size / 2), -(this._screenHeight / 2) + (size / 2), 0);
-
                         this._fireButtonMesh.scale.set(size, size, 1.0);
                         this._fireButtonMesh.position.set((this._screenWidth / 2) - (size / 2), -(this._screenHeight / 2) + (size / 2), 0);
-
                         this._center = { x: size / 2, y: this._screenHeight - (size / 2) };
                         this._radius = size / 2;
-
                         this._scene.add(this._joystickMesh);
                         this._scene.add(this._fireButtonMesh);
-
                         this._hammer = new Hammer(this._renderer.context.canvas, {
                             drag: true,
                             transform: false,
@@ -59795,116 +59617,96 @@ var SpaceshipInTrouble;
                             drag_max_touches: 10,
                             prevent_default: true
                         });
-
                         this._hammer.on('touch drag', this._onTouchMove);
                         this._hammer.on('release', this._onTouchEnd);
                     };
-
                     VirtualJoystick.prototype._onTouchMove = function (evt) {
                         this._isFireButtonPressed = false;
-
                         for (var a = 0; a < evt.gesture.touches.length; a++) {
                             var touch = evt.gesture.touches[a];
-
                             var x = touch.pageX;
                             var y = touch.pageY;
-
                             if (x < this._radius * 2 && y > this._screenHeight - (this._radius * 2)) {
                                 var diffX = x - this._center.x;
                                 var diffY = this._center.y - y;
                                 var length = Math.sqrt((diffX * diffX) + (diffY * diffY));
-
                                 this._speed = Math.max(-1, Math.min(1, length / this._radius));
-
                                 this._angle = Math.atan2(diffY, diffX);
-                            } else if (x > this._screenWidth - (this._radius * 2) && y > this._screenHeight - (this._radius * 2)) {
+                            }
+                            else if (x > this._screenWidth - (this._radius * 2) && y > this._screenHeight - (this._radius * 2)) {
                                 this._isFireButtonPressed = true;
                             }
                         }
                     };
-
                     VirtualJoystick.prototype._onTouchEnd = function (evt) {
                         this._speed = 0;
                         this._isFireButtonPressed = false;
                     };
-
                     VirtualJoystick.prototype.getSpeed = function () {
                         return this._speed;
                     };
-
                     VirtualJoystick.prototype.getAngle = function () {
                         return this._angle;
                     };
-
                     VirtualJoystick.prototype.isFireButtonPressed = function () {
                         return this._isFireButtonPressed;
                     };
                     return VirtualJoystick;
                 })();
                 Input.VirtualJoystick = VirtualJoystick;
-            })(Helpers.Input || (Helpers.Input = {}));
-            var Input = Helpers.Input;
-        })(Engine.Helpers || (Engine.Helpers = {}));
-        var Helpers = Engine.Helpers;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+            })(Input = Helpers.Input || (Helpers.Input = {}));
+        })(Helpers = Engine.Helpers || (Engine.Helpers = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=VirtualJoystick.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var Helpers;
         (function (Helpers) {
             var perfFunction = (function () {
                 return performance.now || performance.mozNow || performance.msNow || performance.oNow || performance.webkitNow || function () {
                     return new Date().getTime();
                 };
             })();
-
             if (performance) {
                 perfFunction = perfFunction.bind(performance);
             }
-
             function performanceTimer() {
                 return perfFunction();
             }
             Helpers.performanceTimer = performanceTimer;
-        })(Engine.Helpers || (Engine.Helpers = {}));
-        var Helpers = Engine.Helpers;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(Helpers = Engine.Helpers || (Engine.Helpers = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=PerformanceTimer.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var Helpers;
         (function (Helpers) {
             var StatsHelper = (function () {
                 function StatsHelper() {
                     if (navigator.hasOwnProperty("isCocoonJS")) {
                         return;
                     }
-
                     this._stats = new Stats();
                     this._stats.setMode(0);
-
                     this._stats.domElement.style.position = 'absolute';
                     this._stats.domElement.style.left = '0px';
                     this._stats.domElement.style.top = '0px';
-
                     document.body.appendChild(this._stats.domElement);
                 }
                 StatsHelper.prototype.begin = function () {
                     if (this._stats)
                         this._stats.begin();
                 };
-
                 StatsHelper.prototype.end = function () {
                     if (this._stats)
                         this._stats.end();
                 };
-
                 StatsHelper.getInstance = function () {
                     if (StatsHelper._instance === null) {
                         StatsHelper._instance = new StatsHelper();
@@ -59915,16 +59717,15 @@ var SpaceshipInTrouble;
                 return StatsHelper;
             })();
             Helpers.StatsHelper = StatsHelper;
-        })(Engine.Helpers || (Engine.Helpers = {}));
-        var Helpers = Engine.Helpers;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(Helpers = Engine.Helpers || (Engine.Helpers = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=StatsHelper.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var AbstractMapLoader = (function () {
                 function AbstractMapLoader(mapFile) {
@@ -59933,31 +59734,27 @@ var SpaceshipInTrouble;
                 AbstractMapLoader.prototype.getMapFile = function () {
                     return this._mapFile;
                 };
-
                 AbstractMapLoader.prototype.getProgressInPercent = function () {
                     return 0;
                 };
-
                 AbstractMapLoader.prototype.getProgressAsText = function () {
                     return "initializing";
                 };
-
                 AbstractMapLoader.prototype.loadMap = function () {
                     throw new Error("Abstract method called");
                 };
                 return AbstractMapLoader;
             })();
             MapSystem.AbstractMapLoader = AbstractMapLoader;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=AbstractMapLoader.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var MapLayer = (function () {
                 function MapLayer() {
@@ -59965,16 +59762,15 @@ var SpaceshipInTrouble;
                 return MapLayer;
             })();
             MapSystem.MapLayer = MapLayer;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=MapLayer.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var MapObject = (function () {
                 function MapObject() {
@@ -59985,13 +59781,10 @@ var SpaceshipInTrouble;
                 return MapObject;
             })();
             MapSystem.MapObject = MapObject;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=MapObject.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60000,16 +59793,18 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var ObjectLayer = (function (_super) {
                 __extends(ObjectLayer, _super);
                 function ObjectLayer(name, width, height, x, y) {
-                    if (typeof name === "undefined") { name = "undefined"; }
-                    if (typeof width === "undefined") { width = -1; }
-                    if (typeof height === "undefined") { height = -1; }
-                    if (typeof x === "undefined") { x = 0; }
-                    if (typeof y === "undefined") { y = 0; }
+                    if (name === void 0) { name = "undefined"; }
+                    if (width === void 0) { width = -1; }
+                    if (height === void 0) { height = -1; }
+                    if (x === void 0) { x = 0; }
+                    if (y === void 0) { y = 0; }
                     _super.call(this);
                     this._objects = [];
                     this._name = name;
@@ -60021,28 +59816,21 @@ var SpaceshipInTrouble;
                 ObjectLayer.prototype.addObject = function (obj) {
                     this._objects.push(obj);
                 };
-
                 ObjectLayer.createFromJSON = function (jsonData) {
                     var objectLayer = new ObjectLayer(jsonData.name, jsonData.width, jsonData.height, jsonData.x, jsonData.y);
-
                     for (var a = 0; a < jsonData.objects.length; a++) {
                         var obj = jsonData.objects[a];
-
                         objectLayer.addObject(MapSystem.MapObject.createFromJSON(obj));
                     }
-
                     return objectLayer;
                 };
                 return ObjectLayer;
             })(SpaceshipInTrouble.Engine.MapSystem.MapLayer);
             MapSystem.ObjectLayer = ObjectLayer;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=ObjectLayer.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60051,7 +59839,9 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var TileLayer = (function (_super) {
                 __extends(TileLayer, _super);
@@ -60064,16 +59854,15 @@ var SpaceshipInTrouble;
                 return TileLayer;
             })(MapSystem.MapLayer);
             MapSystem.TileLayer = TileLayer;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=TileLayer.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var TileSet = (function () {
                 function TileSet() {
@@ -60084,16 +59873,15 @@ var SpaceshipInTrouble;
                 return TileSet;
             })();
             MapSystem.TileSet = TileSet;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=TileSet.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var TiledMap = (function () {
                 function TiledMap(width, height, tileWidth, tileHeight, properties, version) {
@@ -60105,30 +59893,24 @@ var SpaceshipInTrouble;
                     this._tileHeight = tileHeight;
                     this._properties = properties;
                     this._version = version;
-
                     _.bindAll(this);
                 }
                 TiledMap.prototype.addLayer = function (layer) {
                     this._layers.push(layer);
                 };
-
                 TiledMap.prototype.addTileSet = function (tileSet) {
                     this._tileSets.push(tileSet);
                 };
-
                 TiledMap.prototype.setProperties = function (properties) {
                     this._properties = properties;
                 };
                 return TiledMap;
             })();
             MapSystem.TiledMap = TiledMap;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=TiledMap.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60137,7 +59919,9 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var MapSystem;
         (function (MapSystem) {
             var TiledJSONMapLoader = (function (_super) {
                 __extends(TiledJSONMapLoader, _super);
@@ -60149,24 +59933,23 @@ var SpaceshipInTrouble;
                 TiledJSONMapLoader.prototype.getProgressInPercent = function () {
                     return this._progress;
                 };
-
                 TiledJSONMapLoader.prototype.getProgressAsText = function () {
                     return this._status;
                 };
-
                 TiledJSONMapLoader.prototype.loadMap = function () {
                     console.log("loading level " + this.getMapFile());
-
                     var rm = SpaceshipInTrouble.Engine.ResourceSystem.ResourceManager.getInstance();
-
                     return rm.loadJSONFile(this.getMapFile()).then(this._parseMap);
                 };
-
                 TiledJSONMapLoader.prototype._parseMap = function (data) {
                     var a;
-
                     var mandatoryFields = [
-                        'width', 'height', 'tilewidth', 'tileheight', 'properties', 'version'
+                        'width',
+                        'height',
+                        'tilewidth',
+                        'tileheight',
+                        'properties',
+                        'version'
                     ];
                     console.log("parsing map");
                     for (a = 0; a < mandatoryFields.length; a++) {
@@ -60174,11 +59957,8 @@ var SpaceshipInTrouble;
                             throw new Error("Invalid TiledMap file! Missing mandatory field '" + mandatoryFields[a] + "'.");
                         }
                     }
-
                     var map = new MapSystem.TiledMap(data.width, data.height, data.tilewidth, data.tileheight, data.properties, data.version);
-
                     var promises = [];
-
                     for (a = 0; a < data.layers.length; a++) {
                         switch (data.layers[a].type) {
                             case 'tilelayer':
@@ -60191,11 +59971,9 @@ var SpaceshipInTrouble;
                                 console.log("Warning: invalid layer type found... ignoring layer");
                         }
                     }
-
                     for (var a = 0; a < data.tilesets.length; a++) {
                         promises.push(Q.fcall(MapSystem.TileSet.createFromJSON, data.tilesets[a]).then(map.addTileSet));
                     }
-
                     return Q.allSettled(promises).then(function (states) {
                         for (a = 0; a < states.length; a++) {
                             if (states[a].state !== "fulfilled") {
@@ -60209,19 +59987,17 @@ var SpaceshipInTrouble;
                 return TiledJSONMapLoader;
             })(SpaceshipInTrouble.Engine.MapSystem.AbstractMapLoader);
             MapSystem.TiledJSONMapLoader = TiledJSONMapLoader;
-        })(Engine.MapSystem || (Engine.MapSystem = {}));
-        var MapSystem = Engine.MapSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(MapSystem = Engine.MapSystem || (Engine.MapSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=TiledMapLoader.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var ResourceSystem;
         (function (ResourceSystem) {
             var DEFAULT_TIMEOUT = 6000;
-
             var ResourceManager = (function () {
                 function ResourceManager() {
                     if (ResourceManager._instance) {
@@ -60235,7 +60011,6 @@ var SpaceshipInTrouble;
                     }
                     return ResourceManager._instance;
                 };
-
                 ResourceManager.prototype.loadJSONFile = function (jsonFile) {
                     var deferred = Q.defer();
                     $.ajax({
@@ -60254,16 +60029,15 @@ var SpaceshipInTrouble;
                 return ResourceManager;
             })();
             ResourceSystem.ResourceManager = ResourceManager;
-        })(Engine.ResourceSystem || (Engine.ResourceSystem = {}));
-        var ResourceSystem = Engine.ResourceSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(ResourceSystem = Engine.ResourceSystem || (Engine.ResourceSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=ResourceManager.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var ScreenSystem;
         (function (ScreenSystem) {
             var AbstractScreen = (function () {
                 function AbstractScreen(renderer) {
@@ -60272,23 +60046,18 @@ var SpaceshipInTrouble;
                 AbstractScreen.prototype.getRenderer = function () {
                     return this._renderer;
                 };
-
                 AbstractScreen.prototype.show = function () {
                     return Q(true);
                 };
-
                 AbstractScreen.prototype.render = function (timeStep) {
                 };
                 return AbstractScreen;
             })();
             ScreenSystem.AbstractScreen = AbstractScreen;
-        })(Engine.ScreenSystem || (Engine.ScreenSystem = {}));
-        var ScreenSystem = Engine.ScreenSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(ScreenSystem = Engine.ScreenSystem || (Engine.ScreenSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=AbstractScreen.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60297,37 +60066,32 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var ScreenSystem;
         (function (ScreenSystem) {
             var LoadLevelScreen = (function (_super) {
                 __extends(LoadLevelScreen, _super);
                 function LoadLevelScreen(renderer) {
-                    if (typeof renderer === "undefined") { renderer = null; }
+                    if (renderer === void 0) { renderer = null; }
                     _super.call(this, renderer);
                 }
                 LoadLevelScreen.prototype.setMapLoader = function (mapLoader) {
                     this._mapLoader = mapLoader;
                 };
-
                 LoadLevelScreen.prototype.show = function () {
                     return this._setupScene();
                 };
-
                 LoadLevelScreen.prototype._setupScene = function () {
                     this._scene = new THREE.Scene();
-
                     var light = new THREE.AmbientLight(0x404040);
                     this._scene.add(light);
-
                     var directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
                     directionalLight.position.set(1, 1, 1);
                     this._scene.add(directionalLight);
-
                     this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
                     this._camera.position.set(0, 0, 50);
-
                     this.getRenderer().setClearColor(new THREE.Color(0xffffff), 1);
-
                     var defaultTextMaterial = new THREE.MeshPhongMaterial({
                         ambient: 0x777777,
                         color: 0x3333ff,
@@ -60335,7 +60099,6 @@ var SpaceshipInTrouble;
                         shininess: 80,
                         shading: THREE.FlatShading
                     });
-
                     var textGeometry = new SpaceshipInTrouble.Engine.Helpers.D3.Text.TextGeometry();
                     textGeometry.setSize(8);
                     var loadingGeo = textGeometry.createTextGeometry('Loading...');
@@ -60343,23 +60106,18 @@ var SpaceshipInTrouble;
                     var loadingMesh = new THREE.Mesh(loadingGeo, defaultTextMaterial.clone());
                     loadingMesh.position.y = 20;
                     this._scene.add(loadingMesh);
-
                     return Q(true);
                 };
-
                 LoadLevelScreen.prototype.render = function (timeStep) {
                     this.getRenderer().render(this._scene, this._camera);
                 };
                 return LoadLevelScreen;
             })(ScreenSystem.AbstractScreen);
             ScreenSystem.LoadLevelScreen = LoadLevelScreen;
-        })(Engine.ScreenSystem || (Engine.ScreenSystem = {}));
-        var ScreenSystem = Engine.ScreenSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(ScreenSystem = Engine.ScreenSystem || (Engine.ScreenSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=LoadLevelScreen.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60368,7 +60126,9 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var ScreenSystem;
         (function (ScreenSystem) {
             var PlayLevelScreen = (function (_super) {
                 __extends(PlayLevelScreen, _super);
@@ -60378,139 +60138,111 @@ var SpaceshipInTrouble;
                 PlayLevelScreen.prototype.startMap = function (map) {
                     console.log("start playing map", map);
                 };
-
                 PlayLevelScreen.prototype.preRender = function (timeStep) {
                 };
-
                 PlayLevelScreen.prototype.postRender = function (timeStep) {
                 };
-
                 PlayLevelScreen.prototype.prePhysics = function (timeStep) {
                 };
-
                 PlayLevelScreen.prototype.postPhysics = function (timeStep) {
                 };
-
                 PlayLevelScreen.prototype.preEntitySteps = function (timeStep) {
                 };
-
                 PlayLevelScreen.prototype.render = function (timeStep) {
                     this.prePhysics(timeStep);
                     this.calculatePhysics();
                     this.postPhysics(timeStep);
-
                     this.preEntitySteps(timeStep);
                     this.getEntityManager().doStep(timeStep);
-
                     this.preRender(timeStep);
                     this.getRenderer().render(this._scene, this._camera);
                     this.getRenderer().render(this._hudScene, this._hudCamera);
-
                     this.postRender(timeStep);
                 };
-
                 PlayLevelScreen.prototype.initPhysics = function (gravity) {
-                    if (typeof gravity === "undefined") { gravity = new Box2D.Common.Math.b2Vec2(0, 0); }
+                    if (gravity === void 0) { gravity = new Box2D.Common.Math.b2Vec2(0, 0); }
                     this._physicWorld = {
                         world: new Box2D.Dynamics.b2World(gravity, true)
                     };
                     this._setupPhysicCollisionListener();
                     return this.getPhysics();
                 };
-
                 PlayLevelScreen.prototype.calculatePhysics = function (frameRate, velocityIterations, positionIterations) {
-                    if (typeof frameRate === "undefined") { frameRate = 16; }
-                    if (typeof velocityIterations === "undefined") { velocityIterations = 10; }
-                    if (typeof positionIterations === "undefined") { positionIterations = 10; }
+                    if (frameRate === void 0) { frameRate = 16; }
+                    if (velocityIterations === void 0) { velocityIterations = 10; }
+                    if (positionIterations === void 0) { positionIterations = 10; }
                     this._physicWorld.world.Step(frameRate, velocityIterations, positionIterations);
                     this._physicWorld.world.ClearForces();
                 };
-
                 PlayLevelScreen.prototype._setupPhysicCollisionListener = function () {
                     var colDetector = Box2D.Dynamics.b2ContactListener;
-
                     colDetector.BeginContact = function (contact) {
                         var objectA = contact.GetFixtureA().GetBody().GetUserData();
                         var objectB = contact.GetFixtureB().GetBody().GetUserData();
-
                         if (objectA.type == 'entity' && objectA.entity !== undefined) {
                             if (objectB.type == 'entity' && objectB.entity !== undefined) {
                                 objectA.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:entity', { entity: objectB.entity }));
                                 objectB.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:entity', { entity: objectA.entity }));
-                            } else {
+                            }
+                            else {
                                 objectA.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:other', { object: objectB }));
                             }
-                        } else if (objectB.type == 'entity' && objectB.entity !== undefined) {
+                        }
+                        else if (objectB.type == 'entity' && objectB.entity !== undefined) {
                             objectB.entity.sendMessage(new SpaceshipInTrouble.Engine.EntitySystem.EntityMessage('collision:other', { object: objectA }));
                         }
                     };
                     colDetector.EndContact = function (contact) {
                     };
-
                     colDetector.PostSolve = function (contact, impulse) {
                     };
-
                     colDetector.PreSolve = function (contact, oldManifold) {
                     };
-
                     this.getPhysics().world.SetContactListener(colDetector);
                 };
-
                 PlayLevelScreen.prototype.getPhysics = function () {
                     return this._physicWorld;
                 };
-
                 PlayLevelScreen.prototype.setCamera = function (camera) {
                     this._camera = camera;
                 };
-
                 PlayLevelScreen.prototype.getCamera = function () {
                     return this._camera;
                 };
-
                 PlayLevelScreen.prototype.setHUDCamera = function (camera) {
                     this._hudCamera = camera;
                 };
-
                 PlayLevelScreen.prototype.getHUDCamera = function () {
                     return this._hudCamera;
                 };
-
                 PlayLevelScreen.prototype.setScene = function (scene) {
                     this._scene = scene;
                 };
-
                 PlayLevelScreen.prototype.getScene = function () {
                     return this._scene;
                 };
-
                 PlayLevelScreen.prototype.setHUDScene = function (scene) {
                     this._hudScene = scene;
                 };
-
                 PlayLevelScreen.prototype.getHUDScene = function () {
                     return this._hudScene;
                 };
-
                 PlayLevelScreen.prototype.show = function () {
                     console.log("show not implemented");
                     return Q(true);
                 };
-
                 PlayLevelScreen.prototype.getEntityManager = function () {
                     if (this._entityManager == null) {
                         this._entityManager = new SpaceshipInTrouble.Engine.EntitySystem.EntityManager(this._scene, this._physicWorld.world);
                     }
                     return this._entityManager;
                 };
-
                 PlayLevelScreen.prototype.getJoystick = function () {
                     if (this._joystick == null) {
                         this._joystick = new SpaceshipInTrouble.Engine.Helpers.Input.VirtualJoystick();
                     }
                     return this._joystick;
                 };
-
                 PlayLevelScreen.prototype.getKeyboard = function () {
                     if (this._keyboard == null) {
                         this._keyboard = new SpaceshipInTrouble.Engine.Helpers.Input.KeyboardHelper();
@@ -60520,16 +60252,15 @@ var SpaceshipInTrouble;
                 return PlayLevelScreen;
             })(ScreenSystem.AbstractScreen);
             ScreenSystem.PlayLevelScreen = PlayLevelScreen;
-        })(Engine.ScreenSystem || (Engine.ScreenSystem = {}));
-        var ScreenSystem = Engine.ScreenSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(ScreenSystem = Engine.ScreenSystem || (Engine.ScreenSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=PlayLevelScreen.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var ScreenSystem;
         (function (ScreenSystem) {
             var ScreenManager = (function () {
                 function ScreenManager(renderer) {
@@ -60544,53 +60275,43 @@ var SpaceshipInTrouble;
                         requestAnimationFrame(this._render);
                     }
                 };
-
                 ScreenManager.prototype.stopRendering = function () {
                     this._isRendering = false;
                 };
-
                 ScreenManager.prototype.dropScreen = function (screen) {
                     if (screen === this._currentScreen) {
                         this._screenStack.pop();
-
                         if (this._screenStack.length > 0) {
                             this._currentScreen = this._screenStack[this._screenStack.length - 1];
-                        } else {
+                        }
+                        else {
                             this._currentScreen = null;
                         }
                     }
                 };
-
                 ScreenManager.prototype.showScreen = function (screen) {
                     console.log("showing screen...");
                     this._currentScreen = screen;
                     this._screenStack.push(this._currentScreen);
                     this._currentScreen.show().then(this.startRendering);
                 };
-
                 ScreenManager.prototype.getRenderer = function () {
                     return this._renderer;
                 };
-
                 ScreenManager.prototype._render = function () {
                     if (!this._currentScreen) {
                         console.log("no active screen - stopping rendering");
                         this.stopRendering();
                         return;
                     }
-
                     SpaceshipInTrouble.Engine.Helpers.StatsHelper.getInstance().begin();
-
                     this._currentTime = SpaceshipInTrouble.Engine.Helpers.performanceTimer();
                     this._timeDiff = this._currentTime - this._lastTime;
                     this._lastTime = this._currentTime;
-
                     if (this._timeDiff > 60) {
                         this._timeDiff = 60;
                     }
-
                     this._currentScreen.render(this._timeDiff);
-
                     if (this._isRendering) {
                         requestAnimationFrame(this._render);
                     }
@@ -60599,16 +60320,15 @@ var SpaceshipInTrouble;
                 return ScreenManager;
             })();
             ScreenSystem.ScreenManager = ScreenManager;
-        })(Engine.ScreenSystem || (Engine.ScreenSystem = {}));
-        var ScreenSystem = Engine.ScreenSystem;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(ScreenSystem = Engine.ScreenSystem || (Engine.ScreenSystem = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=ScreenManager.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Engine;
     (function (Engine) {
+        var Utils;
         (function (Utils) {
             var Position = (function () {
                 function Position() {
@@ -60616,15 +60336,11 @@ var SpaceshipInTrouble;
                 return Position;
             })();
             Utils.Position = Position;
-        })(Engine.Utils || (Engine.Utils = {}));
-        var Utils = Engine.Utils;
-    })(SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
-    var Engine = SpaceshipInTrouble.Engine;
+        })(Utils = Engine.Utils || (Engine.Utils = {}));
+    })(Engine = SpaceshipInTrouble.Engine || (SpaceshipInTrouble.Engine = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=Position.js.map
-
 //# sourceMappingURL=include_all.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60633,8 +60349,11 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Game;
     (function (Game) {
+        var Components;
         (function (Components) {
+            var Enemies;
             (function (Enemies) {
                 var BasicEnemyBehavior = (function (_super) {
                     __extends(BasicEnemyBehavior, _super);
@@ -60649,21 +60368,18 @@ var SpaceshipInTrouble;
                         var pos = new THREE.Vector2(this._physicBody.GetPosition().x * this._physScale, this._physicBody.GetPosition().y * this._physScale);
                         var worldPos = new THREE.Vector3().setFromMatrixPosition(this._target.matrixWorld);
                         var posTarget = new THREE.Vector2(worldPos.x, worldPos.y);
-
                         var direction = posTarget.sub(pos);
                         var distance = direction.length();
                         if (distance < 60 && distance > 20) {
                             this._isActive = true;
-                        } else {
+                        }
+                        else {
                             this._isActive = false;
                         }
-
                         if (this._isActive) {
                             var force = direction.normalize().multiplyScalar(0.005);
-
                             this._physicBody.ApplyForce(new Box2D.Common.Math.b2Vec2(force.x, force.y), new Box2D.Common.Math.b2Vec2(99999, 99999));
                         }
-
                         if (distance < 60) {
                             this.getEntity().getObject3D().setRotationFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI / 2 + Math.atan2(direction.x, -direction.y));
                         }
@@ -60671,45 +60387,11 @@ var SpaceshipInTrouble;
                     return BasicEnemyBehavior;
                 })(SpaceshipInTrouble.Engine.EntitySystem.EntityComponent);
                 Enemies.BasicEnemyBehavior = BasicEnemyBehavior;
-            })(Components.Enemies || (Components.Enemies = {}));
-            var Enemies = Components.Enemies;
-        })(Game.Components || (Game.Components = {}));
-        var Components = Game.Components;
-    })(SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
-    var Game = SpaceshipInTrouble.Game;
+            })(Enemies = Components.Enemies || (Components.Enemies = {}));
+        })(Components = Game.Components || (Game.Components = {}));
+    })(Game = SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=BasicEnemyBehavior.js.map
-
-var SpaceshipInTrouble;
-(function (SpaceshipInTrouble) {
-    (function (Game) {
-        var Startup = (function () {
-            function Startup() {
-                _.bindAll(this);
-            }
-            Startup.prototype.init = function () {
-                this._gameEngine = new SpaceshipInTrouble.Engine.GameEngine();
-                return this._gameEngine.init();
-            };
-
-            Startup.prototype.startGame = function () {
-                var loadLevelScreen = new SpaceshipInTrouble.Game.Screens.PlayLevelScreen(this._gameEngine.getRenderer());
-                return this._gameEngine.start(loadLevelScreen);
-            };
-            return Startup;
-        })();
-        Game.Startup = Startup;
-
-        $(document).ready(function () {
-            var startUp = new Startup();
-
-            startUp.init().then(startUp.startGame);
-        });
-    })(SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
-    var Game = SpaceshipInTrouble.Game;
-})(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
-//# sourceMappingURL=Startup.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -60718,7 +60400,9 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Game;
     (function (Game) {
+        var Screens;
         (function (Screens) {
             var LoadLevelScreen = (function (_super) {
                 __extends(LoadLevelScreen, _super);
@@ -60728,38 +60412,33 @@ var SpaceshipInTrouble;
                 return LoadLevelScreen;
             })(SpaceshipInTrouble.Engine.ScreenSystem.LoadLevelScreen);
             Screens.LoadLevelScreen = LoadLevelScreen;
-        })(Game.Screens || (Game.Screens = {}));
-        var Screens = Game.Screens;
-    })(SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
-    var Game = SpaceshipInTrouble.Game;
+        })(Screens = Game.Screens || (Game.Screens = {}));
+    })(Game = SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=loadLevel.js.map
-
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Game;
     (function (Game) {
+        var Screens;
         (function (Screens) {
+            var MainMenu;
             (function (MainMenu) {
                 var MainMenuScreen = function (renderer) {
                     this._renderer = renderer;
                     _.bindAll(this);
                 };
-
                 MainMenuScreen.prototype.show = function () {
                     this._setupScene();
                 };
-
                 MainMenuScreen.prototype._setupScene = function () {
                     console.log("setting up mainMenu scene");
-
                     var that = this;
-
                     this._setupCameraAndLighting();
                     this._setupBackgroundStuff();
                     this._registerMouseHandlers();
                     this._showSkipIntroButton();
                 };
-
                 MainMenuScreen.prototype._setupMenuTexts = function () {
                     var textHelper = new SpaceshipInTrouble.Engine.Helpers.D3.Text.TextGeometry();
                     var defaultTextMaterial = new THREE.MeshPhongMaterial({
@@ -60769,38 +60448,32 @@ var SpaceshipInTrouble;
                         shininess: 80,
                         shading: THREE.FlatShading
                     });
-
                     var newGameGeo = textHelper.createTextGeometry('New Game');
                     THREE.GeometryUtils.center(newGameGeo);
                     this._newGameTextMesh = new THREE.Mesh(newGameGeo, defaultTextMaterial.clone());
                     this._newGameTextMesh.position.y = 20;
                     this._scene.add(this._newGameTextMesh);
-
                     var loadGameGeo = textHelper.createTextGeometry('Load Game');
                     THREE.GeometryUtils.center(loadGameGeo);
                     this._loadGameTextMesh = new THREE.Mesh(loadGameGeo, defaultTextMaterial.clone());
                     this._loadGameTextMesh.position.y = 5;
                     this._scene.add(this._loadGameTextMesh);
-
                     var settingsGeo = textHelper.createTextGeometry('Settings');
                     THREE.GeometryUtils.center(settingsGeo);
                     this._settingsTextMesh = new THREE.Mesh(settingsGeo, defaultTextMaterial.clone());
                     this._settingsTextMesh.position.y = -10;
                     this._scene.add(this._settingsTextMesh);
-
                     var helpGeo = textHelper.createTextGeometry('Help');
                     THREE.GeometryUtils.center(helpGeo);
                     this._helpTextMesh = new THREE.Mesh(helpGeo, defaultTextMaterial.clone());
                     this._helpTextMesh.position.y = -25;
                     this._scene.add(this._helpTextMesh);
-
                     var aboutGeo = textHelper.createTextGeometry('About');
                     THREE.GeometryUtils.center(aboutGeo);
                     this._aboutTextMesh = new THREE.Mesh(aboutGeo, defaultTextMaterial.clone());
                     this._aboutTextMesh.position.y = -40;
                     this._scene.add(this._aboutTextMesh);
                 };
-
                 MainMenuScreen.prototype._setupTitleTexts = function () {
                     var textHelper = new SpaceshipInTrouble.Engine.Helpers.D3.Text.TextGeometry();
                     var defaultTextMaterial = new THREE.MeshPhongMaterial({
@@ -60817,44 +60490,37 @@ var SpaceshipInTrouble;
                         shininess: 80,
                         shading: THREE.FlatShading
                     });
-
                     var spaceshipGeo = textHelper.createTextGeometry('SpaceShip');
                     THREE.GeometryUtils.center(spaceshipGeo);
                     var spaceShipTextMesh = new THREE.Mesh(spaceshipGeo, defaultTextMaterial);
                     spaceShipTextMesh.position.y += 60;
                     this._scene.add(spaceShipTextMesh);
-
                     var inGeo = textHelper.createTextGeometry('in');
                     THREE.GeometryUtils.center(inGeo);
                     var inTextMesh = new THREE.Mesh(inGeo, defaultTextMaterial);
                     inTextMesh.position.y += 50;
                     this._scene.add(inTextMesh);
-
                     var troubleGeo = textHelper.createTextGeometry('trouble!');
                     THREE.GeometryUtils.center(troubleGeo);
                     this._troubleTextMesh = new THREE.Mesh(troubleGeo, redTextMaterial);
                     this._troubleTextMesh.position.y += 40;
                     this._scene.add(this._troubleTextMesh);
-
                     this._troubleRota = {
                         x: 0.003,
                         y: 0.008,
                         z: 0.001
                     };
                 };
-
                 MainMenuScreen.prototype._registerMouseHandlers = function () {
                     this._renderer.context.canvas.addEventListener('mousemove', this.onMouseMoved);
                     this._renderer.context.canvas.addEventListener('click', this.onMouseClicked);
                     this._renderer.context.canvas.addEventListener('touch', this.onMouseClicked);
                 };
-
                 MainMenuScreen.prototype.onMouseMoved = function (evt) {
                     var pos = {
                         x: (evt.x / window.innerWidth * 2) - 1,
                         y: (evt.y / window.innerHeight * 2) - 1
                     };
-
                     if (this._isMenuItemHovered) {
                         this._newGameTextMesh.material.color.setHex(0x3333ff);
                         this._loadGameTextMesh.material.color.setHex(0x3333ff);
@@ -60862,79 +60528,78 @@ var SpaceshipInTrouble;
                         this._helpTextMesh.material.color.setHex(0x3333ff);
                         this._aboutTextMesh.material.color.setHex(0x3333ff);
                     }
-
                     if (this._cameraPhase >= 5 && pos.x > -0.2 && pos.x < 0.2) {
                         this._isMenuItemHovered = true;
                         if (pos.y >= -0.34 && pos.y <= -0.16) {
                             this._newGameTextMesh.material.color.setHex(0x33ffff);
-                        } else if (pos.y >= -0.16 && pos.y <= 0.03) {
+                        }
+                        else if (pos.y >= -0.16 && pos.y <= 0.03) {
                             this._loadGameTextMesh.material.color.setHex(0x33ffff);
-                        } else if (pos.y >= 0.03 && pos.y <= 0.22) {
+                        }
+                        else if (pos.y >= 0.03 && pos.y <= 0.22) {
                             this._settingsTextMesh.material.color.setHex(0x33ffff);
-                        } else if (pos.y >= 0.22 && pos.y <= 0.41) {
+                        }
+                        else if (pos.y >= 0.22 && pos.y <= 0.41) {
                             this._helpTextMesh.material.color.setHex(0x33ffff);
-                        } else if (pos.y >= 0.41 && pos.y <= 0.62) {
+                        }
+                        else if (pos.y >= 0.41 && pos.y <= 0.62) {
                             this._aboutTextMesh.material.color.setHex(0x33ffff);
-                        } else {
+                        }
+                        else {
                             this._isMenuItemHovered = false;
                         }
                     }
                 };
-
                 MainMenuScreen.prototype.onMouseClicked = function (evt) {
                     if (this._cameraPhase < 5 && evt.x > window.innerWidth - 200 && evt.y > window.innerHeight - 40) {
                         this._skipIntro();
                     }
-
                     if (this._cameraPhase == 5) {
                         var pos = {
                             x: (evt.x / window.innerWidth * 2) - 1,
                             y: (evt.y / window.innerHeight * 2) - 1
                         };
-
                         if (pos.y >= -0.34 && pos.y <= -0.16) {
                             this._startNewGame();
-                        } else if (pos.y >= -0.16 && pos.y <= 0.03) {
+                        }
+                        else if (pos.y >= -0.16 && pos.y <= 0.03) {
                             alert("load Game not yet implemented");
-                        } else if (pos.y >= 0.03 && pos.y <= 0.22) {
+                        }
+                        else if (pos.y >= 0.03 && pos.y <= 0.22) {
                             alert("settings not yet implemented");
-                        } else if (pos.y >= 0.22 && pos.y <= 0.41) {
+                        }
+                        else if (pos.y >= 0.22 && pos.y <= 0.41) {
                             alert("help not yet implemented");
-                        } else if (pos.y >= 0.41 && pos.y <= 0.62) {
+                        }
+                        else if (pos.y >= 0.41 && pos.y <= 0.62) {
                             alert("about not yet implemented");
-                        } else {
+                        }
+                        else {
                         }
                     }
                 };
-
                 MainMenuScreen.prototype._startNewGame = function () {
                     this._unregisterEvents();
-
                     this.getScreenManager().showScreen(new SpaceshipInTrouble.Engine.ScreenSystem.LoadLevelScreen());
                     this.getScreenManager().startRendering();
                 };
-
                 MainMenuScreen.prototype._unregisterEvents = function () {
                     this._renderer.context.canvas.removeEventListener('mousemove', this.onMouseMoved);
                     this._renderer.context.canvas.removeEventListener('click', this.onMouseClicked);
                     this._renderer.context.canvas.removeEventListener('touch', this.onMouseClicked);
                 };
-
                 MainMenuScreen.prototype._skipIntro = function () {
                     this._cameraPhase = 5;
                     this._camera.rotation.x = 0;
                     this._camera.rotation.y = 0;
                     this._camera.rotation.z = 0;
                     this._camera.position.set(0, 0, 100);
-
                     this._setupTitleTexts();
                     this._setupMenuTexts();
                     this._hideSkipIntroButton();
                 };
-
                 MainMenuScreen.prototype._setupBackgroundStuff = function () {
                     var that = this;
-
                     var planetMaterial = new THREE.MeshPhongMaterial();
                     planetMaterial.map = THREE.ImageUtils.loadTexture('assets/textures/planet_02.jpg');
                     this._planet = new THREE.Mesh(new THREE.SphereGeometry(100, 100, 100), planetMaterial);
@@ -60944,11 +60609,9 @@ var SpaceshipInTrouble;
                     this._planet.castShadow = false;
                     this._planet.overdraw = true;
                     this._scene.add(this._planet);
-
                     var loader = new THREE.JSONLoader();
                     loader.load("assets/models/fighter.js", function (shipGeo, shipMaterials) {
                         console.log("ship loaded");
-
                         var shipMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/textures/fighter.png') });
                         that._shipMesh = new THREE.Mesh(shipGeo, shipMaterial);
                         that._shipMesh.scale.set(10, 10, 10);
@@ -60957,7 +60620,6 @@ var SpaceshipInTrouble;
                         that._shipMesh.position.z = 0;
                         that._scene.add(that._shipMesh);
                     }, "assets/textures/");
-
                     var skySphereTexture = THREE.ImageUtils.loadTexture('assets/textures/nebula_01.jpg');
                     skySphereTexture.wrapS = skySphereTexture.wrapT = THREE.RepeatWrapping;
                     skySphereTexture.repeat.set(3, 3);
@@ -60971,7 +60633,6 @@ var SpaceshipInTrouble;
                     this._skySphere.rotation.z = 2;
                     this._scene.add(this._skySphere);
                 };
-
                 MainMenuScreen.prototype._showSkipIntroButton = function () {
                     var texture = THREE.ImageUtils.loadTexture('assets/textures/skip_intro_button.png');
                     var mat = new THREE.SpriteMaterial({
@@ -60985,29 +60646,22 @@ var SpaceshipInTrouble;
                     this._skipIntroButton.scale.set(128, 64, 1.0);
                     this._scene.add(this._skipIntroButton);
                 };
-
                 MainMenuScreen.prototype._hideSkipIntroButton = function () {
                     this._scene.remove(this._skipIntroButton);
                 };
-
                 MainMenuScreen.prototype._setupCameraAndLighting = function () {
                     this._scene = new THREE.Scene();
-
                     var light = new THREE.AmbientLight(0x404040);
                     this._scene.add(light);
-
                     var directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
                     directionalLight.position.set(1, 1, 1);
                     this._scene.add(directionalLight);
-
                     this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
                     this._camera.rotation.x = -1;
                     this._camera.rotation.y = -2;
                     this._camera.position.z = 500;
-
                     this._cameraPhase = 0;
                 };
-
                 MainMenuScreen.prototype.render = function (time) {
                     if (this._cameraPhase < 5) {
                         if (this._cameraPhase == 0) {
@@ -61031,7 +60685,6 @@ var SpaceshipInTrouble;
                                 this._cameraPhase++;
                             }
                         }
-
                         if (this._cameraPhase == 1) {
                             this._camera.position.z -= 0.5;
                             if (this._camera.position.z <= 100) {
@@ -61043,13 +60696,11 @@ var SpaceshipInTrouble;
                             }
                         }
                     }
-
                     if (this._shipMesh) {
                         this._shipMesh.rotation.x -= 0.0001;
                         this._shipMesh.rotation.y += 0.0003;
                         this._shipMesh.rotation.z += 0.0008;
                     }
-
                     if (this._troubleTextMesh) {
                         this._troubleTextMesh.rotation.x += this._troubleRota.x;
                         this._troubleTextMesh.rotation.z += this._troubleRota.z;
@@ -61061,20 +60712,13 @@ var SpaceshipInTrouble;
                     this._planet.rotation.y += 0.0003;
                     this._skySphere.rotation.y += 0.0001;
                     this._skySphere.rotation.z += 0.00005;
-
                     this._renderer.render(this._scene, this._camera);
                 };
-
-                return MainMenuScreen;
-            })(Screens.MainMenu || (Screens.MainMenu = {}));
-            var MainMenu = Screens.MainMenu;
-        })(Game.Screens || (Game.Screens = {}));
-        var Screens = Game.Screens;
-    })(SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
-    var Game = SpaceshipInTrouble.Game;
+            })(MainMenu = Screens.MainMenu || (Screens.MainMenu = {}));
+        })(Screens = Game.Screens || (Game.Screens = {}));
+    })(Game = SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=mainMenu.js.map
-
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -61083,7 +60727,9 @@ var __extends = this.__extends || function (d, b) {
 };
 var SpaceshipInTrouble;
 (function (SpaceshipInTrouble) {
+    var Game;
     (function (Game) {
+        var Screens;
         (function (Screens) {
             var PlayLevelScreen = (function (_super) {
                 __extends(PlayLevelScreen, _super);
@@ -61098,75 +60744,56 @@ var SpaceshipInTrouble;
                     this.getScene().updateMatrixWorld(true);
                     this._groundMirror.render();
                 };
-
                 PlayLevelScreen.prototype.show = function () {
                     console.log("Showing");
                     return this._setupScene();
                 };
-
                 PlayLevelScreen.prototype._setupScene = function () {
                     console.log("setting up level scene");
-
                     var that = this;
-
                     return this._setupCameraAndLighting().then(this._setupPhysics).then(this._createShip).then(this._createDrone).then(this._setupLevel).then(this.getKeyboard().register).then(function () {
                         that.getJoystick().register(that);
                     });
                 };
-
                 PlayLevelScreen.prototype._setupPhysics = function () {
                     var physics = this.initPhysics();
                     this._physScale = 3;
-
                     var fixDef = new Box2D.Dynamics.b2FixtureDef();
                     fixDef.density = 1000.0;
                     fixDef.friction = 1.0;
                     fixDef.restitution = 0.2;
-
                     var shape = new Box2D.Collision.Shapes.b2PolygonShape();
                     shape.SetAsBox(5 / this._physScale, 5 / this._physScale);
-
                     fixDef.shape = shape;
-
                     physics.defaultWallFixture = fixDef;
                     physics.defaultWallDefinition = new Box2D.Dynamics.b2BodyDef();
                     physics.defaultWallDefinition.type = Box2D.Dynamics.b2Body.b2_staticBody;
                     physics.defaultWallDefinition.position.x = 0;
                     physics.defaultWallDefinition.position.y = 0;
-
                     var shipFix = new Box2D.Dynamics.b2FixtureDef();
                     shipFix.density = 100.0;
                     shipFix.friction = 0;
                     shipFix.restitution = 0.1;
                     shipFix.shape = new Box2D.Collision.Shapes.b2CircleShape(3 / this._physScale);
-
                     var shipBodyDef = new Box2D.Dynamics.b2BodyDef();
                     shipBodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
-
                     physics.ship = physics.world.CreateBody(shipBodyDef);
                     physics.ship.CreateFixture(shipFix);
                     physics.ship.SetLinearDamping(0.002);
                     physics.ship.SetUserData({ type: 'ship' });
-
                     var enemyFix = new Box2D.Dynamics.b2FixtureDef();
                     enemyFix.density = 50.0;
                     enemyFix.friction = 0.11;
                     enemyFix.restitution = 0;
-
                     enemyFix.shape = new Box2D.Collision.Shapes.b2CircleShape(3 / this._physScale);
-
                     physics.enemyFix = enemyFix;
-
                     var enemyBodyDef = new Box2D.Dynamics.b2BodyDef();
                     enemyBodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
-
                     physics.enemyBodyDef = enemyBodyDef;
-
                     physics.enemy = physics.world.CreateBody(enemyBodyDef);
                     physics.enemy.CreateFixture(enemyFix);
                     physics.enemy.SetLinearDamping(0);
                     physics.enemy.SetUserData({ type: 'enemy' });
-
                     var projectileFix = new Box2D.Dynamics.b2FixtureDef();
                     projectileFix.density = 0.001;
                     projectileFix.friction = 0;
@@ -61174,43 +60801,33 @@ var SpaceshipInTrouble;
                     projectileFix.isSensor = true;
                     projectileFix["isBullet"] = true;
                     projectileFix.shape = new Box2D.Collision.Shapes.b2CircleShape(1 / this._physScale);
-
                     var projectileBodyDef = new Box2D.Dynamics.b2BodyDef();
                     projectileBodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
-
                     physics.projectileFix = projectileFix;
                     physics.projectileBodyDef = projectileBodyDef;
                 };
-
                 PlayLevelScreen.prototype.prePhysics = function (time) {
                     this._moveShip(time);
                 };
-
                 PlayLevelScreen.prototype._moveEnemies = function (time) {
                 };
-
                 PlayLevelScreen.prototype.postPhysics = function (time) {
                 };
-
                 PlayLevelScreen.prototype._moveShip = function (time) {
                     if (!time || !this._shipEntity) {
                         return;
                     }
                     var physics = this.getPhysics();
-
                     var factor = 0.20284;
-
                     var isAngleSet = false;
                     var facingDirection = new Box2D.Common.Math.b2Vec2();
                     facingDirection.x = Math.cos(physics.ship.GetAngle() - (Math.PI / 2));
                     facingDirection.y = Math.sin(physics.ship.GetAngle() - (Math.PI / 2));
                     facingDirection.Multiply(factor);
-
                     var backwardsDirection = new Box2D.Common.Math.b2Vec2();
                     backwardsDirection.x = Math.cos(physics.ship.GetAngle() + (Math.PI / 2));
                     backwardsDirection.y = Math.sin(physics.ship.GetAngle() + (Math.PI / 2));
                     backwardsDirection.Multiply(factor);
-
                     if (this.getKeyboard().isLeftPressed()) {
                         physics.ship.SetAngle(physics.ship.GetAngle() + 0.1);
                         isAngleSet = true;
@@ -61225,7 +60842,6 @@ var SpaceshipInTrouble;
                     if (this.getKeyboard().isDownPressed()) {
                         physics.ship.ApplyForce(backwardsDirection, physics.ship.GetWorldCenter());
                     }
-
                     if (this.getJoystick().getSpeed() > 0) {
                         var joystickDirection = new Box2D.Common.Math.b2Vec2();
                         joystickDirection.x = Math.cos(this.getJoystick().getAngle());
@@ -61238,89 +60854,67 @@ var SpaceshipInTrouble;
                     if (!isAngleSet) {
                         physics.ship.SetAngle(physics.ship.GetAngle());
                     }
-
                     this._shipEntity.getObject3D().position.x = physics.ship.GetPosition().x * this._physScale;
                     this._shipEntity.getObject3D().position.y = physics.ship.GetPosition().y * this._physScale;
                     this.getCamera().position.x = physics.ship.GetPosition().x * this._physScale;
                     this.getCamera().position.y = physics.ship.GetPosition().y * this._physScale;
                     this._shipEntity.getObject3D().rotation.y = physics.ship.GetAngle();
-
                     physics.ship.SetLinearDamping(0.1 * physics.ship.GetLinearVelocity().Length());
-
                     if (this.getKeyboard().isSpacePressed() || this.getJoystick().isFireButtonPressed()) {
                         var currentTime = new Date().getTime();
                         if (currentTime - this._lastShot > 150) {
                             this._lastShot = currentTime;
-
                             var projectileEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
                             projectileEntity.getObject3D().rotation.set(Math.PI / 2, 0, 0);
-
                             var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({ color: 0x00ff00 }));
                             projectileEntity.getObject3D().position.set(physics.ship.GetPosition().x * this._physScale, physics.ship.GetPosition().y * this._physScale, 0);
-
                             var projectileMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(projectileEntity, shotMesh);
-
                             var projectile = physics.world.CreateBody(physics.projectileBodyDef);
-
                             facingDirection.Multiply(0.1);
-
                             projectile.SetLinearVelocity(facingDirection);
-
                             projectile.CreateFixture(physics.projectileFix);
                             var pos = new Box2D.Common.Math.b2Vec2(physics.ship.GetPosition().x + (facingDirection.x / factor), physics.ship.GetPosition().y + (facingDirection.y / factor));
                             projectile.SetPosition(pos);
-
                             projectile.SetUserData({ type: "projectile" });
-
                             var projectilePhysicComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.PhysicComponent(projectileEntity, projectile, this._physScale);
-
                             var projectileLimitedLifeComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.LimitedLifeComponent(projectileEntity, 1500);
-
                             this.getScene().add(projectileEntity.getObject3D());
                         }
                     }
                 };
-
                 PlayLevelScreen.prototype._setupLevel = function () {
                     var cubeGeo = new THREE.BoxGeometry(10, 10, 10);
-
                     var geo = new THREE.Geometry();
                     var mesh = new THREE.Mesh(cubeGeo);
-
                     var lineGeo = new THREE.Geometry();
                     var lineMat = new THREE.LineBasicMaterial({ color: 0x666666 });
-
                     var wall = this.getPhysics().world.CreateBody(this.getPhysics().defaultWallDefinition);
                     wall.SetUserData({ type: 'wall' });
-
                     var isBoxToCreate = false;
                     for (var x = 0; x < 100; x++) {
                         for (var y = 0; y < 100; y++) {
                             var posx = (x - 50) * 10;
                             var posy = (y - 50) * 10;
-
                             if (x == 0 || x == 99 || y == 0 || y == 99) {
                                 isBoxToCreate = true;
-                            } else {
+                            }
+                            else {
                                 isBoxToCreate = Math.random() * 10 < 1;
                             }
-
                             if ((x > 45 && x < 55) && (y > 45 && y < 55)) {
                                 isBoxToCreate = false;
                             }
-
                             if (isBoxToCreate) {
                                 mesh.position.x = posx;
                                 mesh.position.y = posy;
                                 mesh.position.z = 5;
                                 mesh.updateMatrix();
                                 geo.merge(mesh.geometry, mesh.matrix, undefined);
-
                                 this.getPhysics().defaultWallFixture.shape.SetAsOrientedBox(5 / this._physScale, 5 / this._physScale, new Box2D.Common.Math.b2Vec2(posx / this._physScale, posy / this._physScale), 0);
                                 wall.CreateFixture(this.getPhysics().defaultWallFixture);
-                            } else {
+                            }
+                            else {
                                 var isEnemyToCreate = Math.random() * 50 < 1;
-
                                 if (isEnemyToCreate) {
                                     var enemyBody = this.getPhysics().world.CreateBody(this.getPhysics().enemyBodyDef);
                                     enemyBody.CreateFixture(this.getPhysics().enemyFix);
@@ -61328,67 +60922,48 @@ var SpaceshipInTrouble;
                                     var enemyEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
                                     var enemyMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(enemyEntity, this._droneMesh.clone());
                                     var enemyPhysicComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.PhysicComponent(enemyEntity, enemyBody, this._physScale);
-
                                     var enemyBehaviourComponent = new SpaceshipInTrouble.Game.Components.Enemies.BasicEnemyBehavior(enemyEntity, enemyBody, this._physScale, this._shipEntity.getObject3D());
-
                                     enemyBody.SetPosition(new Box2D.Common.Math.b2Vec2(posx / this._physScale, posy / this._physScale));
                                     enemyEntity.getObject3D().position.set(posx, posy, 0);
-
                                     enemyBody.SetLinearDamping(0.0012);
-
                                     this.getScene().add(enemyEntity.getObject3D());
                                 }
                             }
-
                             lineGeo.vertices.push(new THREE.Vector3((x - 50) * 10 + 5, (y - 50) * 10 + 5, 0));
                             lineGeo.vertices.push(new THREE.Vector3((x - 50) * 10 + 5, (y - 50) * 10 + 15, 0));
                             lineGeo.vertices.push(new THREE.Vector3((x - 50) * 10 + 5, (y - 50) * 10 + 5, 0));
                             lineGeo.vertices.push(new THREE.Vector3((x - 50) * 10 + 15, (y - 50) * 10 + 5, 0));
                         }
                     }
-
                     var lines = new THREE.Line(lineGeo, lineMat, THREE.LinePieces);
                     this.getScene().add(lines);
-
                     var planeGeo = new THREE.PlaneGeometry(1000.1, 1000.1);
-
                     this._groundMirror = new THREE["Mirror"](this.getRenderer(), this.getCamera(), { clipBias: 0.003, textureWidth: 512, textureHeight: 512, color: 0x777777 });
-
                     var mirrorMesh = new THREE.Mesh(planeGeo, this._groundMirror.material);
                     mirrorMesh.add(this._groundMirror);
                     this.getScene().add(mirrorMesh);
-
                     var group = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: 0xffff00 }));
                     group.matrixAutoUpdate = false;
                     group.updateMatrix();
-
                     this.getScene().add(group);
                 };
-
                 PlayLevelScreen.prototype._setupCameraAndLighting = function () {
                     this.setScene(new THREE.Scene());
                     this.setHUDScene(new THREE.Scene());
-
                     var light = new THREE.AmbientLight(0x404040);
                     this.getScene().add(light);
-
                     var directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
                     directionalLight.position.set(1, 1, 1);
                     this.getScene().add(directionalLight);
-
                     this.setCamera(new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000));
-
                     this.setHUDCamera(new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, -2000, 2000));
                     this.getHUDCamera().position.set(0, 0, 50);
                     this.getCamera().position.set(0, 0, 50);
-
                     return Q(true);
                 };
-
                 PlayLevelScreen.prototype._createDrone = function () {
                     var that = this;
                     var deferred = Q.defer();
-
                     var loader = new THREE.JSONLoader();
                     loader.load("assets/game/models/drone.js", function (droneGeo, droneMaterials) {
                         var droneMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/game/textures/fighter.png') });
@@ -61396,44 +60971,59 @@ var SpaceshipInTrouble;
                         droneMesh.scale.set(1.5, 1.5, 1.5);
                         droneMesh.rotation.set(Math.PI / 2, 0, 0);
                         droneMesh.updateMatrix();
-
                         that._droneMesh = droneMesh;
                         deferred.resolve(true);
                     }, "assets/game/textures/");
-
                     return deferred.promise;
                 };
-
                 PlayLevelScreen.prototype._createShip = function () {
                     var that = this;
-
                     this._shipEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
                     this._shipEntity.getObject3D().rotation.set(Math.PI / 2, 0, 0);
-
                     var loader = new THREE.JSONLoader();
                     loader.load("assets/game/models/fighter.js", function (shipGeo, shipMaterials) {
                         console.log("ship loaded", shipGeo, shipMaterials);
-
                         var shipMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('assets/game/textures/fighter.png') });
                         var shipMesh = new THREE.Mesh(shipGeo, shipMaterial);
                         shipMesh.scale.set(1.5, 1.5, 1.5);
                         shipMesh.updateMatrix();
-
                         var shipMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(that._shipEntity, shipMesh);
-
                         that.getScene().add(that._shipEntity.getObject3D());
                     }, "assets/game/textures/");
                 };
                 return PlayLevelScreen;
             })(SpaceshipInTrouble.Engine.ScreenSystem.PlayLevelScreen);
             Screens.PlayLevelScreen = PlayLevelScreen;
-        })(Game.Screens || (Game.Screens = {}));
-        var Screens = Game.Screens;
-    })(SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
-    var Game = SpaceshipInTrouble.Game;
+        })(Screens = Game.Screens || (Game.Screens = {}));
+    })(Game = SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
 })(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
 //# sourceMappingURL=playLevel.js.map
-
+var SpaceshipInTrouble;
+(function (SpaceshipInTrouble) {
+    var Game;
+    (function (Game) {
+        var Startup = (function () {
+            function Startup() {
+                _.bindAll(this);
+            }
+            Startup.prototype.init = function () {
+                this._gameEngine = new SpaceshipInTrouble.Engine.GameEngine();
+                return this._gameEngine.init();
+            };
+            Startup.prototype.startGame = function () {
+                var loadLevelScreen = new SpaceshipInTrouble.Game.Screens.PlayLevelScreen(this._gameEngine.getRenderer());
+                return this._gameEngine.start(loadLevelScreen);
+            };
+            return Startup;
+        })();
+        Game.Startup = Startup;
+        $(document).ready(function () {
+            var startUp = new Startup();
+            startUp.init().then(startUp.startGame);
+        });
+    })(Game = SpaceshipInTrouble.Game || (SpaceshipInTrouble.Game = {}));
+})(SpaceshipInTrouble || (SpaceshipInTrouble = {}));
+//# sourceMappingURL=Startup.js.map
 
 
 
