@@ -8,7 +8,7 @@
  */
 
 ///ts:ref=include_all.ts
-/// <reference path="../../../engine/include_all.ts"/> ///ts:ref:generated
+/// <reference path="../../../Engine/include_all.ts"/> ///ts:ref:generated
 
 module SpaceshipInTrouble.Game.Components.Enemies {
 
