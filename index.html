@@ -4,7 +4,7 @@
         /**
         * Spaceship in trouble - a Game & GameEngine in TypeScript
         *
-        * Copyright (c) 2014 Johannes Brosi <me@brosi.me>
+        * Copyright (c) 2014 - 2015 Johannes Brosi <me@brosi.me>
         *
         * Released under the MIT license
         * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
@@ -18,53 +18,28 @@
             
         </style>
         <script>
-            var require = {
-                baseUrl: "js",               
-                shim: {
-                    'three': {
-                        exports: 'THREE'
-                    },
-                    'helvetiker-font': {
-                        deps: ['three']
-                    },
-                    'box2d-web': {
-                        exports: 'Box2D'
-                    },
-                    'box2d-cocoon': {
-                        exports: 'Box2D'
-                    },                    
-                    'stats': {
-                        exports: 'Stats'
-                    },
-                    'hammer': {
-                        exports: 'Hammer'
-                    },
-                    'quadtree': {
-                        exports: 'Quadtree'
-                    },
-                    'zepto': {
-                        exports: 'Zepto'
-                    }
-                },
-                paths: {
-                    promise: 'lib/vendor/promise',
-                    stats: 'lib/vendor/stats',
-                    three: 'lib/vendor/three',
-                    'helvetiker-font': '../assets/engine/fonts/helvetiker_regular.typeface',
-            		lodash: 'lib/vendor/lodash',
-                    box2d: 'engine/helper/box2DHelper',
-            	    'box2d-web': 'lib/vendor/box2dweb',
-            		'box2d-cocoon': 'lib/vendor/box2d_cocoonJS',
-            		hammer: 'lib/vendor/hammer',
-            		quadtree: 'lib/vendor/quadtree',
-            		zepto: 'lib/vendor/zepto'
-                },
-               urlArgs: "bust=" + (new Date()).getTime(),     //this is usefull for debugging... remove this on productive!
-               waitSeconds: 30
-            };  
+            var isDebug = window.location.hash.indexOf("debug") !== -1;
+            if (isDebug) {
+                document.write("<scr" + "ipt src=\"src/lib/vendor/jsnlog.min.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/initializeLogger.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/threejs/three.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/threejs/Mirror.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/zepto.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/lodash.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/box2dweb.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/hammer.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/promise.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/stats.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"assets/engine/fonts/helvetiker_regular.typeface.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"build/debug_loader.js\"></scr"+"ipt>");
 
+            } else {
+                document.write("<scr" + "ipt src=\"dist/spaceshipintrouble.js\"></scr"+"ipt>");
+
+
+
+            }
         </script>
-        <script src="js/lib/vendor/require.js" data-main="app"></script>
     </head>
     <body>
         <div id="canvas-container"></div>

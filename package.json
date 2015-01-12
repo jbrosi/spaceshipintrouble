@@ -1,0 +1,44 @@
+{
+    "version": "0.0.1",
+    "name": "spaceshipintrouble",
+    "author": {
+        "name": "Johannes Brosi",
+        "email": "me@brosi.me",
+        "url": "http://brosi.me"
+    },
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jbrosi/spaceshipintrouble"
+    },
+    "bugs": {
+        "url": "https://github.com/jbrosi/spaceshipintrouble/issues",
+        "email": "spaceshipintrouble@brosi.me"
+    },
+    "dependencies": {
+    },
+    "bundleDependencies" : [
+    ],
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-contrib-clean": "*",
+		"grunt-contrib-copy": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-import": "*",
+        "grunt-ts": "*"
+    },
+    "scripts": {
+    },
+    "contributors": [
+        {
+            "name": "Johannes Brosi",
+            "email": "me@brosi.me"
+        }
+    ],
+    "maintainers": [
+        {
+            "name": "Johannes Brosi",
+            "email": "me@brosi.me"
+        }
+    ]
+}

@@ -35,8 +35,6 @@ Of course not. I used various libraries, tools and assets... The entity / compon
 
 - ThreeJS
 - Lodash
-- RequireJS
-- Almond
 - Stats
 - Box2DWeb
 
@@ -95,7 +93,7 @@ assets as they may fall under other licenses.
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Johannes Brosi <me@brosi.me>
+Copyright (c) 2014 - 2015 Johannes Brosi <me@brosi.me>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
