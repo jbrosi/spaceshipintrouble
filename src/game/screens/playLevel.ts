@@ -8,7 +8,7 @@
  */
 
 ///ts:ref=include_all.ts
-/// <reference path="../../Engine/include_all.ts"/> ///ts:ref:generated
+/// <reference path="../../engine/include_all.ts"/> ///ts:ref:generated
 module SpaceshipInTrouble.Game.Screens {
 
     export class PlayLevelScreen extends SpaceshipInTrouble.Engine.ScreenSystem.PlayLevelScreen {

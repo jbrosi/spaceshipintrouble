@@ -17,39 +17,27 @@
             html {overflow: hidden;}
             
         </style>
-        <script src="src/lib/vendor/jsnlog.min.js"></script>
-        <script>
-            var consoleAppender = JL.createConsoleAppender('consoleAppender');
-            JL().setOptions({
-                "appenders": [consoleAppender]
-            });
-            JL("Spaceship in Trouble").info("*** Logger initialized ***");
-
-            JL("Init").info("Loading libraries...");
-        </script>
-
-        <script src="src/lib/vendor/threejs/three.js"></script>
-        <script src="src/lib/vendor/threejs/Mirror.js"></script>
-        <script src="src/lib/vendor/zepto.js"></script>
-        <script src="src/lib/vendor/lodash.js"></script>
-        <script src="src/lib/vendor/box2dweb.js"></script>
-        <script src="src/lib/vendor/hammer.js"></script>
-        <script src="src/lib/vendor/promise.js"></script>
-        <script src="src/lib/vendor/stats.js"></script>
-
-
-
-        <script src="assets/engine/fonts/helvetiker_regular.typeface.js"></script>
-
         <script>
             var isDebug = window.location.hash.indexOf("debug") !== -1;
-            JL("Init").info("Finished loading libraries!");
-            JL("Init").info("*** " + (isDebug ? "debug" : "release" )+ " mode Detected ***");
-
             if (isDebug) {
+                document.write("<scr" + "ipt src=\"src/lib/vendor/jsnlog.min.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/initializeLogger.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/threejs/three.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/threejs/Mirror.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/zepto.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/lodash.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/box2dweb.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/hammer.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/promise.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/stats.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"assets/engine/fonts/helvetiker_regular.typeface.js\"></scr"+"ipt>");
                 document.write("<scr" + "ipt src=\"build/debug_loader.js\"></scr"+"ipt>");
+
             } else {
                 document.write("<scr" + "ipt src=\"dist/spaceshipintrouble.js\"></scr"+"ipt>");
+
+
+
             }
         </script>
     </head>

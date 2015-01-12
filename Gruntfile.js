@@ -21,13 +21,26 @@ module.exports = function(grunt) {
                 dest: './dist/include_sources.inc',
                 options: {
                     process: function (content, srcPath) {
-                        return content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/$1.js\";")
+                        return "@import \"../src/lib/vendor/jsnlog.min.js\";\n"
+                            +  "@import \"../src/lib/initializeLogger.js\";\n"
+                            +  "@import \"../src/lib/vendor/threejs/three.js\";\n"
+                            +  "@import \"../src/lib/vendor/threejs/Mirror.js\";\n"
+                            +  "@import \"../src/lib/vendor/zepto.js\";\n"
+                            +  "@import \"../src/lib/vendor/lodash.js\";\n"
+                            +  "@import \"../src/lib/vendor/box2dweb.js\";\n"
+                            +  "@import \"../src/lib/vendor/hammer.js\";\n"
+                            +  "@import \"../src/lib/vendor/promise.js\";\n"
+                            +  "@import \"../src/lib/vendor/stats.js\";\n"
+                            +  "@import \"../assets/engine/fonts/helvetiker_regular.typeface.js\";\n"
+                            + content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/$1.js\";")
                                       .replace(/(@import \".*\.d\.js\";)/g, "");
+
                     }
                 }
             }
         },
-        import: {
+
+    import: {
             options: {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
                 footer: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
