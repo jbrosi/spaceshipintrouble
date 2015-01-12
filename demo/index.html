@@ -1,13 +1,45 @@
 <html>
     <head>
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <!--
+        /**
+        * Spaceship in trouble - a Game & GameEngine in TypeScript
+        *
+        * Copyright (c) 2014 - 2015 Johannes Brosi <me@brosi.me>
+        *
+        * Released under the MIT license
+        * https://github.com/jbrosi/spaceshipintrouble/blob/master/LICENSE
+        */
+        -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>Spaceship in Trouble</title>
         <style>
-            body {margin: 0; padding: 0;}
+            body {margin: 0; padding: 0; width: 100%; height: 100%; overflow:hidden; }
             html {overflow: hidden;}
             
         </style>
-        <script src="main-built.js"></script>
+        <script>
+            var isDebug = window.location.hash.indexOf("debug") !== -1;
+            if (isDebug) {
+                document.write("<scr" + "ipt src=\"src/lib/vendor/jsnlog.min.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/initializeLogger.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/threejs/three.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/threejs/Mirror.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/zepto.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/lodash.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/box2dweb.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/hammer.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/promise.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"src/lib/vendor/stats.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"assets/engine/fonts/helvetiker_regular.typeface.js\"></scr"+"ipt>");
+                document.write("<scr" + "ipt src=\"build/debug_loader.js\"></scr"+"ipt>");
+
+            } else {
+                document.write("<scr" + "ipt src=\"dist/spaceshipintrouble.js\"></scr"+"ipt>");
+
+
+
+            }
+        </script>
     </head>
     <body>
         <div id="canvas-container"></div>
