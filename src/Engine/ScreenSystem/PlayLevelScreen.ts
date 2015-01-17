@@ -26,6 +26,8 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
         private _keyboard: SpaceshipInTrouble.Engine.Helpers.Input.KeyboardHelper;
         private _camera: THREE.Camera;
         private _hudCamera: THREE.Camera;
+        private _effectComposer;
+        private _glitchPass;
 
 
         private _layers: SpaceshipInTrouble.Engine.MapSystem.MapLayer[];
@@ -126,11 +128,41 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
             this.getEntityManager().doStep(timeStep);
 
             this.preRender(timeStep);
-            this.getRenderer().render(this._scene, this._camera);
+
+
+            var composer = this.getEffectComposer();
+
+
+            composer.render();
+
+            //this.getRenderer().render(this._scene, this._camera);
             this.getRenderer().render(this._hudScene, this._hudCamera);
 
             this.postRender(timeStep);
         }
+
+
+        public getEffectComposer() {
+            if (this._composer == null) {
+                // postprocessing
+                this._composer = new THREE.EffectComposer( this.getRenderer() );
+                this._composer.addPass( new THREE.RenderPass( this._scene, this._camera) );
+
+                //var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
+                //dotScreenEffect.uniforms[ 'scale' ].value = 4;
+                //composer.addPass( dotScreenEffect );
+
+                this._glitchPass = new THREE.GlitchPass();
+                this._composer.addPass(this._glitchPass);
+
+                var copyPass = new THREE.ShaderPass( THREE.CopyShader );
+                copyPass.renderToScreen = true;
+                this._composer.addPass( copyPass );
+            }
+
+            return this._composer;
+        }
+
 
         /**
          * Initializes the physics world. Should be called before using #calculatePhysics()
