@@ -18,6 +18,7 @@ module SpaceshipInTrouble.Game.Screens {
 
         private _droneMesh : THREE.Mesh;
 
+        private _projectileMesh: THREE.Sprite;
         private _physScale:any;
         private _groundMirror : any;
 
@@ -208,6 +209,10 @@ module SpaceshipInTrouble.Game.Screens {
             //shoot?
             if (this.getKeyboard().isSpacePressed() || this.getJoystick().isFireButtonPressed()) {
 
+                if (this._projectileMesh === undefined) {
+                    return;
+                }
+
                 var currentTime = new Date().getTime();
                 if (currentTime - this._lastShot > 150) {
                     this._lastShot = currentTime;
@@ -217,7 +222,7 @@ module SpaceshipInTrouble.Game.Screens {
                     var projectileEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
                     projectileEntity.getObject3D().rotation.set(Math.PI / 2, 0, 0);
 
-                    var shotMesh = new THREE.Mesh(new THREE.SphereGeometry(1), new THREE.MeshLambertMaterial({color: 0x00ff00}));
+                    var shotMesh = this._projectileMesh.clone();
                     projectileEntity.getObject3D().position.set(physics.ship.GetPosition().x * this._physScale, physics.ship.GetPosition().y * this._physScale, 0);
 
                     var projectileMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(projectileEntity, shotMesh);
@@ -424,6 +429,22 @@ module SpaceshipInTrouble.Game.Screens {
 
 
             }, "assets/game/textures/");
+
+
+            var projectileTexture = THREE.ImageUtils.loadTexture('assets/engine/textures/nova_01.png');
+            var projectileMat = new THREE.SpriteMaterial({
+                map: projectileTexture,
+                depthTest: true,
+                depthWrite: true,
+                blending: THREE.AdditiveBlending,
+                blendSrc: THREE.SrcAlphaFactor,
+                blendDst: THREE.DstColorFactor
+            });
+
+
+            this._projectileMesh = new THREE.Sprite(projectileMat);
+            this._projectileMesh.material.color.setRGB( 0.5 * Math.random(), 0.8, 0.9 );
+            this._projectileMesh.scale.set(4,4,1);
         }
 
     }

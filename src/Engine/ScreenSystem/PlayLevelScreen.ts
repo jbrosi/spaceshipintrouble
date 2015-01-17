@@ -132,7 +132,6 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
 
             var composer = this.getEffectComposer();
 
-
             composer.render();
 
             //this.getRenderer().render(this._scene, this._camera);
@@ -148,12 +147,8 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
                 this._composer = new THREE.EffectComposer( this.getRenderer() );
                 this._composer.addPass( new THREE.RenderPass( this._scene, this._camera) );
 
-                //var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
-                //dotScreenEffect.uniforms[ 'scale' ].value = 4;
-                //composer.addPass( dotScreenEffect );
-
-                this._glitchPass = new THREE.GlitchPass();
-                this._composer.addPass(this._glitchPass);
+                //this._glitchPass = new THREE.GlitchPass();
+                //this._composer.addPass(this._glitchPass);
 
                 var copyPass = new THREE.ShaderPass( THREE.CopyShader );
                 copyPass.renderToScreen = true;
@@ -162,6 +157,8 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
 
             return this._composer;
         }
+
+
 
 
         /**
