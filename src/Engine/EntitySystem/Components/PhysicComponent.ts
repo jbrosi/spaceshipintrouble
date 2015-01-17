@@ -39,10 +39,10 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
 
 
         public "onEvent:collision:entity" (msg: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage) {
-            console.log("entity collision detected", msg.getMessage().entity);
+            //console.log("entity collision detected", msg.getMessage().entity);
         }
         public "onEvent:collision:other" (msg: SpaceshipInTrouble.Engine.EntitySystem.EntityMessage) {
-            console.log("other collision detected", msg.getMessage().object);
+            //console.log("other collision detected", msg.getMessage().object);
         }
 
         public "onEvent:entity:disposed" () {

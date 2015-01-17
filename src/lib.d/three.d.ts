@@ -10,6 +10,11 @@ interface WebGLRenderingContext {}
 declare module THREE {
     export var REVISION: string;
 
+    export var EffectComposer: any;
+    export var RenderPass: any;
+    export var ShaderPass: any;
+    export var CopyShader: any;
+
     // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
     export enum MOUSE { }
     export var LEFT: MOUSE;
