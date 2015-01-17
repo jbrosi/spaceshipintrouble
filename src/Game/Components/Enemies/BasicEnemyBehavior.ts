@@ -95,8 +95,8 @@ module SpaceshipInTrouble.Game.Components.Enemies {
                     projectile.SetLinearVelocity(new Box2D.Common.Math.b2Vec2(speed.x, speed.y));
 
                     projectile.CreateFixture(physics.projectileFix);
-                    var pos = new Box2D.Common.Math.b2Vec2(this._physicBody.GetPosition().x + (speed.x), this._physicBody.GetPosition().y + (speed.y));
-                    projectile.SetPosition(pos);
+                    var projectilePos = new Box2D.Common.Math.b2Vec2(this._physicBody.GetPosition().x + (speed.x), this._physicBody.GetPosition().y + (speed.y));
+                    projectile.SetPosition(projectilePos);
 
 
                     projectile.SetUserData({type: "projectile"});

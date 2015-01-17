@@ -142,20 +142,20 @@ module SpaceshipInTrouble.Engine.ScreenSystem {
 
 
         public getEffectComposer() {
-            if (this._composer == null) {
+            if (this._effectComposer== null) {
                 // postprocessing
-                this._composer = new THREE.EffectComposer( this.getRenderer() );
-                this._composer.addPass( new THREE.RenderPass( this._scene, this._camera) );
+                this._effectComposer = new THREE.EffectComposer( this.getRenderer() );
+                this._effectComposer.addPass( new THREE.RenderPass( this._scene, this._camera) );
 
                 //this._glitchPass = new THREE.GlitchPass();
-                //this._composer.addPass(this._glitchPass);
+                //this._effectComposer.addPass(this._glitchPass);
 
                 var copyPass = new THREE.ShaderPass( THREE.CopyShader );
                 copyPass.renderToScreen = true;
-                this._composer.addPass( copyPass );
+                this._effectComposer.addPass( copyPass );
             }
 
-            return this._composer;
+            return this._effectComposer;
         }
 
 

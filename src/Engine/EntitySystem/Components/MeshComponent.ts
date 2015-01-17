@@ -18,7 +18,9 @@ module SpaceshipInTrouble.Engine.EntitySystem.Components {
 
         private _mesh : THREE.Mesh;
 
-        public constructor(entity: SpaceshipInTrouble.Engine.EntitySystem.Entity, mesh : THREE.Mesh) {
+        public constructor(entity: SpaceshipInTrouble.Engine.EntitySystem.Entity, mesh : THREE.Sprite);
+        public constructor(entity: SpaceshipInTrouble.Engine.EntitySystem.Entity, mesh : THREE.Mesh);
+        public constructor(entity: SpaceshipInTrouble.Engine.EntitySystem.Entity, mesh : any) {
             super("MeshComponent", entity);
             entity.getObject3D().add(mesh);
             this._mesh = mesh;
