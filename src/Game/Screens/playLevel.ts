@@ -19,6 +19,8 @@ module SpaceshipInTrouble.Game.Screens {
         private _droneMesh : THREE.Mesh;
 
         private _projectileMesh: THREE.Sprite;
+        private _playerProjectileMesh: THREE.Sprite;
+
         private _physScale:any;
         private _groundMirror : any;
 
@@ -222,7 +224,7 @@ module SpaceshipInTrouble.Game.Screens {
                     var projectileEntity = SpaceshipInTrouble.Engine.EntitySystem.EntityFactory.createEntity(this.getEntityManager());
                     projectileEntity.getObject3D().rotation.set(Math.PI / 2, 0, 0);
 
-                    var shotMesh = this._projectileMesh.clone();
+                    var shotMesh = this._playerProjectileMesh.clone();
                     projectileEntity.getObject3D().position.set(physics.ship.GetPosition().x * this._physScale, physics.ship.GetPosition().y * this._physScale, 0);
 
                     var projectileMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(projectileEntity, shotMesh);
@@ -313,7 +315,7 @@ module SpaceshipInTrouble.Game.Screens {
                             var enemyMeshComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.MeshComponent(enemyEntity, this._droneMesh.clone());
                             var enemyPhysicComponent = new SpaceshipInTrouble.Engine.EntitySystem.Components.PhysicComponent(enemyEntity, enemyBody, this._physScale);
 
-                            var enemyBehaviourComponent = new SpaceshipInTrouble.Game.Components.Enemies.BasicEnemyBehavior(enemyEntity, enemyBody, this._physScale, this._shipEntity.getObject3D());
+                            var enemyBehaviourComponent = new SpaceshipInTrouble.Game.Components.Enemies.BasicEnemyBehavior(enemyEntity, enemyBody, this._physScale, this._shipEntity.getObject3D(), this._projectileMesh, this);
 
                             enemyBody.SetPosition(new Box2D.Common.Math.b2Vec2(posx / this._physScale, posy / this._physScale));
                             enemyEntity.getObject3D().position.set(posx, posy, 0);
@@ -440,11 +442,24 @@ module SpaceshipInTrouble.Game.Screens {
                 blendSrc: THREE.SrcAlphaFactor,
                 blendDst: THREE.DstColorFactor
             });
+            var playerProjectileMat = new THREE.SpriteMaterial({
+                map: projectileTexture,
+                depthTest: true,
+                depthWrite: true,
+                blending: THREE.AdditiveBlending,
+                blendSrc: THREE.SrcAlphaFactor,
+                blendDst: THREE.DstColorFactor
+            });
 
 
             this._projectileMesh = new THREE.Sprite(projectileMat);
-            this._projectileMesh.material.color.setRGB( 0.5 * Math.random(), 0.8, 0.9 );
+            this._projectileMesh.material.color.setRGB( 1, 0, 0);
             this._projectileMesh.scale.set(4,4,1);
+
+            this._playerProjectileMesh = new THREE.Sprite(playerProjectileMat);
+            this._playerProjectileMesh.material.color.setRGB( 0.5 * Math.random(), 0.8, 0.9 );
+            this._playerProjectileMesh.scale.set(4,4,1);
+
         }
 
     }
