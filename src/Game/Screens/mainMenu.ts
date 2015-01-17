@@ -382,7 +382,4 @@ module SpaceshipInTrouble.Game.Screens.MainMenu {
 
     };
 
-
-    return MainMenuScreen;
-
 }
