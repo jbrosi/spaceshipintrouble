@@ -49,7 +49,7 @@ module.exports = function(grunt) {
                             +  "@import \"../src/lib/vendor/promise.js\";\n"
                             +  "@import \"../src/lib/vendor/stats.js\";\n"
                             +  "@import \"../assets/engine/fonts/helvetiker_regular.typeface.js\";\n"
-                            + content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/$1.js\";")
+                            + content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/client/$1.js\";")
                                       .replace(/(@import \".*\.d\.js\";)/g, "");
 
                     }
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                 dest: './dist/include_sources_server.inc',
                 options: {
                     process: function (content, srcPath) {
-                        return content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/$1.js\";")
+                        return content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/server/$1.js\";")
                                 .replace(/(@import \".*\.d\.js\";)/g, "");
                     }
                 }

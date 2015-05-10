@@ -16,6 +16,21 @@
         "email": "spaceshipintrouble@brosi.me"
     },
     "dependencies": {
+        "serve-static": "*",
+        "connect": "*",
+        "optimist": "*",
+        "prompt": "*",
+        "lodash-node": "*",
+        "q": "*",
+        "body-parser": "*",
+        "socket.io": "*",
+        "compression": "*",
+        "shelljs": "*",
+        "cookie-parser": "*",
+        "express-session": "*",
+        "node-uuid": "*",
+        "sessionstore": "*",
+        "express": "*"
     },
     "bundleDependencies" : [
     ],
