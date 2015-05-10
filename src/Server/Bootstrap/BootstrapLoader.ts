@@ -53,7 +53,7 @@ module SpaceshipInTrouble.Server.Bootstrap {
             }
 
 
-            app.use(serveStatic(path.resolve(__dirname + "/../client")));
+            app.use(serveStatic(path.resolve(__dirname + '/public')));
             app.use(cookieParser("cute kitten", {}));
 
             app.use(session({

@@ -17,6 +17,20 @@ module.exports = function(grunt) {
                     {src: './src/reference_server.tpl', dest: './build/reference_server.ts'}
                 ]
             },
+            assetsToDist: {
+                files: [
+                    {
+                        src: '**',
+                        expand: true,
+                        dest: './dist/public/',
+                        cwd: './src/public/'
+                    },
+                    {
+                        src: './dist/spaceshipintrouble_client.js',
+                        dest: './dist/public/js/spaceshipintrouble.js'
+                    }
+                ]
+            },
             distClient: {
                 src: './build/reference_client.ts',
                 dest: './dist/include_sources_client.inc',
@@ -169,7 +183,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('default', ['clean:build', 'copy:build', 'ts:buildClient', 'ts:buildServer']);
-    grunt.registerTask('dist', ['clean:dist', 'default', 'copy:distClient', 'copy:distServer', 'import:distClient', 'import:distServer']);
+    grunt.registerTask('dist', ['clean:dist', 'default', 'copy:distClient', 'copy:distServer', 'import:distClient', 'import:distServer', 'copy:assetsToDist']);
 
     grunt.registerTask('dev', ['default', 'ts:watchClient', 'ts:watchServer']);
 
