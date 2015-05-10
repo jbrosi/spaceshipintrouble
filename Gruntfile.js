@@ -13,12 +13,13 @@ module.exports = function(grunt) {
             build: {
                 files: [
                     {src: './src/debug_loader.js', dest: './build/debug_loader.js'},
-                    {src: './src/reference.tpl', dest: './build/reference.ts'}
+                    {src: './src/reference_client.tpl', dest: './build/reference_client.ts'},
+                    {src: './src/reference_server.tpl', dest: './build/reference_server.ts'}
                 ]
             },
-            dist: {
-                src: './build/reference.ts',
-                dest: './dist/include_sources.inc',
+            distClient: {
+                src: './build/reference_client.ts',
+                dest: './dist/include_sources_client.inc',
                 options: {
                     process: function (content, srcPath) {
                         return "@import \"../src/lib/vendor/jsnlog.min.js\";\n"
@@ -53,6 +54,16 @@ module.exports = function(grunt) {
 
                     }
                 }
+            },
+            distServer: {
+                src: './build/reference_server.ts',
+                dest: './dist/include_sources_server.inc',
+                options: {
+                    process: function (content, srcPath) {
+                        return content.replace(/\/\/\/ <reference path="\.\.\/(.*).ts" \/>/g, "@import \"../build/$1.js\";")
+                                .replace(/(@import \".*\.d\.js\";)/g, "");
+                    }
+                }
             }
         },
 
@@ -62,16 +73,20 @@ module.exports = function(grunt) {
                 footer: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
                 separator: ''
             },
-            dist: {
-                src: 'dist/include_sources.inc',
-                dest: 'dist/spaceshipintrouble.js'
+            distClient: {
+                src: 'dist/include_sources_client.inc',
+                dest: 'dist/spaceshipintrouble_client.js'
+            },
+            distServer: {
+                src: 'dist/include_sources_server.inc',
+                dest: 'dist/spaceshipintrouble_server.js'
             }
         },
         ts: {
-            build: {
-                src: ["src/**/*.ts"],
-                reference: "./build/reference.ts",
-                outDir: './build',
+            buildClient: {
+                src: ["src/Client/**/*.ts", "src/Common/**/*.ts"],
+                reference: "./build/reference_client.ts",
+                outDir: './build/client',
                 //watch: "core",
 
                 options: {
@@ -87,10 +102,48 @@ module.exports = function(grunt) {
                     removeComments: true
                 }
             },
-            watch: {
-                src: ["src/**/*.ts"],
-                reference: "./build/reference.ts",
-                outDir: './build',
+            buildServer: {
+                src: ["src/Server/**/*.ts", "src/Common/**/*.ts"],
+                reference: "./build/reference_server.ts",
+                outDir: './build/server',
+                //watch: "core",
+
+                options: {
+                    // 'es3' (default) | 'es5'
+                    target: 'es5',
+                    // 'amd' (default) | 'commonjs'
+                    module: 'commonjs',
+                    // true (default) | false
+                    sourceMap: true,
+                    // true | false (default)
+                    declaration: true,
+                    // true (default) | false
+                    removeComments: true
+                }
+            },
+            watchClient: {
+                src: ["src/Client/**/*.ts", "src/Common/**/*.ts"],
+                reference: "./build/reference_client.ts",
+                outDir: './build/client',
+                watch: "src",
+
+                options: {
+                    // 'es3' (default) | 'es5'
+                    target: 'es5',
+                    // 'amd' (default) | 'commonjs'
+                    module: 'commonjs',
+                    // true (default) | false
+                    sourceMap: true,
+                    // true | false (default)
+                    declaration: true,
+                    // true (default) | false
+                    removeComments: true
+                }
+            },
+            watchServer: {
+                src: ["src/Server/**/*.ts", "src/Common/**/*.ts"],
+                reference: "./build/reference_server.ts",
+                outDir: './build/server',
                 watch: "src",
 
                 options: {
@@ -115,9 +168,9 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('default', ['clean:build', 'copy:build', 'ts:build']);
-    grunt.registerTask('dist', ['clean:dist', 'default', 'copy:dist', 'import:dist']);
+    grunt.registerTask('default', ['clean:build', 'copy:build', 'ts:buildClient', 'ts:buildServer']);
+    grunt.registerTask('dist', ['clean:dist', 'default', 'copy:distClient', 'copy:distServer', 'import:distClient', 'import:distServer']);
 
-    grunt.registerTask('dev', ['default', 'ts:watch']);
+    grunt.registerTask('dev', ['default', 'ts:watchClient', 'ts:watchServer']);
 
 };
