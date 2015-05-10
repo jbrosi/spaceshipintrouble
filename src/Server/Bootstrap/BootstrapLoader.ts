@@ -3,7 +3,7 @@
 
 
 
-module SpaceshipInTrouble.Server.Server {
+module SpaceshipInTrouble.Server.Bootstrap {
     var _ : any = require('lodash-node');
     var path = require('path');
     var serveStatic : any = require('serve-static');
@@ -15,9 +15,9 @@ module SpaceshipInTrouble.Server.Server {
     var sessionstore = require('sessionstore');
     var myStore = sessionstore.createSessionStore();
 
-    export class CCIDELoader {
+    export class BootstrapLoader {
 
-        private static _instance : CCIDELoader = null;
+        private static _instance : BootstrapLoader = null;
 
         private _cliSettings: SpaceshipInTrouble.Server.CLI.CLISettings = null;
 
@@ -53,7 +53,7 @@ module SpaceshipInTrouble.Server.Server {
             }
 
 
-            app.use(serveStatic(path.resolve(__dirname + "/public")));
+            app.use(serveStatic(path.resolve(__dirname + "/../client")));
             app.use(cookieParser("cute kitten", {}));
 
             app.use(session({
@@ -105,11 +105,11 @@ module SpaceshipInTrouble.Server.Server {
             return this._cliSettings;
         }
 
-        public static getInstance() : CCIDELoader {
-            if (CCIDELoader._instance === null) {
-                CCIDELoader._instance = new CCIDELoader();
+        public static getInstance() : BootstrapLoader {
+            if (BootstrapLoader._instance === null) {
+                BootstrapLoader._instance = new BootstrapLoader();
             }
-            return CCIDELoader._instance;
+            return BootstrapLoader._instance;
         }
 
     }
