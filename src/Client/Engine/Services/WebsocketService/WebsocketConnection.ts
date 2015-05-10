@@ -39,6 +39,8 @@ module SpaceshipInTrouble.Engine.Services.WebsocketService {
 
                 $(".chat-content").append(messageElem);
 
+                $(".chat-content").get(0).scrollTop = $(".chat-content")[0].scrollHeight - $(".chat-content").height();
+
                 setTimeout(function() {
                     messageElem.removeClass("hidden");
                 }, 50)

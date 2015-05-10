@@ -17,6 +17,21 @@
             html {overflow: hidden;}
 
             /* TODO: move this stuff to a compass/sass file */
+            ::-webkit-scrollbar
+            {
+                width: 12px;  /* for vertical scrollbars */
+                height: 12px; /* for horizontal scrollbars */
+            }
+
+            ::-webkit-scrollbar-track
+            {
+                background: rgba(0, 0, 0, 0.1);
+            }
+
+            ::-webkit-scrollbar-thumb
+            {
+                background: rgba(0, 0, 100, 0.5);
+            }
 
             .chat-container {
                 position: absolute;
@@ -33,6 +48,8 @@
                 top: 10px;
                 left: 10px;
                 right: 10px;
+                overflow-y: scroll;
+
             }
             .message {
                 font-family: "Arial", Arial, arial, sans-serif;
