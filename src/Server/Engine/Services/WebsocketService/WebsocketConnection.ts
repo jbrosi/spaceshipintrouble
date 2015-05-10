@@ -1,5 +1,5 @@
 
-module SpaceshipInTrouble.Server.Services.WebsocketService {
+module SpaceshipInTrouble.Server.Engine.Services.WebsocketService {
 
     var _:any = require('lodash-node');
     var io : any = require('socket.io');

@@ -10,6 +10,7 @@
 /// <reference path="../src/lib.d/box2dweb.d.ts" />
 /// <reference path="../src/lib.d/hammerjs.d.ts" />
 /// <reference path="../src/lib.d/stats.d.ts" />
+/// <reference path="../src/lib.d/socket.io-client.d.ts" />
 
 //grunt-start
 //grunt-end

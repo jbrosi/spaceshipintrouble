@@ -89,7 +89,7 @@ module SpaceshipInTrouble.Server.Bootstrap {
 
             this._server = app.listen(this.getCLISettings().getPort());
 
-            this._socketService = new SpaceshipInTrouble.Server.Services.WebsocketService.WebsocketService(this._server, myStore);
+            this._socketService = new SpaceshipInTrouble.Server.Engine.Services.WebsocketService.WebsocketService(this._server, myStore);
 
             console.log("listening on " + this.getCLISettings().getPort());
 

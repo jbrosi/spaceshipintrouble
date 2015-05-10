@@ -56,6 +56,7 @@ module.exports = function(grunt) {
                             +  "@import \"../src/lib/vendor/threejs/BokehPass.js\";\n"
                             +  "@import \"../src/lib/vendor/threejs/BloomPass.js\";\n"
 
+                            +  "@import \"../src/lib/vendor/socket.io.js\";\n"
                             +  "@import \"../src/lib/vendor/zepto.js\";\n"
                             +  "@import \"../src/lib/vendor/lodash.js\";\n"
                             +  "@import \"../src/lib/vendor/box2dweb.js\";\n"
