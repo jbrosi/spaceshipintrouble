@@ -26,6 +26,8 @@ module SpaceshipInTrouble.Engine {
         private _renderContainer : HTMLElement = null;
         private _screenManager : SpaceshipInTrouble.Engine.ScreenSystem.ScreenManager = null;
 
+        private _ws : SpaceshipInTrouble.Engine.Services.WebsocketService.WebsocketConnection = null;
+
         /**
          * Creates a new GameInitializer
          *
@@ -40,6 +42,11 @@ module SpaceshipInTrouble.Engine {
         }
 
 
+        private _initializeWebsockets() {
+            this._ws = SpaceshipInTrouble.Engine.Services.WebsocketService.WebsocketConnection.getInstance();
+        }
+
+
         /**
          * Initializes the canvasContainer and the ThreeJS environment
          *
@@ -50,6 +57,7 @@ module SpaceshipInTrouble.Engine {
             var that = this;
             return this._initializeCanvasContainer()
                 .then(this._initializeThreeJS)
+                .then(this._initializeWebsockets)
                 .then(function () {
                     that._screenManager = new SpaceshipInTrouble.Engine.ScreenSystem.ScreenManager(that._renderer);
                 });

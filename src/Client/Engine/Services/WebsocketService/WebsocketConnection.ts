@@ -28,7 +28,7 @@ module SpaceshipInTrouble.Engine.Services.WebsocketService {
             socket.on('chat', function (data) {
                 var from = data.from;
                 var msg = data.message;
-                var messageElem = $('<div class="message"></div>');
+                var messageElem = $('<div class="message hidden"></div>');
 
                 if (data.message.indexOf("/e ") === 0) {
                     //emote
@@ -37,13 +37,27 @@ module SpaceshipInTrouble.Engine.Services.WebsocketService {
                     messageElem.append($('<span class="chat-name"></span>').text(from), ": ", $('<span class="chat-text"></span>').text(msg));
                 }
 
-                messageElem.hide();
                 $(".chat-content").append(messageElem);
-                messageElem.fadeIn();
 
-                $(".chat-content").animate({scrollTop: $(".chat-content")[0].scrollHeight - $(".chat-content").height()}, "fast");
+                setTimeout(function() {
+                    messageElem.removeClass("hidden");
+                }, 50)
             });
 
+
+            var sendChat = function () {
+                var msg = $(".chat-container input").val();
+                $(".chat-container input").val("");
+
+                socket.emit("chat", {message: msg});
+            };
+
+            $(".chat-container input").keypress(function(e) {
+                if (e.which === 13) {
+                    sendChat();
+                }
+            });
+            $(".chat-container button").click(sendChat);
 
         }
 
